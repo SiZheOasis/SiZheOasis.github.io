@@ -2,8 +2,8 @@
   "name": "Feng SiZhe",
   "short_name": "Feng SiZhe",
   "description": "Feng SiZhe",
-  "background_color": "#fff",
-  "theme_color": "#000",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait"

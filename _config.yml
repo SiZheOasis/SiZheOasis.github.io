@@ -38,5 +38,5 @@ featured-tags: false                    # no posts, so the homepage does not sho
 featured-condition-size: 1
 
 # Progressive Web Apps
-chrome-tab-theme-color: "#000000"
+chrome-tab-theme-color: "#0a0a0a"
 service-worker: true
