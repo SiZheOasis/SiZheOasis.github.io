@@ -1,0 +1,181 @@
+/* Front door for the homepage and About.
+   Tokens below were measured with Dembrandt on the public x.ai pages
+   (dark scheme). Type is set in the OFL Geist fonts, not the site's
+   proprietary faces. This file is loaded only by the front layout. */
+
+@font-face {
+    font-family: "Geist";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../fonts/geist-latin-wght-normal.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Geist Mono";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../fonts/geist-mono-latin-wght-normal.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+    --jet: #0a0a0a;
+    --umbra: #1f2228;
+    /* Charcoal was the dark pill fill. This page does not use pills. */
+    --charcoal: #1a1a1a;
+    --dove: #d5d9e2;
+    --ink: #ffffff;
+    --quiet: #8d867e;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --move: 150ms;
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-20: 20px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-40: 40px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--jet);
+    color-scheme: dark;
+}
+
+body.front {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--jet);
+    color: var(--ink);
+    font-family: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-24) var(--space-24) var(--space-32);
+}
+
+.top {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.top a {
+    color: var(--dove);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: color var(--move) var(--ease);
+}
+
+.top a:hover {
+    color: var(--ink);
+}
+
+.stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: clamp(4.5rem, 16vh, 11rem);
+    padding-bottom: clamp(3rem, 10vh, 7rem);
+}
+
+.name {
+    margin: 0;
+    max-width: 12ch;
+    color: var(--ink);
+    font-weight: 500;
+    font-size: clamp(3.5rem, 12vw, 10.5rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+}
+
+.readings {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+    margin-top: clamp(2.5rem, 7vh, 5.5rem);
+    max-width: 42rem;
+}
+
+.readings a {
+    display: block;
+    color: var(--dove);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -0.011em;
+    text-decoration: none;
+    transition: color var(--move) var(--ease);
+}
+
+.readings a:hover {
+    color: var(--ink);
+}
+
+.foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8) var(--space-24);
+    margin-top: auto;
+    color: var(--quiet);
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.63;
+    letter-spacing: -0.01em;
+}
+
+.foot a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--move) var(--ease);
+}
+
+.foot a:hover {
+    color: var(--dove);
+}
+
+.front a:focus-visible {
+    outline: 1px solid var(--dove);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+::selection {
+    background: var(--umbra);
+    color: var(--ink);
+}
+
+@media (min-width: 768px) {
+    .shell {
+        padding: var(--space-32) clamp(2.5rem, 7vw, 8rem) var(--space-40);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .front a {
+        transition: none;
+    }
+}
