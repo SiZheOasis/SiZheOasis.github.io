@@ -1,0 +1,57 @@
+---
+layout: front
+title: "马原 · 专题九"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/mayuan-09/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/mayuan/' | prepend: site.baseurl }}">马原</a> · 专题九</p>
+    <h1>唯物辩证法是认识世界和改造世界的根本方法</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>1. 唯物辩证法是客观辩证法与主观辩证法的统一</h2>
+
+    <ul>
+        <li>主观辩证法是客观辩证法在人的思维中的反映，二者在<span class="cloze"><span class="cloze-text">本质</span></span>上是统一的，但在表现形式上却是不同的。客观辩证法采取外部必然性的形式；主观辩证法则采取<span class="cloze"><span class="cloze-text">观念的</span></span>、逻辑的形式。</li>
+        <li><span class="cloze"><span class="cloze-text">二者的关系</span></span>：反映与被反映的关系。</li>
+    </ul>
+
+    <h2>2. 六大思维能力</h2>
+
+    <p>辩证思维能力、历史思维能力、系统思维能力、战略思维能力、底线思维能力和创新思维能力。</p>
+
+    <h3>【点拨】</h3>
+    <p><span class="cloze"><span class="cloze-text">所谓系统</span></span>，是指由相互联系、相互作用的若干要素组成的具有稳定结构和特定功能的有机整体。系统的存在及其特征体现了物质世界普遍联系的具体性。坚持系统观念，就是要把事物放在普遍联系的系统中来把握。</p>
+
+    <h3>【命题分析】</h3>
+
+    <table>
+        <thead>
+            <tr><th>* <span class="cloze"><span class="cloze-text">2010 年</span></span>以来真题选择题考查频率：3 次。* 命题特点：本专题的内容作为选择题考查较为简单，主要是判断题目材料是否体现了辩证思维、系统思维、历史思维等。作为分析题考点，辩证思维、创新思维都曾多次命题，因此考生需要背诵相应内容，具体可参见本书的下册。</th></tr>
+        </thead>
+    </table>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

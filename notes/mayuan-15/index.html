@@ -1,0 +1,69 @@
+---
+layout: front
+title: "马原 · 专题十五"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/mayuan-15/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/mayuan/' | prepend: site.baseurl }}">马原</a> · 专题十五</p>
+    <h1>认识世界和改造世界</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>1. 认识世界的根本目的在于改造世界</h2>
+
+    <p>认识世界和改造世界统一的基础<span class="cloze"><span class="cloze-text">是实践</span></span>。</p>
+
+    <h2>2. 改造客观世界和改造主观世界</h2>
+
+    <p>只有在改造客观世界的实践中，才能深入改造主观世界；只有认真改造主观世界，才能更好地改造客观世界。</p>
+
+    <h2>3. 认识世界和改造世界的过程是从必然走向自由的过程</h2>
+
+    <p>① <span class="cloze"><span class="cloze-text">必然性</span></span>：<span class="cloze"><span class="cloze-text">即规律性</span></span>，是不依赖于人的意识而存在的自然和社会发展所固有的<span class="cloze"><span class="cloze-text">客观规律</span></span>。人<span class="cloze"><span class="cloze-text">不能摆脱必然性的制约</span></span>。</p>
+
+    <p>② 自由是<span class="cloze"><span class="cloze-text">对必然的认识和对客观世界的改造</span></span>。自由是<span class="cloze"><span class="cloze-text">有条件</span></span>的：一是<span class="cloze"><span class="cloze-text">认识条件</span></span>，二是<span class="cloze"><span class="cloze-text">实践条件</span></span>。认识必然只是取得了获得自由<span class="cloze"><span class="cloze-text">的前提</span></span>，只有利用必然改造世界，达到了预想的目的，自由才能<span class="cloze"><span class="cloze-text">真正实现</span></span>。</p>
+
+    <p>③ <span class="cloze"><span class="cloze-text">认识必然、争取自由</span></span>，是人类认识世界和改造世界的<span class="cloze"><span class="cloze-text">根本目标</span></span>。自由是<span class="cloze"><span class="cloze-text">相对</span></span>的，不是<span class="cloze"><span class="cloze-text">绝对</span></span>的。</p>
+
+    <table>
+        <thead>
+            <tr><th>点拨</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><span class="cloze"><span class="cloze-text">在自由问题上，有两类错误</span></span>：一是倡导消极地顺应自然、抹杀人类自由可能性的<span class="cloze"><span class="cloze-text">宿命论</span></span>；二是否定客观必然性，强调人的意志或某种精神力量<span class="cloze"><span class="cloze-text">绝对</span></span>自由的<span class="cloze"><span class="cloze-text">唯意志论</span></span>。</td></tr>
+        </tbody>
+    </table>
+
+    <h3>【命题分析】</h3>
+
+    <ul>
+        <li><span class="cloze"><span class="cloze-text">2010 年以来真题选择题考查频率</span></span>：3 次。</li>
+        <li>对于关系类题目中出现的诸如&quot;<span class="cloze"><span class="cloze-text">前提</span></span>&quot;&quot;<span class="cloze"><span class="cloze-text">决定</span></span>&quot;等词语的选项，一定要认真审题，搞清楚两者关系。</li>
+        <li><span class="cloze"><span class="cloze-text">经典干扰项</span></span>：</li>
+        <li>改造客观世界的前提是人们必须先改造主观世界（×）</li>
+    </ul>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

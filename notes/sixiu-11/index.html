@@ -1,0 +1,86 @@
+---
+layout: front
+title: "思修法基 · 专题十一"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/sixiu-11/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/sixiu/' | prepend: site.baseurl }}">思修法基</a> · 专题十一</p>
+    <h1>锤炼个人品德</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>一、个人品德的作用</h2>
+
+    <p>个人品德在社会道德建设中<span class="cloze"><span class="cloze-text">具有基础性作用</span></span>，社会公德、职业道德和家庭美德建设，最终都要落实到个人品德的养成上。</p>
+
+    <h2>二、个人品德的内涵</h2>
+
+    <ul>
+        <li>个人品德是通过社会道德教育和个人自觉的道德修养所形成的稳定的心理状态和行为习惯，</li>
+        <li>是个体对某种道德要求认同和践履的结果，</li>
+        <li>集中体现了道德认知、<span class="cloze"><span class="cloze-text">道德情感</span></span>、道德意志、道德信念和道德行为的<span class="cloze"><span class="cloze-text">内在</span></span>统一。</li>
+    </ul>
+
+    <h2>三、涵养高尚道德品格</h2>
+
+    <p>① 形成正确的道德认知和道德判断。</p>
+
+    <p>最<span class="cloze"><span class="cloze-text">根本</span></span>的就是要坚持以唯物史观的基本原理来看待道德。</p>
+
+    <p>② 激发正向的道德认同和道德情感。</p>
+
+    <p>③ 强化坚定的道德<span class="cloze"><span class="cloze-text">意志和道德信念</span></span>。</p>
+
+    <p>在道德认知向道德行为转化的过程中，道德意志和道德信念是关键环节。</p>
+
+    <h2>四、道德修养重在践行</h2>
+
+    <p>① 掌握道德修养的正确方法。借鉴历史上思想家们所提出的学思并重、<span class="cloze"><span class="cloze-text">省察克治</span></span>、慎独自律、<span class="cloze"><span class="cloze-text">知行合一</span></span>、积善成德等各种积极<span class="cloze"><span class="cloze-text">有效</span></span>的<span class="cloze"><span class="cloze-text">方法</span></span>。</p>
+
+    <p>② 向道德模范学习。榜样的力量是无穷的。</p>
+
+    <p>③ 参与志愿服务活动。志愿服务是培育和弘扬社会主义核心价值观的重要载体。</p>
+
+    <p>志愿服务的精神<span class="cloze"><span class="cloze-text">是奉献</span></span>、<span class="cloze"><span class="cloze-text">友爱</span></span>、<span class="cloze"><span class="cloze-text">互助</span></span>、进步。其中，<span class="cloze"><span class="cloze-text">奉献精神是精髓</span></span>。</p>
+
+    <p>④ <span class="cloze"><span class="cloze-text">积极引领社会风尚</span></span>。促成知荣辱、讲正气、作奉献、促和谐的社会风尚。</p>
+
+    <div class="table-wrap">
+    <table>
+        <thead>
+            <tr><th>修养方法</th><th>含义</th><th>名言名句</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>学思并重</td><td>通过虚心学习，积极思索，辨别善恶，学善戒恶，以涵养良好的德性</td><td>&quot;学而不思则罔，思而不学则殆&quot;</td></tr>
+            <tr><td>省察克治</td><td>通过反省检验以发现和找出自己思想与行为中的不良倾向，并及时进行抑制和克服</td><td>&quot;吾日三省吾身&quot;</td></tr>
+            <tr><td>慎独自律</td><td>强调在无人知晓或无人监督的情况下，能够对个人内心深处比较隐蔽的意识、情绪进行管理和自律的一种修养方式</td><td>&quot;故君子慎其独也&quot;</td></tr>
+            <tr><td>知行合一</td><td>把提高道德认识与躬行道德实践统一起来，以促进道德要求内化为个人的道德品质，外化为实际的道德行为</td><td>&quot;听其言而观其行&quot;<span class="cloze"><span class="cloze-text">&quot;君子学以致其道&quot;</span></span>&quot;行义以达其道&quot;</td></tr>
+            <tr><td>积善成德</td><td>通过积累善行或美德，使之巩固强化，以逐渐凝结成优良的品德</td><td>&quot;不积跬步，无以至千里；<span class="cloze"><span class="cloze-text">不积小流，无以成江海&quot;</span></span>&quot;勿以恶小而为之，<span class="cloze"><span class="cloze-text">勿以善小而不为&quot;</span></span></td></tr>
+        </tbody>
+    </table>
+    </div>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

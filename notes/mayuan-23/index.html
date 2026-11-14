@@ -1,0 +1,56 @@
+---
+layout: front
+title: "马原 · 专题二十三"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/mayuan-23/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/mayuan/' | prepend: site.baseurl }}">马原</a> · 专题二十三</p>
+    <h1>资本主义的基本矛盾与经济危机</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>1. 资本主义基本矛盾</h2>
+
+    <p>资本主义的基本矛盾是生产社会化和生产资料资本主义私人占有之间的矛盾。</p>
+
+    <h2>2. 资本主义经济危机</h2>
+
+    <p>① <span class="cloze"><span class="cloze-text">本质特征</span></span>：生产<span class="cloze"><span class="cloze-text">相对</span></span>过剩。（不是与劳动人民的实际需要相比的<span class="cloze"><span class="cloze-text">绝对过剩</span></span>）</p>
+
+    <p>② 经济危机的抽象的一般的可能性（<span class="cloze"><span class="cloze-text">形式上的可能性</span></span>）：首先是由货币作为支付手段和流通手段引起的。</p>
+
+    <p>③ <span class="cloze"><span class="cloze-text">爆发的根本原因</span></span>：资本主义的基本矛盾。这一基本矛盾具体表现为：</p>
+
+    <ul>
+        <li>生产无限扩大的趋势与劳动人民有支付能力的需求<span class="cloze"><span class="cloze-text">相对</span></span>缩小的矛盾；</li>
+        <li>单个企业内部生产的有组织性和整个社会生产的无政府状态之间的矛盾。</li>
+    </ul>
+
+    <p>④ <span class="cloze"><span class="cloze-text">资本主义经济危机具有周期性</span></span>：这是由资本主义基本矛盾运动的阶段性决定的。</p>
+
+    <p>资本主义经济危机周期性爆发的特点，使社会资本再生产也呈现出周期性的特点，包括四个阶段：危机、萧条、复苏和高涨。其中危机阶段是周期的基本阶段。资本主义的再生产不一定都经过四个阶段，但是危机阶段是必经阶段。</p>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

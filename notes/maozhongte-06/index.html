@@ -1,0 +1,61 @@
+---
+layout: front
+title: "毛中特 · 专题六"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/maozhongte-06/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/maozhongte/' | prepend: site.baseurl }}">毛中特</a> · 专题六</p>
+    <h1>中国特色社会主义理论体系的形成发展</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>一、中国特色社会主义理论体系的形成过程</h2>
+
+    <p><span class="cloze"><span class="cloze-text">邓小平</span></span>理论是中国特色社会主义理论体系的<span class="cloze"><span class="cloze-text">开篇之作</span></span>，<span class="cloze"><span class="cloze-text">因此</span></span>，<span class="cloze"><span class="cloze-text">邓小平</span></span>理论的形成过程也就是中国特色社会主义理论体系的形成过程。</p>
+
+    <p>① <span class="cloze"><span class="cloze-text">1982年邓小平在党的十二大开幕词中明确提出</span></span>：走自己的道路，建设有中国特色的社会主义。从此，&quot;中国特色社会主义&quot;成为我们党的全部理论和实践创新的主题。这一重大命题的提出具有里程碑意义，是中国共产党人对科学社会主义发展的开创性贡献。</p>
+
+    <p>② 从党的十二大到十三大，<span class="cloze"><span class="cloze-text">邓小平</span></span>围绕着&quot;什么是社会主义、怎样建设社会主义&quot;这个基本的理论问题和实践问题进行<span class="cloze"><span class="cloze-text">深层次思考</span></span>，形成了一系列新的方针政策以及与此<span class="cloze"><span class="cloze-text">相对</span></span>应的理论观点。</p>
+
+    <p>③ <span class="cloze"><span class="cloze-text">1987年</span></span>在党的十三大上，<span class="cloze"><span class="cloze-text">邓小平</span></span>理论的轮廓形成。</p>
+
+    <p>④ <span class="cloze"><span class="cloze-text">1992年邓小平南方谈话</span></span>，是<span class="cloze"><span class="cloze-text">邓小平</span></span>理论的集大成之作。谈话推动改革开放和社会主义现代化建设进入新阶段，<span class="cloze"><span class="cloze-text">邓小平</span></span>理论也逐步<span class="cloze"><span class="cloze-text">走向成熟</span></span>。</p>
+
+    <p>⑤ <span class="cloze"><span class="cloze-text">1997年</span></span>召开的党的十五大正式提出&quot;<span class="cloze"><span class="cloze-text">邓小平</span></span>理论&quot;这一概念，郑重地把<span class="cloze"><span class="cloze-text">邓小平理论同马克思列宁主义、毛泽东思想一起，确立为党的指导思想并</span></span>写入党章，<span class="cloze"><span class="cloze-text">1999年</span></span>载入宪法。</p>
+
+    <h2>二、中国特色社会主义理论体系的发展过程</h2>
+
+    <p>① &quot;三个代表&quot;重要思想是中国特色社会主义理论体系的跨世纪发展。</p>
+
+    <p>② 科学发展观是中国特色社会主义理论体系在新世纪新阶段的新发展。</p>
+
+    <p>③ <span class="cloze"><span class="cloze-text">习近平</span></span>新时代中国特色社会主义思想是中国特色社会主义理论体系在新时代的新篇章。</p>
+
+    <h3>【点拨】</h3>
+
+    <p>党的十七大提出了&quot;中国特色社会主义理论体系&quot;的科学概念，把改革开放以来我们党在实践中相继形成的<span class="cloze"><span class="cloze-text">邓小平</span></span>理论、&quot;三个代表&quot;重要思想以及科学发展观等重大战略思想一道作为中国特色社会主义理论体系的重要组成部分，标志着中国特色社会主义理论和实践的进一步成熟。</p>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

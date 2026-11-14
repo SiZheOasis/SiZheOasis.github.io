@@ -1,0 +1,82 @@
+---
+layout: front
+title: "马原 · 专题二十九"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/mayuan-29/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/mayuan/' | prepend: site.baseurl }}">马原</a> · 专题二十九</p>
+    <h1>共产主义崇高理想及其最终实现</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>1. 展望未来共产主义新社会</h2>
+
+    <h3>（1）预见未来社会的方法论原则</h3>
+
+    <p>① <span class="cloze"><span class="cloze-text">在展望未来社会的问题上</span></span>，是否坚持科学的立场观点方法是能否正确预见<span class="cloze"><span class="cloze-text">未来的基本前提</span></span>，也是<span class="cloze"><span class="cloze-text">马克思</span></span>主义与空想社会主义的<span class="cloze"><span class="cloze-text">根本区别</span></span>。</p>
+
+    <p>② <span class="cloze"><span class="cloze-text">马克思主义经典作家预见未来社会的方法论原则</span></span>：</p>
+
+    <ul>
+        <li>在揭示人类社会发展一般规律的基础上指明社会发展的方向。</li>
+        <li>在剖析资本主义旧世界的过程中阐发未来新世界的特点。</li>
+        <li>在社会主义社会发展中不断深化对未来共产主义社会<span class="cloze"><span class="cloze-text">的认识</span></span>。</li>
+        <li>立足于揭示未来社会的一般特征，而不对各种细节作具体描绘。</li>
+    </ul>
+
+    <h3>（2）共产主义社会的基本特征</h3>
+
+    <p>① 物质财富极大丰富，消费资料按需分配。</p>
+
+    <p>② 社会关系高度和谐，人们精神境界极大提高。</p>
+
+    <p>③ 实现每个人自由而全面的发展，人类从必然王国向自由王国飞跃。（<span class="cloze"><span class="cloze-text">马克思</span></span>主义追求的<span class="cloze"><span class="cloze-text">根本价值目标</span></span>：实现人的自由而全面的发展）</p>
+
+    <h2>2. 实现共产主义是历史发展的必然趋势</h2>
+
+    <h3>（1）实现共产主义是历史发展的必然</h3>
+
+    <p>① <span class="cloze"><span class="cloze-text">共产主义理想的实现是历史发展的必然</span></span>：这是以人类社会发展规律以及资本主义社会的基本矛盾发展为依据的。</p>
+
+    <p>② 实现共产主义是人类最伟大的事业。</p>
+
+    <h3>（2）实现共产主义是长期的历史过程</h3>
+
+    <p>① 资本主义的灭亡和向社会主义的转变是一个长期的过程。</p>
+
+    <p>② 社会主义社会的充分发展和最终向共产主义过渡需要很长的历史时期。</p>
+
+    <h3>（3）共产主义远大理想与中国特色社会主义共同理想</h3>
+
+    <p><span class="cloze"><span class="cloze-text">远大理想与共同理想的关系</span></span>：</p>
+
+    <ul>
+        <li><span class="cloze"><span class="cloze-text">从时间上看</span></span>：是最终理想与阶段性理想的关系</li>
+        <li><span class="cloze"><span class="cloze-text">从层次上看</span></span>：是最高纲领与最低纲领的关系</li>
+        <li><span class="cloze"><span class="cloze-text">从范围来看</span></span>：是全人类理想与全体中国人民理想的关系</li>
+    </ul>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

@@ -1,0 +1,50 @@
+---
+layout: front
+title: "马原 · 专题二十五"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/mayuan-25/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/mayuan/' | prepend: site.baseurl }}">马原</a> · 专题二十五</p>
+    <h1>经济全球化</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>1. 经济全球化的表现</h2>
+
+    <p>生产全球化；贸易全球化；金融全球化。</p>
+
+    <h2>2. 经济全球化的动因（生产力发展和社会化大生产的必然要求）</h2>
+
+    <p>① 科学技术的进步和生产力的发展为经济全球化提供<span class="cloze"><span class="cloze-text">了坚实的物质基础和</span></span><span class="cloze"><span class="cloze-text">根本的推动力</span></span>。信息技术革命把整个世界空前地<span class="cloze"><span class="cloze-text">联系在一起</span></span>。</p>
+
+    <p>② 跨国公司的发展为经济全球化提供<span class="cloze"><span class="cloze-text">了</span></span><span class="cloze"><span class="cloze-text">适宜的企业组织形式</span></span>。大大地促进了各种生产要素在全球的流动和国际分工。</p>
+
+    <p>③ 各国经济体制的变革和国际经济组织的发展是经济全球化的体制与组织保障。</p>
+
+    <h3>【点拨】</h3>
+    <p>必须看到，当今困扰世界的很多问题，并不是经济全球化造成的。如国际金融危机不是经济全球化发展的必然产物，而是金融资本过度逐利、金融监管严重缺失的结果。</p>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>
