@@ -328,6 +328,37 @@ body.notes {
     border-radius: 2px;
 }
 
+/* Beside a Long Cang heading. Same face as the toolbar, not a chip. */
+.section-toggle {
+    appearance: none;
+    margin: 0 0 0 var(--space-20);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--dove);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    transition: color var(--move) var(--ease);
+}
+
+.section-toggle:hover {
+    color: var(--ink);
+}
+
+.section-toggle:focus-visible {
+    outline: 1px solid var(--dove);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
 .article {
     color: var(--dove);
     font-size: 1.0625rem;
@@ -512,6 +543,7 @@ body.notes {
     .front a,
     .notes a,
     .toolbar button,
+    .section-toggle,
     .cloze-text {
         transition: none;
     }

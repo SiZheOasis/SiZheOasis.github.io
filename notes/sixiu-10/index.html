@@ -12,8 +12,7 @@ permalink: /notes/sixiu-10/
     <h1>公民道德建设</h1>
 </header>
 <div class="toolbar">
-    <button type="button" id="reveal-all">全部显示</button>
-    <button type="button" id="hide-all">全部蒙上</button>
+    <button type="button" id="cloze-toggle">全部显示</button>
 </div>
 <article class="article">
         <p>《新时代公民道德建设实施纲要》强调，要把<span class="cloze"><span class="cloze-text">社会公德</span></span>、<span class="cloze"><span class="cloze-text">职业道德</span></span>、家庭美德、个人品德建设作为着力点。鼓励人们在社会上做一个好公民；在工作中做一个好建设者；在家庭里做一个好成员；在日常生活中<span class="cloze"><span class="cloze-text">养成好品行</span></span>。</p>
@@ -95,18 +94,4 @@ permalink: /notes/sixiu-10/
     <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
 </article>
 
-<script>
-    const clozes = [...document.querySelectorAll(".cloze")];
-    const toggle = (el) => el.classList.toggle("is-on");
-    clozes.forEach((el) => {
-        el.setAttribute("role", "button");
-        el.setAttribute("tabindex", "0");
-        el.addEventListener("click", () => toggle(el));
-        el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
-        });
-    });
-    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
-    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
-    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
-</script>
+<script src="{{ '/js/notes-cloze.js' | prepend: site.baseurl }}"></script>
