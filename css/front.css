@@ -562,3 +562,102 @@ body.notes {
         transition: none;
     }
 }
+
+/* Practice-paper layout. Politics pages do not use body.exam. */
+body.notes.exam .stage {
+    max-width: 76rem;
+}
+
+body.exam .article h2,
+body.exam .article h3 {
+    scroll-margin-top: 4.5rem;
+}
+
+body.exam .exam-toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.1rem;
+    margin: 0 0 var(--space-32);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+body.exam .exam-toc a {
+    color: var(--quiet);
+    text-decoration: none;
+}
+
+body.exam .exam-toc a:hover {
+    color: var(--ink);
+}
+
+body.exam .exam-directions {
+    margin: 0 0 var(--space-24);
+}
+
+body.exam .exam-split {
+    display: grid;
+    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+    gap: var(--space-24);
+    align-items: start;
+    margin: 0 0 var(--space-40);
+}
+
+body.exam .exam-pane {
+    min-width: 0;
+    max-height: calc(100vh - 8.5rem);
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+body.exam .exam-single {
+    max-width: 42rem;
+    margin: 0 0 var(--space-40);
+}
+
+body.exam .exam-q {
+    margin: 0 0 var(--space-24);
+}
+
+body.exam .exam-after {
+    margin-top: var(--space-8);
+}
+
+body.exam .exam-fold {
+    margin: 0 0 var(--space-12);
+    border-top: 1px solid rgba(213, 217, 226, 0.16);
+}
+
+body.exam .exam-fold summary {
+    cursor: pointer;
+    color: var(--dove);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+    padding: 0.55rem 0;
+}
+
+body.exam .exam-fold summary:hover {
+    color: var(--ink);
+}
+
+body.exam .exam-fold summary:focus-visible {
+    outline: 1px solid var(--dove);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+@media (max-width: 860px) {
+    body.exam .exam-split {
+        grid-template-columns: 1fr;
+    }
+
+    body.exam .exam-passage {
+        max-height: 38vh;
+    }
+
+    body.exam .exam-questions {
+        max-height: 58vh;
+    }
+}
