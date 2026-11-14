@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,14 +9,19 @@
     <link rel="manifest" href="{{ site.baseurl }}/pwa/manifest.json">
     <link rel="stylesheet" href="{{ '/css/front.css' | prepend: site.baseurl }}">
 </head>
-<body class="front">
+<body class="{% if page.body_class %}{{ page.body_class }}{% else %}front{% endif %}">
     <div class="shell">
         <header class="top">
-            {% if page.title == "About" %}
-            <a href="{{ '/' | prepend: site.baseurl }}">Home</a>
-            {% else %}
+            {%- if page.section == "notes" %}
+            <a href="{{ '/' | prepend: site.baseurl }}">Feng SiZhe</a>
+            <a href="{{ '/notes/' | prepend: site.baseurl }}"{% if page.nav_current == "notes" %} aria-current="page"{% endif %}>学习笔记</a>
             <a href="{{ '/about/' | prepend: site.baseurl }}">About</a>
-            {% endif %}
+            {%- elsif page.title == "About" %}
+            <a href="{{ '/' | prepend: site.baseurl }}">Home</a>
+            {%- else %}
+            <a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a>
+            <a href="{{ '/about/' | prepend: site.baseurl }}">About</a>
+            {%- endif %}
         </header>
         <main class="stage">
             {{ content }}
