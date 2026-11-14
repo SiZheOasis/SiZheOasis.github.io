@@ -1,0 +1,78 @@
+---
+layout: front
+title: "审查 · 思修法基 · 专题一"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /review/cloze-batch1/sixiu-01/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">审查预览 · <a href="{{ '/review/cloze-batch1/' | prepend: site.baseurl }}">本批</a> · 思修法基 · 专题一</p>
+    <h1>思想道德和法律（德治和法治）的相互关系</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>法律和道德的共同点</th></tr>
+</thead>
+<tbody>
+<tr><td>① 都是<span class="cloze"><span class="cloze-text">调节人们思想行为</span></span>、<span class="cloze"><span class="cloze-text">协调人际关系</span></span>、<span class="cloze"><span class="cloze-text">维护社会秩序</span></span>的重要手段</td></tr>
+<tr><td>② 都是<span class="cloze"><span class="cloze-text">社会上层建筑</span></span>的重要组成部分，共同服务于一定的<span class="cloze"><span class="cloze-text">经济基础</span></span></td></tr>
+<tr><td>③ 都是重要的社会规范，都具有<span class="cloze"><span class="cloze-text">必须遵守</span></span>的性质</td></tr>
+<tr><td class="note">注意：法治和德治，是治国理政<span class="cloze"><span class="cloze-text">不可或缺</span></span>的两种方式</td></tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>法律和道德（或者法治和德治）的不同点</th></tr>
+</thead>
+<tbody>
+<tr><td>① <span class="cloze"><span class="cloze-text">调节领域不同</span></span>：道德调节的领域比法律<span class="cloze"><span class="cloze-text">广</span></span>，道德<span class="cloze"><span class="cloze-text">反对和谴责</span></span>的行为，不一定是法律<span class="cloze"><span class="cloze-text">禁止和制裁</span></span>的行为；但法律<span class="cloze"><span class="cloze-text">禁止和制裁</span></span>的行为，通常是道德<span class="cloze"><span class="cloze-text">反对和谴责</span></span>的行为</td></tr>
+<tr><td>② <span class="cloze"><span class="cloze-text">调节方式不同</span></span>：道德是一种<span class="cloze"><span class="cloze-text">非强制性</span></span>的规范，是通过<span class="cloze"><span class="cloze-text">社会舆论</span></span>、<span class="cloze"><span class="cloze-text">传统习俗</span></span>和<span class="cloze"><span class="cloze-text">内心信念</span></span>来维持的；法律靠<span class="cloze"><span class="cloze-text">国家强制力</span></span>保证实施</td></tr>
+<tr><td>③ <span class="cloze"><span class="cloze-text">地位不同</span></span>：法治是治国理政的<span class="cloze"><span class="cloze-text">基本方式</span></span>，德治是治国理政的<span class="cloze"><span class="cloze-text">重要方式</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>相互关系</th></tr>
+</thead>
+<tbody>
+<tr><td>① 思想道德建设为法治建设提供<span class="cloze"><span class="cloze-text">思想指引和价值基础</span></span></td></tr>
+<tr><td class="note">要强化道德对法治的<span class="cloze"><span class="cloze-text">支撑作用</span></span>，重视发挥道德的<span class="cloze"><span class="cloze-text">教化作用</span></span></td></tr>
+<tr><td>② 法治建设为思想道德建设提供<span class="cloze"><span class="cloze-text">制度支撑和法律保障</span></span></td></tr>
+<tr><td class="note">把<span class="cloze"><span class="cloze-text">道德要求</span></span>贯彻到法治建设中，以法治承载<span class="cloze"><span class="cloze-text">道德理念</span></span></td></tr>
+<tr><td class="note">运用<span class="cloze"><span class="cloze-text">法治手段</span></span>解决道德领域突出问题</td></tr>
+<tr><td>③ 坚持和发展中国特色社会主义，既要发挥思想道德的<span class="cloze"><span class="cloze-text">引领和教化作用</span></span>，又要发挥法律的<span class="cloze"><span class="cloze-text">规范和强制作用</span></span>（<span class="cloze"><span class="cloze-text">法安天下，德润人心</span></span>）</td></tr>
+</tbody>
+</table>
+</div>
+
+    <p class="hint">点开一处只显示这一处，淡底还在；再点一次重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>
+
