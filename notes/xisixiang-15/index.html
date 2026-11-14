@@ -1,0 +1,73 @@
+---
+layout: front
+title: "习思想 · 专题十五"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/xisixiang-15/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/xisixiang/' | prepend: site.baseurl }}">习思想</a> · 专题十五</p>
+    <h1>在共建共治共享中推进社会治理现代化</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>一、加强和创新社会治理</h2>
+
+    <p>① 社会治理关系国家长治久安、社会安定有序、人民安居乐业。</p>
+
+    <p>② 加强和创新社会治理，要在党的领导下，以政府<span class="cloze"><span class="cloze-text">为主导</span></span>，以社会多元主体参与<span class="cloze"><span class="cloze-text">为基础</span></span>，以维护人民群众<span class="cloze"><span class="cloze-text">根本利益为核心</span></span>。</p>
+
+    <p>③ 新时代加强和创新社会治理的<span class="cloze"><span class="cloze-text">要求</span></span>：<span class="cloze"><span class="cloze-text">坚持系统治理</span></span>、<span class="cloze"><span class="cloze-text">依法治理</span></span>、综合治理、源头治理。</p>
+
+    <h2>二、完善社会治理体系</h2>
+
+    <p>① <span class="cloze"><span class="cloze-text">重要性</span></span>：社会治理体系是进行社会治理的<span class="cloze"><span class="cloze-text">基础</span></span>，也是提高社会治理效能的<span class="cloze"><span class="cloze-text">保障</span></span>。</p>
+
+    <p>② <span class="cloze"><span class="cloze-text">内涵</span></span>：完善党委领导、政府负责、民主协商、社会协同、公众参与、法治保障、科技支撑的社会治理体系。</p>
+
+    <p>③ <span class="cloze"><span class="cloze-text">理念</span></span>：共建共治共享。</p>
+
+    <p>共建是社会治理的基础；共治是社会治理的关键；共享是社会治理的目标。</p>
+
+    <p>① <span class="cloze"><span class="cloze-text">社会治理共同体</span></span>：人人有责、人人尽责、人人享有。</p>
+
+    <h2>三、加强城乡社区治理</h2>
+
+    <h3>1. 重要性及目标</h3>
+
+    <p>基层治理是国家治理的<span class="cloze"><span class="cloze-text">基石</span></span>，城乡社区是社会治理<span class="cloze"><span class="cloze-text">最基本的单元</span></span>，是党和政府<span class="cloze"><span class="cloze-text">联系</span></span>、服务居民群众的&quot;<span class="cloze"><span class="cloze-text">最后一公里</span></span>&quot;。</p>
+
+    <p>社会治理的<span class="cloze"><span class="cloze-text">重心</span></span>必须<span class="cloze"><span class="cloze-text">向基层下移</span></span>，落实到城乡社区，努力打造和谐有序、<span class="cloze"><span class="cloze-text">绿色文明</span></span>、创新包容、共建共享的幸福家园。</p>
+
+    <h3>2. 举措</h3>
+
+    <p>① 健全党组织领导的城乡基层治理体系，实现政府治理和<span class="cloze"><span class="cloze-text">社会调节</span></span>、居民自治良性互动。</p>
+
+    <p>充分发挥基层党组织领导<span class="cloze"><span class="cloze-text">核心作用</span></span>；有效发挥基层政府<span class="cloze"><span class="cloze-text">主导作用</span></span>；注重发挥基层群众性自治组织<span class="cloze"><span class="cloze-text">基础作用</span></span>。</p>
+
+    <p>② 坚持和发展<span class="cloze"><span class="cloze-text">新时代&quot;枫桥经验&quot;&quot;浦江经验&quot;</span></span>，完善正确处理新形势下人民内部<span class="cloze"><span class="cloze-text">矛盾机制</span></span>。</p>
+
+    <p>③ 加快推进市域社会治理现代化，提高市域社会治理能力。市域是将风险隐患解决在基层、化解在萌芽状态的<span class="cloze"><span class="cloze-text">最直接</span></span>、<span class="cloze"><span class="cloze-text">最有效力</span></span>的治理层级，处于推进基层治理现代化的<span class="cloze"><span class="cloze-text">前线位置</span></span>。</p>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

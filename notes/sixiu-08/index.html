@@ -1,0 +1,79 @@
+---
+layout: front
+title: "思修法基 · 专题八"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/sixiu-08/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/sixiu/' | prepend: site.baseurl }}">思修法基</a> · 专题八</p>
+    <h1>社会主义道德</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>一、社会主义道德的先进性特征</h2>
+
+    <p>社会主义道德是人类道德发展史上一种崭新类型的道德，具有显著的先进性特征。</p>
+
+    <p>1. 社会主义道德是社会主义经济<span class="cloze"><span class="cloze-text">基础的反映</span></span>。</p>
+
+    <p>2. 社会主义道德是对人类优秀道德资源的批判继承和创新发展。</p>
+
+    <p>3. 社会主义道德克服了以往阶级社会道德的片面性和局限性，坚持以<span class="cloze"><span class="cloze-text">为人民服务为核心</span></span>，坚持以集体主义为原则，展现出真实而强大的道义力量。</p>
+
+    <h2>二、社会主义道德的核心</h2>
+
+    <p>1. 为人民服务是社会主义道德的核心。</p>
+
+    <p>2. 为人民服务是社会主义道德观的<span class="cloze"><span class="cloze-text">集中体现</span></span>，是全体中国人民共同遵循的道德要求。</p>
+
+    <p>3. 以为人民服务为核心是社会主义道德区别和优越于其他社会形态道德的显著标志。</p>
+
+    <h2>三、社会主义道德的原则</h2>
+
+    <h3>1. 集体主义是社会主义道德的原则</h3>
+
+    <p>在我国，国家利益、社会整体利益和个人利益<span class="cloze"><span class="cloze-text">根本</span></span>上的一致性，使得集体主义应当而且能够在全社会范围内贯彻实施。长期以来，集体主义已经成为调节国家利益、社会整体利益和个人利益关系的基本原则。</p>
+
+    <h3>2. 集体主义的内涵（正确认识和处理国家利益、社会整体利益和个人利益的关系）</h3>
+
+    <p>1. 集体主义强调国家利益、社会整体利益和个人利益的辩证统一。在社会主义社会中，国家利益、社会整体利益和个人利益是不能分割的。在现实生活中，要力求做到<span class="cloze"><span class="cloze-text">共同发展</span></span>、相互增益、相得益彰。</p>
+
+    <p>2. 集体主义强调国家利益、社会整体利益高于个人利益。这既是为了维护国家、社会的共同利益，最终也是为了维护个人的<span class="cloze"><span class="cloze-text">根本</span></span>利益和长远利益。集体主义要求个人对国家、社会作出牺牲并不是随意的，只有在不牺牲个人利益就不能保全国家利益、社会整体利益的情况下，才要求个人作出牺牲。</p>
+
+    <p>3. 集体主义重视和保障个人的正当利益。</p>
+
+    <h3>3. 集体主义的要求（三个层次）</h3>
+
+    <p>1. 无私奉献、一心为公，这是集体主义的<span class="cloze"><span class="cloze-text">最高层次</span></span>。</p>
+
+    <p>2. 先公后私、先人后己，这是已经具有较高社会主义道德觉悟的人能够达到的要求。</p>
+
+    <p>3. 顾全大局、遵纪守法、热爱祖国、诚实劳动，以正当合法的手段保障个人利益。这是对公民<span class="cloze"><span class="cloze-text">最基本</span></span>的道德要求。</p>
+
+    <h2>四、社会主义道德建设要吸收借鉴优秀道德成果</h2>
+
+    <p>传承中华传统美德；发扬中国革命道德；借鉴人类文明优秀道德成果。</p>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

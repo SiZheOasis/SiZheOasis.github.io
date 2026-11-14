@@ -1,0 +1,79 @@
+---
+layout: front
+title: "思修法基 · 专题十四"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/sixiu-14/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/sixiu/' | prepend: site.baseurl }}">思修法基</a> · 专题十四</p>
+    <h1>全面依法治国的唯一正确道路——坚持走中国特色社会主义法治道路</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>一、什么是中国特色社会主义法治道路</h2>
+
+    <p>① 中国特色社会主义法治道路本质上是中国特色社会主义道路在法治领域的具体体现。</p>
+
+    <p>② 中国特色社会主义法治道路的<span class="cloze"><span class="cloze-text">核心要义</span></span>，就是要坚持党的领导，坚持中国特色社会主义制度，贯彻中国特色社会主义<span class="cloze"><span class="cloze-text">法治理论</span></span>。</p>
+
+    <h2>二、为什么要坚持走中国特色社会主义法治道路</h2>
+
+    <p>① 走中国特色社会主义法治道路，是历史的必然结论。</p>
+
+    <p>② 走中国特色社会主义法治道路，是由我国社会主义<span class="cloze"><span class="cloze-text">国家性质所决定的</span></span>。</p>
+
+    <p>③ 走中国特色社会主义法治道路，是立足我国基本国情的必然选择。</p>
+
+    <h2>三、坚持中国特色社会主义法治道路必须遵循的原则</h2>
+
+    <p>① 坚持中国共产党的领导</p>
+
+    <p>党的领导是中国特色社会主义最本质的特征，是社会主义法治最<span class="cloze"><span class="cloze-text">根本</span></span>的保证。</p>
+
+    <p>党的领导是中国特色社会主义法治之魂，是我们的法治同西方资本主义国家的法治最大的区别。</p>
+
+    <p>坚持党的领导体现在党领导立法、<span class="cloze"><span class="cloze-text">保证执法</span></span>、<span class="cloze"><span class="cloze-text">支持司法</span></span>、带头<span class="cloze"><span class="cloze-text">守法</span></span>上。</p>
+
+    <p>② <span class="cloze"><span class="cloze-text">坚持人民主体地位</span></span>。全面依法治国最广泛、最深厚的基础是人民。</p>
+
+    <p>③ 坚持法律面前人人平等。</p>
+
+    <p>平等是社会主义法律的基本属性，是社会主义法治的<span class="cloze"><span class="cloze-text">基本要求</span></span>。</p>
+
+    <p>坚持法律面前人人平等，<span class="cloze"><span class="cloze-text">一方面要求违法必究</span></span>，一切违反宪法法律的行为都必须予以追究。另一方面要求非歧视，<span class="cloze"><span class="cloze-text">即无差别对待</span></span>。</p>
+
+    <p>坚持法律面前人人平等，可以充分显示中国特色社会主义制度的优越性，有利于增强人民群众的主人翁意识和责任感；有利于预防特权思想和各种潜规则的侵蚀；有利于贯彻执行&quot;以事实为根据，以法律为准绳&quot;的司法原则；有利于维护法律权威、健全社会主义法治，确保实现全面依法治国的<span class="cloze"><span class="cloze-text">总目标</span></span>。</p>
+
+    <p>④ 坚持依法治国和以德治国相结合。</p>
+
+    <ul>
+        <li>既要强化道德对法治的<span class="cloze"><span class="cloze-text">支撑作用</span></span>，重视发挥道德的<span class="cloze"><span class="cloze-text">教化作用</span></span>，提高全社会文明程度，为全面依法治国<span class="cloze"><span class="cloze-text">创造良好环境</span></span>；</li>
+        <li>又要把<span class="cloze"><span class="cloze-text">道德要求</span></span>贯彻到法治建设中，以法治承载<span class="cloze"><span class="cloze-text">道德理念</span></span>；</li>
+        <li>要运用<span class="cloze"><span class="cloze-text">法治手段</span></span>解决道德领域突出问题，依法加强对群众反映强烈的失德行为的整治。</li>
+    </ul>
+
+    <p>⑤ 坚持从中国实际出发。</p>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>

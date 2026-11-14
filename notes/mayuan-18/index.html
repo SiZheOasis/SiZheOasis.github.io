@@ -1,0 +1,73 @@
+---
+layout: front
+title: "马原 · 专题十八"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /notes/mayuan-18/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">学习笔记 · <a href="{{ '/notes/mayuan/' | prepend: site.baseurl }}">马原</a> · 专题十八</p>
+    <h1>社会进步与社会形态更替</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+        <h2>1. 社会进步与人的发展</h2>
+
+    <p>① 社会进步的<span class="cloze"><span class="cloze-text">集中表现</span></span>：<span class="cloze"><span class="cloze-text">社会形态的更替</span></span>。</p>
+
+    <p>② 社会进步不是<span class="cloze"><span class="cloze-text">直线上升</span></span>的，而是<span class="cloze"><span class="cloze-text">曲折发展</span></span>的，有时甚至包含着某些<span class="cloze"><span class="cloze-text">停滞和倒退</span></span>。（<span class="cloze"><span class="cloze-text">比如社会主义的发展过程中也有挫折</span></span>）</p>
+
+    <p>③ 人的发展的<span class="cloze"><span class="cloze-text">三个阶段</span></span>：<span class="cloze"><span class="cloze-text">人的依赖关系</span></span>占统治地位的阶段（<span class="cloze"><span class="cloze-text">资本主义以前的社会</span></span>）、<span class="cloze"><span class="cloze-text">以物的依赖关系为基础的人的独立性</span></span>的阶段（<span class="cloze"><span class="cloze-text">资本主义社会</span></span>）、<span class="cloze"><span class="cloze-text">自由个性</span></span>的阶段（<span class="cloze"><span class="cloze-text">共产主义社会</span></span>）。</p>
+
+    <h2>2. 社会形态更替</h2>
+
+    <h3>（1）社会形态更替的统一性和多样性</h3>
+
+    <p>① <span class="cloze"><span class="cloze-text">统一性</span></span>：依据经济基础特别是生产关系的不同性质，社会历史可划分为五种社会形态（<span class="cloze"><span class="cloze-text">从原始社会到共产主义社会</span></span>）。五种社会形态依次更替，表现了社会形态更替的统一性。</p>
+
+    <p>② <span class="cloze"><span class="cloze-text">多样性</span></span>：有些国家在发展中超越了一个甚至几个社会形态而跨越式地向前发展；同一种社会形态，在不同国家也会显现出不同特点。</p>
+
+    <h3>【点拨】</h3>
+
+    <p>社会形态更替的多样性并不能否定人类总体历史过程。某些民族可以实现跨越，但其跨越的方向、跨越的限度是受总体历史进程制约的。</p>
+
+    <h3>（2）社会形态更替中的必然性与选择性</h3>
+
+    <p>① <span class="cloze"><span class="cloze-text">必然性</span></span>：主要是指社会形态依次更替的过程和规律<span class="cloze"><span class="cloze-text">是客观的</span></span>，其发展的基本趋势是<span class="cloze"><span class="cloze-text">确定不移</span></span>的。生产力与生产关系矛盾运动的<span class="cloze"><span class="cloze-text">规律性</span></span>，<span class="cloze"><span class="cloze-text">从根本上</span></span>规定了社会形态更替的必然性。</p>
+
+    <p>② <span class="cloze"><span class="cloze-text">人们的历史选择性</span></span>：</p>
+
+    <ul>
+        <li>第一，社会发展的必然性造成了一定历史阶段社会发展的基本趋势，为人们的历史选择提供<span class="cloze"><span class="cloze-text">了</span></span><span class="cloze"><span class="cloze-text">基础、范围和可能性空间</span></span>。</li>
+        <li>第二，社会形态更替的过程也是一个主观能动性与客观规律性相统一的过程。</li>
+        <li>第三，人们的历史选择性<span class="cloze"><span class="cloze-text">归根到底</span></span>是<span class="cloze"><span class="cloze-text">人民群众的选择性</span></span>。</li>
+    </ul>
+
+    <h3>【命题分析】</h3>
+
+    <ul>
+        <li><span class="cloze"><span class="cloze-text">2010 年以来真题选择题考查频率</span></span>：3 次。</li>
+    </ul>
+    <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>
