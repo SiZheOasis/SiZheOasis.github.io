@@ -23,11 +23,24 @@
         return found;
     }
 
+    /* 点拨 / 命题分析 are tips, with or without 【】. They are not controls
+       and not boundaries, so the previous content heading keeps walking. */
+    function isTipHeading(node) {
+        if (!node || node.nodeType !== 1) return false;
+        const text = node.textContent.replace(/\s+/g, "");
+        return text === "点拨" || text === "【点拨】" || text === "命题分析" || text === "【命题分析】";
+    }
+
+    function isContentBoundary(node, fromTag) {
+        if (!node || node.nodeType !== 1 || isTipHeading(node)) return false;
+        if (fromTag === "H2") return node.tagName === "H2";
+        return node.tagName === "H2" || node.tagName === "H3";
+    }
+
     function blockClozes(heading) {
-        const stop = heading.tagName === "H2" ? new Set(["H2"]) : new Set(["H2", "H3"]);
         const items = clozesIn(heading);
         let el = heading.nextElementSibling;
-        while (el && !stop.has(el.tagName)) {
+        while (el && !isContentBoundary(el, heading.tagName)) {
             items.push(...clozesIn(el));
             el = el.nextElementSibling;
         }
@@ -78,6 +91,7 @@
     const article = document.querySelector("article.article");
     if (article) {
         article.querySelectorAll("h2, h3").forEach((heading) => {
+            if (isTipHeading(heading)) return;
             const items = blockClozes(heading);
             if (!items.length) return;
             const button = document.createElement("button");
