@@ -12,8 +12,7 @@ permalink: /notes/mayuan-20/
     <h1>商品与劳动价值理论</h1>
 </header>
 <div class="toolbar">
-    <button type="button" id="reveal-all">全部显示</button>
-    <button type="button" id="hide-all">全部蒙上</button>
+    <button type="button" id="cloze-toggle">全部显示</button>
 </div>
 <article class="article">
         <h2>1. 商品经济的形成和发展</h2>
@@ -214,18 +213,4 @@ permalink: /notes/mayuan-20/
     <p class="hint">点开一处只显示这一处，淡底还在；再点一次重新模糊。</p>
 </article>
 
-<script>
-    const clozes = [...document.querySelectorAll(".cloze")];
-    const toggle = (el) => el.classList.toggle("is-on");
-    clozes.forEach((el) => {
-        el.setAttribute("role", "button");
-        el.setAttribute("tabindex", "0");
-        el.addEventListener("click", () => toggle(el));
-        el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
-        });
-    });
-    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
-    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
-    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
-</script>
+<script src="{{ '/js/notes-cloze.js' | prepend: site.baseurl }}"></script>

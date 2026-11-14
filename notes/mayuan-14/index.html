@@ -12,8 +12,7 @@ permalink: /notes/mayuan-14/
     <h1>价值</h1>
 </header>
 <div class="toolbar">
-    <button type="button" id="reveal-all">全部显示</button>
-    <button type="button" id="hide-all">全部蒙上</button>
+    <button type="button" id="cloze-toggle">全部显示</button>
 </div>
 <article class="article">
         <p>价值是反映主体和客体之间<span class="cloze"><span class="cloze-text">意义关系</span></span>的哲学范畴，是客体对个人、群体乃至整个社会的生活和活动所具有的意义。</p>
@@ -125,18 +124,4 @@ permalink: /notes/mayuan-14/
     <p class="hint">点开一处只显示这一处，淡底还在；再点一次重新模糊。</p>
 </article>
 
-<script>
-    const clozes = [...document.querySelectorAll(".cloze")];
-    const toggle = (el) => el.classList.toggle("is-on");
-    clozes.forEach((el) => {
-        el.setAttribute("role", "button");
-        el.setAttribute("tabindex", "0");
-        el.addEventListener("click", () => toggle(el));
-        el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
-        });
-    });
-    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
-    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
-    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
-</script>
+<script src="{{ '/js/notes-cloze.js' | prepend: site.baseurl }}"></script>

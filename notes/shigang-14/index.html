@@ -12,8 +12,7 @@ permalink: /notes/shigang-14/
     <h1>中国特色社会主义进入新时代</h1>
 </header>
 <div class="toolbar">
-    <button type="button" id="reveal-all">全部显示</button>
-    <button type="button" id="hide-all">全部蒙上</button>
+    <button type="button" id="cloze-toggle">全部显示</button>
 </div>
 <article class="article">
         <h2>会议与重要提法总结</h2>
@@ -36,18 +35,4 @@ permalink: /notes/shigang-14/
     <p class="hint">加粗内容全部遮住；其余关键表述原则上也遮。点开后淡底仍在，再点可重新模糊。</p>
 </article>
 
-<script>
-    const clozes = [...document.querySelectorAll(".cloze")];
-    const toggle = (el) => el.classList.toggle("is-on");
-    clozes.forEach((el) => {
-        el.setAttribute("role", "button");
-        el.setAttribute("tabindex", "0");
-        el.addEventListener("click", () => toggle(el));
-        el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
-        });
-    });
-    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
-    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
-    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
-</script>
+<script src="{{ '/js/notes-cloze.js' | prepend: site.baseurl }}"></script>
