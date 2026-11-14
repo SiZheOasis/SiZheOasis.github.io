@@ -465,6 +465,20 @@ body.notes {
     background: var(--mark);
 }
 
+/* Whole answer or analysis on a practice paper. Word-level cloze stays inline. */
+.article .cloze-block {
+    display: block;
+    margin: 0 0 var(--space-16);
+}
+
+.article .cloze-block > .cloze-text {
+    display: block;
+}
+
+.article .cloze-block > .cloze-text > :last-child {
+    margin-bottom: 0;
+}
+
 /* Two-level index links, deeper headings, 点拨, and wide tables. */
 
 .subjects h2 a,
