@@ -1,0 +1,61 @@
+---
+layout: front
+title: "审查 · 毛中特 · 专题一"
+lang: zh-CN
+body_class: notes
+section: notes
+permalink: /review/cloze-batch1/maozhongte-01/
+---
+
+<header class="topic-head">
+    <p class="page-kicker">审查预览 · <a href="{{ '/review/cloze-batch1/' | prepend: site.baseurl }}">本批</a> · 毛中特 · 专题一</p>
+    <h1>马克思主义中国化时代化的历史进程和理论成果</h1>
+</header>
+<div class="toolbar">
+    <button type="button" id="reveal-all">全部显示</button>
+    <button type="button" id="hide-all">全部蒙上</button>
+</div>
+<article class="article">
+<h2>1. 马克思主义中国化时代化的<span class="cloze"><span class="cloze-text">提出及其原因</span></span></h2>
+<p>① 提出：<span class="cloze"><span class="cloze-text">1938年</span></span>，<span class="cloze"><span class="cloze-text">毛泽东</span></span>在党的<span class="cloze"><span class="cloze-text">六届六中全会</span></span>上作的题为<span class="cloze"><span class="cloze-text">《论新阶段》</span></span>的政治报告中<span class="cloze"><span class="cloze-text">最先</span></span>提出了&quot;马克思主义的<span class="cloze"><span class="cloze-text">中国化</span></span>&quot;这个命题。这是党<span class="cloze"><span class="cloze-text">首次</span></span>明确提出&quot;马克思主义中国化&quot;的重大命题。</p>
+<p>② 原因：推进马克思主义中国化时代化，是马克思主义理论本身发展的<span class="cloze"><span class="cloze-text">内在要求</span></span>；是解决中国实际问题的客观需要。</p>
+<h2>2. 推进马克思主义中国化时代化的根本途径——&quot;<span class="cloze"><span class="cloze-text">两个结合</span></span>&quot;</h2>
+<p>坚守好马克思主义这个<span class="cloze"><span class="cloze-text">魂脉</span></span>和中华优秀传统文化这个<span class="cloze"><span class="cloze-text">根脉</span></span>，是理论创新的基础和前提。</p>
+<h2>3. 马克思主义中国化时代化的<span class="cloze"><span class="cloze-text">理论成果及其关系</span></span></h2>
+<h3>（1）理论成果</h3>
+<p><span class="cloze"><span class="cloze-text">毛泽东思想</span></span>、<span class="cloze"><span class="cloze-text">邓小平理论</span></span>、<span class="cloze"><span class="cloze-text">&quot;三个代表&quot;重要思想</span></span>、<span class="cloze"><span class="cloze-text">科学发展观</span></span>、<span class="cloze"><span class="cloze-text">习近平新时代中国特色社会主义思想</span></span>。</p>
+<h3>（2）关系：<span class="cloze"><span class="cloze-text">一脉相承又与时俱进</span></span></h3>
+<p>① 毛泽东思想所蕴含的马克思主义的立场、观点和方法，为中国特色社会主义理论体系提供了<span class="cloze"><span class="cloze-text">基本遵循</span></span>。</p>
+<p>② 中国特色社会主义理论体系在新的历史条件下进一步<span class="cloze"><span class="cloze-text">丰富和发展</span></span>了毛泽东思想。</p>
+<p>③ 它们都是马克思列宁主义<span class="cloze"><span class="cloze-text">在中国的运用和发展</span></span>，都以独创性的理论成果丰富和发展了马克思主义的<span class="cloze"><span class="cloze-text">理论宝库</span></span>，都是党和国家必须长期坚持的<span class="cloze"><span class="cloze-text">指导思想</span></span>，都是全国各族人民团结奋斗的<span class="cloze"><span class="cloze-text">共同思想基础</span></span>。注意：毛泽东思想与中国特色社会主义理论体系形成的时代背景、实践基础是不同的。（<span class="cloze"><span class="cloze-text">前者不涉及改革，后者不涉及革命</span></span>）</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>项目</th><th>毛泽东思想</th><th>中国特色社会主义理论体系</th></tr>
+</thead>
+<tbody>
+<tr><td>时代背景</td><td><span class="cloze"><span class="cloze-text">战争与革命的时代</span></span></td><td><span class="cloze"><span class="cloze-text">和平与发展的时代</span></span></td></tr>
+<tr><td>实践基础</td><td><span class="cloze"><span class="cloze-text">革命和建设</span></span></td><td><span class="cloze"><span class="cloze-text">改革开放和现代化建设</span></span></td></tr>
+</tbody>
+</table>
+</div>
+
+    <p class="hint">点开一处只显示这一处，淡底还在；再点一次重新模糊。</p>
+</article>
+
+<script>
+    const clozes = [...document.querySelectorAll(".cloze")];
+    const toggle = (el) => el.classList.toggle("is-on");
+    clozes.forEach((el) => {
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.addEventListener("click", () => toggle(el));
+        el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(el); }
+        });
+    });
+    document.getElementById("reveal-all").addEventListener("click", () => clozes.forEach((el) => el.classList.add("is-on")));
+    document.getElementById("hide-all").addEventListener("click", () => clozes.forEach((el) => el.classList.remove("is-on")));
+    if (new URLSearchParams(location.search).has("reveal")) clozes.forEach((el) => el.classList.add("is-on"));
+</script>
+
