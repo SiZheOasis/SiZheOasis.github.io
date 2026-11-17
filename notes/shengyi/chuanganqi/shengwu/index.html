@@ -1,0 +1,1050 @@
+---
+layout: front
+title: "传感器重构笔记 · 生物传感器（18–21章）"
+lang: zh-CN
+body_class: notes shengyi
+section: notes
+nav_current: notes
+permalink: /notes/shengyi/chuanganqi/shengwu/
+katex: true
+---
+
+<header class="topic-head">
+    <p class="page-kicker"><a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a> · <a href="{{ '/notes/shengyi/' | prepend: site.baseurl }}">生物医学电子学</a> · <a href="{{ '/notes/shengyi/chuanganqi/' | prepend: site.baseurl }}">传感器重构笔记</a> · 生物传感器（18–21章）</p>
+    <h1>生物传感器（18–21章）</h1>
+</header>
+<nav class="note-toc" aria-label="目录">
+<ol>
+<li class="toc-h2 toc-tab"><a href="#tab-18">18 概论与酶传感器</a></li>
+<li class="toc-h2"><a href="#18-生物传感器概论与酶生物传感器对应-ppt-p139">18 生物传感器概论与酶生物传感器（对应 PPT P1–39）</a></li>
+<li class="toc-h3"><a href="#一-生物传感器概论与换能器映射p611">一、 生物传感器概论与换能器映射（P6–11）</a></li>
+<li class="toc-h3"><a href="#二-酶与酶促反应动力学米氏方程零跳步推导p1215">二、 酶与酶促反应动力学：米氏方程零跳步推导（P12–15）</a></li>
+<li class="toc-h3"><a href="#三-酶的固定化技术与微环境调控p1619">三、 酶的固定化技术与微环境调控（P16–19）</a></li>
+<li class="toc-h3"><a href="#四-电流型酶电极第一代与第二代葡萄糖传感器p2024">四、 电流型酶电极：第一代与第二代葡萄糖传感器（P20–24）</a></li>
+<li class="toc-h3"><a href="#五-电位型酶电极与酶场效应管-enfetp2531">五、 电位型酶电极与酶场效应管 EnFET（P25–31）</a></li>
+<li class="toc-h3"><a href="#六-酶热敏电阻与光纤酶传感器p3239">六、 酶热敏电阻与光纤酶传感器（P32–39）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-19">19 免疫传感器与SPR</a></li>
+<li class="toc-h2"><a href="#19-免疫传感器与表面等离子体共振对应-ppt-p4057">19 免疫传感器与表面等离子体共振（对应 PPT P40–57）</a></li>
+<li class="toc-h3"><a href="#一-免疫学反应基础与三明治竞争法p4045">一、 免疫学反应基础与三明治/竞争法（P40–45）</a></li>
+<li class="toc-h3"><a href="#二-电化学与半导体型免疫传感器p4649">二、 电化学与半导体型免疫传感器（P46–49）</a></li>
+<li class="toc-h3"><a href="#三-表面等离子体共振spr物理推导与光学免疫传感p5054">三、 表面等离子体共振（SPR）物理推导与光学免疫传感（P50–54）</a></li>
+<li class="toc-h3"><a href="#四-压电免疫传感器与-sauerbrey-完整计算题p5557">四、 压电免疫传感器与 Sauerbrey 完整计算题（P55–57）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-20">20 微生物与细胞传感器</a></li>
+<li class="toc-h2"><a href="#20-微生物生物组织与细胞传感器对应-ppt-p5866">20 微生物、生物组织与细胞传感器（对应 PPT P58–66）</a></li>
+<li class="toc-h3"><a href="#一-微生物传感器概论与两大反应机能p5860">一、 微生物传感器概论与两大反应机能（P58–60）</a></li>
+<li class="toc-h3"><a href="#二-电流型微生物传感器与-bod-检测闭环p6162">二、 电流型微生物传感器与 BOD 检测闭环（P61–62）</a></li>
+<li class="toc-h3"><a href="#三-电位型光微生物与燃料电池型传感器p6365">三、 电位型、光微生物与燃料电池型传感器（P63–65）</a></li>
+<li class="toc-h3"><a href="#四-混合型生物组织与细胞细胞器传感器p66">四、 混合型、生物组织与细胞/细胞器传感器（P66）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-21">21 基因/适配体与总收官</a></li>
+<li class="toc-h2"><a href="#21-基因传感器适配体与生物传感器总收官对应-ppt-p6781">21 基因传感器、适配体与生物传感器总收官（对应 PPT P67–81）</a></li>
+<li class="toc-h3"><a href="#一-基因传感器基础与核酸分子杂交p6769">一、 基因传感器基础与核酸分子杂交（P67–69）</a></li>
+<li class="toc-h3"><a href="#二-电化学与压电晶体qcmdna-传感器p7073">二、 电化学与压电晶体（QCM）DNA 传感器（P70–73）</a></li>
+<li class="toc-h3"><a href="#三-半导体型适配体传感器aptamer-fetp7476">三、 半导体型适配体传感器（Aptamer-FET，P74–76）</a></li>
+<li class="toc-h3"><a href="#四-extra-前沿专题dna-芯片光刻制备与纳米孔测序p7780">四、 Extra 前沿专题：DNA 芯片光刻制备与纳米孔测序（P77–80）</a></li>
+<li class="toc-h3"><a href="#五-第七章生物传感器全章总收官对比p81">五、 第七章《生物传感器》全章总收官对比（P81）</a></li>
+</ol>
+</nav>
+<div class="toolbar">
+    <button type="button" id="fold-toggle" aria-expanded="true">折叠闭环与概念</button>
+</div>
+{% raw %}
+<article class="article">
+<section class="note-tab">
+<h2 class="tab-label" id="tab-18">18 概论与酶传感器</h2>
+<h2 id="18-生物传感器概论与酶生物传感器对应-ppt-p139" class="doc-title">18 生物传感器概论与酶生物传感器（对应 PPT P1–39）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1X6NsC0z-okRbsYc_vjtfERS-yNtL533j/view?usp=drivesdk">18_生物-酶生物传感器_P592-630.pdf</a>（PPT P1–39，对应总第 592–630 页）｜<em>注：本章为全新构建笔记，严格对齐 PPT 主干，并将零基础所需的<strong>生物概念解释</strong>直接穿插在对应章节中，同时保留无跳步的数学与物理推导。</em></p>
+</blockquote>
+<h3 id="目录">目录</h3>
+<ul>
+<li><a href="#一-生物传感器概论与换能器映射p611">一、 生物传感器概论与换能器映射（P6–11）</a></li>
+<li><a href="#二-酶与酶促反应动力学米氏方程零跳步推导p1215">二、 酶与酶促反应动力学：米氏方程零跳步推导（P12–15）</a></li>
+<li><a href="#三-酶的固定化技术与微环境调控p1619">三、 酶的固定化技术与微环境调控（P16–19）</a></li>
+<li><a href="#四-电流型酶电极第一代与第二代葡萄糖传感器p2024">四、 电流型酶电极：第一代与第二代葡萄糖传感器（P20–24）</a></li>
+<li><a href="#五-电位型酶电极与酶场效应管-enfetp2531">五、 电位型酶电极与酶场效应管 EnFET（P25–31）</a></li>
+<li><a href="#六-酶热敏电阻与光纤酶传感器p3239">六、 酶热敏电阻与光纤酶传感器（P32–39）</a></li>
+</ul>
+<hr>
+<h3 id="一-生物传感器概论与换能器映射p611">一、 生物传感器概论与换能器映射（P6–11）</h3>
+<h4 id="11-生物传感器的基本组成与核心定位ppt-p68-p11">1.1 生物传感器的基本组成与核心定位（PPT P6–8, P11）</h4>
+<ul>
+<li><strong>定义</strong>：利用<strong>生物活性物质</strong>（如酶、抗体、微生物、核酸等）作为<strong>分子识别元件（感受器）</strong>，选择性地识别并测定各种生物化学物质的传感器。</li>
+<li><strong>基本链路</strong>（直接承接第 13–17 章化学传感器）：
+$$\text{被测生物化学量} \xrightarrow{\text{分子识别元件（敏感膜）}} \text{生物学反应信息} \xrightarrow{\text{换能器（第 6、7 章）}} \text{电信号} \xrightarrow{\text{放大器}} \text{输出}$$</li>
+<li><strong>三大核心性能指标（PPT P9）</strong>：<strong>选择性</strong>（不误判其他干扰物）、<strong>灵敏度</strong>（检出限低）、<strong>稳定性</strong>（生物活性保持时间长）。</li>
+</ul>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：什么是“生物活性物质”和“分子识别”？】</strong></p>
+<ul>
+<li><strong>分子识别（Molecular Recognition）</strong>：你可以把生物传感器想象成**“锁与钥匙”**。普通化学电极（比如 pH 玻璃电极）只能识别简单的小离子，遇到血液里成千上万种结构相似的有机物（葡萄糖、尿酸、抗坏血酸）就分不清了；而生物大分子具有精确的三维立体结构，只有特定形状和电荷分布的目标分子才能卡进它的结合位点。</li>
+<li><strong>常见生物活性材料（PPT P9, P11）</strong>：<ul>
+<li><strong>酶（E, Enzyme）</strong>：具有催化功能的特殊蛋白质，能高效、专一地加速某一个化学反应。</li>
+<li><strong>抗体（A, Antibody）</strong>：免疫系统产生的“Y”形球蛋白，能像磁铁一样死死锁住对应的<strong>抗原（Antigen）</strong>。</li>
+<li><strong>原核生物细胞（PK）与真核生物细胞（EK）</strong>：原核生物（如细菌）没有细胞核，结构简单繁殖快；真核生物（如酵母、动植物细胞）有细胞核与线粒体等<strong>细胞器（Organelle）</strong>，代谢网络更复杂。</li>
+<li><strong>寡聚核苷酸（Oligonucleotide）</strong>：短链的 DNA 或 RNA（通常十几个到几十个碱基），靠碱基互补配对识别基因序列。</li>
+</ul>
+</li>
+</ul>
+</blockquote></details>
+<h4 id="12-生物学反应信息与换能器映射总表ppt-p9高频必背">1.2 生物学反应信息与换能器映射总表（PPT P9，高频必背！）</h4>
+<p>生物识别本身<strong>不直接产生电压或电流</strong>，必须把它转成第 13–17 章学过的物理/化学变化，再交给对应的换能器：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">生物学反应信息</th>
+<th align="left">对应的换能器选择（第 6、7 章）</th>
+<th align="left">典型工作原理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>离子变化</strong></td>
+<td align="left">离子选择电极（ISE）</td>
+<td align="left">生成/消耗特定离子 $\to$ 能斯特膜电位变化</td>
+</tr>
+<tr>
+<td align="left"><strong>电阻、电导变化</strong></td>
+<td align="left">阻抗计、电导仪</td>
+<td align="left">反应生成带电离子 $\to$ 溶液电导率 $\sigma$ 改变</td>
+</tr>
+<tr>
+<td align="left"><strong>电荷密度变化</strong></td>
+<td align="left">阻抗计、导纳、场效应晶体管（FET）</td>
+<td align="left">表面吸附带电生物分子 $\to$ 调制栅压/界面电容</td>
+</tr>
+<tr>
+<td align="left"><strong>质子变化（$\text{H}^+$）</strong></td>
+<td align="left">场效应晶体管（ISFET / EnFET）</td>
+<td align="left">局部 $\text{pH}$ 改变 $\to$ 栅极表面电位变化</td>
+</tr>
+<tr>
+<td align="left"><strong>气体分压的变化</strong></td>
+<td align="left">气敏电极（如 $\text{O}_2, \text{CO}_2, \text{NH}_3$ 电极）</td>
+<td align="left">反应消耗 $\text{O}_2$ 或产生 $\text{NH}_3/\text{CO}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>热焓变化（$\Delta H$）</strong></td>
+<td align="left">热敏元件（NTC 热敏电阻）</td>
+<td align="left">生化反应放热/吸热 $\to$ 绝热体系 $\Delta T \to \Delta R$</td>
+</tr>
+<tr>
+<td align="left"><strong>光学 / 颜色变化</strong></td>
+<td align="left">光纤、光敏管、荧光计</td>
+<td align="left">吸光度（Beer-Lambert）、化学发光、荧光猝灭</td>
+</tr>
+<tr>
+<td align="left"><strong>质量变化（$\Delta m$）</strong></td>
+<td align="left">压电晶体（QCM）</td>
+<td align="left">表面结合生物分子 $\to$ Sauerbrey 方程 $\Delta f \propto -\Delta m$</td>
+</tr>
+<tr>
+<td align="left"><strong>溶液密度/折射率变化</strong></td>
+<td align="left">表面等离子体共振（SPR）</td>
+<td align="left">界面折射率 $n$ 改变 $\to$ 共振角 $\theta_{sp}$ 偏移</td>
+</tr>
+</tbody></table></div>
+<h4 id="13-生物传感器的两大分类法ppt-p10">1.3 生物传感器的两大分类法（PPT P10）</h4>
+<ol>
+<li><strong>按分子识别元件分类</strong>：酶传感器、免疫传感器、组织传感器、细胞传感器、核酸（基因）传感器、微生物传感器、分子印迹生物传感器。</li>
+<li><strong>按换能器器件分类</strong>：电化学生物传感器、半导体生物传感器、光生物传感器、热生物传感器、声波（压电）生物传感器、电导/阻抗生物传感器、悬臂梁生物传感器。</li>
+</ol>
+<hr>
+<h3 id="二-酶与酶促反应动力学米氏方程零跳步推导p1215">二、 酶与酶促反应动力学：米氏方程零跳步推导（P12–15）</h3>
+<h4 id="21-酶的催化本质与三大特异性ppt-p13-p15">2.1 酶的催化本质与三大特异性（PPT P13, P15）</h4>
+<ul>
+<li><strong>活化能与催化机理（PPT P13）</strong>：<strong>活化能</strong>是指一定温度下，$1\;\text{mol}$ 底物分子从初态转变到活化态（过渡态）所需的能量。酶通过与底物结合，<strong>降低反应的活化能</strong>（促进底物形成过渡态），从而将反应速率提高 $10^6\sim 10^{12}$ 倍，而酶本身在反应前后质量与化学性质不变。</li>
+<li><strong>诱导契合假说（Induced Fit，PPT P15）</strong>：酶的活性中心并不是一块死板的刚性“铁锁孔”；当底物靠近时，酶分子的空间构象会发生微调，主动包裹并契合底物，同时使底物的化学键处于容易断裂的张力状态。</li>
+<li><strong>酶的三大特异性（PPT P13）</strong>：<ol>
+<li><strong>绝对特异性</strong>：只作用于一种特定结构的底物（如脲酶只催化尿素水解）。</li>
+<li><strong>相对特异性</strong>：作用于一类具有相同化学键或基团的底物（如酯酶可水解多种酯类）。</li>
+<li><strong>立体异构特异性</strong>：只作用于某一种旋光异构体或顺反异构体（如只识别 $\text{D}$-葡萄糖，不识别 $\text{L}$-葡萄糖）。</li>
+</ol>
+</li>
+</ul>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：底物、产物与辅助因子（Cofactor）】</strong></p>
+<ul>
+<li><strong>底物（Substrate, $S$）</strong>：被酶加工的原料分子（也就是传感器要测的<strong>待测物</strong>，比如血糖仪里的葡萄糖）。</li>
+<li><strong>产物（Product, $P$）</strong>：底物经过酶催化转化后生成的新分子（比如葡萄糖酸和 $\text{H}_2\text{O}_2$）。</li>
+<li><strong>辅助因子（Cofactor）</strong>：很多酶单靠蛋白质骨架还不能工作，必须绑定一个“小帮手”（比如金属离子 $\text{Mg}^{2+}$，或有机小分子辅酶如 $\text{FAD}$）才能完成电子转移或催化。</li>
+</ul>
+</blockquote></details>
+<h4 id="22-米氏方程michaelis-menten-equationppt-p14-核心必考">2.2 米氏方程（Michaelis-Menten Equation，PPT P14 核心必考！）</h4>
+<p>在酶浓度 $[E]_{\text{total}}$ 一定、其他条件不变时，酶促反应初速率 $V$ 与底物浓度 $[S]$ 呈<strong>矩形双曲线</strong>关系：
+$$\boxed{V = \frac{V_{\max}[S]}{K_m + [S]}}$$
+其中：</p>
+<ul>
+<li><strong>$V_{\max} = k_3 [E]_{\text{total}}$</strong>：酶被底物完全饱和时的最大反应速率，正比于总酶浓度 $[E]_{\text{total}}$。</li>
+<li><strong>$K_m = \frac{k_2 + k_3}{k_1}$</strong>：<strong>米氏常数</strong>，物理意义是<strong>反应速率达到最大反应速率一半（$V = \frac{1}{2}V_{\max}$）时的底物浓度</strong>。$K_m$ 越小，通常说明酶与底物的亲和力越高。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：米氏方程（稳态近似法）零跳步推导】</strong></p>
+<ol>
+<li><strong>反应动力学模型（PPT P14）</strong>：酶 $E$ 与底物 $S$ 先可逆结合成酶-底物中间复合物 $ES$，随后 $ES$ 不可逆分解生成产物 $P$ 并释放游离酶 $E$：
+$$E + S \underset{k_2}{\overset{k_1}{\rightleftharpoons}} ES \xrightarrow{k_3} E + P$$</li>
+<li><strong>写出速率方程与物料守恒</strong>：
+反应生成产物的速率为：
+$$V = \frac{d[P]}{dt} = k_3 [ES]$$
+中间复合物 $ES$ 的净生成速率为（生成项减两个消耗项）：
+$$\frac{d[ES]}{dt} = k_1 [E][S] - k_2 [ES] - k_3 [ES]$$
+设体系总酶浓度为 $[E]_{\text{total}}$，由于酶一部分游离（$[E]$），一部分被底物结合（$[ES]$），故物料守恒为：
+$$[E]_{\text{total}} = [E] + [ES] \implies [E] = [E]_{\text{total}} - [ES]$$</li>
+<li><strong>稳态近似（Steady-State Approximation）</strong>：当底物远过量（$[S] \gg [E]_{\text{total}}$）时，反应迅速进入稳态，中间复合物浓度保持恒定，即 $\frac{d[ES]}{dt} = 0$：
+$$k_1 ([E]_{\text{total}} - [ES])[S] - (k_2 + k_3)[ES] = 0$$
+展开并移项合并 $[ES]$：
+$$k_1 [E]_{\text{total}}[S] = \big(k_1[S] + k_2 + k_3\big)[ES]$$
+两边同除以 $k_1$，定义米氏常数 $K_m \equiv \frac{k_2 + k_3}{k_1}$：
+$$[ES] = \frac{[E]_{\text{total}}[S]}{K_m + [S]}$$</li>
+<li><strong>代入产物速率式</strong>：当所有酶都变成 $ES$ 时达到最大速率 $V_{\max} = k_3 [E]_{\text{total}}$，故：
+$$V = k_3 [ES] = \frac{k_3 [E]_{\text{total}}[S]}{K_m + [S]} = \boxed{\frac{V_{\max}[S]}{K_m + [S]}}$$</li>
+<li><strong>两大极限与传感线性区（考研分析题关键）</strong>：<ul>
+<li><strong>低底物浓度（$[S] \ll K_m$）</strong>：$V \approx \frac{V_{\max}}{K_m}[S]$，<strong>反应速率与底物浓度呈线性关系（一级反应）</strong>——这是生物传感器定量测量的<strong>理想线性工作区</strong>！</li>
+<li><strong>高底物浓度（$[S] \gg K_m$）</strong>：$V \approx V_{\max} = k_3 [E]_{\text{total}}$，此时底物已使酶饱和，速率与 $[S]$ 无关（零级反应），传感器出现<strong>响应饱和（上平台）</strong>。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<blockquote>
+<ul>
+<li><strong>Lineweaver-Burk 双倒数线性化（实验测 $K_m$ 与 $V_{\max}$）</strong>：对米氏方程两边取倒数：
+$$\frac{1}{V} = \frac{K_m}{V_{\max}}\cdot\frac{1}{[S]} + \frac{1}{V_{\max}}$$
+以 $\frac{1}{V}$ 对 $\frac{1}{[S]}$ 作图得一条直线：斜率为 $\frac{K_m}{V_{\max}}$，纵轴截距为 $\frac{1}{V_{\max}}$，横轴截距为 $-\frac{1}{K_m}$。</li>
+</ul>
+</blockquote>
+<h4 id="23-影响酶促反应速率的五大因素ppt-p15">2.3 影响酶促反应速率的五大因素（PPT P15）</h4>
+<ol>
+<li><strong>酶浓度</strong>：底物饱和时，$V_{\max}$ 与 $[E]_{\text{total}}$ 呈直线关系。</li>
+<li><strong>温度</strong>：具有<strong>双重影响</strong>——升温一方面加快分子热运动使反应加速，另一方面高温破坏酶蛋白质的空间构象导致<strong>热变性失活</strong>，故存在一个<strong>最适温度</strong>（呈钟形曲线）。</li>
+<li><strong>$\text{pH}$</strong>：通过改变酶活性中心及底物分子的解离（带电）状态影响结合与催化，存在<strong>最适 $\text{pH}$</strong>。</li>
+<li><strong>抑制剂与激活剂</strong>：抑制剂可逆或不可逆地降低酶活性（如重金属离子使酶失活）；激活剂（如 $\text{Mg}^{2+}$）提高酶活性。</li>
+</ol>
+<hr>
+<h3 id="三-酶的固定化技术与微环境调控p1619">三、 酶的固定化技术与微环境调控（P16–19）</h3>
+<p>游离在水里的酶用一次就流失了，还容易变性。为了做成可重复使用的固体敏感膜，必须进行<strong>酶的固定化</strong>。</p>
+<h4 id="31-四大经典酶固定化方法ppt-p16">3.1 四大经典酶固定化方法（PPT P16）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">物理/化学本质</th>
+<th align="left">优点</th>
+<th align="left">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 吸附法</strong></td>
+<td align="left">靠范德华力、静电引力或疏水作用将酶物理吸附在载体表面</td>
+<td align="left">条件温和，酶活性保留高，操作简单</td>
+<td align="left">结合力弱，酶易受 $\text{pH}$、离子强度变化而<strong>脱落</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>2. 交联法</strong></td>
+<td align="left">用双功能试剂（如戊二醛）把酶分子之间或酶与载体交联成网状</td>
+<td align="left">结合牢固，不易脱落</td>
+<td align="left">化学反应剧烈，易破坏酶活性中心，<strong>活力损失大</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>3. 共价连接法</strong></td>
+<td align="left">酶表面非必需基团与载体表面官能团形成稳定的<strong>共价键</strong></td>
+<td align="left">结合极牢固，耐受性好</td>
+<td align="left">修饰位点控制不好会降低酶活性，工艺较复杂</td>
+</tr>
+<tr>
+<td align="left"><strong>4. 包埋法</strong></td>
+<td align="left">将酶包裹在多孔高分子凝胶（如海藻酸钠水凝胶）或半透膜微囊内</td>
+<td align="left">酶不直接参与化学成键，<strong>保持天然构象</strong></td>
+<td align="left">存在扩散传质阻力（底物需钻进凝胶才能遇到酶）</td>
+</tr>
+</tbody></table></div>
+<h4 id="32-纳米限域微环境调控ppt-p1719戴小川课题组前沿案例">3.2 纳米限域微环境调控（PPT P17–19，戴小川课题组前沿案例）</h4>
+<ul>
+<li><strong>限域微环境三大优势（PPT P17，Nano Lett. 2019）</strong>：<ol>
+<li>降低局域介电常数（Mitigate dielectrics）$\to$ 抑制溶液离子屏蔽效应（Suppress screening，对 FET 传感器极其关键）；</li>
+<li>调节孔隙率（Adjust porosity）$\to$ 像筛子一样阻挡大分子杂质非特异性吸附；</li>
+<li>共聚固定（Co-polymerization）$\to$ 显著延长生物受体的使用寿命。</li>
+</ol>
+</li>
+<li><strong>海藻酸钠水凝胶固定化核酸外切酶（Exo III，PPT P19）</strong>：虽然因为凝胶传质阻力导致<strong>酶催化反应速率略有下降</strong>，但酶的抗失活<strong>稳定性显著提高</strong>。</li>
+</ul>
+<hr>
+<h3 id="四-电流型酶电极第一代与第二代葡萄糖传感器p2024">四、 电流型酶电极：第一代与第二代葡萄糖传感器（P20–24）</h3>
+<h4 id="41-葡萄糖氧化酶god催化反应与三大检测途径ppt-p20">4.1 葡萄糖氧化酶（GOD）催化反应与三大检测途径（PPT P20）</h4>
+<p>在葡萄糖氧化酶（GOD）催化下，葡萄糖被溶解氧氧化为葡萄糖酸（内酯 $\text{C}_6\text{H}_{10}\text{O}_6$ 水解即葡萄糖酸）和过氧化氢：
+$$\text{C}_6\text{H}_{12}\text{O}_6 + \text{O}_2 \xrightarrow{\text{GOD}} \text{H}_2\text{O}_2 + \text{C}_6\text{H}_{10}\text{O}_6$$
+由此衍生出<strong>三种测量途径</strong>：</p>
+<ol>
+<li>测生成的<strong>葡萄糖酸</strong>（引起局部 $\text{pH}$ 下降 $\to$ 电位型/pH电极）；</li>
+<li>测<strong>消耗的 $\text{O}_2$</strong>（第一代酶电极——氧电极法）；</li>
+<li>测生成的<strong>$\text{H}_2\text{O}_2$</strong>（第一代酶电极——过氧化氢电极法）。</li>
+</ol>
+<h4 id="42-第一代电流型酶电极texto_2-电极-vs-texth_2texto_2-电极ppt-p2122">4.2 第一代电流型酶电极：$\text{O}_2$ 电极 vs. $\text{H}_2\text{O}_2$ 电极（PPT P21–22）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">电极配置</th>
+<th align="left">核心电极反应</th>
+<th align="left">电流信号方向与缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>氧电极法（P21）</strong></td>
+<td align="left"><strong>阴极</strong>：$\text{Pt}$<br><strong>阳极</strong>：$\text{AgCl/Ag}$</td>
+<td align="left">$\text{O}_2$ 在阴极分步还原：<br>$2\text{H}^+ + \text{O}_2 + 2e^- \to \text{H}_2\text{O}_2$<br>$2\text{H}^+ + \text{H}_2\text{O}_2 + 2e^- \to 2\text{H}_2\text{O}$</td>
+<td align="left">葡萄糖越多，耗氧越多，阴极还原电流<strong>下降</strong>；<br><strong>致命缺点</strong>：受样品中<strong>溶解氧浓度波动</strong>的严重干扰。</td>
+</tr>
+<tr>
+<td align="left"><strong>过氧化氢电极法（P22）</strong></td>
+<td align="left"><strong>阳极</strong>：$\text{Pt}$<br><strong>阴极</strong>：$\text{AgCl/Ag}$</td>
+<td align="left">$\text{H}_2\text{O}_2$ 在铂阳极被氧化：<br>$\text{H}_2\text{O}_2 \to \text{O}_2 + 2\text{H}^+ + 2e^-$<br><em>(注：PPT P22 简写作 $\text{H}_2\text{O}_2 \to \text{H}_2\text{O}+2e^-+\text{O}_2$)</em></td>
+<td align="left">葡萄糖越多，$\text{H}_2\text{O}_2$ 越多，阳极氧化电流<strong>增大</strong>；<br><strong>缺点</strong>：需较高氧化电位（约 $+0.6\;\text{V}$），易将血液中的抗坏血酸、尿酸等干扰物一并氧化，且仍依赖 $\text{O}_2$ 参与第一步反应。</td>
+</tr>
+</tbody></table></div>
+<h4 id="43-第二代电流型酶电极电子媒介体mediatorppt-p2324">4.3 第二代电流型酶电极：电子媒介体（Mediator，PPT P23–24）</h4>
+<p>为了彻底摆脱对溶解氧（$\text{O}_2$）的依赖，并降低工作电位、消除干扰，引入<strong>人工电子媒介体 $M_{\text{ox}}/M_{\text{red}}$</strong>（如<strong>二茂铁及其衍生物</strong>、苯醌、铁氰化物、细胞色素、辅酶等）来直接搬运电子！</p>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：GOD-FAD 与电子媒介体的“接力赛”】</strong>
+葡萄糖氧化酶（GOD）内部深处藏着一个负责接收电子的辅酶叫 <strong>FAD（黄素腺嘌呤二核苷酸）</strong>。</p>
+<ul>
+<li>在第一代电极中，GOD 抢走葡萄糖的电子变成 $\text{GOD–FADH}_2$ 后，必须等路过的 $\text{O}_2$ 把电子接走才能恢复原状。</li>
+<li>在第二代电极中，我们派出一群小巧灵活的“电子快递员”——<strong>氧化态媒介体 $M_{\text{ox}}$</strong>，钻进酶分子内部接走电子变成 $M_{\text{red}}$，再跑到电极表面把电子交给电极。</li>
+</ul>
+</blockquote></details>
+<p><strong>第二代酶电极三步反应链（PPT P23 必背！）</strong>：
+$$\begin{aligned}
+\text{步骤 1（酶催化氧化葡萄糖）：}\quad &amp; \text{C}_6\text{H}_{12}\text{O}_6 + \text{GOD–FAD} \longrightarrow \text{C}_6\text{H}_{10}\text{O}_6 + \text{GOD–FADH}_2 \\
+\text{步骤 2（酶层中电子交接）：}\quad &amp; \text{GOD–FADH}_2 + 2M_{\text{ox}} \longrightarrow \text{GOD–FAD} + 2M_{\text{red}} + 2\text{H}^+ \\
+\text{步骤 3（电极表面再生与测流）：}\quad &amp; 2M_{\text{red}} \longrightarrow 2M_{\text{ox}} + 2e^-
+\end{aligned}$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么第二代电极能摆脱溶解氧干扰且抗血液干扰？】</strong></p>
+<ol>
+<li><strong>氧无关性</strong>：只要媒介体 $M_{\text{ox}}$ 浓度足够且与 $\text{GOD–FADH}_2$ 的反应速率常数远大于 $\text{O}_2$，电子全部走 $M_{\text{ox}}$ 通道，即使血液缺氧也不会产生误差。</li>
+<li><strong>低工作电位抗干扰</strong>：二茂铁衍生物的氧化电位仅约 $+0.1\sim +0.3\;\text{V}$，远低于 $\text{H}_2\text{O}_2$ 所需的 $+0.6\;\text{V}$，因此不会把血液中的维生素 C（抗坏血酸）或尿酸一起氧化产生假电流。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h4 id="44-常见电流型酶电极一览表ppt-p24-表-5-1多酶级联必看">4.4 常见电流型酶电极一览表（PPT P24 表 5-1，多酶级联必看！）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">检测对象</th>
+<th align="left">敏感物质（酶）</th>
+<th align="left">换能器（电极）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>葡萄糖</strong></td>
+<td align="left">葡萄糖氧化酶</td>
+<td align="left">$\text{O}_2,\;\text{H}_2\text{O}_2,\;\text{Pt}$</td>
+</tr>
+<tr>
+<td align="left"><strong>麦芽糖</strong></td>
+<td align="left">淀粉酶</td>
+<td align="left">$\text{Pt}$</td>
+</tr>
+<tr>
+<td align="left"><strong>蔗糖</strong></td>
+<td align="left"><strong>转化酶 + 变旋光酶 + 葡萄糖酶</strong>（三酶级联）</td>
+<td align="left">$\text{O}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>半乳糖</strong></td>
+<td align="left">半乳糖酶</td>
+<td align="left">$\text{Pt}$</td>
+</tr>
+<tr>
+<td align="left"><strong>乳酸</strong></td>
+<td align="left">乳酸氧化酶</td>
+<td align="left">$\text{O}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>尿酸</strong></td>
+<td align="left">尿酸酶</td>
+<td align="left">$\text{O}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>尿素</strong></td>
+<td align="left">脲酶</td>
+<td align="left">$\text{H}_2\text{O}_2,\;\text{O}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>胆固醇</strong></td>
+<td align="left">胆固醇氧化酶</td>
+<td align="left">$\text{O}_2,\;\text{H}_2\text{O}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>磷脂质</strong></td>
+<td align="left">磷脂酶</td>
+<td align="left">$\text{Pt}$</td>
+</tr>
+<tr>
+<td align="left"><strong>氨基酸</strong></td>
+<td align="left">氨基酸酶</td>
+<td align="left">$\text{O}_2,\;\text{H}_2\text{O}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>丙酮酸</strong></td>
+<td align="left">丙酮酸脱氢酶</td>
+<td align="left">$\text{O}_2$</td>
+</tr>
+<tr>
+<td align="left"><strong>乙醇</strong></td>
+<td align="left">乙醇氧化酶</td>
+<td align="left">$\text{O}_2$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="五-电位型酶电极与酶场效应管-enfetp2531">五、 电位型酶电极与酶场效应管 EnFET（P25–31）</h3>
+<h4 id="51-电位型酶电极ppt-p25">5.1 电位型酶电极（PPT P25）</h4>
+<p>将固定化酶膜贴合在<strong>离子选择性电极（ISE）<strong>或</strong>气敏电极（如 $\text{NH}_3, \text{CO}_2$ 电极）<strong>表面，通过酶促反应生成特定的离子或气体，再利用基础电极的</strong>能斯特方程</strong>测量电位变化（$E \propto \lg [\text{底物}]$）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">电位型酶电极</th>
+<th align="left">催化反应（PPT P25 必记）</th>
+<th align="left">搭配的基础换能器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>尿素电极</strong></td>
+<td align="left">$(\text{NH}_2)_2\text{CO} + \text{H}_2\text{O} \xrightarrow{\text{脲酶}} 2\text{NH}_3 + \text{CO}_2$</td>
+<td align="left">$\text{NH}_3$ 气敏电极 / $\text{NH}_4^+$ 离子电极 / $\text{pH}$ 电极</td>
+</tr>
+<tr>
+<td align="left"><strong>草酸电极</strong></td>
+<td align="left">$\text{草酸} \xrightarrow{\text{草酸脱羧酶}} 2\text{CO}_2 + \text{甲酸}$</td>
+<td align="left">$\text{CO}_2$ 气敏电极</td>
+</tr>
+<tr>
+<td align="left"><strong>腺苷电极</strong></td>
+<td align="left">$\text{腺苷} \xrightarrow{\text{腺嘌呤脱氨基酶}} \text{肌苷} + \text{NH}_3$</td>
+<td align="left">$\text{NH}_3$ 气敏电极</td>
+</tr>
+<tr>
+<td align="left"><strong>苯丙氨酸电极</strong></td>
+<td align="left">$\text{苯丙氨酸} \xrightarrow{\text{苯丙氨酸胺裂解酶}} \text{反式肉桂酸盐} + \text{NH}_3$</td>
+<td align="left">$\text{NH}_3$ 气敏电极 / 相应离子电极</td>
+</tr>
+</tbody></table></div>
+<h4 id="52-酶场效应管传感器enfet--biofetppt-p2631">5.2 酶场效应管传感器（EnFET / BioFET，PPT P26–31）</h4>
+<p>直接结合第 17-1 节的 <strong>ISFET</strong>！生物反应改变局部 $\text{pH}$ 或表面电荷密度 $\to$ 调制栅极阈值电压 $V_T$ $\to$ 改变漏源电流 $I_D$。</p>
+<ul>
+<li><strong>两大优势（PPT P26）</strong>：体积微米级、易阵列化（是生物芯片和生物计算机的基础），适合微量样品和活体内测定。</li>
+<li><strong>两种结构形式（PPT P27）</strong>：<ol>
+<li><strong>分离型（Extended-gate）</strong>：生物反应系统与 MOSFET 各自为独立组件（中间用导线连接），保护昂贵的晶体管不被生物溶液腐蚀。</li>
+<li><strong>结合型</strong>：直接由生物功能材料（如聚合物包埋酶膜，PPT P28）取代 FET 的金属栅极。</li>
+</ol>
+</li>
+<li><strong>典型实例（PPT P30–31）</strong>：<ul>
+<li><strong>乙酰胆碱酯酶 / 青霉素酶 EnFET</strong>：青霉素酶催化青霉素水解产生酸（$\text{H}^+$ 增多，$\text{pH}$ 下降）；乙酰胆碱酯酶催化乙酰胆碱水解产生乙酸（$\text{H}^+$ 增多）。</li>
+<li><strong>乐高式自由重组（PPT P31）</strong>：同一套 ISFET 换能器底座，只要换上不同的酶膜（如①青霉素酶、②脲酶），就能像乐高积木一样组装出测不同底物的传感器！</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="六-酶热敏电阻与光纤酶传感器p3239">六、 酶热敏电阻与光纤酶传感器（P32–39）</h3>
+<h4 id="61-酶热敏电阻传感器ppt-p32">6.1 酶热敏电阻传感器（PPT P32）</h4>
+<ul>
+<li><strong>结构</strong>：固定化酶柱 + NTC 热敏电阻（回顾 17-2 节：$R_T \approx R_0 e^{B(1/T - 1/T_0)}$）。</li>
+<li><strong>原理</strong>：酶促反应伴随<strong>反应焓变 $\Delta H$</strong>（通常为放热反应）。在<strong>绝热体系</strong>中，反应释放的热量 $Q = -n\Delta H$ 引起体系温度微小变化 $\Delta T = \frac{Q}{C_p} \propto [\text{底物}]$，经高灵敏度热敏电阻转化为电阻/电桥电压变化。</li>
+</ul>
+<h4 id="62-光纤酶传感器ppt-p3338">6.2 光纤酶传感器（PPT P33–38）</h4>
+<ul>
+<li><p><strong>三大组成（PPT P33）</strong>：<strong>光纤</strong>（高锟 2009 年诺贝尔物理学奖）+ <strong>生物敏感膜（探头）</strong> + <strong>光电换能器</strong>。</p>
+</li>
+<li><p><strong>三种探头结构（PPT P33）</strong>：(a) 双束光纤（一束送激发光、一束收信号光）；(b) 单束光纤，生物敏感膜在端部；(c) 单束光纤，生物敏感膜与光纤包层为一体（利用消逝波）。</p>
+</li>
+<li><p><strong>四大核心优势（PPT P34）</strong>：①抗干扰能力强（不受电磁场干扰）；②<strong>不用参比电极</strong>，极易微型化；③可实现远距离遥测；④响应快、灵敏度高。</p>
+</li>
+<li><p><strong>五大光学传感模式与 PPT 实例（PPT P35–38，常考选择/简答！）</strong>：</p>
+</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">PPT 核心反应/机理</th>
+<th align="left">光学检测原理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 化学发光型（P35）</strong></td>
+<td align="left">$\text{C}_6\text{H}_{12}\text{O}_6 + 2\text{H}_2\text{O} + \text{O}_2 \xrightarrow{\text{GOD}} \text{C}_6\text{H}_{12}\text{O}_7 + 2\text{H}_2\text{O}_2$<br>$\text{鲁米诺} + \text{H}_2\text{O}_2 \longrightarrow \text{氨基邻苯二甲酸} + \text{N}_2 + h\nu$</td>
+<td align="left">生成的 $\text{H}_2\text{O}_2$ 立即启动鲁米诺发蓝光，<strong>无需外接激发光源</strong>，响应极快（可推广至胆固醇氧化酶等）。</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 光吸收型（P36）</strong></td>
+<td align="left">$\text{对硝基苯磷酸酯} + \text{H}_2\text{O} \xrightarrow{\text{碱性磷酸酯酶}} \text{对硝基苯酚} + \text{磷酸}$</td>
+<td align="left">产物对硝基苯酚呈黄色，在 <strong>$404\;\text{nm}$</strong> 有最大吸收峰，由 Beer-Lambert 定律 $A = \varepsilon l c$ 定量。</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 荧光猝灭型（P37）</strong></td>
+<td align="left">大肠杆菌<strong>麦芽糖结合蛋白</strong> + 麦芽糖 $\to$ 蛋白荧光猝灭</td>
+<td align="left">利用 Stern-Volmer 方程 $\frac{I_0}{I_c} = 1 + k_{sv} c$ 定量麦芽糖浓度。</td>
+</tr>
+<tr>
+<td align="left"><strong>4. 指示剂型（P38）</strong></td>
+<td align="left">固定化酶反应改变微环境 $\text{pH}$ $\to$ 改变荧光染料 <strong>HPTS</strong> 发光</td>
+<td align="left"><strong>HPTS</strong>（8-羟基芘-1,3,6-三磺酸三钠盐）在 $450\;\text{nm}$ 激发下发射 $515\;\text{nm}$ 荧光，强度随微环境 $\text{pH}$ 灵敏变化。</td>
+</tr>
+<tr>
+<td align="left"><strong>5. 生物发光型</strong></td>
+<td align="left">利用生物体内发光酶系（如荧光素酶催化 ATP 发光）</td>
+<td align="left">直接检测生物发光光子数定量 ATP 或相关酶底物。</td>
+</tr>
+</tbody></table></div>
+<h4 id="63-酶生物传感器全章小结ppt-p39-信号流向总图">6.3 酶生物传感器全章小结（PPT P39 信号流向总图）</h4>
+<ul>
+<li><strong>测定物质 $\to$ 酶膜</strong>后产生五路物理/化学信号：<ol>
+<li><strong>$	ext{O}_2 / \text{H}_2\text{O}_2$</strong> $\xrightarrow{\text{透气膜}}$ $\text{Pt}$ 阴/阳电极 $\to$ <strong>电流测量</strong>；</li>
+<li><strong>$	ext{NH}_3 / \text{CO}_2$</strong> $\xrightarrow{\text{透气膜 + H}^+\text{敏感膜}}$ <strong>电位测量</strong>；</li>
+<li><strong>$	ext{H}^+$（直接生成/消耗）</strong> $\to$ <strong>电位（pH 电极）</strong> 或 <strong>电流（场效应管 EnFET）</strong>；</li>
+<li><strong>热（反应焓变）</strong> $\to$ <strong>热敏电阻传感器</strong>；</li>
+<li><strong>光（吸光/荧光/发光）</strong> $\to$ <strong>光纤传感器</strong>。</li>
+</ol>
+</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-19">19 免疫传感器与SPR</h2>
+<h2 id="19-免疫传感器与表面等离子体共振对应-ppt-p4057" class="doc-title">19 免疫传感器与表面等离子体共振（对应 PPT P40–57）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1TEnpVEFwm3U_Hk1H6VHbNWrSSopT1o0W/view?usp=drivesdk">19_生物-免疫传感器_P631-648.pdf</a>（PPT P40–57，对应总第 631–648 页）｜<em>注：本章涵盖免疫学基础、ELISA、SPR 波矢匹配推导与 QCM 压电免疫计算题，已穿插生物概念并补全全部计算细节。</em></p>
+</blockquote>
+<h3 id="目录-2">目录</h3>
+<ul>
+<li><a href="#一-免疫学反应基础与三明治竞争法p4045">一、 免疫学反应基础与三明治/竞争法（P40–45）</a></li>
+<li><a href="#二-电化学与半导体型免疫传感器p4649">二、 电化学与半导体型免疫传感器（P46–49）</a></li>
+<li><a href="#三-表面等离子体共振spr物理推导与光学免疫传感p5054">三、 表面等离子体共振（SPR）物理推导与光学免疫传感（P50–54）</a></li>
+<li><a href="#四-压电免疫传感器与-sauerbrey-完整计算题p5557">四、 压电免疫传感器与 Sauerbrey 完整计算题（P55–57）</a></li>
+</ul>
+<hr>
+<h3 id="一-免疫学反应基础与三明治竞争法p4045">一、 免疫学反应基础与三明治/竞争法（P40–45）</h3>
+<h4 id="11-免疫传感器的基本概念与分类ppt-p4041">1.1 免疫传感器的基本概念与分类（PPT P40–41）</h4>
+<ul>
+<li><strong>定义</strong>：利用<strong>抗体对相应抗原的特异性识别与结合</strong>功能，将抗体（或抗原）固定化膜与信号转换器组合，用来测定抗原（或抗体）浓度的<strong>亲和型</strong>生物传感器。</li>
+<li><strong>性能优劣决定因素</strong>：抗体与待测物结合的<strong>选择性</strong>和<strong>亲和力</strong>。</li>
+<li><strong>两大分类方式（PPT P40）</strong>：<ol>
+<li><strong>按是否标记</strong>：<strong>非标记免疫传感器</strong>（直接测结合引起的质量/折射率/电荷变化，如 QCM、SPR、FET） vs. <strong>标记免疫传感器</strong>（需要酶、荧光或同位素做信号放大）。</li>
+<li><strong>按信号转换过程</strong>：<strong>直接型</strong> vs. <strong>间接型</strong>。</li>
+</ol>
+</li>
+</ul>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：抗原、抗体、一抗/二抗与 HRP】</strong></p>
+<ul>
+<li><strong>抗原（Antigen, $\text{Ag}$）</strong>：能刺激机体产生免疫反应的外来物质（如病毒蛋白、细菌表面分子、肿瘤标志物），也是传感器常要检测的<strong>待测目标</strong>。</li>
+<li><strong>抗体（Antibody, $\text{Ab}$）</strong>：机体被抗原刺激后产生的“Y”形免疫球蛋白。Y 形的两条手臂尖端专门抓捕特定抗原，而柄端（Fc 段）结构相对保守。</li>
+<li><strong>一抗（Primary Antibody）与二抗（Secondary Antibody，PPT P42）</strong>：<ul>
+<li><strong>一抗</strong>是直接固定在传感器表面、用来“抓捕”待测抗原的抗体；</li>
+<li><strong>二抗</strong>是带有信号标签（如酶、荧光染料）的抗体，用来识别已被一抗抓住的抗原（或者识别一抗本身），负责“报告信号”。</li>
+</ul>
+</li>
+<li><strong>辣根过氧化物酶（HRP，PPT P44）</strong>：最常用的<strong>酶标记物</strong>！它能高效催化 $\text{H}_2\text{O}_2$ 氧化底物产生颜色变化或电流信号，把“抓到一个抗原”放大成几百万个产物分子的信号。</li>
+<li><strong>牛血清白蛋白（BSA）封端（Blocking，PPT P56）</strong>：固定好抗体后，传感器表面还有裸露的空隙，如果直接加血液样本，杂蛋白会乱粘上去产生假信号。用 <strong>BSA</strong>（一种惰性小蛋白）把空隙提前填满，就叫<strong>封端/封闭</strong>。</li>
+</ul>
+</blockquote></details>
+<h4 id="12-两大核心免疫分析模式三明治法-vs-竞争法ppt-p42必考对比">1.2 两大核心免疫分析模式：三明治法 vs. 竞争法（PPT P42，必考对比！）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">对比维度</th>
+<th align="left">三明治分析（夹心法，Sandwich）</th>
+<th align="left">竞争性分析（Competitive）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>结构流程</strong></td>
+<td align="left">固定化<strong>一抗</strong> $\to$ 结合待测<strong>抗原</strong> $\to$ 再结合标记<strong>二抗</strong>（形成“抗体-抗原-抗体”夹心）</td>
+<td align="left">固定化<strong>一抗</strong>数量有限，待测<strong>无标记抗原</strong>与外加的<strong>标记抗原</strong>共同竞争这批一抗位点</td>
+</tr>
+<tr>
+<td align="left"><strong>信号与浓度关系</strong></td>
+<td align="left">待测抗原越多，抓到的标记二抗越多 $\implies$ <strong>信号 $S \propto [\text{Ag}]$（成正比）</strong></td>
+<td align="left">待测抗原越多，抢走越多一抗，标记抗原结合越少 $\implies$ <strong>信号 $S \propto \dfrac{1}{[\text{Ag}]}$（成反比）</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>适用对象</strong></td>
+<td align="left"><strong>大分子抗原</strong>（必须足够大，同时拥有两个不重叠的结合表位供一抗和二抗分别结合）</td>
+<td align="left"><strong>小分子半抗原</strong>（体积太小，抓了一个抗体就塞不下第二个抗体，只能用竞争法）</td>
+</tr>
+</tbody></table></div>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：质量作用定律解释三明治法与竞争法信号规律】</strong>
+设抗原-抗体结合平衡常数为 $K_a = \frac{[\text{Ag}\cdot\text{Ab}]}{[\text{Ag}][\text{Ab}]}$：</p>
+<ol>
+<li><strong>三明治法</strong>：表面一抗总量 $[\text{Ab}_1]_{\text{tot}}$ 过量且固定。待测抗原 $[\text{Ag}]$ 结合上去的复合物浓度为 $[\text{Ab}_1\cdot\text{Ag}] \propto [\text{Ag}]$；随后加入过量标记二抗 $\text{Ab}_2^*$，每个复合物对应结合一个 $\text{Ab}_2^*$，故测得总标记信号 $S \propto [\text{Ab}_1\cdot\text{Ag}\cdot\text{Ab}_2^*] \propto [\text{Ag}]$。</li>
+<li><strong>竞争法</strong>：表面一抗总位点数 $N_0$ 有限且恒定。溶液中同时存在待测抗原 $[\text{Ag}]$ 与固定浓度的标记抗原 $[\text{Ag}^*]$，二者按浓度比例竞争 $N_0$ 个位点，标记抗原占据的比例为 $\theta^* = \frac{[\text{Ag}^*]}{[\text{Ag}^*] + [\text{Ag}] + 1/K_a}$。显然，$[\text{Ag}]$ 越大，分母越大，$\theta^*$ 越小，故信号 $S \propto \theta^*$ 与 $[\text{Ag}]$ <strong>呈反比单调递减</strong>！</li>
+</ol>
+</blockquote></details>
+<h4 id="13-五大免疫分析方法ppt-p4345">1.3 五大免疫分析方法（PPT P43–45）</h4>
+<ol>
+<li><strong>沉淀法</strong>：抗原抗体结合形成肉眼可见的大分子网状沉淀（灵敏度较低）。</li>
+<li><strong>放射免疫测定法（RIA）</strong>：用放射性同位素（如 $^{125}\text{I}$）标记，灵敏度极高但有辐射危害。</li>
+<li><strong>免疫荧光测定法（FIA）</strong>：用荧光染料标记，通过荧光强度定量。</li>
+<li><strong>酶联免疫测定法（ELISA，PPT P44–45）</strong>：将抗原/抗体固定在固相载体上，用 <strong>HRP 等酶</strong>标记二抗，加入底物后发生显色或电化学反应（兼具特异性与酶催化放大）。</li>
+<li><strong>非标记法</strong>：不引入外源标记物，直接利用 SPR、QCM、ISFET 等物理换能器实时监测结合过程。</li>
+</ol>
+<hr>
+<h3 id="二-电化学与半导体型免疫传感器p4649">二、 电化学与半导体型免疫传感器（P46–49）</h3>
+<h4 id="21-电位型免疫传感器ppt-p46">2.1 电位型免疫传感器（PPT P46）</h4>
+<ul>
+<li><strong>链路</strong>：$\text{抗体固定在载体膜上} \to \text{抗原-抗体特异性结合} \to \text{膜内离子载体性质/表面电荷分布改变} \to \text{电极膜电位变化 } \Delta E \to \text{测得抗原/抗体浓度}$。</li>
+<li><strong>两种典型构造（PPT P46 图 6.2.8）</strong>：<strong>(a) 固定抗体于离子载体膜表面</strong>（含内充 $\text{Ag/AgCl}$ 参比与内电解液）；<strong>(b) 直接固定抗体于金属电极表面</strong>（无内电解液，外配 $\text{Ag/AgCl}$ 参比电极测定膜/金属界面电位差）。</li>
+</ul>
+<h4 id="22-电流型酶免疫传感器ppt-p4748">2.2 电流型（酶）免疫传感器（PPT P47–48）</h4>
+<p>将 <strong>ELISA 的酶标记放大</strong>与**电流型电极（如氧电极、$\text{H}_2\text{O}_2$ 电极）**结合：</p>
+<ul>
+<li><strong>竞争法（P47）</strong>：用<strong>酶标抗原</strong>与待测抗原竞争氧电极上的固定化抗体 $\to$ 酶催化氧化还原反应 $\to$ 产生或消耗电活性物质 $\to$ 电流变化（与待测抗原浓度成反比）。</li>
+<li><strong>夹心法（P48）</strong>：<ol>
+<li>样品中的抗原与电极表面的固定化抗体结合；</li>
+<li>加入<strong>过氧化物酶（如 HRP）标记的二抗</strong>，形成夹心结构；</li>
+<li>在溶液中加入足量 $\text{H}_2\text{O}_2$，附着在电极上的过氧化物酶催化 $\text{H}_2\text{O}_2$ 还原/氧化，产生<strong>与抗原数量成正比的电流信号</strong>。</li>
+</ol>
+</li>
+</ul>
+<h4 id="23-半导体型免疫传感器immunofetppt-p49">2.3 半导体型免疫传感器（ImmunoFET，PPT P49）</h4>
+<ul>
+<li><strong>结构</strong>：在 <strong>ISFET</strong> 的栅极绝缘层（或敏感膜）表面直接固定抗体/抗原，取消传统金属栅，由<strong>参比电极 + 被测溶液 + 敏感膜</strong>构成栅极回路。</li>
+<li><strong>原理</strong>：免疫复合物（带净电荷）在界面结合 $\to$ 改变固液界面的表面电位与跨膜电场 $\to$ 调制沟道载流子浓度 $\to$ 改变漏源电流 $I_D$（或阈值电压 $V_T$）。</li>
+<li><strong>关键物理限制（与 17-1 / 18 节呼应）</strong>：溶液中存在大量背景离子会形成<strong>双电层屏蔽（德拜长度 $\lambda_D$ 仅约 $0.7\sim 1\;\text{nm}$）</strong>，抗体分子（约 $10\;\text{nm}$）过大往往会超出 $\lambda_D$ 范围，因此后来发展出<strong>纳米限域微环境</strong>和<strong>小尺寸核酸适配体</strong>（见第 21 章）来突破屏蔽限制。</li>
+</ul>
+<hr>
+<h3 id="三-表面等离子体共振spr物理推导与光学免疫传感p5054">三、 表面等离子体共振（SPR）物理推导与光学免疫传感（P50–54）</h3>
+<h4 id="31-spr-物理现象ppt-p50">3.1 SPR 物理现象（PPT P50）</h4>
+<p>当偏振电磁波从高折射率棱镜一侧以一定角度 $\theta$ 射向镀有超薄金属膜（如 $\text{Au}$ 膜）的界面时，在全反射条件下，反射光谱在<strong>某一特定入射角 $\theta_{sp}$</strong> 处会出现反射光强急剧下降的<strong>明显暗带（共振吸收峰）</strong>；且金属膜外侧样品的<strong>折射率 $n$ 变大时，共振角 $\theta_{sp}$ 会发生偏移</strong>。</p>
+<h4 id="32-波矢匹配条件与公式推导ppt-p5153必背核心公式">3.2 波矢匹配条件与公式推导（PPT P51–53，必背核心公式！）</h4>
+<p>在棱镜/金属膜/样品三层结构中（$x$ 轴平行于金属膜表面）：</p>
+<ol>
+<li><strong>消逝波（Evanescent Wave）在 $x$ 轴方向的波矢分量</strong>：
+$$K_{ev} = \frac{\omega}{c}\sqrt{\varepsilon_0}\sin\theta$$
+其中 $\omega$ 为入射光角频率，$c$ 为真空光速，$\varepsilon_0$ 为棱镜（支持体）的介电常数，$\theta$ 为入射角。</li>
+<li><strong>金属膜表面的表面等离子体波（SPW）在 $x$ 轴方向的波矢分量</strong>：
+$$K_{sp} \approx \frac{\omega}{c}\sqrt{\frac{\varepsilon_1 \varepsilon_2}{\varepsilon_1 + \varepsilon_2}}$$
+其中 $\varepsilon_1$ 为金属膜介电常数，$\varepsilon_2$ 为金属膜表面样品介质的介电常数。</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从 Maxwell 边界条件到 SPR 共振角 $\sin\theta_{sp}$ 推导】</strong></p>
+<ol>
+<li><strong>为何出现表面等离子体波 $K_{sp}$？</strong> 在金属（$\varepsilon_1 &lt; 0$）与电介质样品（$\varepsilon_2 &gt; 0$）的分界面上，TM 偏振（磁场平行于界面）电磁波满足切向电场与磁场连续边界条件，解得色散关系为：
+$$K_{sp} = \frac{\omega}{c}\sqrt{\frac{\varepsilon_1 \varepsilon_2}{\varepsilon_1 + \varepsilon_2}}$$
+注意当 $|\varepsilon_1| &gt; \varepsilon_2$ 且 $\varepsilon_1 &lt; 0$ 时，$\frac{\varepsilon_1 \varepsilon_2}{\varepsilon_1 + \varepsilon_2} &gt; \varepsilon_2$，故在空气或水中直接用光照射金属表面无法激发（因光的平行波矢 $\frac{\omega}{c}\sqrt{\varepsilon_2}\sin\theta &lt; K_{sp}$）。</li>
+<li><strong>为何需要高折射率棱镜产生消逝波？</strong> 利用高介电常数棱镜（$\varepsilon_0 &gt; \varepsilon_2$）在全反射时产生沿界面传播的<strong>消逝波</strong>，其平行波矢被放大了 $\sqrt{\varepsilon_0}$ 倍：$K_{ev} = \frac{\omega}{c}\sqrt{\varepsilon_0}\sin\theta$。</li>
+<li><strong>能量与动量匹配（共振条件）</strong>：当调节入射角 $\theta$ 使得沿界面方向的<strong>动量匹配</strong>（$K_{ev} = K_{sp}$）时：
+$$\frac{\omega}{c}\sqrt{\varepsilon_0}\sin\theta_{sp} = \frac{\omega}{c}\sqrt{\frac{\varepsilon_1\varepsilon_2}{\varepsilon_1+\varepsilon_2}} \implies \boxed{\sin\theta_{sp} = \sqrt{\frac{\varepsilon_1\varepsilon_2}{\varepsilon_0(\varepsilon_1+\varepsilon_2)}} = f(\omega, \varepsilon_0, \varepsilon_1, \varepsilon_2)}$$
+此时入射光能量剧烈耦合进金属表面自由电子的集体振荡（等离子体激元），转化为热能消耗，导致<strong>反射光强度急剧下降至最小值</strong>！</li>
+<li><strong>从物理量到生物量定量的映射链（PPT P52）</strong>：
+$$\sin\theta_{sp} = f(\omega, \varepsilon_0, \varepsilon_1, \varepsilon_2) \xrightarrow{\omega \to \lambda,\;\varepsilon_2 = n^2} \sin\theta_{sp} = f(\lambda, n) \xrightarrow{n \text{ 正比于表面质量 } m} \sin\theta_{sp} = f(\lambda, m)$$</li>
+</ol>
+</blockquote></details>
+<blockquote>
+<ol start="5">
+<li><strong>为什么样品折射率 $n$ 增大时共振角 $\theta_{sp}$ 总是向右（大角度）移动？（PPT P50 曲线 A $\to$ B 证明）</strong>：
+将 $\varepsilon_2 = n^2 &gt; 0$（且金属膜满足 $\varepsilon_1 &lt; -\varepsilon_2 &lt; 0$）代入共振条件并对 $\varepsilon_2$ 求导：
+$$\frac{d(\sin^2\theta_{sp})}{d\varepsilon_2} = \frac{1}{\varepsilon_0}\cdot\frac{\varepsilon_1(\varepsilon_1+\varepsilon_2) - \varepsilon_1\varepsilon_2}{(\varepsilon_1+\varepsilon_2)^2} = \frac{\varepsilon_1^2}{\varepsilon_0(\varepsilon_1+\varepsilon_2)^2} &gt; 0$$
+导数<strong>严格大于零</strong>！故样品折射率 $n$（或结合生物分子质量 $m$）增大 $\implies \varepsilon_2$ 增大 $\implies \theta_{sp}$ 必然<strong>增大（曲线暗带由 A 向右移至 B）</strong>。</li>
+</ol>
+</blockquote>
+<h4 id="33-spr-影响因素与免疫传感应用ppt-p5354">3.3 SPR 影响因素与免疫传感应用（PPT P53–54）</h4>
+<ul>
+<li><strong>影响 $\theta_{sp}$ 的四大因素（P53）</strong>：①入射光波长 $\lambda$；②金属膜的厚度；③玻璃（棱镜）与金属的介电常数；④界面两侧介质的折射系数（反映介质浓度变化、表面介质均匀度及厚度变化）。</li>
+<li><strong>SPR 免疫传感器（P54）</strong>：将抗体固定在 SPR 金膜表面 $\to$ 通入抗原并发生特异性结合 $\to$ 表面质量与局部折射率 $n$ 增大 $\to$ 共振角偏移 $\Delta\theta_{sp}$ 增大 $\to$ <strong>$\Delta\theta_{sp}$ 近似线性正比于所结合抗原的浓度/表面质量</strong>（全程无需任何标记，可实时监测结合/解离动力学！）。</li>
+</ul>
+<hr>
+<h3 id="四-压电免疫传感器与-sauerbrey-完整计算题p5557">四、 压电免疫传感器与 Sauerbrey 完整计算题（P55–57）</h3>
+<h4 id="41-压电免疫传感原理与-sauerbrey-方程ppt-p55">4.1 压电免疫传感原理与 Sauerbrey 方程（PPT P55）</h4>
+<p>把抗体固定在石英晶体微天平（QCM）金电极表面，抗原结合后导致晶体表面刚性质量增加 $\Delta m$，从而引起谐振频率下降 $\Delta f$：
+$$\boxed{\Delta f = \frac{-2 f_0^2}{\sqrt{\rho_q \mu_q}}\frac{\Delta m}{A} = -C_f \frac{f_0^2}{A}\Delta m}$$
+<em>(注：推导见第 17-2 节驻波微分；其中质量灵敏度常数 $C_f = \frac{2}{\sqrt{\rho_q\mu_q}} \approx 2.26\times 10^{-6}\;\text{cm}^2\cdot\text{s/g}$。)</em></p>
+<h4 id="42-ppt-p5657-完整计算例题考研计算题必练">4.2 PPT P56–57 完整计算例题（考研计算题必练！）</h4>
+<p><strong>【题目条件（PPT P56–57）】</strong>
+为增加结合位点，在裸石英晶体金电极（触液面几何面积 $A = 0.5024\;\text{cm}^2$，基频 $f_0 = 10\;\text{MHz}$）表面采用树枝状自组装策略依次修饰：半胱胺（CEA）$\to$ 对苯二异硫氰酸酯（PDITC）$\to$ 蛋白 A（Pr A）$\to$ 抗大肠杆菌 O157:H7 抗体（Ab）$\to$ 牛血清白蛋白（BSA）封端，最后检测 $10^9\;\text{CFU/mL}$ 大肠杆菌。各步频率下降 $\Delta F$ 及已知参数如下表：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">修饰层（Layer）</th>
+<th align="center">分子量 $M$（$\text{g/mol}$）</th>
+<th align="center">频率下降 $|\Delta F|$（$\text{Hz}$）</th>
+<th align="center">质量增加 $\Delta m$（$\text{ng}$）</th>
+<th align="center">物质的量 $n$（$\text{nmol}$）</th>
+<th align="center">分子数 $N$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>CEA</strong></td>
+<td align="center">$77.15$</td>
+<td align="center">$64$</td>
+<td align="center">$142.27$</td>
+<td align="center">$1.84$</td>
+<td align="center">$1.11\times 10^{15}$</td>
+</tr>
+<tr>
+<td align="left"><strong>PDITC</strong></td>
+<td align="center">$192.26$</td>
+<td align="center">$50$</td>
+<td align="center">$111.15$</td>
+<td align="center">$0.58$</td>
+<td align="center">$3.49\times 10^{14}$</td>
+</tr>
+<tr>
+<td align="left"><strong>Pr A</strong></td>
+<td align="center">$42000$</td>
+<td align="center">$35$</td>
+<td align="center">$77.80$</td>
+<td align="center">$0.0019$</td>
+<td align="center">$1.14\times 10^{12}$</td>
+</tr>
+<tr>
+<td align="left"><strong>Ab（待求！）</strong></td>
+<td align="center"><strong>$150000$</strong></td>
+<td align="center"><strong>$80$</strong></td>
+<td align="center"><strong>？</strong></td>
+<td align="center"><strong>？</strong></td>
+<td align="center"><strong>？</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>BSA</strong></td>
+<td align="center">$66400$</td>
+<td align="center">$6$</td>
+<td align="center">$13.34$</td>
+<td align="center">$0.0002$</td>
+<td align="center">$1.20\times 10^{11}$</td>
+</tr>
+</tbody></table></div>
+<p><strong>问题</strong>：试计算体系中抗体（Ab）的质量变化 $\Delta m$、物质的量 $n$ 和分子数 $N$。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：QCM 例题零跳步全过程求解】</strong></p>
+<ol>
+<li><strong>确定单位换算与灵敏度比例（用 CEA 行反推校核最稳妥！）</strong>：
+由 Sauerbrey 方程 $\Delta m = \frac{|\Delta f|\cdot A \cdot \sqrt{\rho_q \mu_q}}{2 f_0^2}$。
+代入 $f_0 = 10\;\text{MHz} = 10^7\;\text{Hz}$，$A = 0.5024\;\text{cm}^2$，以及 $\frac{2}{\sqrt{\rho_q\mu_q}} = 2.26\times 10^{-6}\;\text{cm}^2\cdot\text{s/g}$：
+$$\frac{\Delta m}{|\Delta f|} = \frac{0.5024}{2.26\times 10^{-6} \times (10^7)^2} = \frac{0.5024}{2.26\times 10^8} = 2.2230\times 10^{-9}\;\text{g/Hz} = 2.2230\;\text{ng/Hz}$$
+<em>校核表中 CEA 行</em>：$64\;\text{Hz} \times 2.2230\;\text{ng/Hz} = 142.27\;\text{ng}$（与 PPT P57 表格<strong>完全一致</strong>！）。</li>
+<li><strong>计算固定化抗体 Ab 的质量 $\Delta m_{\text{Ab}}$</strong>：
+已知 Ab 组装引起的频移 $|\Delta F_{\text{Ab}}| = 80\;\text{Hz}$，故：
+$$\Delta m_{\text{Ab}} = 80\;\text{Hz} \times 2.2230\;\text{ng/Hz} = \boxed{177.84\;\text{ng}}$$</li>
+<li><strong>计算 Ab 的物质的量 $n_{\text{Ab}}$</strong>：
+已知抗体分子量 $M_{\text{Ab}} = 150000\;\text{g/mol}$，先将 $\text{ng}$ 化为 $\text{g}$（$1\;\text{ng} = 10^{-9}\;\text{g}$）：
+$$n_{\text{Ab}} = \frac{\Delta m_{\text{Ab}}}{M_{\text{Ab}}} = \frac{177.84\times 10^{-9}\;\text{g}}{150000\;\text{g/mol}} = 1.1856\times 10^{-12}\;\text{mol} = \boxed{0.0012\;\text{nmol}}\quad (\text{精确值 } 1.186\times 10^{-3}\;\text{nmol})$$</li>
+<li><strong>计算固定化 Ab 的分子数 $N_{\text{Ab}}$</strong>：
+乘以阿伏伽德罗常数 $N_A = 6.022\times 10^{23}\;\text{mol}^{-1}$：
+$$N_{\text{Ab}} = n_{\text{Ab}} \cdot N_A = 1.1856\times 10^{-12}\;\text{mol} \times 6.022\times 10^{23}\;\text{mol}^{-1} = \boxed{7.14\times 10^{11}\;\text{个}}$$</li>
+<li><strong>物理意义与树枝状设计亮点</strong>：一个 Pr A 分子（$1.14\times 10^{12}$ 个）按理可结合多个抗体（此处 $N_{\text{Ab}}/N_{\text{Pr A}} \approx 0.63$），但关键在于 <strong>Pr A 能定向结合抗体的柄部（Fc 段）</strong>，让抗体的两个抓手（Fab 段）朝外整齐排列去抓大肠杆菌（引发最后一步 $25\;\text{Hz}$ 频降），从而显著提高结合效率！</li>
+</ol>
+</blockquote></details>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-20">20 微生物与细胞传感器</h2>
+<h2 id="20-微生物生物组织与细胞传感器对应-ppt-p5866" class="doc-title">20 微生物、生物组织与细胞传感器（对应 PPT P58–66）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1T7ZBMvFX6GVVuOHsH2o85tU34NXa-s-d/view?usp=drivesdk">20_生物-微生物传感器_P649-657.pdf</a>（PPT P58–66，对应总第 649–657 页）｜<em>注：本章涵盖微生物反应两大机能、BOD 传感器稳态电流闭环、微生物燃料电池（MFC）及组织/细胞传感器，并穿插必需的生物学概念。</em></p>
+</blockquote>
+<h3 id="目录-3">目录</h3>
+<ul>
+<li><a href="#一-微生物传感器概论与两大反应机能p5860">一、 微生物传感器概论与两大反应机能（P58–60）</a></li>
+<li><a href="#二-电流型微生物传感器与-bod-检测闭环p6162">二、 电流型微生物传感器与 BOD 检测闭环（P61–62）</a></li>
+<li><a href="#三-电位型光微生物与燃料电池型传感器p6365">三、 电位型、光微生物与燃料电池型传感器（P63–65）</a></li>
+<li><a href="#四-混合型生物组织与细胞细胞器传感器p66">四、 混合型、生物组织与细胞/细胞器传感器（P66）</a></li>
+</ul>
+<hr>
+<h3 id="一-微生物传感器概论与两大反应机能p5860">一、 微生物传感器概论与两大反应机能（P58–60）</h3>
+<h4 id="11-为什么已经有了酶传感器还要做微生物传感器ppt-p58">1.1 为什么已经有了酶传感器，还要做微生物传感器？（PPT P58）</h4>
+<ol>
+<li><strong>多酶级联反应优势</strong>：微生物细胞内部天然自带一整套完整的酶系，对于需要<strong>多种酶协同</strong>才能完成的复杂反应，微生物传感器可以直接使用，无需分别提纯和固定化好几种酶。</li>
+<li><strong>解决“无法分离的酶”难题</strong>：有些酶一旦离开细胞膜环境就会立刻失活，至今无法分离纯化，此时只能直接用<strong>含有该酶的完整细菌/真菌</strong>组成传感器。</li>
+<li><strong>成本低、寿命长</strong>：细胞自带自我修复机制，比昂贵的纯化酶更耐受恶劣环境（如工业废水）。</li>
+</ol>
+<ul>
+<li><strong>按信号转换器分类（PPT P58）</strong>：电化学微生物传感器、光微生物传感器、燃料电池型微生物传感器、热敏电阻型微生物传感器、压电微生物传感器等。</li>
+</ul>
+<h4 id="12-微生物传感器的两大反应机能ppt-p5960必考分类">1.2 微生物传感器的两大反应机能（PPT P59–60，必考分类！）</h4>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：需氧 vs. 厌氧、呼吸机能 vs. 代谢机能】</strong></p>
+<ul>
+<li><strong>需氧型微生物（Aerobic）</strong>：和人类一样，需要吸收氧气（$\text{O}_2$）来“烧掉”有机物（如葡萄糖、废水中的有机污染物）获取能量，过程叫<strong>呼吸作用</strong>；有机物越多，它耗氧越快。</li>
+<li><strong>厌氧型微生物（Anaerobic）</strong>：不需要氧气就能分解有机物，或者在无氧发酵时把有机物拆解成小分子代谢废物（如 $\text{NH}_3$、$\text{CO}_2$、有机酸）。</li>
+</ul>
+</blockquote></details>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">反应机能类型</th>
+<th align="left">选用的微生物</th>
+<th align="left">生物化学变化</th>
+<th align="left">搭配的换能器与测量逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 呼吸机能型（P59）</strong></td>
+<td align="left"><strong>需氧型微生物</strong></td>
+<td align="left">与有机底物作用时，细胞呼吸活性提高，<strong>耗氧量增大</strong></td>
+<td align="left">用<strong>氧电极（Clark 电极）<strong>测定呼吸活性变化引起的</strong>扩散极限电流下降值</strong> $\to$ 间接测定有机物浓度</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 代谢机能型（P60）</strong></td>
+<td align="left"><strong>厌氧型微生物</strong></td>
+<td align="left">分解有机物，产生各种<strong>代谢生成物</strong>（如 $\text{NH}_3, \text{CO}_2, \text{有机酸}$）</td>
+<td align="left">用相应的<strong>离子选择性电极（ISE）或气敏电极</strong>测得代谢物浓度 $\to$ 反推底物浓度</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="二-电流型微生物传感器与-bod-检测闭环p6162">二、 电流型微生物传感器与 BOD 检测闭环（P61–62）</h3>
+<h4 id="21-什么是-bodppt-p61">2.1 什么是 BOD？（PPT P61）</h4>
+<ul>
+<li><strong>BOD（Biochemical Oxygen Demand，生化需氧量）</strong>：指水体中微生物分解有机污染物所消耗的溶解氧的量，是<strong>监测水体被有机物污染状况的最常用指标</strong>。</li>
+<li><strong>传统 $\text{BOD}_5$ 法痛点</strong>：传统国标方法需要把水样在 $20^\circ\text{C}$ 避光培养 <strong>5 天</strong>才能测出耗氧量；而 <strong>BOD 微生物传感器</strong>只需 <strong>15～20 分钟</strong>就能给出结果！</li>
+</ul>
+<h4 id="22-bod-微生物传感器结构与工作流程ppt-p6162">2.2 BOD 微生物传感器结构与工作流程（PPT P61–62）</h4>
+<ul>
+<li><strong>7 层核心结构（PPT P61 结构图）</strong>：①电解液、②O 形环、③阴极（$\text{Pt}$）、④聚四氟乙烯膜（透 $\text{O}_2$ 膜，即 Clark 氧电极内膜）、⑤<strong>微生物膜</strong>（固定有假单胞菌、活性污泥菌、丝孢酵母菌、枯草芽孢杆菌等）、⑥尼龙网（保护支撑）、⑦阳极（$\text{Ag/AgCl}$）。</li>
+<li><strong>流路系统（PPT P62）</strong>：缓冲液、清洗液、待测样品与标准溶液通过蠕动泵和空气泵（保证恒定溶解氧）进入恒温箱内的微生物传感器，由记录仪记录电流-时间响应曲线。</li>
+</ul>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：内源呼吸 vs. 外源呼吸（PPT P62 核心考点）】</strong></p>
+<ul>
+<li><strong>内源呼吸（Endogenous Respiration）</strong>：当传感器放在**纯缓冲液（没有外部有机物食物）**中时，微生物只能靠消耗自己体内储存的营养勉强维持生命，耗氧速率很低且恒定。</li>
+<li><strong>外源呼吸（Exogenous Respiration）</strong>：一旦通入<strong>含有有机物的待测水样</strong>，微生物瞬间吃到外界食物，呼吸代谢骤然加快，耗氧量剧增！</li>
+</ul>
+</blockquote></details>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么 BOD 越大，传感器输出电流反而“下降”得越多？】</strong></p>
+<ol>
+<li><strong>基线稳态（内源呼吸平衡）</strong>：传感器置于充氧缓冲液中，溶解氧向氧电极阴极扩散的通量 $J_{\text{diff}}$ 减去微生物内源呼吸的恒定耗氧速率 $R_{\text{endo}}$，使到达铂阴极的氧通量恒定，输出<strong>稳态基线电流 $I_0$</strong>（如图 PPT P61 右侧约 $48\;\mu\text{A}$ 平台）：
+$$I_0 = n F A \big(J_{\text{diff}} - R_{\text{endo}}\big)$$<ul>
+<li><em>(注：由第 13-2 节 Fick 第一定律，穿过聚四氟乙烯透氧膜到达铂阴极的稳态氧扩散通量 $J_{\text{diff}} = D_{\text{O}_2}\frac{C_{\text{O}_2}^* - 0}{\delta}$，其中溶液溶解氧 $C_{\text{O}_2}^*$ 由空气泵维持恒定，阴极表面氧浓度在极限扩散电位下为 $0$。)</em></li>
+</ul>
+</li>
+<li><strong>样品响应（切换至外源呼吸）</strong>：通入含浓度为 $C_{\text{BOD}}$ 有机物的水样后，微生物转向外源呼吸，额外增加的耗氧速率在低浓度线性区正比于有机物浓度：$\Delta R_{\text{exo}} = k C_{\text{BOD}}$。此时能穿透微生物膜到达铂阴极的 $\text{O}_2$ 减少，输出电流跌落至新稳态 $I_s$：
+$$I_s = n F A \big(J_{\text{diff}} - R_{\text{endo}} - \Delta R_{\text{exo}}\big)$$</li>
+<li><strong>电流下降值 $\Delta I$ 定量</strong>：两式相减，背景扩散通量与内源呼吸全部抵消！
+$$\Delta I \equiv I_0 - I_s = n F A \cdot \Delta R_{\text{exo}} = \boxed{K \cdot C_{\text{BOD}}}$$
+因此<strong>电流的下降值 $\Delta I$ 与水样有机物浓度（$\text{BOD}$ 值）呈线性正比关系</strong>（PPT P61 图中 $20, 40, 80\;\text{mg/L}$ 样品对应电流下降越来越深；换回缓冲液冲洗后电流在 $20\sim 40\;\text{min}$ 内恢复至基线 $I_0$）。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-电位型光微生物与燃料电池型传感器p6365">三、 电位型、光微生物与燃料电池型传感器（P63–65）</h3>
+<h4 id="31-电位型微生物传感器ppt-p63">3.1 电位型微生物传感器（PPT P63）</h4>
+<ul>
+<li><strong>基础电极</strong>：$\text{pH}$ 玻璃电极、$\text{NH}_3$ 气敏电极、$\text{CO}_2$ 气敏电极等。</li>
+<li><strong>定量方程</strong>：电极电位与代谢产生的离子/气体活度之间严格符合<strong>能斯特方程</strong>：
+$$E = E_0 \pm \frac{RT}{nF}\ln a_{\text{代谢产物}}$$</li>
+</ul>
+<h4 id="32-光微生物传感器ppt-p64">3.2 光微生物传感器（PPT P64）</h4>
+<ul>
+<li><strong>生物学基础</strong>：某些微生物（如蓝细菌、微藻）具有<strong>光合作用</strong>能力，在光照下能将待测物转化为电极敏感物质，或者自身裂解水<strong>释放 $\text{O}_2$</strong>。</li>
+<li><strong>结构</strong>：将光合微生物固定化，并与氧电极（或光敏器件）结合。若水样中存在抑制光合作用的除草剂或重金属毒物，产氧量会急剧下降，从而反向测出毒性物质浓度。</li>
+</ul>
+<h4 id="33-燃料电池型微生物传感器microbial-fuel-cell-mfcppt-p65">3.3 燃料电池型微生物传感器（Microbial Fuel Cell, MFC，PPT P65）</h4>
+<ul>
+<li><strong>定义</strong>：有机分子被氧化时释放化学能（故称“燃料”）；在原电池装置中，若由<strong>微生物催化</strong>该氧化还原反应把化学能直接转变为电能，称为<strong>生物燃料电池（Bio-fuel Cell）</strong>。</li>
+<li><strong>结构特点（PPT P65 示意图）</strong>：阳极室（含微生物 + 还原态媒介体 + 燃料有机物）与阴极室（含氧化剂 $\text{O}_2$）之间由**质子交换膜（离子交换膜）**隔开，质子 $\text{H}^+$ 穿膜到达阴极，电子 $e^-$ 通过外电路检流计从阳极流向阴极。</li>
+</ul>
+<p><strong>燃料电池型微生物传感器两极反应（PPT P65，注意 PPT 图文字印刷把阴阳极标签写反了，下方已按电化学定义校准并标注！）</strong>：</p>
+<ul>
+<li><strong>阳极反应（氧化反应，失电子）</strong>：微生物氧化有机物（以碳水化合物 $(\text{CH}_2\text{O})_n$ 为例）释放电子与质子：
+$$(\text{CH}_2\text{O})_n + n\text{H}_2\text{O} \longrightarrow n\text{CO}_2 + 4n e^- + 4n\text{H}^+$$</li>
+<li><strong>阴极反应（还原反应，得电子）</strong>：氧气在阴极结合电子与穿膜而来的质子生成水：
+$$\text{O}_2 + 4\text{H}^+ + 4e^- \longrightarrow 2\text{H}_2\text{O}$$
+<em>(考试提示：PPT P65 右侧排版把“阳极反应”和“阴极反应”两个紫字标题印反了！记住第 13-2 节第一性原理：<strong>阳极永远发生氧化失电子，阴极永远发生还原得电子</strong>，故产生 $e^-$ 的有机物氧化一定是阳极反应。)</em></li>
+</ul>
+<hr>
+<h3 id="四-混合型生物组织与细胞细胞器传感器p66">四、 混合型、生物组织与细胞/细胞器传感器（P66）</h3>
+<p>在分子识别元件的尺度上，生物传感器经历了“<strong>纯酶 $\to$ 微生物 $\to$ 组织切片 $\to$ 活细胞/细胞器</strong>”的逐级复杂化拓展（PPT P66）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">敏感元件构成</th>
+<th align="left">核心优势与应用特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 酶—微生物混合型传感器</strong></td>
+<td align="left"><strong>纯化酶 + 微生物</strong>混合固定化</td>
+<td align="left">弥补单一微生物缺乏某种关键酶、或单一酶缺乏辅助因子的短板，使敏感膜性能更完善。</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 生物组织传感器</strong></td>
+<td align="left"><strong>活的动植物细胞切片</strong>（如香蕉片、猪肝片、甜菜切片）</td>
+<td align="left">组织切片天然富含高浓度特定酶且处于<strong>最理想的天然保护环境</strong>中，无需提纯酶，寿命长、成本极低。</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 细胞与细胞器传感器</strong></td>
+<td align="left"><strong>活细胞</strong>或亚细胞结构（如<strong>线粒体、叶绿体</strong>）</td>
+<td align="left">可连续、实时、动态监测活细胞在外界药物或毒素刺激下的<strong>真实生理功能变化</strong>（而非单一化学反应），用于药物筛选与毒性评估。</td>
+</tr>
+</tbody></table></div>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：什么是“细胞器”？】</strong>
+真核细胞就像一座微缩工厂，里面有不同的功能车间，这些车间就叫<strong>细胞器（Organelle）</strong>。PPT P9/P66 最常提到的两个细胞器是：</p>
+<ul>
+<li><strong>线粒体（Mitochondria）</strong>：细胞的“发电站”，负责有氧呼吸消耗 $\text{O}_2$ 并产生能量货币 ATP；</li>
+<li><strong>叶绿体（Chloroplast）</strong>：植物与藻类的“太阳能板”，负责光合作用吸收 $\text{CO}_2$、释放 $\text{O}_2$。</li>
+</ul>
+</blockquote></details>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-21">21 基因/适配体与总收官</h2>
+<h2 id="21-基因传感器适配体与生物传感器总收官对应-ppt-p6781" class="doc-title">21 基因传感器、适配体与生物传感器总收官（对应 PPT P67–81）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1E9BZdqaZbWlLHk9NXtCuVvfOipbQtuw9/view?usp=drivesdk">21_生物-基因传感器_P658-672.pdf</a>（PPT P67–81，对应总第 658–672 页）｜<em>注：本章涵盖 DNA 杂交与探针设计、电化学/QCM 基因传感器、前沿适配体 FET、DNA 芯片光刻、纳米孔测序以及第七章全章总收官，已穿插分子生物学概念并补全物理闭环。</em></p>
+</blockquote>
+<h3 id="目录-4">目录</h3>
+<ul>
+<li><a href="#一-基因传感器基础与核酸分子杂交p6769">一、 基因传感器基础与核酸分子杂交（P67–69）</a></li>
+<li><a href="#二-电化学与压电晶体qcmdna-传感器p7073">二、 电化学与压电晶体（QCM）DNA 传感器（P70–73）</a></li>
+<li><a href="#三-半导体型适配体传感器aptamer-fetp7476">三、 半导体型适配体传感器（Aptamer-FET，P74–76）</a></li>
+<li><a href="#四-extra-前沿专题dna-芯片光刻制备与纳米孔测序p7780">四、 Extra 前沿专题：DNA 芯片光刻制备与纳米孔测序（P77–80）</a></li>
+<li><a href="#五-第七章生物传感器全章总收官对比p81">五、 第七章《生物传感器》全章总收官对比（P81）</a></li>
+</ul>
+<hr>
+<h3 id="一-基因传感器基础与核酸分子杂交p6769">一、 基因传感器基础与核酸分子杂交（P67–69）</h3>
+<h4 id="11-基因传感器的定义结构与制备四步ppt-p67">1.1 基因传感器的定义、结构与制备四步（PPT P67）</h4>
+<ul>
+<li><strong>定义</strong>：以 <strong>DNA</strong>（单链寡核苷酸探针）为敏感元件，通过信号转换器将 <strong>DNA 与 DNA、DNA 与 RNA、或 DNA 与其他离子/分子</strong>之间作用的生物学信号，转变为可检测的光、电、质量等物理信号的亲和型生物传感器。</li>
+<li><strong>基本结构</strong>：<strong>DNA 探针（分子识别元件）</strong> + <strong>信号转换器</strong>。</li>
+<li><strong>两大关键技术</strong>：<ol>
+<li>有效地将 DNA 探针固定在固体基质表面的技术；</li>
+<li>在传感器/液相界面对于靶基因的高灵敏检测技术。</li>
+</ol>
+</li>
+<li><strong>制备与检测四步骤</strong>：① DNA 探针的固定 $\to$ ② 杂交过程 $\to$ ③ 杂交的指示 $\to$ ④ 信号的检测。</li>
+</ul>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：ssDNA、dsDNA、碱基互补配对与“杂交”】</strong></p>
+<ul>
+<li><strong>DNA 的四种碱基（字母表）</strong>：DNA 就像一串由 4 个字母写成的密码带——<strong>A（腺嘌呤）、T（胸腺嘧啶）、C（胞嘧啶）、G（鸟嘌呤）</strong>。</li>
+<li><strong>互补配对法则（Watson-Crick 配对，PPT P68）</strong>：<strong>A 只和 T 配对</strong>（靠 2 条氢键），<strong>G 只和 C 配对</strong>（靠 3 条氢键）。</li>
+<li><strong>ssDNA vs. dsDNA</strong>：单链 DNA（<strong>ssDNA</strong>）就像半边拉链；当遇到序列完全互补的另一条单链（<strong>靶 DNA</strong>）时，两条链会像拉链一样严丝合缝地扣在一起形成双螺旋双链 DNA（<strong>dsDNA</strong>）。这个“单链变双链”的特异性配对过程就叫<strong>核酸分子杂交（Hybridization）</strong>。</li>
+<li><strong>什么是 DNA 探针（Probe）？</strong>：我们人工合成一段已知序列的 ssDNA 固定在电极上当“诱饵”，它就是<strong>探针</strong>；样品里等待被抓捕的未知病毒或基因片段叫<strong>靶基因（Target DNA）</strong>。</li>
+</ul>
+</blockquote></details>
+<h4 id="12-选择-dna-探针的三大原则ppt-p67-p69简答题必背">1.2 选择 DNA 探针的三大原则（PPT P67, P69，简答题必背！）</h4>
+<ol>
+<li><strong>探针的长度</strong>：通常控制在 <strong>15～30 个碱基（nt）</strong> 左右——太短了特异性不够（随机序列也能撞车），太长了杂交速度慢且容易发生局部错配。</li>
+<li><strong>GC 碱基的组成（GC 含量）</strong>：因 <strong>G≡C 之间有 3 条氢键</strong>，而 <strong>A=T 之间只有 2 条氢键</strong>，故 GC 含量越高，双链结合越牢固、解链温度（$T_m$）越高；一般要求 GC 含量适中（约 $40\% \sim 60\%$）以保证杂交既稳定又有良好的错配分辨力。</li>
+<li><strong>探针分子内不能存在互补区</strong>：如果一根单链探针自己的头和尾能互补配对，它就会自己折回来形成“发夹结构（Hairpin）”，把配对位点藏起来，导致无法与外来的靶 DNA 杂交。</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么 GC 含量决定杂交温度 $T_m$？】</strong>
+每对 <strong>G≡C</strong> 碱基由 <strong>3 条氢键</strong>维系，而每对 <strong>A=T</strong> 只有 <strong>2 条氢键</strong>。对于 $15\sim 30\;\text{nt}$ 的短探针，解链温度（一半双链解开成单链的温度）可用 <strong>Wallace 经验公式</strong>定量估算：
+$$T_m\;(^{\circ}\text{C}) \approx 2(N_A + N_T) + 4(N_G + N_C)$$
+因此提高 GC 含量可显著提高 $T_m$（增强杂交热稳定性），但 GC 过高会导致探针内部易自发折叠且非特异性错配不易洗脱，故常取 $40\%\sim 60\%$。</p>
+</blockquote></details>
+<h4 id="13-dna-探针的四大固定化方法ppt-p69">1.3 DNA 探针的四大固定化方法（PPT P69）</h4>
+<ol>
+<li><strong>吸附法</strong>：利用带负电的 DNA 磷酸骨架与带正电修饰电极之间的静电物理吸附（简单但易脱落）。</li>
+<li><strong>自组装法（SAM）</strong>：在探针末端修饰<strong>巯基（$-\text{SH}$）</strong>，利用极强的 $\text{Au–S}$ 键自动整齐地直立组装在金电极表面（见 PPT P73 QCM 图中的 $\text{Au–S}$ 锚定）。</li>
+<li><strong>生物素—亲和素固定法</strong>：利用生物素（Biotin）与亲和素/链霉亲和素（Avidin）之间自然界最强的非共价亲和力（$K_d \approx 10^{-15}\;\text{M}$）进行桥接固定。</li>
+<li><strong>共价键结合法</strong>：探针修饰氨基（$-\text{NH}_2$）或羧基，与活化后的载体表面形成牢固共价键。</li>
+</ol>
+<hr>
+<h3 id="二-电化学与压电晶体qcmdna-传感器p7073">二、 电化学与压电晶体（QCM）DNA 传感器（P70–73）</h3>
+<h4 id="21-电化学-dna-传感器ppt-p70">2.1 电化学 DNA 传感器（PPT P70）</h4>
+<ul>
+<li><strong>构成</strong>：已知序列的 ssDNA 探针 + 电化学电极。</li>
+<li><strong>核心痛点与关键技术</strong>：DNA 本身在常规电位窗口内几乎不发生氧化还原反应！因此<strong>必须引入电化学活性标识物</strong>：<ol>
+<li><strong>电化学活性的杂交指示剂</strong>：小分子嵌入剂（如亚甲蓝、金属配合物），它对 ssDNA 和 dsDNA 的结合能力截然不同；杂交成双链 dsDNA 后大量指示剂嵌入双螺旋沟槽中，产生显著增大的氧化还原电流峰（$e^-$ 转移）。</li>
+<li><strong>寡聚核苷酸上修饰电化学活性官能团</strong>：在合成探针时直接给它挂上二茂铁（Fc）等电化学标签。</li>
+<li><strong>标记酶</strong>：在靶标或二级报告探针上连接酶（如 HRP、碱性磷酸酶），通过酶促反应产生电活性产物进行电流放大。</li>
+</ol>
+</li>
+</ul>
+<h4 id="22-压电晶体qcmdna-传感器ppt-p7273">2.2 压电晶体（QCM）DNA 传感器（PPT P72–73）</h4>
+<ul>
+<li><strong>免标记直接检测</strong>：无需电化学指示剂或荧光染料！</li>
+<li><strong>工作流程（PPT P72–73）</strong>：<ol>
+<li>压电石英晶体金电极表面活化，通过 $\text{Au–S}$ 自组装固定已知序列的探针 ssDNA（如 PPT P73 示例：<code>5'-GGGAATTCGT-3'</code>）；</li>
+<li>通入待测靶 DNA，若序列互补（如 <code>CCCTTAAGCA</code>），发生杂交形成双链 dsDNA；</li>
+<li>双链结合使石英晶体表面刚性质量增加 $\Delta m &gt; 0$，由 <strong>Sauerbrey 方程</strong> $\Delta f = -\frac{2f_0^2}{\sqrt{\rho_q\mu_q}}\frac{\Delta m}{A}$ 直接引起晶振谐振频率下降 $\Delta f &lt; 0$，频率改变量定量反映靶 DNA 浓度。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="三-半导体型适配体传感器aptamer-fetp7476">三、 半导体型适配体传感器（Aptamer-FET，P74–76）</h3>
+<h4 id="31-什么是核酸适配体aptamerppt-p74">3.1 什么是核酸适配体（Aptamer）？（PPT P74）</h4>
+<ul>
+<li><strong>定义</strong>：一小段经体外筛选（SELEX 技术）得到的<strong>单链寡核苷酸序列</strong>（或短多肽），能折叠成特定的三维空间口袋，与相应的配体（小分子、神经递质、蛋白质甚至细胞）进行<strong>高亲和力和强特异性</strong>的结合——俗称**“化学抗体”**。</li>
+</ul>
+<details class="note-fold note-fold-bio" open=""><summary>生物概念穿插</summary><blockquote>
+<p><strong>【生物概念穿插：为什么 Aptamer-FET 能打败传统抗体 ImmunoFET？（PPT P75–76 最小闭环）】</strong>
+回顾第 19 章 2.3 节提到的物理痛点：在生理盐水（PBS 或脑脊液 aCSF）中，高浓度离子会把带电分子包裹起来，<strong>德拜屏蔽长度 $\lambda_D$ 只有约 $0.7\sim 1\;\text{nm}$</strong>——超过这个距离，FET 沟道就“看不见”电荷变化了！</p>
+<ul>
+<li><strong>传统抗体太大（约 $10\;\text{nm}$）</strong>：抗原被抓在 $10\;\text{nm}$ 以外，电荷全被盐离子屏蔽了，FET 几乎没信号。</li>
+<li><strong>适配体极小且会发生构象折叠（Science 2018，PPT P75–76）</strong>：<ol>
+<li>适配体本身只有几纳米长，表面带大量负电（磷酸骨架）；</li>
+<li>当靶标小分子（如多巴胺 Dopamine、血清素 Serotonin、葡萄糖 Glucose、S1P，PPT P76）钻进适配体口袋时，<strong>适配体自身发生剧烈的三维折叠（构象变化）</strong>；</li>
+<li>这种折叠<strong>带着自身大量带负电的磷酸骨架在德拜长度 $\lambda_D$ 内靠近或远离 $\text{In}_2\text{O}_3$ 半导体沟道表面</strong>，从而产生极强的栅极电场调制，即使面对**不带电的小分子（如葡萄糖）**也能在生理条件下实现超高灵敏度实时检测！</li>
+</ol>
+</li>
+</ul>
+</blockquote></details>
+<hr>
+<h3 id="四-extra-前沿专题dna-芯片光刻制备与纳米孔测序p7780">四、 Extra 前沿专题：DNA 芯片光刻制备与纳米孔测序（P77–80）</h3>
+<h4 id="41-dna-芯片光刻制备ppt-p7778张昊化学与芯片制造">4.1 DNA 芯片光刻制备（PPT P77–78，张昊《化学与芯片制造》）</h4>
+<p>把半导体芯片的**光刻技术（Photolithography）**借用到生物芯片上，实现高通量微阵列探针合成：</p>
+<ul>
+<li><strong>核心材料</strong>：硅基底（Si Substrate）+ $\text{SiO}_2$ 绝缘层 + 光刻胶（Photoresist）+ 掩膜（Mask）+ 光源（$h\nu$）。</li>
+<li><strong>正胶 vs. 负胶显影机制（PPT P77 必分清！）</strong>：<ul>
+<li><strong>正性光刻胶（Positive）</strong>：被光照曝光的区域<strong>变得可溶（soluble）</strong>，显影时被洗掉，留下未曝光区域。</li>
+<li><strong>负性光刻胶（Negative）</strong>：被光照曝光的区域发生交联而<strong>变得不可溶（insoluble）</strong>，显影时保留曝光区域，洗掉未曝光区域。</li>
+</ul>
+</li>
+<li>经过曝光（exposure）$\to$ 显影（developing）$\to$ 刻蚀/去胶（strip），即可在晶圆上定义出微米级的生物探针阵列位点。</li>
+</ul>
+<h4 id="42-纳米孔测序nanopore-sequencingppt-p7980">4.2 纳米孔测序（Nanopore Sequencing，PPT P79–80）</h4>
+<ul>
+<li><strong>装置结构（PPT P79）</strong>：两腔室（<strong>Cis 腔</strong>与 <strong>Trans 腔</strong>）充满电解质溶液，中间隔一层带有**纳米级小孔（蛋白孔或固态 $\text{SiN}_x$ 孔）**的薄膜，两侧各插一根 <strong>$\text{Ag/AgCl}$ 电极</strong>并施加偏压，串联高灵敏度皮安（$\text{pA}$）级电流表。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：纳米孔测序的物理读出机制（阻塞电流 vs. FET 耦合）】</strong></p>
+<ol>
+<li><strong>第一代离子阻塞电流测序（PPT P79）</strong>：外加电场驱动带负电的 DNA 单链逐个碱基穿过纳米孔。孔道未堵塞时，电解液离子自由穿孔形成稳定的基线离子电流 $I_0$；当 A、T、C、G 四种大小/形状不同的碱基依次挤过纳米孔时，会不同程度地<strong>阻塞孔道截面积</strong>，引起特征性的瞬态<strong>离子电流下降（$\Delta I$，几十皮安量级）</strong>。通过解码台阶状电流脉冲序列即可直接读出 DNA 碱基序列！</li>
+</ol>
+</blockquote></details>
+<blockquote>
+<ul>
+<li><em>定量阻塞估算</em>：将纳米孔近似为长度 $L$、直径 $d$ 的圆柱导体（电解液电阻率 $\rho$），空孔电阻 $R_0 = \frac{4\rho L}{\pi d^2}$。当截面积为 $\Delta A$ 的碱基进入孔道时，有效截面积减小为 $A_{\text{pore}} - \Delta A$，引起相对电流下降：
+$$\frac{\Delta I}{I_0} \approx -\frac{\Delta A}{A_{\text{pore}}}$$
+不同碱基（A、G 嘌呤较大，C、T 嘧啶较小）对应不同的 $\Delta A$，从而产生可分辨的台阶电流脉冲。</li>
+</ul>
+<ol start="2">
+<li><strong>纳米孔—硅纳米线 FET 协同测序（Harvard 2012, Nature Nanotechnology，PPT P80）</strong>：在 $\text{SiN}_x$ 固态纳米孔边缘集成一根 <strong>硅纳米线场效应晶体管（SiNW-FET）</strong>，DNA 穿孔时同时被测<strong>跨孔离子电流（$\text{nA}$ 级）<strong>和</strong>纳米线电导变化（$\text{nS}$ 级）</strong>，双通道互相印证大幅提升时间分辨率与信噪比。</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="五-第七章生物传感器全章总收官对比p81">五、 第七章《生物传感器》全章总收官对比（P81）</h3>
+<p>对照 PPT P81 终极总结框图，生物传感器按<strong>分子识别机制</strong>可分为两大阵营，与第 13–17 章的五大换能器完美闭环：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">识别机制大类</th>
+<th align="left">包含的传感器类型</th>
+<th align="left">核心识别特点</th>
+<th align="left">典型换能器对接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>催化代谢型</strong></td>
+<td align="left"><strong>1. 酶生物传感器（Ch 18）</strong><br><strong>2. 微生物传感器（Ch 20）</strong></td>
+<td align="left">生物活性物质<strong>连续消耗底物并生成产物</strong>，可反复催化周转，输出稳态反应速率信号（遵守米氏方程）</td>
+<td align="left">氧电极 / $\text{H}_2\text{O}_2$ 电极、ISE/气敏电极、EnFET、热敏电阻、光纤、生物燃料电池</td>
+</tr>
+<tr>
+<td align="left"><strong>亲和型</strong></td>
+<td align="left"><strong>3. 免疫传感器（Ch 19）</strong><br><strong>4. 基因传感器（Ch 21）</strong></td>
+<td align="left">靠<strong>非共价特异性结合</strong>（抗原-抗体、碱基互补杂交、适配体-配体）形成复合物，引起界面物理量变化</td>
+<td align="left">标记法（ELISA 电流/光学）、非标记法（SPR 共振角、QCM 频率、BioFET 栅压）</td>
+</tr>
+</tbody></table></div>
+<details class="note-fold note-fold-bridge" open=""><summary>终极复习口诀</summary><blockquote>
+<p><strong>【全书第 13–21 章终极复习口诀】</strong></p>
+<ul>
+<li>**化学传感器基础（Ch 13–17）**造就了五大“耳朵和眼睛”（<strong>电导、电位/ISE、伏安/极谱、半导体 ISFET、光/压电/热敏</strong>）；</li>
+<li>**生物传感器（Ch 18–21）**则是在这五类换能器表面贴上一层生物“指纹识别锁”（<strong>酶、抗体、微生物、DNA/适配体</strong>），从而完成从无机离子气体到复杂生命分子的终极跨越！</li>
+</ul>
+</blockquote></details>
+</section>
+</article>
+{% endraw %}
+{% include shengyi-foot.html %}

@@ -1,0 +1,952 @@
+---
+layout: front
+title: "传感器重构笔记 · 概论与基本理论（02–04章）"
+lang: zh-CN
+body_class: notes shengyi
+section: notes
+nav_current: notes
+permalink: /notes/shengyi/chuanganqi/gailun/
+katex: true
+---
+
+<header class="topic-head">
+    <p class="page-kicker"><a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a> · <a href="{{ '/notes/shengyi/' | prepend: site.baseurl }}">生物医学电子学</a> · <a href="{{ '/notes/shengyi/chuanganqi/' | prepend: site.baseurl }}">传感器重构笔记</a> · 概论与基本理论（02–04章）</p>
+    <h1>概论与基本理论（02–04章）</h1>
+</header>
+<nav class="note-toc" aria-label="目录">
+<ol>
+<li class="toc-h2 toc-tab"><a href="#tab-02">02 概论与微悬臂梁</a></li>
+<li class="toc-h2"><a href="#02-生物医学测量概论与微悬臂梁传感器对应-ppt-p1646">02 生物医学测量概论与微悬臂梁传感器（对应 PPT P16–46）</a></li>
+<li class="toc-h3"><a href="#一-生物医学检测对象信号分类与基本特点p3438">一、 生物医学检测对象、信号分类与基本特点（P34–38）</a></li>
+<li class="toc-h3"><a href="#二-典型微纳生物医学传感物理原理p2433">二、 典型微纳生物医学传感物理原理（P24–33）</a></li>
+<li class="toc-h3"><a href="#三-微悬臂梁-stoney-方程与热应力物理闭环p2933">三、 微悬臂梁 Stoney 方程与热应力物理闭环（P29–33）</a></li>
+<li class="toc-h3"><a href="#四-生物医学测量系统框图与发展趋势p3745">四、 生物医学测量系统框图与发展趋势（P37–45）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-03-1">03-1 概念与静态特性</a></li>
+<li class="toc-h2"><a href="#03-1-传感器概念与静态特性对应-ppt-p126">03-1 传感器概念与静态特性（对应 PPT P1–26）</a></li>
+<li class="toc-h3"><a href="#一-传感器基本概念组成与分类p46">一、 传感器基本概念、组成与分类（P4–6）</a></li>
+<li class="toc-h3"><a href="#二-静态特性数学模型与最小二乘法线性拟合推导p814">二、 静态特性数学模型与最小二乘法线性拟合推导（P8–14）</a></li>
+<li class="toc-h3"><a href="#三-十大静态性能指标全表与物理闭环p1524">三、 十大静态性能指标全表与物理闭环（P15–24）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-03-2">03-2 动态模型与时域</a></li>
+<li class="toc-h2"><a href="#03-2-动态数学模型拉氏变换与时域响应对应-ppt-p2858">03-2 动态数学模型、拉氏变换与时域响应（对应 PPT P28–58）</a></li>
+<li class="toc-h3"><a href="#一-动态数学模型与物理建模p3042">一、 动态数学模型与物理建模（P30–42）</a></li>
+<li class="toc-h3"><a href="#二-拉普拉斯变换核心定理与留数法工具p33-p4344">二、 拉普拉斯变换核心定理与留数法工具（P33, P43–44）</a></li>
+<li class="toc-h3"><a href="#三-零阶与一阶传感器阶跃响应及时间常数-taup4748">三、 零阶与一阶传感器阶跃响应及时间常数 （P47–48）</a></li>
+<li class="toc-h3"><a href="#四-二阶传感器三态阶跃响应无跳步推导p4953">四、 二阶传感器三态阶跃响应无跳步推导（P49–53）</a></li>
+<li class="toc-h3"><a href="#五-二阶欠阻尼六大时域性能指标推导p5458">五、 二阶欠阻尼六大时域性能指标推导（P54–58）</a></li>
+<li class="toc-h3"><a href="#五-真题靶向加厚二阶系统欠阻尼-vs-过阻尼分支速查26-计5">五、 真题靶向加厚：二阶系统欠阻尼 vs. 过阻尼分支速查（26-计5）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-03-3">03-3 频域与不失真</a></li>
+<li class="toc-h2"><a href="#03-3-传感器频域分析伯德图与不失真测试条件对应-ppt-p5978">03-3 传感器频域分析、伯德图与不失真测试条件（对应 PPT P59–78）</a></li>
+<li class="toc-h3"><a href="#一-频率响应函数-hjomega-与正弦激励物理本质p5963">一、 频率响应函数 与正弦激励物理本质（P59–63）</a></li>
+<li class="toc-h3"><a href="#二-无失真传输条件p45-p6465">二、 无失真传输条件（P45, P64–65）</a></li>
+<li class="toc-h3"><a href="#三-一阶传感器频域特性截止频率与例题p6669">三、 一阶传感器频域特性、截止频率与例题（P66–69）</a></li>
+<li class="toc-h3"><a href="#四-二阶传感器频域特性与谐振峰推导p7072">四、 二阶传感器频域特性与谐振峰推导（P70–72）</a></li>
+<li class="toc-h3"><a href="#五-动态性能选型与全章总结p7377">五、 动态性能选型与全章总结（P73–77）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-04-1">04-1 误差统计与置信</a></li>
+<li class="toc-h2"><a href="#04-1-误差分类随机误差统计与置信区间对应-ppt-p143">04-1 误差分类、随机误差统计与置信区间（对应 PPT P1–43）</a></li>
+<li class="toc-h3"><a href="#一-误差与偏差准确度与精密度p616">一、 误差与偏差、准确度与精密度（P6–16）</a></li>
+<li class="toc-h3"><a href="#二-误差的三大分类p1720">二、 误差的三大分类（P17–20）</a></li>
+<li class="toc-h3"><a href="#三-随机误差的统计特征与正态换元推导p2132">三、 随机误差的统计特征与正态换元推导（P21–32）</a></li>
+<li class="toc-h3"><a href="#四-置信问题t-分布与例-23-演算p3343">四、 置信问题、 分布与例 2.3 演算（P33–43）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-04-2">04-2 异常值与误差传递</a></li>
+<li class="toc-h2"><a href="#04-2-粗大误差系统误差判定与误差传递对应-ppt-p4465">04-2 粗大误差、系统误差判定与误差传递（对应 PPT P44–65）</a></li>
+<li class="toc-h3"><a href="#一-粗大误差异常值的两大检验法p4450">一、 粗大误差（异常值）的两大检验法（P44–50）</a></li>
+<li class="toc-h3"><a href="#二-系统误差的三大假设检验与两大变化判据p5161">二、 系统误差的三大假设检验与两大变化判据（P51–61）</a></li>
+<li class="toc-h3"><a href="#三-误差传递理论与全微分方差公式推导p6263">三、 误差传递理论与全微分/方差公式推导（P62–63）</a></li>
+<li class="toc-h3"><a href="#四-真题靶向加厚dixon-q-检验完整临界值表26-计7">四、 真题靶向加厚：Dixon 检验完整临界值表（26-计7）</a></li>
+</ol>
+</nav>
+<div class="toolbar">
+    <button type="button" id="fold-toggle" aria-expanded="true">折叠闭环与概念</button>
+</div>
+{% raw %}
+<article class="article">
+<section class="note-tab">
+<h2 class="tab-label" id="tab-02">02 概论与微悬臂梁</h2>
+<h2 id="02-生物医学测量概论与微悬臂梁传感器对应-ppt-p1646" class="doc-title">02 生物医学测量概论与微悬臂梁传感器（对应 PPT P16–46）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1fU1Hekv3m9NZD_dvBzqAEqWwIV9yvH5k/view?usp=drivesdk">02_1-概论_P016-046.pdf</a>（PPT P16–46）｜<em>注：本讲为全新构建笔记，已按“PPT 主干为纲、筛除纯科普背景、保留核心物理建模与方程推导”原则精编。</em></p>
+</blockquote>
+<h3 id="目录">目录</h3>
+<ul>
+<li><a href="#一-生物医学检测对象信号分类与基本特点p3438">一、 生物医学检测对象、信号分类与基本特点（P34–38）</a></li>
+<li><a href="#二-典型微纳生物医学传感物理原理p2433">二、 典型微纳生物医学传感物理原理（P24–33）</a></li>
+<li><a href="#三-微悬臂梁-stoney-方程与热应力物理闭环p2933">三、 微悬臂梁 Stoney 方程与热应力物理闭环（P29–33）</a></li>
+<li><a href="#四-生物医学测量系统框图与发展趋势p3745">四、 生物医学测量系统框图与发展趋势（P37–45）</a></li>
+</ul>
+<hr>
+<h3 id="一-生物医学检测对象信号分类与基本特点p3438">一、 生物医学检测对象、信号分类与基本特点（P34–38）</h3>
+<h4 id="11-检测对象与三大生物医学信号ppt-p3435">1.1 检测对象与三大生物医学信号（PPT P34–35）</h4>
+<ul>
+<li><strong>检测对象</strong>：生物体（人体），跨越<strong>分子 $\to$ 细胞 $\to$ 器官 $\to$ 系统</strong>四个空间尺度，涵盖物理量、化学量、生物量及电磁/非电磁量。</li>
+<li><strong>三大信号分类（PPT P35）</strong>：<ol>
+<li><strong>生理电信号</strong>：心电（ECG）、脑电（EEG）、肌电（EMG）、眼电（EOG）、皮电（EDA）。</li>
+<li><strong>物理信号</strong>：体温、姿态与运动（本体感受：力量觉、速度觉、位置觉，P17–19）、血压、血流。</li>
+<li><strong>生化信号</strong>：血糖、汗液成分、离子水平、细胞因子水平。</li>
+</ol>
+</li>
+</ul>
+<h4 id="12-生物医学检测的四大基本特点ppt-p36简答题必背">1.2 生物医学检测的四大基本特点（PPT P36，简答题必背！）</h4>
+<ol>
+<li><strong>微弱信号测量</strong>：生理信号幅值极低（如 EEG 微伏级、ECG 毫伏级），要求传感器<strong>灵敏度高、分辨力强、抑制噪声与抗干扰能力好</strong>。</li>
+<li><strong>生物体内噪声干扰</strong>：活体自身存在多种伴随生理活动（如测脑电时混入肌电、心电或工频干扰）。</li>
+<li><strong>易引入环境干扰</strong>：需采取<strong>电磁场屏蔽</strong>与<strong>电气隔离</strong>措施（如 $50\;\text{Hz}$ 工频干扰抑制）。</li>
+<li><strong>多变性与极高安全性要求</strong>：生物个体差异与动态变异性大；必须严格满足<strong>电安全</strong>（漏电流限制）、<strong>机械安全</strong>与<strong>化学/生物相容性安全</strong>。</li>
+</ol>
+<hr>
+<h3 id="二-典型微纳生物医学传感物理原理p2433">二、 典型微纳生物医学传感物理原理（P24–33）</h3>
+<p>PPT P18–33 展示了三个前沿微纳传感范例，其中具有明确物理机制与定量方程的考点如下：</p>
+<h4 id="21-一体化可拉伸应变传感微系统ppt-p1823">2.1 一体化可拉伸应变传感微系统（PPT P18–23）</h4>
+<ul>
+<li><strong>背景痛点</strong>：传统量角器/视觉跟踪精度低，临床 BIODEX 等速力量测试系统设备繁重。</li>
+<li><strong>工程方案</strong>：采用复合弹性模量柔性电路、离子导电液体应变传感元件与高灵敏度斑马纹传感结构，通过过渡区设计重新分布基底应力，实现与人体关节三维适形贴附的动态（$0.5\sim 2\;\text{Hz}$）本体感觉监测。</li>
+</ul>
+<h4 id="22-纳米线单病毒电导检测芯片ppt-p2428pnas-2004">2.2 纳米线单病毒电导检测芯片（PPT P24–28，PNAS 2004）</h4>
+<ul>
+<li><strong>为什么能测单个病毒？（PPT P25）</strong>：<ol>
+<li><strong>几何尺度匹配</strong>：纳米线的宽度（纳米级）与单个病毒颗粒直径具有<strong>可比性</strong>；</li>
+<li><strong>病毒自身带电</strong>：病毒表面蛋白衣壳在缓冲液中带有净电荷。</li>
+</ol>
+</li>
+<li><strong>电学检测机制</strong>：在纳米线表面修饰特定病毒抗体 $\to$ 当匹配病毒流过并被抗体束缚时，病毒所带电荷通过场效应调制纳米线载流子浓度 $\to$ <strong>纳米线两端电导 $G$ 发生明显台阶式跳变</strong>；修饰不同抗体阵列可实现上百种病毒的同步多路检测（P28）。</li>
+</ul>
+<hr>
+<h3 id="三-微悬臂梁-stoney-方程与热应力物理闭环p2933">三、 微悬臂梁 Stoney 方程与热应力物理闭环（P29–33）</h3>
+<h4 id="31-微悬臂梁传感原理与光学杠杆读出ppt-p3033">3.1 微悬臂梁传感原理与光学杠杆读出（PPT P30–33）</h4>
+<ul>
+<li><strong>力—电/光转换机制（P30–31）</strong>：在微悬臂梁（上层金膜 $\text{Au}$ + 下层氮化硅 $\text{SiN}$）表面修饰探针分子；当靶分子（如 DNA 杂交或前列腺癌标志物 <strong>fPSA</strong>，注意：血清中 fPSA 浓度越低患前列腺癌风险越高，但悬臂梁检测时 fPSA 浓度越高结合量越大、变形越显著，P33）结合时，产生分子间作用力与<strong>表面应力差 $\Delta\sigma$</strong>，使悬臂梁发生微米/纳米级弯曲挠度 $\Delta h$。</li>
+<li><strong>光学读出（P31）</strong>：激光照射悬臂梁自由端尖端，由位置敏感光电探测器检测反射光斑偏移，放大测出挠度 $\Delta h$。</li>
+</ul>
+<h4 id="32-stoney-方程与热应力补偿ppt-p29-核心公式">3.2 Stoney 方程与热应力补偿（PPT P29 核心公式）</h4>
+<p>PPT P29 给出悬臂梁挠度 $\Delta h$、总表面应力变化 $\Delta\sigma$、以及温度变化 $\Delta T$ 引起的双层热应力 $\Delta\sigma_T$：</p>
+<ul>
+<li><strong>应力分解（消除温度漂移）</strong>：
+$$\Delta\sigma = \Delta\sigma_R - \Delta\sigma_T$$
+其中 $\Delta\sigma_R$ 为生物分子反应引起的多层结构表观应力，$\Delta\sigma_T$ 为环境温度变化 $\Delta T$ 导致金膜（热膨胀系数 $\alpha_{\text{Au}}$）与氮化硅层（热膨胀系数 $\alpha_{\text{SiN}}$）热胀冷缩不一致产生的寄生热应力（工程上常设空白对照梁差分相消）。</li>
+<li><strong>核心物理量列表（PPT P29）</strong>：<ul>
+<li>$\Delta h$：悬臂梁自由端挠度（横向位移）；</li>
+<li>$L_b$：悬臂梁长度；$L_p$：自由端宽度；</li>
+<li>$d_{\text{Au}}, E_{\text{Au}}$：金层厚度与杨氏模量；</li>
+<li>$d_{\text{SiN}}, E_{\text{SiN}}$：氮化硅层厚度与杨氏模量。</li>
+</ul>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从单层 Stoney 公式到双层微悬臂梁弯曲曲率物理推导】</strong></p>
+<ol>
+<li><strong>经典 Stoney 弯曲曲率方程</strong>：当厚为 $d$、杨氏模量为 $E$、泊松比为 $\nu$ 的悬臂梁单侧表面产生表面应力增量 $\Delta\sigma$（单位 $\text{N/m}$）时，产生的等效弯矩 $M = \Delta\sigma \cdot L_p \cdot \frac{d}{2}$ 与梁的抗弯刚度 $E'I = \frac{E}{1-\nu}\cdot\frac{L_p d^3}{12}$ 平衡，得到曲率半径 $R$ 满足：
+$$\frac{1}{R} = \frac{M}{E'I} = \frac{6(1-\nu)\Delta\sigma}{E d^2}$$</li>
+<li><strong>小挠度几何关系</strong>：对于长度为 $L_b$ 的悬臂梁，自由端挠度 $\Delta h \ll L_b$ 时，由圆弧几何 $\Delta h \approx \frac{L_b^2}{2R}$ 代入曲率：
+$$\Delta h = \frac{3(1-\nu)L_b^2}{E d^2}\,\Delta\sigma$$
+可见自由端挠度 $\Delta h$ <strong>严格正比于表面应力 $\Delta\sigma$ 和梁长平方 $L_b^2$，反比于基底厚度平方 $d^2$</strong>——因此把悬臂梁做得越长、越薄，灵敏度越高！</li>
+<li><strong>双层热膨胀失配应力 $\Delta\sigma_T$</strong>：温度变化 $\Delta T$ 时，金层与氮化硅层热应变差为 $\Delta\varepsilon_T = (\alpha_{\text{Au}} - \alpha_{\text{SiN}})\Delta T$，故寄生热应力正比于 $(\alpha_{\text{Au}} - \alpha_{\text{SiN}})\Delta T$ 与两层模量/厚度组合，必须通过参考对照梁（Reference Cantilever）作差消除。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-生物医学测量系统框图与发展趋势p3745">四、 生物医学测量系统框图与发展趋势（P37–45）</h3>
+<h4 id="41-生物医学测量仪器通用框图与四大分类ppt-p3738">4.1 生物医学测量仪器通用框图与四大分类（PPT P37–38）</h4>
+<ul>
+<li><strong>信号闭环链路（P37）</strong>：
+$$\text{被测对象（生物电/物理/生化参数）} \longrightarrow \text{传感器} \longrightarrow \text{信号调节} \longrightarrow \text{信号处理} \longrightarrow \begin{cases} \text{数据显示 / 存储 / 通信} \\ \text{反馈效应器（Effector）} \to \text{被测对象} \end{cases}$$</li>
+<li><strong>四大临床仪器类别（P38）</strong>：①生理检查记录仪器（如心电图机）；②生化检查与分析仪器（如血糖仪、血气分析仪）；③医学图像仪器（X-CT、MRI、超声）；④临床监护装置（Holter 动态心电等）。</li>
+</ul>
+<h4 id="42-发展趋势要点ppt-p4245">4.2 发展趋势要点（PPT P42–45）</h4>
+<ul>
+<li><strong>技术方向</strong>：无创/微创、小型便携/可穿戴、无线化、自动化与多参数集成、MEMS 工艺与物联网大数据结合，实现从“疾病诊治”向“疾病预报与早期预警”跨越。</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-03-1">03-1 概念与静态特性</h2>
+<h2 id="03-1-传感器概念与静态特性对应-ppt-p126" class="doc-title">03-1 传感器概念与静态特性（对应 PPT P1–26）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1UW0VF4Ldd6mIuAtmLpcEH7PxxAa-le77/view?usp=drivesdk">03_2-基本理论-静动态_P047-125.pdf</a>（PPT P1–26）｜<em>注：融合原笔记 <code>t4.1</code>，补齐原笔记缺失的全部 10 项静态性能指标公式（分辨力、准确度、重复性、线性度、迟滞、漂移、输入/输出阻抗）与阻抗匹配推导。</em></p>
+</blockquote>
+<h3 id="目录-2">目录</h3>
+<ul>
+<li><a href="#一-传感器基本概念组成与分类p46">一、 传感器基本概念、组成与分类（P4–6）</a></li>
+<li><a href="#二-静态特性数学模型与最小二乘法线性拟合推导p814">二、 静态特性数学模型与最小二乘法线性拟合推导（P8–14）</a></li>
+<li><a href="#三-十大静态性能指标全表与物理闭环p1524">三、 十大静态性能指标全表与物理闭环（P15–24）</a></li>
+</ul>
+<hr>
+<h3 id="一-传感器基本概念组成与分类p46">一、 传感器基本概念、组成与分类（P4–6）</h3>
+<h4 id="11-定义与三段式组成ppt-p45">1.1 定义与三段式组成（PPT P4–5）</h4>
+<ul>
+<li><strong>国标定义（GB7665-87）</strong>：能感受规定的被测量并按照一定规律转换成可用信号输出的器件或装置，通常由<strong>敏感器件、转换器件和电子线路</strong>组成。</li>
+<li><strong>三段式链路（PPT P5）</strong>：
+$$\text{非电/生物信息} \xrightarrow{\text{敏感元件（如膜片）}} \text{中介非电量（如应变）} \xrightarrow{\text{转换元件（如应变片）}} \text{电学量（如}\Delta R\text{）} \xrightarrow{\text{接口电路（如电桥）}} \text{电压信号}$$</li>
+</ul>
+<h4 id="12-三大分类准则ppt-p6">1.2 三大分类准则（PPT P6）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">分类准则</th>
+<th align="left">类别</th>
+<th align="left">PPT 典型实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>按被测对象</strong></td>
+<td align="left">物理 / 化学 / 生物传感器</td>
+<td align="left">血压・体温传感器 / $\text{pH}$・葡萄糖电极 / 酶电极・生物芯片</td>
+</tr>
+<tr>
+<td align="left"><strong>按是否需要外部电源</strong></td>
+<td align="left"><strong>无源传感器</strong> / <strong>有源传感器</strong></td>
+<td align="left">电阻应变片・热敏电阻（需外激励） / 热电偶・压电片（自发电）</td>
+</tr>
+<tr>
+<td align="left"><strong>按输出信号形式</strong></td>
+<td align="left">模拟传感器 / 数字传感器</td>
+<td align="left">电阻应变片等 / 位置编码器等</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="二-静态特性数学模型与最小二乘法线性拟合推导p814">二、 静态特性数学模型与最小二乘法线性拟合推导（P8–14）</h3>
+<h4 id="21-静态特性多项式模型ppt-p911">2.1 静态特性多项式模型（PPT P9–11）</h4>
+<p>当输入量恒定或随时间变化极缓慢时，输出 $y$ 与输入 $x$ 的关系用多项式描述：
+$$y = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n$$</p>
+<ul>
+<li><strong>$a_0$</strong>：零位输出（零偏）；<strong>$a_1$</strong>：线性项系数（理想线性传感器 $y = a_1 x$ 的静态灵敏度 $K = a_1$）；<strong>$a_2, a_3, \dots$</strong>：非线性项系数（仅含奇次项呈现 S 形对称弯曲，仅含偶次项呈现非对称单侧弯曲，PPT P10–11）。</li>
+<li>非线性传感器在工作点 $(x_0, y_0)$ 邻域的局部灵敏度为导数：<strong>$K(x_0) = y'(x_0)$</strong>。</li>
+</ul>
+<h4 id="22-静态标定与正反行程平均ppt-p1213">2.2 静态标定与正反行程平均（PPT P12–13）</h4>
+<ul>
+<li><strong>标定条件</strong>：温度 $15\sim 25^\circ\text{C}$，气压 $101.3\pm 8\;\text{kPa}$，湿度 $&lt;85\%$。</li>
+<li><strong>正反行程测试</strong>：对每个固定输入 $x_i$，在正行程（递增）和反行程（递减）中各重复测 $m$ 次，取总体平均值作为校准点 $(x_i, \bar{y}_i)$：
+$$\bar{y}_i = \frac{\sum_{j=1}^{m} y_{ij}^+ + \sum_{j=1}^{m} y_{ij}^-}{2m}$$</li>
+</ul>
+<h4 id="23-最小二乘法线性拟合推导ppt-p14核心计算推导">2.3 最小二乘法线性拟合推导（PPT P14，核心计算推导！）</h4>
+<p>用直线 $\hat{y}_i = k x_i + b$ 拟合 $n$ 组标定数据 $(x_i, y_i)$，使<strong>残差平方和 $Q$ 最小</strong>：
+$$Q(k, b) = \sum_{i=1}^{n} \big(y_i - (k x_i + b)\big)^2 \longrightarrow \min$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：最小二乘法正规方程与相关系数 $r$ 零跳步推导】</strong></p>
+<ol>
+<li><p><strong>对 $b$ 和 $k$ 分别求偏导并令为 $0$</strong>：
+$$\frac{\partial Q}{\partial b} = -2\sum_{i=1}^{n}(y_i - k x_i - b) = 0 \implies \sum_{i=1}^{n} y_i - k\sum_{i=1}^{n} x_i - n b = 0 \implies \boxed{b = \bar{y} - k\bar{x}}$$
+$$\frac{\partial Q}{\partial k} = -2\sum_{i=1}^{n} x_i(y_i - k x_i - b) = 0 \implies \sum_{i=1}^{n} x_i y_i - k\sum_{i=1}^{n} x_i^2 - b\sum_{i=1}^{n} x_i = 0$$</p>
+</li>
+<li><p><strong>消去 $b$ 解出斜率 $k$（即 PPT P14 原始形式）</strong>：将 $n b = \sum y_i - k\sum x_i$ 代入第二式（整体乘以 $n$）：
+$$n\sum_{i=1}^{n} x_i y_i - k\,n\sum_{i=1}^{n} x_i^2 - \left(\sum_{i=1}^{n} y_i - k\sum_{i=1}^{n} x_i\right)\sum_{i=1}^{n} x_i = 0$$
+整理得：
+$$\boxed{k = \frac{n\sum_{i=1}^{n} x_i y_i - \left(\sum_{i=1}^{n} x_i\right)\left(\sum_{i=1}^{n} y_i\right)}{n\sum_{i=1}^{n} x_i^2 - \left(\sum_{i=1}^{n} x_i\right)^2} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}}$$
+再回代 $b = \bar{y} - k\bar{x}$ 即得 PPT P14 截距公式：
+$$b = \frac{\left(\sum x_i^2\right)\left(\sum y_i\right) - \left(\sum x_i y_i\right)\left(\sum x_i\right)}{n\sum x_i^2 - \left(\sum x_i\right)^2}$$</p>
+</li>
+<li><p><strong>线性相关系数 $r$ 与最小残差 $Q$（PPT P14）</strong>：
+$$r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2 \cdot \sum_{i=1}^{n}(y_i - \bar{y})^2}}, \qquad Q = (1 - r^2)\sum_{i=1}^{n}(y_i - \bar{y})^2$$</p>
+</li>
+<li><p><strong>最小残差公式 $Q = (1 - r^2)\sum (y_i - \bar{y})^2$ 简证</strong>：记 $S_{xx}=\sum(x_i-\bar{x})^2,\;S_{yy}=\sum(y_i-\bar{y})^2,\;S_{xy}=\sum(x_i-\bar{x})(y_i-\bar{y})$，则 $k = S_{xy}/S_{xx}$，$r = S_{xy}/\sqrt{S_{xx}S_{yy}}$。将 $b = \bar{y}-k\bar{x}$ 代入残差平方和：
+$$Q = \sum_{i=1}^n \big[(y_i-\bar{y}) - k(x_i-\bar{x})\big]^2 = S_{yy} - 2k S_{xy} + k^2 S_{xx} = S_{yy} - \frac{S_{xy}^2}{S_{xx}} = \left(1 - \frac{S_{xy}^2}{S_{xx}S_{yy}}\right)S_{yy} = (1 - r^2)S_{yy}$$
+<em>工程注意</em>：$|r|$ 越接近 $1$ 线性度越好；$x_i$ 应尽量覆盖传感器整个允许输入范围。</p>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-十大静态性能指标全表与物理闭环p1524">三、 十大静态性能指标全表与物理闭环（P15–24）</h3>
+<h4 id="31-检测能力准确性与误差指标ppt-p1522必考公式汇总">3.1 检测能力、准确性与误差指标（PPT P15–22，必考公式汇总！）</h4>
+<p>设 $Y_{\text{FS}}$ 为满量程输出（Full Scale）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">类别</th>
+<th align="left">指标名称与符号</th>
+<th align="left">定义与 PPT 核心计算公式</th>
+<th align="left">物理意义与考点提示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>检测能力</strong></td>
+<td align="left"><strong>灵敏度 $K$</strong>（P16）</td>
+<td align="left">线性：$K = a_1$；非线性：$K(x_0) = y'(x_0)$</td>
+<td align="left">输出增量与输入增量之比 $\Delta y / \Delta x$</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>分辨力 / 分辨率 $R$</strong>（P17）</td>
+<td align="left">引起输出可察觉变化的<strong>最小输入增量</strong></td>
+<td align="left">灵敏度越高，分辨力往往越好（阈值 $\Delta x_{\min}$ 越小）</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>输入范围</strong>（P17）</td>
+<td align="left">传感器正常工作允许的上下限 $[x_{\min}, x_{\max}]$</td>
+<td align="left">超出量程会严重非线性甚至损坏器件</td>
+</tr>
+<tr>
+<td align="left"><strong>综合误差</strong></td>
+<td align="left"><strong>准确度 $E_A$</strong>（P18）</td>
+<td align="left">$E_A = \dfrac{\Delta A_{\max}}{Y_{\text{FS}}} = \dfrac{\max|\text{测量值} - \text{真值}|}{Y_{\text{FS}}}$</td>
+<td align="left">不区分误差来源的总误差量度</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>精密度</strong>（P18）</td>
+<td align="left">有效位数 + 测量结果可重复性</td>
+<td align="left">仅反映随机分散度（详见第 04 讲）</td>
+</tr>
+<tr>
+<td align="left"><strong>分项误差</strong></td>
+<td align="left"><strong>重复性 $E_R$</strong>（P19）</td>
+<td align="left">$E_R = \dfrac{|\Delta R_{\max}|}{Y_{\text{FS}}}$</td>
+<td align="left">同一方向多次重复测量偏差最大值 $\max(|\Delta R_{\max 1}|, |\Delta R_{\max 2}|)$</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>线性度 $E_L$</strong>（P20）</td>
+<td align="left">$E_L = \dfrac{|\Delta L_{\max}|}{Y_{\text{FS}}}$</td>
+<td align="left">校准曲线与拟合直线之间的最大偏差（即非线性误差）</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>迟滞 $E_H$</strong>（P20）</td>
+<td align="left">$E_H = \dfrac{|\Delta H_{\max}|}{Y_{\text{FS}}}$</td>
+<td align="left"><strong>同一输入 $x$ 下，正行程与反行程输出的最大差值</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>稳定性</strong></td>
+<td align="left"><strong>漂移 $E_D$</strong>（P21–22）</td>
+<td align="left">零点时漂 $E_{DZt} = \dfrac{\Delta Y_{Z\max}}{Y_{\text{FS}}}$<br>零点温漂 $E_{DZT} = \dfrac{\Delta Y_{Z\max}}{Y_{\text{FS}}\cdot\Delta T}$<br>灵敏度时漂 $E_{DKt} = \dfrac{\Delta K_{\max}}{K_0}$<br>灵敏度温漂 $E_{DKT} = \dfrac{\Delta K_{\max}}{K_0\cdot\Delta T}$</td>
+<td align="left">输入不变时，输出随<strong>时间</strong>或<strong>温度</strong>的缓慢变化（分为零漂与灵敏度漂移）</td>
+</tr>
+</tbody></table></div>
+<h4 id="32-输入阻抗-z_i-与输出阻抗-z_oppt-p2324">3.2 输入阻抗 $Z_i$ 与输出阻抗 $Z_O$（PPT P23–24）</h4>
+<ul>
+<li><strong>输入阻抗 $Z_i$（P23）</strong>：通用广义表达为<strong>力/流变量之比</strong> $Z_i = \frac{e_i}{f_i}$（如电学 $Z_i = V_i/I_i$，力学中压强/流速）。<ul>
+<li><strong>原则</strong>：<strong>$Z_i$ 越大越好</strong>（从前级吸取的电流/能量越小，负载效应越弱；生物电极常要求 $\text{M}\Omega$ 级以上）。</li>
+</ul>
+</li>
+<li><strong>输出阻抗 $Z_O$（P24）</strong>：接负载 $Z_L$ 后，开路电压 $V_O$ 跌落为负载电压 $V_Z$，由分压定理：
+$$V_Z = V_O \frac{Z_L}{Z_O + Z_L} \implies \boxed{Z_O = \frac{V_O - V_Z}{V_Z}\,Z_L}$$<ul>
+<li><strong>原则</strong>：<strong>$Z_O$ 越小越好</strong>，后级输入阻抗必须远大于前级输出阻抗（$Z_{L} \gg Z_O \implies V_Z \approx V_O$，避免信号衰减）。</li>
+</ul>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：级联负载效应与戴维南阻抗匹配证明】</strong>
+设前级传感器等效为开路电压 $V_O$ 串联输出阻抗 $Z_O$，后级（放大器/采集卡）输入阻抗为 $Z_i$（即负载 $Z_L = Z_i$）。两级级联后的实际输入电压为：
+$$V_Z = V_O \cdot \frac{Z_i}{Z_O + Z_i} = \frac{V_O}{1 + Z_O / Z_i}$$
+若要使电压传输无衰减（$V_Z \approx V_O$，消除负载效应），必须满足 <strong>$Z_i \gg Z_O$</strong>（工程上常要求 $Z_i \ge 100\,Z_O$）。这正是 03-2 节“多环节串联传递函数可直接相乘 $H(s)=H_1(s)H_2(s)$”的物理前提！</p>
+</blockquote></details>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-03-2">03-2 动态模型与时域</h2>
+<h2 id="03-2-动态数学模型拉氏变换与时域响应对应-ppt-p2858" class="doc-title">03-2 动态数学模型、拉氏变换与时域响应（对应 PPT P28–58）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1UW0VF4Ldd6mIuAtmLpcEH7PxxAa-le77/view?usp=drivesdk">03_2-基本理论-静动态_P047-125.pdf</a>（PPT P28–58）｜<em>注：将原笔记 <code>t4.2.1.1</code>～<code>t4.2.2.5</code> 去重提纯，完整保留拉氏变换、微分/移位定理、一阶/二阶物理建模、留数法、三态阶跃响应及全部时域指标推导。</em></p>
+</blockquote>
+<h3 id="目录-3">目录</h3>
+<ul>
+<li><a href="#一-动态数学模型与物理建模p3042">一、 动态数学模型与物理建模（P30–42）</a></li>
+<li><a href="#二-拉普拉斯变换核心定理与留数法工具p33-p4344">二、 拉普拉斯变换核心定理与留数法工具（P33, P43–44）</a></li>
+<li><a href="#三-零阶与一阶传感器阶跃响应及时间常数-taup4748">三、 零阶与一阶传感器阶跃响应及时间常数 $\tau$（P47–48）</a></li>
+<li><a href="#四-二阶传感器三态阶跃响应无跳步推导p4953">四、 二阶传感器三态阶跃响应无跳步推导（P49–53）</a></li>
+<li><a href="#五-二阶欠阻尼六大时域性能指标推导p5458">五、 二阶欠阻尼六大时域性能指标推导（P54–58）</a></li>
+</ul>
+<hr>
+<h3 id="一-动态数学模型与物理建模p3042">一、 动态数学模型与物理建模（P30–42）</h3>
+<h4 id="11-通用线性定常lti微分方程ppt-p30-p33">1.1 通用线性定常（LTI）微分方程（PPT P30, P33）</h4>
+<p>$$a_n \frac{d^n y(t)}{dt^n} + \cdots + a_1 \frac{dy(t)}{dt} + a_0 y(t) = b_m \frac{d^m x(t)}{dt^m} + \cdots + b_1 \frac{dx(t)}{dt} + b_0 x(t)$$
+引入微分算子 $D \equiv \frac{d}{dt}$，在零初始条件下做拉氏变换即得<strong>传递函数</strong>：
+$$H(s) = \frac{Y(s)}{X(s)} = \frac{b_m s^m + \cdots + b_1 s + b_0}{a_n s^n + \cdots + a_1 s + a_0}$$</p>
+<h4 id="12-零阶一阶二阶标准形式与物理实例ppt-p3442">1.2 零阶、一阶、二阶标准形式与物理实例（PPT P34–42）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">阶次</th>
+<th align="left">标准微分方程</th>
+<th align="left">核心参数定义</th>
+<th align="left">PPT 典型物理实例与参数映射</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>零阶（P34）</strong></td>
+<td align="left">$y(t) = K x(t)$</td>
+<td align="left">$K = \dfrac{b_0}{a_0}$</td>
+<td align="left"><strong>理想电位器</strong>：$y(t) = E\dfrac{x(t)}{L}$（无储能元件，无幅相失真）</td>
+</tr>
+<tr>
+<td align="left"><strong>一阶（P35–37）</strong></td>
+<td align="left">$\tau \dfrac{dy(t)}{dt} + y(t) = K x(t)$</td>
+<td align="left">$\tau = \dfrac{a_1}{a_0}$（时间常数，$\text{s}$）<br>$K = \dfrac{b_0}{a_0}$</td>
+<td align="left">1. <strong>RC 电路</strong>：$\tau = RC,\; K = 1,\; u_C(0^+)=u_0$<br>2. <strong>玻璃温度计</strong>（热平衡 $mC\frac{dT}{dt} = hS(T_i - T)$）：$\tau = \dfrac{mC}{hS},\; K = 1$</td>
+</tr>
+<tr>
+<td align="left"><strong>二阶（P38–40）</strong></td>
+<td align="left">$\dfrac{1}{\omega_0^2}\dfrac{d^2y}{dt^2} + \dfrac{2\xi}{\omega_0}\dfrac{dy}{dt} + y = K x(t)$</td>
+<td align="left">$\omega_0 = \sqrt{\dfrac{a_0}{a_2}}$（无阻尼固有频率）<br>$\xi = \dfrac{a_1}{2\sqrt{a_0 a_2}}$（阻尼比）</td>
+<td align="left">1. <strong>RLC 串联电路</strong>：$\omega_0 = \dfrac{1}{\sqrt{LC}},\; \xi = \dfrac{R}{2}\sqrt{\dfrac{C}{L}},\; K=1,\; u_C'(0^+)=\dfrac{i_0}{C}$<br>2. <strong>弹簧-阻尼-质量</strong>：$K = \dfrac{1}{k},\; \omega_0 = \sqrt{\dfrac{k}{m}},\; \xi = \dfrac{f}{2\sqrt{km}}$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="二-拉普拉斯变换核心定理与留数法工具p33-p4344">二、 拉普拉斯变换核心定理与留数法工具（P33, P43–44）</h3>
+<h4 id="21-单边拉氏变换与三大核心定理衔接-t4211">2.1 单边拉氏变换与三大核心定理（衔接 <code>t4.2.1.1</code>）</h4>
+<p>单边拉普拉斯变换定义为 $F(s) = \mathcal{L}\{f(t)\} = \int_{0_-}^{\infty} f(t)e^{-st}\,dt$（下限取 $0_-$ 以捕获 $t=0$ 处的冲激与初始储能）：</p>
+<ol>
+<li><strong>微分定理</strong>（分部积分证得）：
+$$\mathcal{L}\left\{\frac{df(t)}{dt}\right\} = s F(s) - f(0_-), \qquad \mathcal{L}\left\{\frac{d^2 f(t)}{dt^2}\right\} = s^2 F(s) - s f(0_-) - f'(0_-)$$
+零初始状态时退化为 $s^n F(s)$，此时才可定义传递函数 $H(s) = Y(s)/X(s)$（P43）。</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：一阶微分定理分部积分证明 &amp; 为什么 $D$ 算子不等价于 $s$？】</strong></p>
+<ol>
+<li><strong>分部积分证微分定理</strong>：设 $u = e^{-st},\; dv = f'(t)dt$，在收敛域 $\text{Re}(s)&gt;\sigma_0$ 下 $t\to\infty$ 时 $f(t)e^{-st}\to 0$：
+$$\mathcal{L}\{f'(t)\} = \int_{0_-}^{\infty} f'(t)e^{-st}dt = \Big[f(t)e^{-st}\Big]_{0_-}^{\infty} + s\int_{0_-}^{\infty} f(t)e^{-st}dt = sF(s) - f(0_-)$$</li>
+<li><strong>$D$ 算子与 $s$ 的本质界限</strong>：当且仅当系统处于<strong>零初始状态</strong>（$f(0_-)=f'(0_-)=\dots=0$）时，微分定理退化为 $s^n F(s)$，此时 $s$ 与微分算子 $D$ 完全等价；若存在初始储能（如电容预充 $u_0$、电感初流 $i_0$），$D$ 算子无法直接求解全响应，必须用拉氏变换保留减项 $s f(0_-) + f'(0_-)$。</li>
+<li><strong>复频移定理</strong>（解析二阶欠阻尼衰减振荡核心）：
+$$\mathcal{L}\{e^{-\alpha t} f(t)\} = F(s + \alpha) \implies \mathcal{L}\{e^{-\xi\omega_0 t}\sin(\omega_d t)\} = \frac{\omega_d}{(s+\xi\omega_0)^2 + \omega_d^2}$$</li>
+<li><strong>时移定理</strong>（纯滞后 $\tau$ 环节）：
+$$\mathcal{L}\{f(t-\tau)u(t-\tau)\} = e^{-s\tau}F(s)$$</li>
+<li><strong>串并联传递函数（P44）</strong>：$r$ 个环节串联 $H(s) = \prod_{i=1}^r H_i(s)$；$p$ 个环节并联 $H(s) = \sum_{i=1}^p H_i(s)$（前提：前后级阻抗匹配，忽略负载效应）。</li>
+</ol>
+</blockquote></details>
+<h4 id="22-部分分式展开与留数法赫维赛德覆盖法衔接-t4223">2.2 部分分式展开与留数法（赫维赛德覆盖法，衔接 <code>t4.2.2.3</code>）</h4>
+<ul>
+<li><strong>单实根极点 $p_k$</strong>：
+$$A_k = \lim_{s\to p_k} \big[(s - p_k)F(s)\big]$$</li>
+<li><strong>二重根极点 $(s - a)^2$</strong>（如临界阻尼 $\xi = 1$）：设 $F(s) = \dots + \frac{B}{s-a} + \frac{C}{(s-a)^2}$，则：
+$$C = \lim_{s\to a} \big[(s-a)^2 F(s)\big], \qquad B = \lim_{s\to a} \frac{d}{ds}\big[(s-a)^2 F(s)\big]$$</li>
+</ul>
+<hr>
+<h3 id="三-零阶与一阶传感器阶跃响应及时间常数-taup4748">三、 零阶与一阶传感器阶跃响应及时间常数 $\tau$（P47–48）</h3>
+<p>输入单位阶跃信号 $x(t) = u(t) \implies X(s) = \frac{1}{s}$：</p>
+<ul>
+<li><strong>零阶传感器（P47）</strong>：$y(t) = K u(t)$，无延迟、无畸变（上升时间 $t_r = 0$）。</li>
+<li><strong>一阶传感器（P48）</strong>：
+$$Y(s) = H(s)X(s) = \frac{K}{s(\tau s + 1)} = K\left(\frac{1}{s} - \frac{1}{s + 1/\tau}\right) \xrightarrow{\mathcal{L}^{-1}} \boxed{y(t) = K\left(1 - e^{-t/\tau}\right)u(t)}$$<ul>
+<li><strong>核心节点</strong>：$t = \tau$ 时 $y(\tau) = 0.632K$；$t = 3\tau$ 时 $y(3\tau) = 0.950K$；$t = 5\tau$ 时 $y(5\tau) = 0.993K$。</li>
+<li><strong>结论</strong>：<strong>$\tau$ 越小，传感器响应越快，动态性能越好</strong>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="四-二阶传感器三态阶跃响应无跳步推导p4953">四、 二阶传感器三态阶跃响应无跳步推导（P49–53）</h3>
+<p>由 $H(s) = \frac{K\omega_0^2}{s^2 + 2\xi\omega_0 s + \omega_0^2}$ 与 $X(s) = \frac{1}{s}$，得输出像函数：
+$$Y(s) = \frac{K\omega_0^2}{s\left(s^2 + 2\xi\omega_0 s + \omega_0^2\right)}$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：二阶系统三种阻尼状态的统一解析推导与 $\xi \to 1$ 连续性验证】</strong>
+特征方程 $s^2 + 2\xi\omega_0 s + \omega_0^2 = 0$ 的根由阻尼比 $\xi$ 决定：</p>
+<p><strong>1. 欠阻尼状态（$0 &lt; \xi &lt; 1$，PPT P50）</strong>：
+特征根为共轭复根 $s_{1,2} = -\xi\omega_0 \pm j\omega_d$，其中阻尼振荡角频率 $\omega_d = \omega_0\sqrt{1-\xi^2}$。
+对 $Y(s)$ 配凑标准实二次型并拆项：
+$$\begin{aligned}
+Y(s) &amp;= K\left[\frac{1}{s} - \frac{s + 2\xi\omega_0}{(s+\xi\omega_0)^2 + \omega_d^2}\right] \\
+&amp;= K\left[\frac{1}{s} - \frac{s+\xi\omega_0}{(s+\xi\omega_0)^2 + \omega_d^2} - \frac{\xi\omega_0}{\omega_d}\cdot\frac{\omega_d}{(s+\xi\omega_0)^2 + \omega_d^2}\right]
+\end{aligned}$$
+取拉氏逆变换并令辅助角 $\theta = \arctan\left(\frac{\sqrt{1-\xi^2}}{\xi}\right)$（满足 $\sin\theta = \sqrt{1-\xi^2},\;\cos\theta = \xi$）：
+$$\begin{aligned}
+y(t) &amp;= K\left[1 - e^{-\xi\omega_0 t}\left(\cos\omega_d t + \frac{\xi}{\sqrt{1-\xi^2}}\sin\omega_d t\right)\right] \\
+&amp;= \boxed{K\left[1 - \frac{e^{-\xi\omega_0 t}}{\sqrt{1-\xi^2}}\sin\left(\omega_d t + \arctan\frac{\sqrt{1-\xi^2}}{\xi}\right)\right]} \quad (t \ge 0)
+\end{aligned}$$</p>
+<p><strong>2. 临界阻尼状态（$\xi = 1$，PPT P51）</strong>：
+特征根为二重实根 $s_{1,2} = -\omega_0$。由留数法展开 $Y(s) = \frac{K\omega_0^2}{s(s+\omega_0)^2} = K\left[\frac{1}{s} - \frac{1}{s+\omega_0} - \frac{\omega_0}{(s+\omega_0)^2}\right]$，利用 $\mathcal{L}^{-1}\left\{\frac{1}{(s+\omega_0)^2}\right\} = t e^{-\omega_0 t}$：
+$$\boxed{y(t) = K\left[1 - (1 + \omega_0 t)e^{-\omega_0 t}\right]} \quad (t \ge 0)$$</p>
+<p><strong>3. 过阻尼状态（$\xi &gt; 1$，PPT P52）</strong>：
+特征根为两个相异负实根 $s_{1,2} = -\xi\omega_0 \pm \omega_0\sqrt{\xi^2 - 1}$（记 $\omega_d' = \omega_0\sqrt{\xi^2-1}$，满足 $s_1 s_2 = \omega_0^2$，$s_1 - s_2 = 2\omega_d'$）。由单实根留数法：
+$$y(t) = K\left[1 + \omega_0^2\left(\frac{e^{s_1 t}}{s_1(s_1-s_2)} - \frac{e^{s_2 t}}{s_2(s_1-s_2)}\right)\right] = K\left[1 + \frac{s_2 e^{s_1 t} - s_1 e^{s_2 t}}{s_1 - s_2}\right]$$
+代入 $s_{1,2}$ 化为 PPT P52 显式双指数形式（亦可写为 $\cosh/\sinh$ 形式）：
+$$\boxed{y(t) = K\left\{1 - \frac{1}{2\sqrt{\xi^2-1}}\left[\frac{\exp\big(-(\xi-\sqrt{\xi^2-1})\omega_0 t\big)}{\xi - \sqrt{\xi^2-1}} - \frac{\exp\big(-(\xi+\sqrt{\xi^2-1})\omega_0 t\big)}{\xi + \sqrt{\xi^2-1}}\right]\right\}}$$</p>
+<p><strong>4. 边界连续性验证（$\xi \to 1$）</strong>：欠阻尼式中令 $\omega_d \to 0$ 并用 $\lim_{x\to 0}\frac{\sin x}{x} = 1$，立即收敛到 $K[1 - (1+\omega_0 t)e^{-\omega_0 t}]$；过阻尼式化为双曲函数后用 $\lim_{x\to 0}\frac{\sinh x}{x} = 1$ 同样无缝收敛到临界阻尼解！</p>
+</blockquote></details>
+<ul>
+<li><strong>工程选型结论（PPT P53）</strong>：实际生物医学二阶传感器常设计为<strong>欠阻尼 $\xi = 0.6 \sim 0.8$</strong>，兼顾最快达到稳态且超调振荡较小。</li>
+</ul>
+<hr>
+<h3 id="五-二阶欠阻尼六大时域性能指标推导p5458">五、 二阶欠阻尼六大时域性能指标推导（P54–58）</h3>
+<p>以 $y(t) = K\left[1 - \frac{e^{-\xi\omega_0 t}}{\sqrt{1-\xi^2}}\sin(\omega_d t + \theta)\right]$ 为起点，先求速度（一阶导数）：
+$$\begin{aligned}
+y'(t) &amp;= -\frac{K}{\sqrt{1-\xi^2}}\Big[-\xi\omega_0 e^{-\xi\omega_0 t}\sin(\omega_d t+\theta) + \omega_d e^{-\xi\omega_0 t}\cos(\omega_d t+\theta)\Big] \\
+&amp;= \frac{K\omega_0}{\sqrt{1-\xi^2}}e^{-\xi\omega_0 t}\Big[\xi\sin(\omega_d t+\theta) - \sqrt{1-\xi^2}\cos(\omega_d t+\theta)\Big]
+\end{aligned}$$
+由辅助角 $\cos\theta = \xi,\;\sin\theta = \sqrt{1-\xi^2}$，括号内恰好等于 $\cos\theta\sin(\omega_d t+\theta) - \sin\theta\cos(\omega_d t+\theta) = \sin(\omega_d t)$，故：
+$$y'(t) = \frac{K\omega_0}{\sqrt{1-\xi^2}} e^{-\xi\omega_0 t} \sin(\omega_d t)$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：六大时域指标公式推导与 PPT P55–58 核对】</strong></p>
+<ol>
+<li><strong>上升时间 $t_r$（首次到达稳态值 $K$，P55）</strong>：令 $y(t_r) = K \implies \sin(\omega_d t_r + \theta) = 0$。取第一正根 $\omega_d t_r + \theta = \pi$：
+$$\boxed{t_r = \frac{\pi - \theta}{\omega_d} = \frac{\pi - \arctan\left(\frac{\sqrt{1-\xi^2}}{\xi}\right)}{\omega_0\sqrt{1-\xi^2}}}$$
+<em>(注：PPT P55 分母与三角函数反写为 $\arccos$ 等价形式；对过阻尼/临界阻尼，$t_r$ 定义为从稳态值 $10\%$ 上升到 $90\%$ 的时间。)</em></li>
+<li><strong>峰值时间 $t_p$（首个极大值，P57）</strong>：令 $y'(t_p) = 0 \implies \sin(\omega_d t_p) = 0$，取首个正根 $\omega_d t_p = \pi$：
+$$\boxed{t_p = \frac{\pi}{\omega_d} = \frac{\pi}{\omega_0\sqrt{1-\xi^2}}}$$</li>
+<li><strong>振荡周期 $T_d$（P57）</strong>：相邻两极大值时间差即周期 $T_d = 2t_p = \dfrac{2\pi}{\omega_0\sqrt{1-\xi^2}}$。</li>
+<li><strong>超调量 $\sigma_p$（P58）</strong>：将 $t_p = \pi/\omega_d$ 代入 $y(t)$ 计算最大过冲量 $M_1 = y(t_p) - K$（注意 $\sin(\pi + \theta) = -\sin\theta = -\sqrt{1-\xi^2}$）：
+$$\sigma_p = \frac{M_1}{K} = \frac{y(t_p) - K}{K} = \boxed{\exp\left(-\frac{\pi\xi}{\sqrt{1-\xi^2}}\right)}$$
+反解阻尼比（PPT P58 实验测参数必考！）：
+$$\xi = \frac{1}{\sqrt{\left(\frac{\pi}{\ln\sigma_p}\right)^2 + 1}}$$</li>
+<li><strong>衰减度 $L$（P58）</strong>：第 $n$ 个正峰值出现在 $t_n = \frac{(2n-1)\pi}{\omega_d}$，过冲量 $M_n = K\exp\big(-\xi\omega_0 t_n\big)$。相邻两峰值之比为常数 $\frac{M_n}{M_{n+1}} = \exp(\xi\omega_0 T_d)$，取自然对数即得 $L = \ln\frac{M_n}{M_{n+1}} = \xi\omega_0 T_d = \frac{2\pi\xi}{\sqrt{1-\xi^2}}$。</li>
+<li><strong>稳定时间 $t_s$（$\pm 5\%$ 误差带，P56）</strong>：由包络线 $\frac{e^{-\xi\omega_0 t_s}}{\sqrt{1-\xi^2}} \approx 0.05$ 解得：
+$$\boxed{t_s \approx -\frac{\ln\left(0.05\sqrt{1-\xi^2}\right)}{\xi\omega_0} \approx \frac{3}{\xi\omega_0}}$$</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="五-真题靶向加厚二阶系统欠阻尼-vs-过阻尼分支速查26-计5">五、 真题靶向加厚：二阶系统欠阻尼 vs. 过阻尼分支速查（26-计5）</h3>
+<p>考场上遇到质量—弹簧—阻尼二阶力学传感器 $m\ddot{y} + f\dot{y} + ky = F(t)$ 时，先化为标准形式 $\frac{1}{\omega_n^2}\ddot{y} + \frac{2\zeta}{\omega_n}\dot{y} + y = K F(t)$，提取 $K = \frac{1}{k}$、$\omega_n = \sqrt{\frac{k}{m}}$、$\zeta = \frac{f}{2\sqrt{mk}}$，再严格按 $\zeta$ 分支求解：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">阻尼状态</th>
+<th align="center">判据</th>
+<th align="left">特征根与响应形态</th>
+<th align="left">核心考题设问与封闭公式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>欠阻尼</strong></td>
+<td align="center">$0 &lt; \zeta &lt; 1$</td>
+<td align="left">共轭复根，衰减正弦振荡</td>
+<td align="left"><strong>阻尼角频率</strong>：$\omega_d = \omega_n\sqrt{1 - \zeta^2}$<br><strong>振荡周期</strong>：$T_d = \dfrac{2\pi}{\omega_d}$</td>
+</tr>
+<tr>
+<td align="left"><strong>临界阻尼</strong></td>
+<td align="center">$\zeta = 1$</td>
+<td align="left">重实根 $s_{1,2} = -\omega_n$，无超调最快响应</td>
+<td align="left">$y(t)/K = 1 - (1 + \omega_n t)e^{-\omega_n t}$</td>
+</tr>
+<tr>
+<td align="left"><strong>过阻尼</strong></td>
+<td align="center">$\zeta &gt; 1$</td>
+<td align="left">两不等负实根 $s_{1,2} = -\omega_n(\zeta \mp \sqrt{\zeta^2 - 1})$，单调缓慢上升</td>
+<td align="left">令 $\tau_1 = -1/s_1,\; \tau_2 = -1/s_2$（$\tau_1 &gt; \tau_2$）：<br>$$\frac{y(t)}{K} = 1 - \frac{\tau_1 e^{-t/\tau_1} - \tau_2 e^{-t/\tau_2}}{\tau_1 - \tau_2}$$<br>当 $\zeta \gg 1$ 时按主导极点近似 $1 - e^{-t/\tau_1} = 0.9 \implies \boxed{t_{90\%} \approx \tau_1\ln 10 \approx 2.303\tau_1}$</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-03-3">03-3 频域与不失真</h2>
+<h2 id="03-3-传感器频域分析伯德图与不失真测试条件对应-ppt-p5978" class="doc-title">03-3 传感器频域分析、伯德图与不失真测试条件（对应 PPT P59–78）</h2>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1UW0VF4Ldd6mIuAtmLpcEH7PxxAa-le77/view?usp=drivesdk">03_2-基本理论-静动态_P047-125.pdf</a>（PPT P59–78）｜<em>注：本节内容在原有笔记中完全缺失，现按 PPT 主干与最小闭环全新补齐。</em></p>
+</blockquote></details>
+<h3 id="目录-4">目录</h3>
+<ul>
+<li><a href="#一-频率响应函数-hjomega-与正弦激励物理本质p5963">一、 频率响应函数 $H(j\omega)$ 与正弦激励物理本质（P59–63）</a></li>
+<li><a href="#二-无失真传输条件p45-p6465">二、 无失真传输条件（P45, P64–65）</a></li>
+<li><a href="#三-一阶传感器频域特性截止频率与例题p6669">三、 一阶传感器频域特性、截止频率与例题（P66–69）</a></li>
+<li><a href="#四-二阶传感器频域特性与谐振峰推导p7072">四、 二阶传感器频域特性与谐振峰推导（P70–72）</a></li>
+<li><a href="#五-动态性能选型与全章总结p7377">五、 动态性能选型与全章总结（P73–77）</a></li>
+</ul>
+<hr>
+<h3 id="一-频率响应函数-hjomega-与正弦激励物理本质p5963">一、 频率响应函数 $H(j\omega)$ 与正弦激励物理本质（P59–63）</h3>
+<p>在零初始条件下，令传递函数 $H(s) = \frac{Y(s)}{X(s)}$ 中的复变量 $s = j\omega$（$\sigma = 0$，对应虚轴上的稳态正弦扫描），即得到<strong>频率响应函数 $H(j\omega)$</strong>：
+$$H(j\omega) = \frac{Y(j\omega)}{X(j\omega)} = \frac{b_m (j\omega)^m + \cdots + b_1 (j\omega) + b_0}{a_n (j\omega)^n + \cdots + a_1 (j\omega) + a_0} = H_R(\omega) + j H_I(\omega)$$</p>
+<ul>
+<li><strong>幅频特性</strong>：输出正弦幅值 $B$ 与输入正弦幅值 $A$ 之比（代表不同频率下的放大倍率）：
+$$A(\omega) = |H(j\omega)| = \sqrt{\big[H_R(\omega)\big]^2 + \big[H_I(\omega)\big]^2} = \frac{B}{A}$$</li>
+<li><strong>相频特性</strong>：输出正弦相位相对于输入正弦相位的超前/滞后角：
+$$\varphi(\omega) = \arctan\frac{H_I(\omega)}{H_R(\omega)}$$</li>
+<li><strong>物理意义（P62–63）</strong>：线性定常传感器输入正弦波 $x(t) = A\sin\omega t$ 时，稳态输出<strong>频率不变</strong>，仅幅值变为 $B = A|H(j\omega)|$、相位偏移 $\varphi(\omega)$，即 $y(t) = A|H(j\omega)|\sin(\omega t + \varphi(\omega))$。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么 $s = j\omega$ 就能直接给出稳态正弦响应？】</strong>
+设稳定线性系统 $H(s)$（所有极点 $p_k$ 均在左半平面 $\text{Re}(p_k) &lt; 0$）输入正弦信号 $x(t) = A e^{j\omega t}$（实部/虚部即余弦/正弦），则 $X(s) = \frac{A}{s - j\omega}$。由部分分式展开：
+$$Y(s) = H(s)\frac{A}{s - j\omega} = \frac{A\,H(j\omega)}{s - j\omega} + \sum_{k} \frac{R_k}{s - p_k}$$
+逆变换回时域：后一项 $\sum R_k e^{p_k t}$ 因 $\text{Re}(p_k) &lt; 0$ 在 $t\to\infty$ 时<strong>指数衰减至零</strong>（瞬态响应消失）；仅剩第一项稳态输出：
+$$y_{\text{ss}}(t) = A\,H(j\omega)e^{j\omega t} = A|H(j\omega)|e^{j[\omega t + \varphi(\omega)]}$$
+取虚部即得：输入 $A\sin\omega t$ 时，稳态输出必为 $A|H(j\omega)|\sin(\omega t + \varphi(\omega))$！</p>
+</blockquote></details>
+<hr>
+<h3 id="二-无失真传输条件p45-p6465">二、 无失真传输条件（P45, P64–65）</h3>
+<p>若传感器能“不失真”地复现输入信号（允许整体放大 $K$ 倍并有固定时间延迟 $t_0$），则时域关系为：
+$$y(t) = K x(t - t_0)$$
+对其做拉氏变换（利用时移定理）并令 $s = j\omega$：
+$$H(s) = K e^{-s t_0} \implies H(j\omega) = K e^{-j\omega t_0}$$
+由此得到传感器实现<strong>无失真传输的充要条件（PPT P64 必背！）</strong>：</p>
+<ol>
+<li><strong>幅频特性为常数</strong>：$|H(j\omega)| = K$（不随频率 $\omega$ 变化，避免幅度失真）；</li>
+<li><strong>相频特性呈过原点直线</strong>：$\varphi(j\omega) = -\omega t_0$（斜率为 $-t_0$，保证各频率分量延迟时间相同，避免相位色散失真）。
+<em>(注：零阶传感器 $y(t) = Kx(t)$ 天然满足 $|H(j\omega)| = K,\;\varphi = 0$，无任何幅相失真，PPT P65。)</em></li>
+</ol>
+<hr>
+<h3 id="三-一阶传感器频域特性截止频率与例题p6669">三、 一阶传感器频域特性、截止频率与例题（P66–69）</h3>
+<p>由一阶传递函数 $H(s) = \frac{K}{1 + \tau s}$，令 $s = j\omega$：
+$$H(j\omega) = \frac{K}{1 + j\omega\tau} = \frac{K}{\sqrt{1 + (\omega\tau)^2}}\,\angle\big(-\arctan(\omega\tau)\big)$$
+故：
+$$|H(j\omega)| = \frac{K}{\sqrt{1 + \omega^2\tau^2}}, \qquad \varphi(j\omega) = -\arctan(\omega\tau)$$</p>
+<h4 id="31-频率特性极限与截止频率-omega_sppt-p67-p69">3.1 频率特性极限与截止频率 $\omega_s$（PPT P67, P69）</h4>
+<ul>
+<li><strong>低频段（$\omega\tau \ll 1$）</strong>：$|H(j\omega)| \approx K$（平坦），$\varphi(j\omega) \approx -\omega\tau$（近似线性，满足无失真条件！）。</li>
+<li><strong>高频段（$\omega\tau \gg 1$）</strong>：$|H(j\omega)| \approx \frac{K}{\omega\tau}$，在全对数坐标（伯德图）中以 $-20\;\text{dB/十倍频程}$ 线性下降，$\varphi \to -90^\circ$。</li>
+<li><strong>转角频率 / 截止频率 $\omega_s$（PPT P69）</strong>：令 $\omega_s \tau = 1$，即 <strong>$\omega_s = \frac{1}{\tau}$</strong>：<ol>
+<li><strong>幅值衰减至 $\frac{K}{\sqrt{2}} \approx 0.707 K$</strong>：分贝衰减为 $20\lg\frac{|H(j\omega_s)|}{|H(j0)|} = 20\lg\frac{1}{\sqrt{2}} = \mathbf{-3\;\text{dB}}$；</li>
+<li><strong>相移恰好为 $-\frac{\pi}{4} = -45^\circ$</strong>；</li>
+<li><strong>工作频带约束</strong>：输入信号频率 $\omega$ 应满足 $\omega &lt; \omega_s = \frac{1}{\tau}$（$\tau$ 越小，通频带越宽）。</li>
+</ol>
+</li>
+</ul>
+<h4 id="32-ppt-p68-经典计算例题">3.2 PPT P68 经典计算例题</h4>
+<p><strong>题目</strong>：对 1 阶传感器，要求其幅频特性 $|H(j\omega)| \ge 0.95 K$，求输入 $x(t)$ 的频率 $\omega$ 及对应相位范围。
+<strong>解</strong>：
+$$\frac{K}{\sqrt{1 + \omega^2\tau^2}} \ge 0.95 K \implies 1 + \omega^2\tau^2 \le \frac{1}{0.95^2} \implies \omega\tau \le \sqrt{\frac{1}{0.95^2} - 1} = 0.329$$
+即 $\omega \le \frac{0.329}{\tau}$，此时相位 $\varphi(j\omega) = -\arctan(\omega\tau) \ge -\arctan(0.329) = -18.2^\circ$。</p>
+<hr>
+<h3 id="四-二阶传感器频域特性与谐振峰推导p7072">四、 二阶传感器频域特性与谐振峰推导（P70–72）</h3>
+<p>由二阶传递函数 $H(s) = \frac{K\omega_0^2}{s^2 + 2\xi\omega_0 s + \omega_0^2}$，分子分母同除以 $\omega_0^2$ 并代入 $s = j\omega$（记频率比 $u = \frac{\omega}{\omega_0}$）：
+$$H(j\omega) = \frac{K}{\left(1 - \dfrac{\omega^2}{\omega_0^2}\right) + j\,2\xi\dfrac{\omega}{\omega_0}}$$
+拆出幅频与相频表达式（PPT P70）：
+$$\boxed{|H(j\omega)| = \frac{K}{\sqrt{\left(1 - \dfrac{\omega^2}{\omega_0^2}\right)^2 + 4\xi^2\dfrac{\omega^2}{\omega_0^2}}}}, \qquad \boxed{\varphi(j\omega) = -\arctan\left(\frac{2\xi\dfrac{\omega}{\omega_0}}{1 - \dfrac{\omega^2}{\omega_0^2}}\right)}$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：二阶谐振频率 $\omega_r$ 与谐振峰值 $M_r$ 零跳步推导】</strong></p>
+<ol>
+<li>令幅频分母根号内的函数 $g(u) = (1 - u^2)^2 + 4\xi^2 u^2$（其中 $u = \omega/\omega_0$）。幅频出现极大值（谐振峰）等价于 $g(u)$ 取极小值。</li>
+<li>对 $u^2$ 求导并令其为 $0$：
+$$\frac{dg}{d(u^2)} = -2(1 - u^2) + 4\xi^2 = 0 \implies u_r^2 = 1 - 2\xi^2$$</li>
+<li><strong>存在谐振峰的条件</strong>：必须 $1 - 2\xi^2 &gt; 0 \implies \mathbf{\xi &lt; \frac{\sqrt{2}}{2} \approx 0.707}$！<ul>
+<li>当 $\xi &lt; 0.707$ 时，谐振频率为 $\omega_r = \omega_0\sqrt{1 - 2\xi^2}$，代入 $g(u_r)$ 得谐振峰值：
+$$M_r = |H(j\omega_r)| = \frac{K}{2\xi\sqrt{1 - \xi^2}}$$
+<em>(特例：$\xi = 0$ 时 $\omega = \omega_0$ 处幅值趋于无穷大，发生剧烈谐振失真，PPT P71。)</em></li>
+<li>当 $\xi \ge 0.707$ 时，幅频曲线单调递减，<strong>无谐振凸起</strong>；其中 <strong>$\xi = 0.707$ 时幅频特性平坦段最宽</strong>（PPT P72）。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<ul>
+<li><strong>相频特性象限与 $-90^\circ$ 穿越（PPT P71 曲线细节）</strong>：<ul>
+<li>$\omega \ll \omega_0$ 时，分母实部 $1 - (\omega/\omega_0)^2 &gt; 0$，相角 $\varphi(\omega) \to 0^\circ$；</li>
+<li><strong>$\omega = \omega_0$（固有频率）时</strong>，分母实部归零，相角<strong>精确穿过 $-90^\circ$</strong>；</li>
+<li>$\omega \gg \omega_0$ 时，分母实部变为负值（复数位于第三象限），相角继续滞后并<strong>渐近趋于 $-180^\circ$</strong>（此时需根据复数象限取 $-\pi + \arctan(\cdot)$，不可直接套用主值区间）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="五-动态性能选型与全章总结p7377">五、 动态性能选型与全章总结（P73–77）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">传感器阶次</th>
+<th align="left">无失真要求（时域+频域）</th>
+<th align="left">最优工程参数与工作频带选择（PPT P73–77）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>一阶传感器</strong></td>
+<td align="left">时间常数 $\tau$ 越小越好</td>
+<td align="left">尽量减小 $\tau$；工作频率满足 <strong>$\omega &lt; \dfrac{1}{\tau}$</strong>（至少远离截止频率）</td>
+</tr>
+<tr>
+<td align="left"><strong>二阶传感器</strong></td>
+<td align="left">固有频率 $\omega_0$ 越高越好，阻尼比适中</td>
+<td align="left"><strong>$\xi = 0.6 \sim 0.7$</strong>（兼顾时域快稳与频域最宽平坦段）；工作频率满足 <strong>$\omega &lt; \omega_0$</strong>（一般取 $\omega \le 0.3\omega_0 \sim 0.5\omega_0$）</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-04-1">04-1 误差统计与置信</h2>
+<h2 id="04-1-误差分类随机误差统计与置信区间对应-ppt-p143" class="doc-title">04-1 误差分类、随机误差统计与置信区间（对应 PPT P1–43）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1V_vffylnQNk9NASPoQJTohOJZ_-Hx_8I/view?usp=drivesdk">04_2-误差与数据分析_P126-192.pdf</a>（PPT P1–43）｜<em>注：融合原笔记 <code>t4.2.3.1</code>～<code>t4.2.3.3</code>，筛除冗余科普，完整保留标度换元、均值标准误缩减证明、$t$ 分布逻辑及 PPT 例 2.1–2.3 演算。</em></p>
+</blockquote>
+<h3 id="目录-5">目录</h3>
+<ul>
+<li><a href="#一-误差与偏差准确度与精密度p616">一、 误差与偏差、准确度与精密度（P6–16）</a></li>
+<li><a href="#二-误差的三大分类p1720">二、 误差的三大分类（P17–20）</a></li>
+<li><a href="#三-随机误差的统计特征与正态换元推导p2132">三、 随机误差的统计特征与正态换元推导（P21–32）</a></li>
+<li><a href="#四-置信问题t-分布与例-23-演算p3343">四、 置信问题、$t$ 分布与例 2.3 演算（P33–43）</a></li>
+</ul>
+<hr>
+<h3 id="一-误差与偏差准确度与精密度p616">一、 误差与偏差、准确度与精密度（P6–16）</h3>
+<h4 id="11-误差衡量准确度与例-21ppt-p68">1.1 误差（衡量“准确度”）与例 2.1（PPT P6–8）</h4>
+<ul>
+<li><strong>绝对误差</strong>：$E_a = x_i - T$（$T$ 为真值，有正负与量纲）；</li>
+<li><strong>相对误差</strong>：$E_r = \frac{E_a}{T}\times 100\%$（无量纲，<strong>跨量程横向比较必须用相对误差</strong>）。</li>
+<li><strong>例 2.1（P7–8）</strong>：血钾 $T=3.70, x_i=3.85\;\text{mmol/L} \implies E_a = +0.15,\; E_r = +4.1\%$；血钠 $T=138.7, x_i=138.0\;\text{mmol/L} \implies E_a = -0.7,\; E_r = -0.51\%$。虽然血钠绝对误差更大，但相对误差远小于血钾。</li>
+</ul>
+<h4 id="12-偏差衡量精密度与例-22ppt-p914">1.2 偏差（衡量“精密度”）与例 2.2（PPT P9–14）</h4>
+<p>设对同一量进行 $n$ 次平行测量，算术平均值为 $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$：</p>
+<ul>
+<li><strong>绝对偏差</strong>：$d_i = x_i - \bar{x}$（满足 $\sum d_i = 0$）；<strong>相对偏差</strong>：$d_{r,i} = \frac{d_i}{\bar{x}}\times 100\%$。</li>
+<li><strong>两种离散度指标对比（PPT P10–14）</strong>：<ol>
+<li><strong>平均偏差</strong>：$\bar{d} = \frac{\sum_{i=1}^n |x_i - \bar{x}|}{n}$。<strong>缺陷</strong>：对偏差线性平均，<strong>无法灵敏反映个别大偏差</strong>。</li>
+<li><strong>标准差（贝塞尔公式）<strong>与</strong>相对标准差（变异系数 CV）</strong>：
+$$\boxed{s = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n - 1}}}, \qquad \text{RSD (CV)} = \frac{s}{\bar{x}}\times 100\%$$
+<em>(分母 $f = n - 1$ 为自由度，确保 $s^2$ 是总体方差 $\sigma^2$ 的无偏估计；平方项放大了大偏差的权重。)</em></li>
+</ol>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么贝塞尔公式分母必须是 $n - 1$ 才无偏？】</strong>
+设总体真值为 $\mu$、方差为 $\sigma^2$。利用恒等式 $x_i - \bar{x} = (x_i - \mu) - (\bar{x} - \mu)$ 对残差平方和展开：
+$$\sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n (x_i - \mu)^2 - n(\bar{x} - \mu)^2$$
+两边同时取数学期望 $E[\cdot]$。由 $E[(x_i - \mu)^2] = \sigma^2$ 及前文刚证得的 $E[(\bar{x} - \mu)^2] = \text{Var}(\bar{x}) = \frac{\sigma^2}{n}$：
+$$E\left[\sum_{i=1}^n (x_i - \bar{x})^2\right] = n\sigma^2 - n\cdot\frac{\sigma^2}{n} = (n - 1)\sigma^2$$
+因此只有除以 $n - 1$，才能使 $E[s^2] = \sigma^2$（无偏估计）！用样本均值 $\bar{x}$ 代替真值 $\mu$ 恰好“消耗”掉了 $1$ 个自由度。</p>
+</blockquote></details>
+<ul>
+<li><strong>例 2.2（P11–14）</strong>：现有方法甲 $\{12.4, 12.4, 11.6, 11.6\}$ 与新方法乙 $\{12.7, 12.1, 11.4, 11.8\}$ 均值均为 $12.0$、平均偏差均为 $\bar{d}=0.4$；但计算标准差得 $s_{\text{甲}} = 0.46 &lt; s_{\text{乙}} = 0.55$，故<strong>现有方法精密度更高（选 B）</strong>。</li>
+</ul>
+<h4 id="13-准确度与精密度的关系ppt-p1516">1.3 准确度与精密度的关系（PPT P15–16）</h4>
+<ul>
+<li><strong>精密度是准确度的前提条件</strong>：精密度高 $\nRightarrow$ 准确度高（可能存在系统误差）；精密度差 $\implies$ 结果不可靠，讨论准确度失去意义。</li>
+</ul>
+<hr>
+<h3 id="二-误差的三大分类p1720">二、 误差的三大分类（P17–20）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">误差类型</th>
+<th align="left">数学表达与特点</th>
+<th align="left">可否校正/剔除</th>
+<th align="left">PPT P20 分类练习答案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>系统误差（可测误差）</strong></td>
+<td align="left">$\varepsilon = \bar{x} - T$（$n\to\infty$ 时 $\varepsilon = E(X) - T$）；幅值与符号恒定或按规律变化</td>
+<td align="left"><strong>可以校正</strong></td>
+<td align="left">蒸馏水含杂质（B）、光学器件吸光（E）、显示位数截位（J）</td>
+</tr>
+<tr>
+<td align="left"><strong>随机误差（偶然误差）</strong></td>
+<td align="left">$\delta_i = x_i - \bar{x}$（$n\to\infty$ 时 $\delta_i = x_i - E(X)$）；不可预知波动</td>
+<td align="left"><strong>难以单次校正，服从统计规律</strong></td>
+<td align="left">电源 $50\;\text{Hz}$ 电磁干扰（N）</td>
+</tr>
+<tr>
+<td align="left"><strong>粗大误差（过失误差）</strong></td>
+<td align="left">显然与实际值不符（操作/记录错误、环境突变）</td>
+<td align="left"><strong>必须剔除</strong></td>
+<td align="left">心电图左右臂电极接反（I）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="三-随机误差的统计特征与正态换元推导p2132">三、 随机误差的统计特征与正态换元推导（P21–32）</h3>
+<h4 id="31-中心极限定理与正态分布ppt-p2228">3.1 中心极限定理与正态分布（PPT P22–28）</h4>
+<p>由中心极限定理，大量独立微小误差源叠加使随机误差服从正态分布 $X \sim N(\mu, \sigma^2)$，概率密度为：
+$$p(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：一般正态分布向标准正态分布的换元推导（PPT P26）】</strong>
+求测量值 $x$ 落入对称区间 $[\mu - k\sigma, \mu + k\sigma]$ 的概率 $P$：
+令无量纲标准变量 $u = \frac{x - \mu}{\sigma}$，则 $x = \mu + u\sigma$，$dx = \sigma\,du$；积分限由 $x = \mu \mp k\sigma$ 变为 $u = \mp k$：
+$$P\big(x \in [\mu - k\sigma,\; \mu + k\sigma]\big) = \int_{\mu-k\sigma}^{\mu+k\sigma} \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\,dx = \int_{-k}^{k} \frac{1}{\sqrt{2\pi}} e^{-\frac{u^2}{2}}\,du = 2\int_{0}^{k} \frac{1}{\sqrt{2\pi}} e^{-\frac{u^2}{2}}\,du$$</p>
+<ul>
+<li><strong>常用区间概率表（PPT P29）</strong>：$k=1 \to 68.3\%$；<strong>$k=1.96 \to 95.0\%$</strong>；$k=2 \to 95.5\%$；<strong>$k=2.58 \to 99.0\%$</strong>；<strong>$k=3 \to 99.7\%$</strong>（$3\sigma$ 准则根源）。</li>
+</ul>
+</blockquote></details>
+<h4 id="32-算术平均值的标准差缩减证明ppt-p3032">3.2 算术平均值的标准差缩减证明（PPT P30–32）</h4>
+<p>为什么用 $n$ 次测量平均值 $\bar{x}$ 代替单次测量值更合理？</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：证明 $s(\bar{x}) = \dfrac{s(x)}{\sqrt{n}}$】</strong>
+设 $n$ 次等精度独立测量值 $x_1, \dots, x_n$ 方差均为 $\sigma^2$。由方差线性组合性质：
+$$\text{Var}(\bar{x}) = \text{Var}\left(\frac{1}{n}\sum_{i=1}^n x_i\right) = \frac{1}{n^2}\sum_{i=1}^n \text{Var}(x_i) = \frac{1}{n^2}\cdot n\sigma^2 = \frac{\sigma^2}{n}$$
+两边开方并用样本标准差 $s$ 替代 $\sigma$，即得<strong>算术平均值标准差（标准误）</strong>：
+$$\boxed{s(\bar{x}) = \frac{s(x)}{\sqrt{n}} = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n(n - 1)}}}$$
+<em>物理意义</em>：重复测量 $n$ 次取平均，随机误差的分散度缩小为单次测量的 $\frac{1}{\sqrt{n}}$。</p>
+</blockquote></details>
+<hr>
+<h3 id="四-置信问题t-分布与例-23-演算p3343">四、 置信问题、$t$ 分布与例 2.3 演算（P33–43）</h3>
+<h4 id="41-区间估计与为什么必须用-t-分布ppt-p3538">4.1 区间估计与为什么必须用 $t$ 分布（PPT P35–38）</h4>
+<ul>
+<li><strong>$\sigma$ 已知</strong>：标准化变量 $Z = \frac{\bar{x} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)$，置信区间为 $\left(\bar{x} - k\frac{\sigma}{\sqrt{n}},\;\bar{x} + k\frac{\sigma}{\sqrt{n}}\right)$。</li>
+<li><strong>$\sigma$ 未知（工程常态）</strong>：用随机变量 $s$ 代替常数 $\sigma$，构成枢纽量 $T = \frac{\bar{x} - \mu}{s/\sqrt{n}} \sim t(f)$（自由度 $f = n - 1$）。由于分母 $s$ 本身存在抽样波动，$t$ 分布具有<strong>厚尾效应</strong>（$n$ 越小系数 $t_{f,\alpha}$ 越大；$n\to\infty$ 时退化为标准正态 $k$）。置信区间为：
+$$\boxed{\mu = \bar{x} \pm t_{f,\alpha}\frac{s}{\sqrt{n}}}$$
+其中显著性水平 $\alpha = 1 - P_c$（$P_c$ 为置信度）。</li>
+</ul>
+<h4 id="42-例-23-完整演算ppt-p3334-p3942">4.2 例 2.3 完整演算（PPT P33–34, P39–42）</h4>
+<p>11 次重复测得血压：$\bar{x} = 115.0\;\text{mmHg}$，$s(\bar{x}) = 0.26\;\text{mmHg}$，自由度 $f = 11 - 1 = 10$（假设无系统误差，真值即 $\mu$）：</p>
+<ul>
+<li><strong>$95\%$ 置信度（$\alpha = 0.05$）</strong>：查表得 $t_{10,\,0.05} = 2.23$ $\implies$ $\mu = 115.0 \pm 2.23\times 0.26 = \mathbf{115.0 \pm 0.58\;\text{mmHg}}$，即 $(114.42,\; 115.58)\;\text{mmHg}$。</li>
+<li><strong>$99\%$ 置信度（$\alpha = 0.01$）</strong>：查表得 $t_{10,\,0.01} = 3.17$ $\implies$ $\mu = 115.0 \pm 3.17\times 0.26 = \mathbf{115.0 \pm 0.82\;\text{mmHg}}$，即 $(114.18,\; 115.82)\;\text{mmHg}$。</li>
+<li><strong>权衡结论</strong>：提高置信度 $P_c$（$95\% \to 99\%$）必然导致置信区间变宽（不确定度增大），反之亦然。</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-04-2">04-2 异常值与误差传递</h2>
+<h2 id="04-2-粗大误差系统误差判定与误差传递对应-ppt-p4465" class="doc-title">04-2 粗大误差、系统误差判定与误差传递（对应 PPT P44–65）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1V_vffylnQNk9NASPoQJTohOJZ_-Hx_8I/view?usp=drivesdk">04_2-误差与数据分析_P126-192.pdf</a>（PPT P44–65）｜<em>注：融合原笔记 <code>t4.2.3.3</code> 后半段与 <code>t4.2.3.4</code>，精简冗余文字，补齐 PPT 全部判据公式（Q/Grubbs/u/t/F/马利科夫/阿贝-赫梅特）与误差传递全微分推导。</em></p>
+</blockquote>
+<h3 id="目录-6">目录</h3>
+<ul>
+<li><a href="#一-粗大误差异常值的两大检验法p4450">一、 粗大误差（异常值）的两大检验法（P44–50）</a></li>
+<li><a href="#二-系统误差的三大假设检验与两大变化判据p5161">二、 系统误差的三大假设检验与两大变化判据（P51–61）</a></li>
+<li><a href="#三-误差传递理论与全微分方差公式推导p6263">三、 误差传递理论与全微分/方差公式推导（P62–63）</a></li>
+</ul>
+<hr>
+<h3 id="一-粗大误差异常值的两大检验法p4450">一、 粗大误差（异常值）的两大检验法（P44–50）</h3>
+<h4 id="11-q-检验法与-grubbs-检验法ppt-p4446">1.1 $Q$ 检验法与 Grubbs 检验法（PPT P44–46）</h4>
+<p>将测量列按大小排序，疑似异常值记为 $x_?$，与其最近邻的数据记为 $x_{\text{nearest}}$：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">检验法</th>
+<th align="left">检验统计量公式</th>
+<th align="left">判定与后续处理规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>$Q$ 检验法（P44）</strong></td>
+<td align="left">$Q = \left\|\dfrac{x_? - x_{\text{nearest}}}{x_{\max} - x_{\min}}\right\|$</td>
+<td align="left">查表比较 $Q$ 与 $Q_c(n, \alpha)$；若 <strong>$Q &gt; Q_c$</strong> 则舍弃 $x_?$</td>
+</tr>
+<tr>
+<td align="left"><strong>Grubbs 检验法（P46）</strong></td>
+<td align="left">$G = \left\|\dfrac{x_? - \bar{x}}{s}\right\|$</td>
+<td align="left">查表比较 $G$ 与 $G_c(n, \alpha)$；若 <strong>$G &gt; G_c$</strong> 则舍弃 $x_?$（以标准差 $s$ 为尺度，抗极端值能力更强）</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>铁律（PPT P44, P46 紫字）</strong>：<strong>若舍弃该测量值，则所有统计量（$\bar{x}, s, s(\bar{x})$ 等）必须重新计算！</strong></li>
+</ul>
+<h4 id="12-ppt-p4850-异常值例题演算">1.2 PPT P48–50 异常值例题演算</h4>
+<p>在例 2.3（11 次血压数据）基础上混入第 12 个疑似异常读数 $x_{12} = 110.2\;\text{mmHg}$（其余 11 个数据范围为 $113.8 \sim 116.5\;\text{mmHg}$，最近邻 $x_{\text{nearest}} = 113.8\;\text{mmHg}$）：</p>
+<ol>
+<li>含异常值算得：$\bar{x} = 114.6\;\text{mmHg}$，$s = 1.66\;\text{mmHg}$；</li>
+<li><strong>$Q$ 检验</strong>：$Q = \frac{|110.2 - 113.8|}{116.5 - 110.2} = \frac{3.6}{6.3} = 0.571 &gt; Q_{12,\,0.95} = 0.41$ $\implies$ 判定为异常值，<strong>舍弃</strong>；</li>
+<li><strong>Grubbs 检验</strong>：$G = \frac{|110.2 - 114.6|}{1.66} = 2.65 &gt; G_{12,\,0.05} = 2.29$ $\implies$ 同样判定为异常值，<strong>舍弃</strong>；</li>
+<li>剔除后用剩下 11 个数据重新计算得 $\bar{x} = 115.0\;\text{mmHg},\; s(\bar{x}) = 0.26\;\text{mmHg}$。</li>
+</ol>
+<hr>
+<h3 id="二-系统误差的三大假设检验与两大变化判据p5161">二、 系统误差的三大假设检验与两大变化判据（P51–61）</h3>
+<h4 id="21-恒定系统误差的三大统计假设检验ppt-p5157">2.1 恒定系统误差的三大统计假设检验（PPT P51–57）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">检验场景</th>
+<th align="left">原假设 $H_0$</th>
+<th align="left">检验统计量</th>
+<th align="left">判定准则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 已知标准值 $\mu_0$，判有无系统误差（P52）</strong></td>
+<td align="left">$\mu = \mu_0$</td>
+<td align="left"><strong>$\sigma$ 已知（$u$ 检验）</strong>：$u = \dfrac{|\bar{x} - \mu_0|}{\sigma/\sqrt{n}}$<br><strong>$\sigma$ 未知（$t$ 检验）</strong>：$t = \dfrac{|\bar{x} - \mu_0|}{s/\sqrt{n}}$</td>
+<td align="left">$u &gt; u_\alpha$ 或 $t &gt; t_{f,\alpha}$（$f=n-1$）则拒绝 $H_0$，<strong>存在显著系统误差</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>2. 两方法精密度对比（P54–55）</strong></td>
+<td align="left">$\sigma_1 = \sigma_2$</td>
+<td align="left"><strong>$F$ 检验</strong>：$F = \dfrac{s_{\text{大}}^2}{s_{\text{小}}^2}$（保证 $F \ge 1$）</td>
+<td align="left">$F &gt; F_\alpha(f_{\text{大}}, f_{\text{小}})$ 则两方法精密度存在显著差异</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 两方法均值对比（P56–57）</strong></td>
+<td align="left">$\mu_1 = \mu_2$</td>
+<td align="left">先做 $F$ 检验确认方差齐性，再做 <strong>$t$ 检验</strong>：<br>$s_{\text{合}} = \sqrt{\dfrac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}}$，$t = \dfrac{|\bar{x}_1 - \bar{x}_2|}{s_{\text{合}}\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$</td>
+<td align="left">$t &gt; t_{n_1+n_2-2,\,\alpha}$ 则两种方法存在显著系统差异</td>
+</tr>
+</tbody></table></div>
+<h4 id="22-变化系统误差的顺序判据ppt-p5860必背公式">2.2 变化系统误差的顺序判据（PPT P58–60，必背公式！）</h4>
+<ol>
+<li><strong>累进性系统误差（单调漂移）$\to$ 马利科夫判据（P59）</strong>：
+将残差 $v_i = x_i - \bar{x}$ 按测量顺序分为前后两半求差：
+$$M = \begin{cases} \displaystyle\sum_{i=1}^{n/2}(x_i - \bar{x}) - \sum_{i=\frac{n}{2}+1}^{n}(x_i - \bar{x}) &amp; (n\text{ 为偶数}) \\[10pt] \displaystyle\sum_{i=1}^{(n+1)/2}(x_i - \bar{x}) - \sum_{i=\frac{n+1}{2}}^{n}(x_i - \bar{x}) &amp; (n\text{ 为奇数}) \end{cases}$$
+若 <strong>$M &gt; \max(x_i - \bar{x})$</strong>（或 $|M|$ 超过最大残差），则说明存在<strong>累进性系统误差</strong>。</li>
+<li><strong>周期性系统误差 $\to$ 阿贝-赫梅特判据（P60）</strong>：
+计算相邻残差乘积之和：
+$$A = \left|\sum_{i=1}^{n-1}(x_i - \bar{x})(x_{i+1} - \bar{x})\right|$$
+若 <strong>$A &gt; \sqrt{n - 1}\cdot s^2$</strong>，则说明存在<strong>周期性系统误差</strong>。</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：马利科夫与阿贝-赫梅特判据的统计逻辑】</strong></p>
+<ul>
+<li><strong>马利科夫判据逻辑</strong>：若只存在随机误差，前一半残差和与后一半残差和的期望均为 $0$，二者之差 $M$ 在 $0$ 附近随机波动；若传感器存在<strong>单调漂移（累进系统误差）</strong>，前一半残差系统性偏低（负）、后一半系统性偏高（正）（或反之），两部分相减会<strong>同号叠加</strong>，导致 $M$ 显著大于单次最大残差。</li>
+<li><strong>阿贝-赫梅特判据逻辑</strong>：对于纯随机白噪声，相邻两次误差 $v_i$ 与 $v_{i+1}$ 相互独立，乘积期望 $E[v_i v_{i+1}] = 0$，且方差和为 $(n-1)\sigma^4$（标准差为 $\sqrt{n-1}\,s^2$）；若存在<strong>周期性系统误差</strong>（如 $50\;\text{Hz}$ 干扰或周期温漂），相邻两点往往同号（正正得正、负负得正），使 $|\sum v_i v_{i+1}|$ 突破 $1\sigma$ 统计界限 $\sqrt{n-1}\,s^2$。</li>
+</ul>
+</blockquote></details>
+<ul>
+<li><strong>消除系统误差的方法（P61）</strong>：对照试验（标准样品/标准方法）、仪器校准（零点校准、工作曲线校准）。</li>
+</ul>
+<hr>
+<h3 id="三-误差传递理论与全微分方差公式推导p6263">三、 误差传递理论与全微分/方差公式推导（P62–63）</h3>
+<p>设间接测量量 $S = f(x_1, x_2, \dots, x_n)$，各直接测量量相互独立。</p>
+<h4 id="31-系统误差传递一阶泰勒全微分模型ppt-p62">3.1 系统误差传递：一阶泰勒全微分模型（PPT P62）</h4>
+<p>在真值邻域做一阶泰勒展开并略去高阶小量，得<strong>绝对系统误差传递基本方程</strong>：
+$$\boxed{E_a(S) = \frac{\partial f}{\partial x_1}E_a(x_1) + \frac{\partial f}{\partial x_2}E_a(x_2) + \cdots + \frac{\partial f}{\partial x_n}E_a(x_n)}$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：三大基本运算的系统误差与随机误差传递推导】</strong></p>
+<ol>
+<li><p><strong>系统误差传递（保留代数正负号，PPT P62）</strong>：</p>
+<ul>
+<li><strong>加减法 $R = A + B - C$</strong>：偏导为 $1, 1, -1 \implies \boxed{E_a(R) = E_a(A) + E_a(B) - E_a(C)}$。</li>
+<li><strong>乘除法 $R = \frac{AB}{C}$</strong>：求偏导 $E_a(R) = \frac{B}{C}E_a(A) + \frac{A}{C}E_a(B) - \frac{AB}{C^2}E_a(C)$，两边同除以 $R = \frac{AB}{C}$：
+$$\boxed{E_r(R) = \frac{E_a(R)}{R} = \frac{E_a(A)}{A} + \frac{E_a(B)}{B} - \frac{E_a(C)}{C} = E_r(A) + E_r(B) - E_r(C)}$$</li>
+<li><strong>指数幂 $R = A^m B^n$</strong>：求偏导并同除以 $R = A^m B^n$：
+$$\boxed{E_r(R) = \frac{E_a(R)}{R} = m\frac{E_a(A)}{A} + n\frac{E_a(B)}{B} = m E_r(A) + n E_r(B)}$$</li>
+</ul>
+</li>
+<li><p><strong>随机误差传递（方差正交叠加，PPT P63）</strong>：
+对一阶扰动 $\Delta S \approx \sum_{i=1}^n \frac{\partial f}{\partial x_i}\Delta x_i$ 取方差 $\sigma^2(S) = E[(\Delta S)^2]$。因各直接测量量<strong>相互独立</strong>，交叉协方差项 $E[\Delta x_i \Delta x_j] = 0\;(i\neq j)$ 全部消去，得<strong>随机误差标准差传递通式</strong>：
+$$\boxed{\sigma(S) = \sqrt{\left(\frac{\partial f}{\partial x_1}\right)^2\sigma^2(x_1) + \left(\frac{\partial f}{\partial x_2}\right)^2\sigma^2(x_2) + \cdots + \left(\frac{\partial f}{\partial x_n}\right)^2\sigma^2(x_n)}}$$
+代入三大运算（偏导平方消去了负号，故<strong>无论加减乘除，随机误差平方永远相加</strong>！）：</p>
+<ul>
+<li><p><strong>加减法 $R = A + B - C$</strong>：$\sigma^2(R) = \sigma^2(A) + \sigma^2(B) + \sigma^2(C)$。</p>
+</li>
+<li><p><strong>乘除法 $R = \frac{AB}{C}$</strong>：$\left(\frac{\sigma(R)}{R}\right)^2 = \left(\frac{\sigma(A)}{A}\right)^2 + \left(\frac{\sigma(B)}{B}\right)^2 + \left(\frac{\sigma(C)}{C}\right)^2$。</p>
+</li>
+<li><p><strong>指数幂 $R = A^m B^n$</strong>：$\left(\frac{\sigma(R)}{R}\right)^2 = m^2\left(\frac{\sigma(A)}{A}\right)^2 + n^2\left(\frac{\sigma(B)}{B}\right)^2$。</p>
+</li>
+<li><p><em>快捷对数全微分法（考场秒杀乘除与幂次传递）</em>：对 $R = A^m B^n / C^p$ 两边先取自然对数 $\ln R = m\ln A + n\ln B - p\ln C$，再直接全微分 $\frac{dR}{R} = m\frac{dA}{A} + n\frac{dB}{B} - p\frac{dC}{C}$，立刻同时得到<strong>相对系统误差</strong>（保留负号）与<strong>相对随机误差</strong>（系数平方相加）！</p>
+</li>
+</ul>
+</li>
+<li><p><strong>综合总误差表达（PPT P63）</strong>：
+$$\boxed{E_{\text{total}} = E_a(R) \pm \sigma(R)}$$</p>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-真题靶向加厚dixon-q-检验完整临界值表26-计7">四、 真题靶向加厚：Dixon $Q$ 检验完整临界值表（26-计7）</h3>
+<p>小样本（$n = 3\sim 10$）异常值剔除考题中，需按 <strong>“均值 $\bar{x}$ $\to$ 贝塞尔标准差 $s$（分母 $n-1$） $\to$ 从小到大排序算 $Q_{\text{计}}$ $\to$ 查表对比 $Q_c(n, \alpha)$”</strong> 四步闭环作答：</p>
+<p>$$Q_{\text{计}} = \frac{|x_? - x_{\text{nearest}}|}{x_{\max} - x_{\min}}$$</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="center">测定次数 $n$</th>
+<th align="center">$Q\;(90\%)$</th>
+<th align="center">$Q\;(95\%)$</th>
+<th align="center">$Q\;(99\%)$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>3</strong></td>
+<td align="center">$0.90$</td>
+<td align="center">$0.97$</td>
+<td align="center">$0.99$</td>
+</tr>
+<tr>
+<td align="center"><strong>4</strong></td>
+<td align="center">$0.76$</td>
+<td align="center">$0.84$</td>
+<td align="center">$0.93$</td>
+</tr>
+<tr>
+<td align="center"><strong>5</strong></td>
+<td align="center">$0.64$</td>
+<td align="center">$0.73$</td>
+<td align="center">$0.82$</td>
+</tr>
+<tr>
+<td align="center"><strong>6</strong></td>
+<td align="center">$0.56$</td>
+<td align="center"><strong>$0.64$</strong></td>
+<td align="center">$0.74$</td>
+</tr>
+<tr>
+<td align="center"><strong>7</strong></td>
+<td align="center">$0.51$</td>
+<td align="center">$0.59$</td>
+<td align="center">$0.68$</td>
+</tr>
+<tr>
+<td align="center"><strong>8</strong></td>
+<td align="center">$0.47$</td>
+<td align="center">$0.54$</td>
+<td align="center">$0.63$</td>
+</tr>
+<tr>
+<td align="center"><strong>9</strong></td>
+<td align="center">$0.44$</td>
+<td align="center">$0.51$</td>
+<td align="center">$0.60$</td>
+</tr>
+<tr>
+<td align="center"><strong>10</strong></td>
+<td align="center">$0.41$</td>
+<td align="center">$0.49$</td>
+<td align="center">$0.57$</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>判定铁律</strong>：若 $Q_{\text{计}} &gt; Q_{\text{表}}$，则判为粗大误差予以舍弃（<strong>舍弃后须重算 $\bar{x}, s$</strong>）；若 $Q_{\text{计}} \le Q_{\text{表}}$，则保留。</li>
+</ul>
+</section>
+</article>
+{% endraw %}
+{% include shengyi-foot.html %}

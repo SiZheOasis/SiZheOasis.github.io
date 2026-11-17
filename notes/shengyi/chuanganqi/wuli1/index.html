@@ -1,0 +1,1094 @@
+---
+layout: front
+title: "传感器重构笔记 · 物理一：阻容感与接口（05–08章）"
+lang: zh-CN
+body_class: notes shengyi
+section: notes
+nav_current: notes
+permalink: /notes/shengyi/chuanganqi/wuli1/
+katex: true
+---
+
+<header class="topic-head">
+    <p class="page-kicker"><a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a> · <a href="{{ '/notes/shengyi/' | prepend: site.baseurl }}">生物医学电子学</a> · <a href="{{ '/notes/shengyi/chuanganqi/' | prepend: site.baseurl }}">传感器重构笔记</a> · 物理一：阻容感与接口（05–08章）</p>
+    <h1>物理一：阻容感与接口（05–08章）</h1>
+</header>
+<nav class="note-toc" aria-label="目录">
+<ol>
+<li class="toc-h2 toc-tab"><a href="#tab-05-1">05-1 电位器与应变片</a></li>
+<li class="toc-h2"><a href="#05-1-电位器电阻应变片与横向效应推导对应-ppt-p426">05-1 电位器、电阻应变片与横向效应推导（对应 PPT P4–26）</a></li>
+<li class="toc-h3"><a href="#一-变阻式电位器传感器与负载效应推导p46">一、 变阻式（电位器）传感器与负载效应推导（P4–6）</a></li>
+<li class="toc-h3"><a href="#二-电阻应变效应全微分推导尺寸效应-vs-压阻效应p713">二、 电阻应变效应全微分推导：尺寸效应 vs. 压阻效应（P7–13）</a></li>
+<li class="toc-h3"><a href="#三-应变片横向效应完整微元积分推导p1418">三、 应变片横向效应完整微元积分推导（P14–18）</a></li>
+<li class="toc-h3"><a href="#四-应变片静态非理想特性与电桥戴维南等效p1926">四、 应变片静态非理想特性与电桥戴维南等效（P19–26）</a></li>
+<li class="toc-h3"><a href="#五-物理公理与底层简单证明补强短板">五、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-05-2">05-2 血压生理与流体定律</a></li>
+<li class="toc-h2"><a href="#05-2-血压生理学与血液动力学三大定律对应-ppt-p2737">05-2 血压生理学与血液动力学三大定律（对应 PPT P27–37）</a></li>
+<li class="toc-h3"><a href="#一-动脉与静脉血压生理学基础p2731">一、 动脉与静脉血压生理学基础（P27–31）</a></li>
+<li class="toc-h3"><a href="#二-弹性贮器效应与五大血压影响因素p3234">二、 弹性贮器效应与五大血压影响因素（P32–34）</a></li>
+<li class="toc-h3"><a href="#三-血液动力学三大物理定律与泊肃叶积分推导p3537">三、 血液动力学三大物理定律与泊肃叶积分推导（P35–37）</a></li>
+<li class="toc-h3"><a href="#四-物理公理与底层简单证明补强短板">四、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-05-3">05-3 有创测压与导管模型</a></li>
+<li class="toc-h2"><a href="#05-3-有创血压测量与液体耦合导管二阶模型对应-ppt-p3859">05-3 有创血压测量与液体耦合导管二阶模型（对应 PPT P38–59）</a></li>
+<li class="toc-h3"><a href="#一-有创-vs-无创血压检测与传感器核心指标p3841">一、 有创 vs. 无创血压检测与传感器核心指标（P38–41）</a></li>
+<li class="toc-h3"><a href="#二-液体耦合导管二阶-rlc-模型推导p4245">二、 液体耦合导管二阶 RLC 模型推导（P42–45）</a></li>
+<li class="toc-h3"><a href="#三-导管几何优化与全维度失真因素分析p4656">三、 导管几何优化与全维度失真因素分析（P46–56）</a></li>
+<li class="toc-h3"><a href="#四-临床动态标定方波爆破法测试pop-testp5759">四、 临床动态标定：方波/爆破法测试（Pop Test，P57–59）</a></li>
+<li class="toc-h3"><a href="#五-物理公理与底层简单证明补强短板-2">五、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-05-4">05-4 眼压与无创血压</a></li>
+<li class="toc-h2"><a href="#05-4-眼压检测与无创血压测量柯氏音示波法对应-ppt-p6069">05-4 眼压检测与无创血压测量（柯氏音/示波法，对应 PPT P60–69）</a></li>
+<li class="toc-h3"><a href="#一-眼压检测与半桥应变结构p6061">一、 眼压检测与半桥应变结构（P60–61）</a></li>
+<li class="toc-h3"><a href="#二-柯氏音听诊法机理与放气误差推导p6365">二、 柯氏音听诊法机理与放气误差推导（P63–65）</a></li>
+<li class="toc-h3"><a href="#三-示波法自动测压系统与定量判据p6669">三、 示波法自动测压系统与定量判据（P66–69）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-06">06 电容式传感器</a></li>
+<li class="toc-h2"><a href="#06-电容式传感器原理差动线性化与接口电路对应-ppt-p7095">06 电容式传感器原理、差动线性化与接口电路（对应 PPT P70–95）</a></li>
+<li class="toc-h3"><a href="#一-平板电容公式与三大工作类型p7071-p7879">一、 平板电容公式与三大工作类型（P70–71, P78–79）</a></li>
+<li class="toc-h3"><a href="#二-单端变极距型泰勒展开与非线性误差推导p7274">二、 单端变极距型：泰勒展开与非线性误差推导（P72–74）</a></li>
+<li class="toc-h3"><a href="#三-差动变极距型偶次项抵消与双倍灵敏度推导p7577">三、 差动变极距型：偶次项抵消与双倍灵敏度推导（P75–77）</a></li>
+<li class="toc-h3"><a href="#四-电容高频等效电路与三类测量电桥p8083">四、 电容高频等效电路与三类测量电桥（P80–83）</a></li>
+<li class="toc-h3"><a href="#五-生物医学应用心音听诊驻极体助听器与指纹识别p8495">五、 生物医学应用：心音听诊、驻极体助听器与指纹识别（P84–95）</a></li>
+<li class="toc-h3"><a href="#六-物理公理与底层简单证明补强短板">六、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-07">07 电感与LVDT</a></li>
+<li class="toc-h2"><a href="#07-电感式传感器与差动变压器lvdt对应-ppt-p115--p284298">07 电感式传感器与差动变压器（LVDT，对应 PPT P1–15 / P284–298）</a></li>
+<li class="toc-h3"><a href="#一-自感式传感器磁路霍普金森定律与非线性推导p36">一、 自感式传感器：磁路霍普金森定律与非线性推导（P3–6）</a></li>
+<li class="toc-h3"><a href="#二-自感等效电路分布电容限制与交流电桥p78">二、 自感等效电路、分布电容限制与交流电桥（P7–8）</a></li>
+<li class="toc-h3"><a href="#三-互感式传感器差动变压器lvdt完整复数推导p915">三、 互感式传感器：差动变压器（LVDT）完整复数推导（P9–15）</a></li>
+<li class="toc-h3"><a href="#四-物理公理与底层简单证明补强短板-2">四、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-08">08 电桥与接口电路</a></li>
+<li class="toc-h2"><a href="#08-传感器接口电路电桥运放线性化与温度补偿对应-ppt-p107130--p299323">08 传感器接口电路：电桥、运放线性化与温度补偿（对应 PPT P107–130 / P299–323）</a></li>
+<li class="toc-h3"><a href="#一-直流电桥平衡条件与三种组态完整推导p108113">一、 直流电桥平衡条件与三种组态完整推导（P108–113）</a></li>
+<li class="toc-h3"><a href="#二-电桥平衡调整与运放有源线性化电路p114115">二、 电桥平衡调整与运放有源线性化电路（P114–115）</a></li>
+<li class="toc-h3"><a href="#三-应变片温度误差与五大温度补偿技术p116124">三、 应变片温度误差与五大温度补偿技术（P116–124）</a></li>
+<li class="toc-h3"><a href="#四-交流电桥调制解调与相敏检波p125129">四、 交流电桥、调制解调与相敏检波（P125–129）</a></li>
+<li class="toc-h3"><a href="#五-物理公理与底层简单证明补强短板-3">五、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h3"><a href="#六-真题靶向加厚有载电桥精确解与大应变温漂耦合26-计4">六、 真题靶向加厚：有载电桥精确解与大应变/温漂耦合（26-计4）</a></li>
+</ol>
+</nav>
+<div class="toolbar">
+    <button type="button" id="fold-toggle" aria-expanded="true">折叠闭环与概念</button>
+</div>
+{% raw %}
+<article class="article">
+<section class="note-tab">
+<h2 class="tab-label" id="tab-05-1">05-1 电位器与应变片</h2>
+<h2 id="05-1-电位器电阻应变片与横向效应推导对应-ppt-p426" class="doc-title">05-1 电位器、电阻应变片与横向效应推导（对应 PPT P4–26）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1gbxCNrW_Ty25brNx31cvs1BUNvACCkBU/view?usp=drivesdk">05_物理1-电阻_P193-261.pdf</a>（PPT P4–26）｜<em>注：融合原笔记 <code>t1.1.1</code>～<code>t1.1.3</code>，完整保留电位器负载效应、电阻应变效应、半圆弧横向效应微元积分及惠斯通电桥戴维南等效推导。</em></p>
+</blockquote>
+<h3 id="目录">目录</h3>
+<ul>
+<li><a href="#一-变阻式电位器传感器与负载效应推导p46">一、 变阻式（电位器）传感器与负载效应推导（P4–6）</a></li>
+<li><a href="#二-电阻应变效应全微分推导尺寸效应-vs-压阻效应p713">二、 电阻应变效应全微分推导：尺寸效应 vs. 压阻效应（P7–13）</a></li>
+<li><a href="#三-应变片横向效应完整微元积分推导p1418">三、 应变片横向效应完整微元积分推导（P14–18）</a></li>
+<li><a href="#四-应变片静态非理想特性与电桥戴维南等效p1926">四、 应变片静态非理想特性与电桥戴维南等效（P19–26）</a></li>
+</ul>
+<hr>
+<h3 id="一-变阻式电位器传感器与负载效应推导p46">一、 变阻式（电位器）传感器与负载效应推导（P4–6）</h3>
+<h4 id="11-结构分类与优缺点ppt-p46">1.1 结构分类与优缺点（PPT P4–6）</h4>
+<ul>
+<li><strong>结构</strong>：直线电位器、单圈电位器、多圈电位器，将机械位移 $x$ 转化为电阻阻值变化。</li>
+<li><strong>优缺点</strong>：结构简单、尺寸小、价格低、受温湿度与电磁场干扰小、输出信号大；缺点是<strong>电刷与电阻膜间存在机械摩擦</strong>，需较大输入能量、易磨损降低精度与分辨力、<strong>动态响应差</strong>（仅适于慢变信号）。</li>
+</ul>
+<h4 id="12-理想空载-vs-实际负载效应loading-effect推导">1.2 理想空载 vs. 实际负载效应（Loading Effect）推导</h4>
+<p>设电位器总长度为 $L$、总阻值为 $R_p$、激励电压为 $V_{\text{in}}$，电刷滑片位置为 $x \in [0, L]$（对应下方电阻 $R_x = \frac{x}{L}R_p$，上方电阻 $R_p - R_x$）：</p>
+<ol>
+<li><strong>理想空载输出（$R_L \to \infty$，P5）</strong>：
+$$V_{\text{out}} = \frac{R_x}{R_p}V_{\text{in}} = \frac{x}{L}V_{\text{in}}$$</li>
+<li><strong>接入负载电阻 $R_L$ 后的实际输出</strong>：$R_x$ 与 $R_L$ 并联，等效下臂电阻 $R_{\parallel} = \frac{R_x R_L}{R_x + R_L}$，由分压公式得：
+$$V_{\text{out}} = \frac{R_{\parallel}}{(R_p - R_x) + R_{\parallel}}V_{\text{in}} = \frac{\frac{x}{L}V_{\text{in}}}{1 + \frac{R_p}{R_L}\cdot\frac{x}{L}\left(1 - \frac{x}{L}\right)}$$<ul>
+<li><strong>结论</strong>：当 $R_L$ 不够大时，分母出现非线性项 $\frac{R_p}{R_L}\frac{x}{L}(1-\frac{x}{L})$，使输出曲线向下弯曲（最大非线性误差发生在中点 $\frac{x}{L}=\frac{1}{2}$ 处，约为 $\frac{R_p}{4R_L}$）；工程上必须满足 <strong>$R_L \gg R_p$</strong>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二-电阻应变效应全微分推导尺寸效应-vs-压阻效应p713">二、 电阻应变效应全微分推导：尺寸效应 vs. 压阻效应（P7–13）</h3>
+<h4 id="21-应变效应物理本质与基本结构ppt-p7-p1112">2.1 应变效应物理本质与基本结构（PPT P7, P11–12）</h4>
+<p>导体或半导体在外界机械力作用下产生形变 $\varepsilon = \frac{\Delta L}{L}$，导致电阻值发生变化，称为<strong>应变效应</strong>（可测纳米级微小位移）。</p>
+<ul>
+<li><strong>粘贴式应变计三类（P12）</strong>：<strong>电阻丝式</strong>（常用直径 $0.025\;\text{mm}$ 高阻丝绕成敏感栅）、<strong>金属箔式</strong>（光刻成型，端头加宽可有效抑制横向效应）、<strong>螺旋式</strong>。</li>
+</ul>
+<h4 id="22-灵敏系数-g-的零跳步全微分推导ppt-p8-p10-p13">2.2 灵敏系数 $G$ 的零跳步全微分推导（PPT P8, P10, P13）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从 $R = \rho\frac{L}{A}$ 导出应变灵敏系数 $G = (1 + 2\mu) + \frac{\Delta\rho/\rho}{\varepsilon}$】</strong></p>
+<ol>
+<li><strong>对圆柱形电阻丝（$A = \pi r^2$）取对数全微分</strong>：
+$$\ln R = \ln\rho + \ln L - \ln A \implies \frac{dR}{R} = \frac{d\rho}{\rho} + \frac{dL}{L} - \frac{dA}{A}$$</li>
+<li><strong>将截面积微分转化为半径微分</strong>：对 $A = \pi r^2$ 求微分得 $dA = 2\pi r\,dr$，故：
+$$\frac{dA}{A} = \frac{2\pi r\,dr}{\pi r^2} = 2\frac{dr}{r}$$</li>
+<li><strong>引入泊松比 $\mu$</strong>：轴向拉伸（$dL &gt; 0$）时半径收缩（$dr &lt; 0$），满足 $\frac{dr}{r} = -\mu\frac{dL}{L}$。代入上式并改写为有限小增量：
+$$\frac{\Delta R}{R} = \frac{\Delta L}{L} - 2\left(-\mu\frac{\Delta L}{L}\right) + \frac{\Delta\rho}{\rho} = (1 + 2\mu)\frac{\Delta L}{L} + \frac{\Delta\rho}{\rho}$$</li>
+<li><strong>定义轴向应变 $\varepsilon \equiv \frac{\Delta L}{L}$ 与灵敏系数 $G$（PPT P10, P13）</strong>：
+$$\boxed{G \equiv \frac{\Delta R / R}{\Delta L / L} = (1 + 2\mu) + \frac{\Delta\rho / \rho}{\varepsilon}}$$
+$$\frac{\Delta R}{R} = G\varepsilon$$</li>
+</ol>
+</blockquote></details>
+<ul>
+<li><strong>金属 vs. 半导体物理主导机制对比（PPT P10 必考！）</strong>：</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">材料类型</th>
+<th align="left">主导物理效应</th>
+<th align="left">灵敏系数 $G$ 典型值</th>
+<th align="left">工程特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>金属电阻丝（如康铜）</strong></td>
+<td align="left"><strong>尺寸效应 $(1+2\mu)$ 为主</strong></td>
+<td align="left">$G \approx 2$（因金属 $\mu\approx 0.3 \implies 1+2\mu\approx 1.6$，外加微弱压阻）</td>
+<td align="left">线性范围宽、温度稳定性好、康铜应用最广</td>
+</tr>
+<tr>
+<td align="left"><strong>半导体（单晶硅等）</strong></td>
+<td align="left"><strong>压阻效应 $\frac{\Delta\rho/\rho}{\varepsilon}$ 为主</strong></td>
+<td align="left">为金属的 <strong>$50 \sim 70$ 倍</strong>（$G \approx 100\sim 140$）</td>
+<td align="left">灵敏度极高，但<strong>电阻率温度系数极大</strong>、非线性强，必须做温度补偿</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="三-应变片横向效应完整微元积分推导p1418">三、 应变片横向效应完整微元积分推导（P14–18）</h3>
+<p>由于丝式应变片敏感栅两端是半径为 $r$ 的<strong>半圆弧形横栅</strong>，当试件承受轴向应变 $\varepsilon$ 的同时受到垂直方向的横向应变 $\varepsilon_r$ 时，半圆弧段也会产生电阻变化，称为<strong>横向效应</strong>。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：半圆弧横栅微元积分推导 $K_x, K_y$ 与横向效应系数 $H$（PPT P15–18）】</strong>
+设敏感栅有 $n$ 根纵栅（每根长 $l$），则共有 $(n - 1)$ 个半径为 $r$ 的半圆弧横栅，栅丝总长 $L = nl + (n-1)\pi r$，栅丝材料本身的灵敏系数为 $K_s$。</p>
+<ol>
+<li><strong>纵栅总变形量</strong>：全部 $n$ 根纵栅仅感受轴向应变 $\varepsilon$：
+$$\Delta L_1 = n l \varepsilon$$</li>
+<li><strong>半圆弧微元弧长上的应变 $\varepsilon_\theta$</strong>：在半圆弧上极角 $\theta \in [0, \pi]$ 处取微元弧长 $dl = r\,d\theta$。由材料力学平面应变转轴公式（主应变 $\varepsilon, \varepsilon_r$ 投影到切向方向）：
+$$\varepsilon_\theta = \varepsilon\sin^2\theta + \varepsilon_r\cos^2\theta = \frac{\varepsilon + \varepsilon_r}{2} - \frac{\varepsilon - \varepsilon_r}{2}\cos 2\theta$$
+<em>(注：若以垂直于 $\varepsilon$ 的半径方向为 $\theta=0$ 起算，则写成 PPT P15 形式 $\varepsilon_\theta = \frac{\varepsilon+\varepsilon_r}{2} + \frac{\varepsilon-\varepsilon_r}{2}\cos 2\theta$，积分结果完全相同！)</em><ul>
+<li><em>(附：为什么平面应变转轴公式会出现 $2\theta$？取微元矢量 $\vec{dr} = (dx, dy) = dr(\cos\theta, \sin\theta)$，变形后由对称应变张量 $[\varepsilon_{ij}]$（主方向无切应变 $\gamma_{xy}=0$，且 $\varepsilon_x=\varepsilon,\;\varepsilon_y=\varepsilon_r$）得沿切线方向正应变 $\varepsilon_\theta = \hat{n}^T \mathbf{\varepsilon} \hat{n} = \varepsilon\cos^2\theta + \varepsilon_r\sin^2\theta$，再用降幂公式 $\cos^2\theta = \frac{1+\cos 2\theta}{2},\;\sin^2\theta = \frac{1-\cos 2\theta}{2}$ 即得 $2\theta$ 形式！)</em></li>
+</ul>
+</li>
+<li><strong>积分求单个半圆弧变形量 $\Delta l$</strong>：注意到 $\int_0^\pi \cos 2\theta\,d\theta = \left[\frac{1}{2}\sin 2\theta\right]_0^\pi = 0$：
+$$\Delta l = \int_0^\pi \varepsilon_\theta\,dl = \int_0^\pi \left(\frac{\varepsilon + \varepsilon_r}{2} + \frac{\varepsilon - \varepsilon_r}{2}\cos 2\theta\right)r\,d\theta = \frac{\pi r}{2}(\varepsilon + \varepsilon_r)$$</li>
+<li><strong>全部 $(n-1)$ 个横栅变形量与敏感栅总变形</strong>：
+$$\Delta L_2 = (n-1)\frac{\pi r}{2}(\varepsilon + \varepsilon_r)$$
+$$\Delta L = \Delta L_1 + \Delta L_2 = \left[nl + \frac{(n-1)\pi r}{2}\right]\varepsilon + \frac{(n-1)\pi r}{2}\varepsilon_r$$</li>
+<li><strong>解耦轴向与横向灵敏系数（PPT P17–18）</strong>：
+$$\frac{\Delta R}{R} = K_s \frac{\Delta L}{L} = K_x \varepsilon + K_y \varepsilon_r$$
+其中：
+$$K_x = K_s\frac{nl + \frac{(n-1)\pi r}{2}}{L}, \qquad K_y = K_s\frac{\frac{(n-1)\pi r}{2}}{L}$$<ul>
+<li>令 $\varepsilon_r = 0$ 得轴向灵敏度 $K_x = \frac{\Delta R/R}{\varepsilon}$；令 $\varepsilon = 0$ 得横向灵敏度 $K_y = \frac{\Delta R/R}{\varepsilon_r}$。</li>
+<li>定义<strong>横向效应系数 $H$</strong> 为二者之比（PPT P18）：
+$$\boxed{H = \frac{K_y}{K_x} = \frac{(n-1)\pi r}{2nl + (n-1)\pi r}}$$</li>
+<li><strong>工程设计准则</strong>：<strong>$r$ 越小、$l$ 越大，则 $H$ 越小</strong>（即敏感栅越窄、基长越长，横向效应误差越小；金属箔式应变片通过把端头转弯处做宽降低横栅电阻占比，也能大幅减小 $H$）。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-应变片静态非理想特性与电桥戴维南等效p1926">四、 应变片静态非理想特性与电桥戴维南等效（P19–26）</h3>
+<h4 id="41-三大非理想特性ppt-p1921常考名词解释简答">4.1 三大非理想特性（PPT P19–21，常考名词解释/简答！）</h4>
+<ol>
+<li><strong>机械滞后（P19）</strong>：恒温下加载与卸载特性曲线不重合（残余变形、粘结剂固化不充分导致；<strong>加载最大应变越大，卸载滞后也越大</strong>）。</li>
+<li><strong>零点漂移与蠕变（P20）</strong>：<ul>
+<li><strong>零漂</strong>：恒温、<strong>无应变</strong>时阻值随时间变化（通电自热、内应力释放、胶固化不充分）；</li>
+<li><strong>蠕变</strong>：恒温、<strong>恒定机械应变</strong>下阻值随时间变化（方向常与原应变<strong>相反</strong>，因胶层发生“滑动”使传递到敏感栅的应变逐渐松弛）。</li>
+</ul>
+</li>
+<li><strong>应变极限（P21）</strong>：恒温下，指示应变 $\varepsilon_i$ 相对真实应变 $\varepsilon_g$ 的相对误差不超过规定值（<strong>一般为 $10\%$</strong>）时的最大真实应变值：
+$$\delta = \frac{|\varepsilon_i - \varepsilon_g|}{\varepsilon_g}\times 100\% = 10\% \implies \varepsilon_i = 90\%\,\varepsilon_g$$</li>
+</ol>
+<h4 id="42-惠斯通电桥戴维南等效与负载输出ppt-p2225">4.2 惠斯通电桥戴维南等效与负载输出（PPT P22–25）</h4>
+<ul>
+<li><strong>开路戴维南等效电压 $v_{eq}$</strong>（$Z_1, Z_2$ 为左支路，$Z_3, Z_4$ 为右支路，P22）：
+$$v_{eq} = V_{\text{in}}\left(\frac{Z_1}{Z_1 + Z_2} - \frac{Z_3}{Z_3 + Z_4}\right), \qquad Z_{\text{eq}} = (Z_1 // Z_2) + (Z_3 // Z_4)$$</li>
+<li><strong>平衡条件</strong>：$Z_1 Z_4 = Z_2 Z_3$。</li>
+<li><strong>接入负载电阻 $R_L$ 后的实际输出电压（P22）</strong>：
+$$v_o = \frac{R_L}{R_{\text{eq}} + R_L}v_{eq}$$</li>
+<li><strong>等臂纯电阻电桥三大经典结论（P23–25）</strong>：单臂（$1/4$ 桥）$v_{eq} \approx \frac{1}{4}\frac{\Delta R}{R}V_{\text{in}}$；差动半桥 $v_{eq} = \frac{1}{2}\frac{\Delta R}{R}V_{\text{in}}$；差动全桥 $v_{eq} = \frac{\Delta R}{R}V_{\text{in}}$（完整推导见第 08 讲）。</li>
+</ul>
+<hr>
+<h3 id="五-物理公理与底层简单证明补强短板">五、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="51-微观欧姆定律与电阻定律-r--rhofracla-证明">5.1 微观欧姆定律与电阻定律 $R = \rho\frac{L}{A}$ 证明</h4>
+<p>为什么导体的电阻正比于长度 $L$、反比于截面积 $A$？</p>
+<ol>
+<li><strong>微观欧姆定律</strong>：在导体内部施加电场 $\vec{E}$，自由电子定向漂移形成电流密度 $\vec{J} = \sigma \vec{E}$（$\sigma = \frac{1}{\rho}$ 为电导率，$n$ 为载流子密度）。</li>
+<li><strong>积分宏观量</strong>：对均匀截面积 $A$、长度 $L$ 的电阻丝，总电流 $I = J A = \sigma E A$，两端电压 $U = E L$。</li>
+<li><strong>两式相除</strong>：
+$$R \equiv \frac{U}{I} = \frac{E L}{\sigma E A} = \frac{1}{\sigma}\frac{L}{A} = \boxed{\rho\frac{L}{A}}$$
+<em>物理直觉</em>：长度 $L$ 越长，电子碰撞散射路径越长，阻碍越大；截面积 $A$ 越大，并行通道越多，阻碍越小。</li>
+</ol>
+<h4 id="52-泊松比-mu-与体积相对变化-fracdelta-vv--1-2muvarepsilon">5.2 泊松比 $\mu$ 与体积相对变化 $\frac{\Delta V}{V} = (1-2\mu)\varepsilon$</h4>
+<p>为什么金属丝轴向拉长时，横截面积一定会收缩？</p>
+<ul>
+<li>设圆柱电阻丝体积 $V = A L = \pi r^2 L$，取对数全微分：
+$$\frac{dV}{V} = \frac{dL}{L} + 2\frac{dr}{r} = \varepsilon + 2(-\mu\varepsilon) = \boxed{(1 - 2\mu)\varepsilon}$$</li>
+<li><strong>物理极限</strong>：对于完全不可压缩材料（如橡胶、水），拉伸时体积不变（$dV = 0$），故 $\mu = 0.5$；金属晶格存在原子间距弹性扩张，通常 $\mu \approx 0.3 &lt; 0.5$，因此拉伸时体积微增，尺寸效应项 $1 + 2\mu \approx 1.6$。</li>
+</ul>
+<h4 id="53-戴维南等效定理thevenins-theorem的叠加证明">5.3 戴维南等效定理（Thevenin's Theorem）的叠加证明</h4>
+<p>为什么任何复杂的线性电阻电桥，对负载 $R_L$ 而言总能简化为一个电压源 $v_{eq}$ 串联一个内阻 $R_{eq}$？</p>
+<ul>
+<li>在输出端外接假想电流源 $I_{\text{test}}$，由<strong>线性电路叠加定理</strong>，端口电压 $V$ 是原独立源（令 $I_{\text{test}}=0$，得开路电压 $v_{eq}$）与测试电流源（令原独立源置零，得 $I_{\text{test}} R_{eq}$）的线性叠加，即 $V = v_{eq} - I_{\text{test}} R_{eq}$。这正是电压源串联内阻的伏安特性！</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-05-2">05-2 血压生理与流体定律</h2>
+<h2 id="05-2-血压生理学与血液动力学三大定律对应-ppt-p2737" class="doc-title">05-2 血压生理学与血液动力学三大定律（对应 PPT P27–37）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1gbxCNrW_Ty25brNx31cvs1BUNvACCkBU/view?usp=drivesdk">05_物理1-电阻_P193-261.pdf</a>（PPT P27–37）｜<em>注：融合原笔记 <code>t1.2.1</code>～<code>t1.2.2</code>，完整覆盖心动周期四期表、平均动脉压、Windkessel 弹性贮器效应、五大血压调节因素，以及连续性/伯努利/泊肃叶定律的零跳步流体力学推导。</em></p>
+</blockquote>
+<h3 id="目录-2">目录</h3>
+<ul>
+<li><a href="#一-动脉与静脉血压生理学基础p2731">一、 动脉与静脉血压生理学基础（P27–31）</a></li>
+<li><a href="#二-弹性贮器效应与五大血压影响因素p3234">二、 弹性贮器效应与五大血压影响因素（P32–34）</a></li>
+<li><a href="#三-血液动力学三大物理定律与泊肃叶积分推导p3537">三、 血液动力学三大物理定律与泊肃叶积分推导（P35–37）</a></li>
+</ul>
+<hr>
+<h3 id="一-动脉与静脉血压生理学基础p2731">一、 动脉与静脉血压生理学基础（P27–31）</h3>
+<h4 id="11-动脉血压-vs-静脉血压与能量转化ppt-p2728">1.1 动脉血压 vs. 静脉血压与能量转化（PPT P27–28）</h4>
+<ul>
+<li><strong>动脉血压</strong>：左心室射血产生；血管阻力大、压力高；心室收缩时动脉瓣（半月瓣）打开、房室瓣（二尖瓣）关闭，<strong>动能 $\downarrow$、弹性势能 $\uparrow$</strong>，最高值为<strong>收缩压（SP）</strong>；心室舒张时动脉瓣关闭、房室瓣打开，<strong>动能 $\uparrow$、势能 $\downarrow$</strong>，最低值为<strong>舒张压（DP）</strong>。</li>
+<li><strong>静脉血压</strong>：主要由右心室舒张负压抽吸与呼吸负压驱动，压力很低且易受重力影响。</li>
+</ul>
+<h4 id="12-心动周期四期压力与瓣膜心电对应表ppt-p29高频考表">1.2 心动周期四期压力与瓣膜/心电对应表（PPT P29，高频考表！）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">分期</th>
+<th align="left">生理过程</th>
+<th align="center">二尖瓣</th>
+<th align="center">主动脉瓣</th>
+<th align="left">主动脉血压变化</th>
+<th align="left">对应心电波形</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>$A\to B$ 心室快速收缩期</strong></td>
+<td align="left">左心室快速向主动脉射血</td>
+<td align="center">关</td>
+<td align="center">开</td>
+<td align="left">迅速上升，$DP \to SP$</td>
+<td align="left">QRS 后半段及 ST 段</td>
+</tr>
+<tr>
+<td align="left"><strong>$B\to C$ 心室减慢收缩期</strong></td>
+<td align="left">左心室向主动脉供血速度减慢至完成</td>
+<td align="center">关</td>
+<td align="center">开</td>
+<td align="left">缓慢下降</td>
+<td align="left">T 波前半段</td>
+</tr>
+<tr>
+<td align="left"><strong>$C\to D$ 心室等容舒张期</strong></td>
+<td align="left">左心室压力骤降，主动脉血返流撞击主动脉瓣并反弹</td>
+<td align="center">关</td>
+<td align="center">关</td>
+<td align="left"><strong>小幅回升（降中波 / 重搏波）</strong></td>
+<td align="left">T 波后半段</td>
+</tr>
+<tr>
+<td align="left"><strong>$D\to A'$ 心室充盈期</strong></td>
+<td align="left">左心房血液进入左心室，大动脉弹性回缩供血</td>
+<td align="center">开</td>
+<td align="center">关</td>
+<td align="left">持续下降至 $DP$</td>
+<td align="left">T-Q 段</td>
+</tr>
+</tbody></table></div>
+<h4 id="13-正常血压范围与平均动脉压公式ppt-p3031">1.3 正常血压范围与平均动脉压公式（PPT P30–31）</h4>
+<ul>
+<li><strong>单位换算</strong>：$1\;\text{kPa} = 7.5\;\text{mmHg}$。</li>
+<li><strong>正常范围与高血压界限（P30）</strong>：<ul>
+<li><strong>收缩压 $SP$</strong>：正常 $13.3\sim 16.0\;\text{kPa}$（$100\sim 120\;\text{mmHg}$）；高血压 $\ge 18.7\;\text{kPa}$（$140\;\text{mmHg}$）。</li>
+<li><strong>舒张压 $DP$</strong>：正常 $8.0\sim 10.7\;\text{kPa}$（$60\sim 80\;\text{mmHg}$）；高血压 $\ge 12.0\;\text{kPa}$（$90\;\text{mmHg}$）。</li>
+<li><strong>脉压（压差）$SP - DP$</strong>：$4.0\sim 5.3\;\text{kPa}$（$30\sim 40\;\text{mmHg}$）。</li>
+</ul>
+</li>
+<li><strong>平均动脉压（MP）</strong>：一个心动周期内动脉血压的平均值。因心室收缩期约占 $1/3$、舒张期约占 $2/3$（P31），故：
+$$\boxed{MP \approx DP + \frac{1}{3}(SP - DP) = \frac{1}{3}SP + \frac{2}{3}DP \approx 13.3\;\text{kPa}\;(100\;\text{mmHg})}$$</li>
+</ul>
+<hr>
+<h3 id="二-弹性贮器效应与五大血压影响因素p3234">二、 弹性贮器效应与五大血压影响因素（P32–34）</h3>
+<h4 id="21-弹性贮器效应windkessel-effectppt-p32">2.1 弹性贮器效应（Windkessel Effect，PPT P32）</h4>
+<ul>
+<li><strong>物理机制</strong>：外周阻力主要来自<strong>小动脉和微动脉</strong>（阻滞血液瞬间流走），而<strong>大动脉血管壁弹性大</strong>。心室射血时约 $1/3$ 血液直接流向外周，其余 $2/3$ 撑开大动脉将动能转化为<strong>弹性势能</strong>储存；心室舒张时大动脉弹性回缩，将储存的血液压向外周，从而把心脏的间断脉冲射血转化为连续血流，维持较高的平均压。</li>
+<li><strong>血管网络串并联阻力（P32）</strong>：串联 $R_{\text{总}} = \sum R_i$；并联 $\frac{1}{R_{\text{总}}} = \sum \frac{1}{R_i}$。</li>
+<li><strong>核心结论</strong>：<strong>收缩压 $SP$ 主要反映心室每搏输出量；舒张压 $DP$ 主要反映外周阻力大小</strong>。</li>
+</ul>
+<h4 id="22-五大因素对血压的影响规律表ppt-p33必考分析题">2.2 五大因素对血压的影响规律表（PPT P33，必考分析题！）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">影响因素</th>
+<th align="center">变化</th>
+<th align="center">$SP$</th>
+<th align="center">$DP$</th>
+<th align="center">脉压 $SP-DP$</th>
+<th align="left">物理与生理解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>每搏输出量</strong></td>
+<td align="center">$\uparrow$</td>
+<td align="center"><strong>明显 $\uparrow$</strong></td>
+<td align="center">略 $\uparrow$</td>
+<td align="center">$\uparrow$</td>
+<td align="left">射血量剧增使 $SP$ 大幅升高，但舒张期较多血液可流向外周故 $DP$ 仅略升</td>
+</tr>
+<tr>
+<td align="left"><strong>心率</strong></td>
+<td align="center">$\uparrow$</td>
+<td align="center">略 $\uparrow$</td>
+<td align="center"><strong>明显 $\uparrow$</strong></td>
+<td align="center">$\downarrow$</td>
+<td align="left">心舒期缩短，大动脉来不及向外周排空，舒张末期存血增多</td>
+</tr>
+<tr>
+<td align="left"><strong>外周血管阻力</strong></td>
+<td align="center">$\uparrow$</td>
+<td align="center">略 $\uparrow$</td>
+<td align="center"><strong>明显 $\uparrow$</strong></td>
+<td align="center">$\downarrow$</td>
+<td align="left">舒张期血液向外周流速减慢，大动脉存血增多（典型高血压机制）</td>
+</tr>
+<tr>
+<td align="left"><strong>大血管弹性</strong></td>
+<td align="center">$\downarrow$</td>
+<td align="center"><strong>$\uparrow$</strong></td>
+<td align="center"><strong>$\downarrow$</strong></td>
+<td align="center"><strong>明显 $\uparrow$</strong></td>
+<td align="left">储血与弹性缓冲能力变差（老年人动脉硬化特征）</td>
+</tr>
+<tr>
+<td align="left"><strong>循环血量</strong></td>
+<td align="center">$\downarrow$</td>
+<td align="center">$\downarrow$</td>
+<td align="center">$\downarrow$</td>
+<td align="center">$\downarrow$</td>
+<td align="left">血管充盈度与基础弹性势能整体下降（失血性休克）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="三-血液动力学三大物理定律与泊肃叶积分推导p3537">三、 血液动力学三大物理定律与泊肃叶积分推导（P35–37）</h3>
+<h4 id="31-连续性方程与伯努利方程ppt-p35">3.1 连续性方程与伯努利方程（PPT P35）</h4>
+<ol>
+<li><strong>连续性方程（质量守恒）</strong>：不可压缩定常流中体积流量 $Q\;(\text{m}^3/\text{s})$ 处处相等：
+$$Q = v_1 A_1 = v_2 A_2$$</li>
+<li><strong>伯努利方程（能量守恒）</strong>：单位体积流体的静压能、动能与重力势能之和沿流线守恒：
+$$p + \frac{1}{2}\rho v^2 + \rho g h = \text{const}$$</li>
+</ol>
+<h4 id="32-牛顿粘性定律与泊肃叶定律推导ppt-p3637核心推导">3.2 牛顿粘性定律与泊肃叶定律推导（PPT P36–37，核心推导！）</h4>
+<ul>
+<li><strong>牛顿内摩擦（粘性）定律（P36）</strong>：相邻液层间的切应力 $\tau$ 正比于速度梯度 $\frac{dv}{dx}$（$\eta$ 为血液粘滞系数，单位 $\text{Pa}\cdot\text{s}$）：
+$$\tau = \frac{F}{A} \approx \eta\frac{dv}{dx}$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从牛顿粘性定律积分导出泊肃叶定律与流阻 $R = \dfrac{8\eta L}{\pi r^4}$】</strong>
+考察半径为 $R_0$（PPT 记作 $r$）、长度为 $L$ 的刚性圆管内定常层流，两端压差为 $\Delta p$：</p>
+<ol>
+<li><strong>力平衡求速度剖面 $v(\rho_c)$</strong>：取半径为 $\rho_c$ 的同轴圆柱液柱，推动力 $\Delta p \cdot \pi \rho_c^2$ 与管壁粘性阻力 $2\pi \rho_c L \cdot \left(-\eta\frac{dv}{d\rho_c}\right)$ 平衡：
+$$\frac{dv}{d\rho_c} = -\frac{\Delta p}{2\eta L}\rho_c$$
+由管壁无滑移边界条件 $v(r) = 0$，从 $\rho_c$ 到 $r$ 积分得抛物线流速分布：
+$$v(\rho_c) = \frac{\Delta p}{4\eta L}\left(r^2 - \rho_c^2\right)$$</li>
+<li><strong>环带积分求总体积流量 $Q$</strong>：取圆环微元面积 $dA = 2\pi \rho_c\,d\rho_c$，积分得：
+$$Q = \int_0^r v(\rho_c)\cdot 2\pi \rho_c\,d\rho_c = \frac{\pi\Delta p}{2\eta L}\int_0^r \left(r^2 \rho_c - \rho_c^3\right)d\rho_c = \frac{\pi\Delta p}{2\eta L}\left[\frac{r^4}{2} - \frac{r^4}{4}\right] = \boxed{\frac{\pi r^4}{8\eta L}\Delta p}$$</li>
+<li><strong>流体欧姆定律与血管阻力 $R$（PPT P36–37）</strong>：类比电学 $I = \frac{U}{R}$，令流量 $Q \leftrightarrow I$、压差 $\Delta p \leftrightarrow U$，得：
+$$\boxed{Q = \frac{\Delta p}{R}, \qquad R = \frac{8\eta L}{\pi r^4}}$$<ul>
+<li><strong>病理映射（P37）</strong>：阻力与半径的 <strong>4 次方</strong>成反比！原发性高血压中微动脉半径 $r$ 轻微收缩（$r\downarrow$），或高血脂引起血液粘滞度 $\eta\uparrow$，都会导致外周阻力 $R$ 急剧升高。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-物理公理与底层简单证明补强短板">四、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="41-伯努利方程的能量守恒--动能定理-3-行证明">4.1 伯努利方程的能量守恒 / 动能定理 3 行证明</h4>
+<p>为什么流速越快的地方，静压强 $p$ 反而越低？
+考察理想不可压缩流体沿流管微元在 $dt$ 时间内从截面 $1$（$p_1, v_1, h_1$）移动到截面 $2$（$p_2, v_2, h_2$），流过的微元体积 $\Delta V = A_1 v_1 dt = A_2 v_2 dt$，质量 $\Delta m = \rho\Delta V$：</p>
+<ol>
+<li><strong>外力做功</strong>：上游推力做正功 $p_1 A_1 (v_1 dt) = p_1\Delta V$，下游阻力做负功 $-p_2\Delta V$，重力做功 $-\rho g(h_2 - h_1)\Delta V$。</li>
+<li><strong>由动能定理 $\sum W = \Delta E_k$</strong>：
+$$(p_1 - p_2)\Delta V - \rho g(h_2 - h_1)\Delta V = \frac{1}{2}\rho\Delta V(v_2^2 - v_1^2)$$</li>
+<li><strong>消去 $\Delta V$ 移项</strong>：
+$$\boxed{p_1 + \frac{1}{2}\rho v_1^2 + \rho g h_1 = p_2 + \frac{1}{2}\rho v_2^2 + \rho g h_2 = \text{const}}$$</li>
+</ol>
+<h4 id="42-为什么泊肃叶流阻-r-propto-frac1r4-而不是-frac1r2">4.2 为什么泊肃叶流阻 $R \propto \frac{1}{r^4}$ 而不是 $\frac{1}{r^2}$？</h4>
+<p>电学中导线电阻 $R_e = \rho\frac{L}{\pi r^2} \propto \frac{1}{r^2}$，为什么血管流阻却是 $r$ 的四次方反比？</p>
+<ul>
+<li><strong>第一重 $1/r^2$（几何截面积）</strong>：管径减半，过流截面积 $A = \pi r^2$ 缩小为 $1/4$；</li>
+<li><strong>第二重 $1/r^2$（粘性速度梯度）</strong>：由于管壁无滑移边界条件（$v_{\text{壁}}=0$），管径减半时中心层流离静止管壁的距离减半，切应力梯度剧增，使得截面平均流速 $\bar{v} = \frac{\Delta p\, r^2}{8\eta L}$ 也按 $r^2$ 缩小为 $1/4$！</li>
+<li>两者相乘，总流量 $Q = A\bar{v} \propto r^2 \cdot r^2 = r^4$，故流阻 $R \propto \frac{1}{r^4}$。</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-05-3">05-3 有创测压与导管模型</h2>
+<h2 id="05-3-有创血压测量与液体耦合导管二阶模型对应-ppt-p3859" class="doc-title">05-3 有创血压测量与液体耦合导管二阶模型（对应 PPT P38–59）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1gbxCNrW_Ty25brNx31cvs1BUNvACCkBU/view?usp=drivesdk">05_物理1-电阻_P193-261.pdf</a>（PPT P38–59）｜<em>注：融合原笔记 <code>t1.3.1</code>～<code>t1.3.4</code>，完整覆盖直接/间接测压对比、血压传感器指标、液体耦合导管 RLC 二阶建模推导、几何参数优化悖论、五类失真机理及 Pop Test 动态标定。</em></p>
+</blockquote>
+<h3 id="目录-3">目录</h3>
+<ul>
+<li><a href="#一-有创-vs-无创血压检测与传感器核心指标p3841">一、 有创 vs. 无创血压检测与传感器核心指标（P38–41）</a></li>
+<li><a href="#二-液体耦合导管二阶-rlc-模型推导p4245">二、 液体耦合导管二阶 RLC 模型推导（P42–45）</a></li>
+<li><a href="#三-导管几何优化与全维度失真因素分析p4656">三、 导管几何优化与全维度失真因素分析（P46–56）</a></li>
+<li><a href="#四-临床动态标定方波爆破法测试pop-testp5759">四、 临床动态标定：方波/爆破法测试（Pop Test，P57–59）</a></li>
+</ul>
+<hr>
+<h3 id="一-有创-vs-无创血压检测与传感器核心指标p3841">一、 有创 vs. 无创血压检测与传感器核心指标（P38–41）</h3>
+<h4 id="11-直接有创vs-间接无创对比ppt-p38">1.1 直接（有创）vs. 间接（无创）对比（PPT P38）</h4>
+<ul>
+<li><strong>直接检测（液体耦合导管法、血管内传感器法）</strong>：可连续实时测得各类大血管内精确血压波形，适于危重监护，但为有创操作。</li>
+<li><strong>间接检测（柯氏音法、示波法）</strong>：无创、简便低成本，适于家庭与门诊普查，但只能间断测大动脉 $SP/DP$ 且精度较低。</li>
+</ul>
+<h4 id="12-血压传感器核心性能指标与系统框图ppt-p3940">1.2 血压传感器核心性能指标与系统框图（PPT P39–40）</h4>
+<ol>
+<li><strong>整机灵敏度</strong>：因内部采用直流电桥，灵敏度正比于激励电压，国际统一单位为 <strong>$\mu\text{V}\;(\text{或 mV})/\text{V}/\text{mmHg}\;(\text{或 kPa})$</strong>。</li>
+<li><strong>量程（满量程）</strong>：静脉压传感器 <strong>$0\sim 80\;\text{mmHg}$</strong>；动脉压传感器 <strong>$0\sim 300\;\text{mmHg}$</strong>（频带要求 <strong>$0\sim 50\;\text{Hz}$</strong>）。</li>
+<li><strong>输出阻抗</strong>：等于电桥桥臂电阻——金属应变片式约数百欧姆，半导体压阻式可达几 $\text{k}\Omega$。</li>
+<li><strong>临床防凝血</strong>：液体耦合导管需持续用<strong>肝素氯化钠溶液</strong>冲洗。</li>
+</ol>
+<hr>
+<h3 id="二-液体耦合导管二阶-rlc-模型推导p4245">二、 液体耦合导管二阶 RLC 模型推导（P42–45）</h3>
+<h4 id="21-理想边界条件与集总参数物理映射ppt-p4244">2.1 理想边界条件与集总参数物理映射（PPT P42–44）</h4>
+<p>将导管内液柱视为不可压缩的“刚性水滑块”，需满足三大理想假设（P42）：①膜片面积远大于导管截面积；②膜片顺应性远大于导管壁弹性；③血液中无气泡、无血凝块。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">物理性质</th>
+<th align="left">流体力学表达式（PPT P44）</th>
+<th align="left">力学模型</th>
+<th align="left">模拟电学模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>液体阻力（粘滞摩擦）</strong></td>
+<td align="left">$R_c = \dfrac{8\eta L}{\pi r^4}$</td>
+<td align="left">阻尼 $f$</td>
+<td align="left">电阻 $R_c$</td>
+</tr>
+<tr>
+<td align="left"><strong>液体惯性（质量加速）</strong></td>
+<td align="left">$L_c = \dfrac{\rho L}{\pi r^2}$</td>
+<td align="left">质量 $m$</td>
+<td align="left">电感 $L_c$</td>
+</tr>
+<tr>
+<td align="left"><strong>膜片柔性（顺应性）</strong></td>
+<td align="left">$C_d = \dfrac{\Delta V}{\Delta P} = \dfrac{1}{E_d}$（$E_d$ 为膜片体弹性模数）</td>
+<td align="left">弹簧柔度 $1/k$</td>
+<td align="left">电容 $C_d$</td>
+</tr>
+</tbody></table></div>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从流体质量惯性与 RLC 电路导出 $f_n$ 与 $\xi$（PPT P43–45）】</strong></p>
+<ol>
+<li><strong>流体惯性 $L_c$ 的第一性原理推导</strong>：管内液柱质量 $m = \rho(\pi r^2 L)$。体积流量 $Q = A v = \pi r^2 v$，加速液柱所需惯性压差满足 $\Delta P_{\text{惯}}\cdot A = m\frac{dv}{dt} = \frac{m}{A}\frac{dQ}{dt}$，故：
+$$\Delta P_{\text{惯}} = \frac{\rho(\pi r^2 L)}{(\pi r^2)^2}\frac{dQ}{dt} = \left(\frac{\rho L}{\pi r^2}\right)\frac{dQ}{dt} \equiv L_c \frac{dQ}{dt}$$</li>
+<li><strong>建立串联二阶微分方程</strong>：总输入压差 $p(t)$ 克服惯性压降、粘滞压降与膜片弹性压降（$Q = \frac{dV}{dt}$）：
+$$p(t) = L_c \frac{d^2 V(t)}{dt^2} + R_c \frac{dV(t)}{dt} + \frac{V(t)}{C_d} \implies L_c C_d \frac{d^2 V(t)}{dt^2} + R_c C_d \frac{dV(t)}{dt} + V(t) = C_d\,p(t)$$
+<em>(对应电学 RLC 回路：$L_c C_d \frac{d^2 V_o}{dt^2} + R_c C_d \frac{dV_o}{dt} + V_o = V_i$，P45。)</em></li>
+<li><strong>对齐标准二阶方程 $\frac{1}{\omega_0^2}\ddot{y} + \frac{2\xi}{\omega_0}\dot{y} + y = Kx$</strong>：
+$$\omega_0 = \frac{1}{\sqrt{L_c C_d}} = \sqrt{\frac{\pi r^2}{\rho L C_d}} = r\sqrt{\frac{\pi}{\rho L C_d}} \implies \boxed{f_n = \frac{\omega_0}{2\pi} = \frac{r}{2}\sqrt{\frac{1}{\pi\rho L C_d}}}$$
+$$\xi = \frac{R_c}{2}\sqrt{\frac{C_d}{L_c}} = \frac{1}{2}\left(\frac{8\eta L}{\pi r^4}\right)\sqrt{\frac{\pi r^2 C_d}{\rho L}} = \boxed{\frac{4\eta}{r^3}\sqrt{\frac{L C_d}{\pi\rho}}}$$</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-导管几何优化与全维度失真因素分析p4656">三、 导管几何优化与全维度失真因素分析（P46–56）</h3>
+<h4 id="31-导管设计准则与多目标优化悖论ppt-p46-p49">3.1 导管设计准则与多目标优化悖论（PPT P46, P49）</h4>
+<ul>
+<li><strong>目标</strong>：由第 03-3 讲，需使固有频率 $f_0 = f_n$ 远超血压最高频率（$50\;\text{Hz}$），同时阻尼比控制在最佳区间 <strong>$\xi = 0.6\sim 0.7$</strong>。</li>
+<li><strong>几何参数敏感性（P49）</strong>：<ul>
+<li>导管长度 <strong>$L\downarrow$</strong> $\implies f_0\uparrow,\;\xi\downarrow$；</li>
+<li>导管半径 <strong>$r\uparrow$</strong> $\implies f_0\uparrow$（线性）、<strong>$\xi\downarrow\downarrow$（立方反比 $1/r^3$，极其敏感！）</strong>；</li>
+<li>膜片顺应性 <strong>$C_d\downarrow$</strong> $\implies f_0\uparrow,\;\xi\downarrow$。</li>
+<li><strong>一句话口诀</strong>：**“短、粗、硬”**的导管频带最宽、响应最快！</li>
+</ul>
+</li>
+</ul>
+<h4 id="32-五大非理想因素与过欠阻尼失真汇总ppt-p5056常考简答">3.2 五大非理想因素与过/欠阻尼失真汇总（PPT P50–56，常考简答！）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">干扰因素</th>
+<th align="left">物理机制（对等效 $R_c, L_c, C_d$ 的改变）</th>
+<th align="left">对 $f_0, \xi$ 的影响</th>
+<th align="left">失真类型与临床对策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 导管壁柔性 $C_c$（P50–51）</strong></td>
+<td align="left">管壁扩张储液等效并联电容 $C_d \to C_d + C_c$</td>
+<td align="left">$f_0 \downarrow,\; \xi \uparrow$</td>
+<td align="left">过阻尼失真（选用硬质导管）</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 近端微小气泡 $C_b$（P52）</strong></td>
+<td align="left">气体可压缩性极大，等效极高电容 $C_d \to C_d + C_b$</td>
+<td align="left"><strong>$f_0$ 剧降、$\xi$ 剧增</strong></td>
+<td align="left"><strong>最常见的严重过阻尼失真</strong>（排尽气泡）</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 血凝块/接头/湍流（P53）</strong></td>
+<td align="left">凝块使等效 $r\downarrow,\;\eta\uparrow$；接头/分叉湍流使 $R_c\uparrow$</td>
+<td align="left"><strong>$\xi \uparrow,\; f_0 \downarrow$</strong></td>
+<td align="left">过阻尼失真（肝素盐水冲洗）</td>
+</tr>
+<tr>
+<td align="left"><strong>4. 导管抖动（P54）</strong></td>
+<td align="left">高脉动血流冲击弯曲导管产生机械谐振</td>
+<td align="left">叠加高频伪影</td>
+<td align="left"><strong>欠阻尼失真</strong>（用硬导管置低速区）</td>
+</tr>
+<tr>
+<td align="left"><strong>5. 高度差与开口朝向（P56）</strong></td>
+<td align="left">伯努利方程：高度差 $\Delta h$ 引入静压误差 $\Delta p_s = \rho g\Delta h$</td>
+<td align="left">零点系统漂移</td>
+<td align="left"><strong>传感器须与左心室同高</strong>，开口垂直血流</td>
+</tr>
+</tbody></table></div>
+<p>*(PPT P55 总结：<strong>过阻尼</strong>主因：$r\downarrow$、气泡/血凝块、$L\uparrow$、$C_d\uparrow$；<strong>欠阻尼</strong>主因：$r\uparrow$、$L\downarrow$、$C_d\downarrow$、导管抖动、血液稀释。)*</p>
+<hr>
+<h3 id="四-临床动态标定方波爆破法测试pop-testp5759">四、 临床动态标定：方波/爆破法测试（Pop Test，P57–59）</h3>
+<p>直接向充液导管施加一个瞬时阶跃降压（刺破加压橡胶膜），记录系统的欠阻尼阶跃衰减波形：</p>
+<ol>
+<li>测量相邻两波峰时间差即振荡周期 <strong>$T_d$</strong>，测量首个超调峰高度 $M_1$（或连续两峰 $M_1, M_2$）；</li>
+<li>反解阻尼比与固有频率（直接复用第 03-2 讲公式）：
+$$\xi = \frac{1}{\sqrt{\left(\frac{\pi}{\ln(M_1/K)}\right)^2 + 1}}, \qquad \omega_0 = \frac{2\pi}{T_d\sqrt{1 - \xi^2}}$$
+从而在临床现场定量评估导管—传感器系统的动态频响是否满足 $0\sim 50\;\text{Hz}$ 无失真要求。</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：Pop Test 为什么常用相邻两峰比值 $M_1/M_2$（对数衰减率）而非首峰超调量？】</strong>
+临床快速冲洗释放后，由于基线压可能存在漂移，准确读取稳态零位 $K$ 较困难；但相邻两波峰的峰—峰值（或相对高度 $M_1, M_2$）极易直接量取。由第 03-2 讲衰减度定义 $\delta = \ln\frac{M_1}{M_2} = \frac{2\pi\xi}{\sqrt{1-\xi^2}}$，两边平方反解即得临床常用公式：
+$$\boxed{\xi = \frac{\delta}{\sqrt{4\pi^2 + \delta^2}} = \frac{\ln(M_1/M_2)}{\sqrt{4\pi^2 + [\ln(M_1/M_2)]^2}}}$$</p>
+</blockquote></details>
+<hr>
+<h3 id="五-物理公理与底层简单证明补强短板-2">五、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="51-流体力学电学类比的功率共轭公理">5.1 流体力学—电学类比的“功率共轭”公理</h4>
+<p>为什么可以把血压 $p$ 类比为电压 $U$、把体积流量 $Q$ 类比为电流 $I$，并直接套用 RLC 电路方程？</p>
+<ol>
+<li><strong>流变量与势变量守恒</strong>：电学中电荷 $q = \int I\,dt$ 守恒；流体中不可压缩液体体积 $V = \int Q\,dt$ 守恒（对应 $q \leftrightarrow V,\; I \leftrightarrow Q$）。</li>
+<li><strong>功率与能量严格同构</strong>：<ul>
+<li>瞬时功率：$P_{\text{电}} = U I \quad \leftrightarrow \quad P_{\text{流}} = p Q$；</li>
+<li><strong>感性储能（动能）</strong>：$E_L = \frac{1}{2}L I^2 \quad \leftrightarrow \quad E_k = \frac{1}{2}m v^2 = \frac{1}{2}(\rho A L)\left(\frac{Q}{A}\right)^2 = \frac{1}{2}\underbrace{\left(\frac{\rho L}{\pi r^2}\right)}_{L_c} Q^2$；</li>
+<li><strong>容性储能（弹性势能）</strong>：$E_C = \frac{1}{2}\frac{q^2}{C} \quad \leftrightarrow \quad E_p = \frac{1}{2}\frac{V^2}{C_d}$；</li>
+<li><strong>阻性耗散（焦耳热/粘滞热）</strong>：$P_R = I^2 R \quad \leftrightarrow \quad P_{\text{粘}} = Q^2 R_c$。
+正因为三种储能与耗散泛函在数学形式上完全一一对应，拉格朗日方程与 KVL 回路方程必然完全同构！</li>
+</ul>
+</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-05-4">05-4 眼压与无创血压</h2>
+<h2 id="05-4-眼压检测与无创血压测量柯氏音示波法对应-ppt-p6069" class="doc-title">05-4 眼压检测与无创血压测量（柯氏音/示波法，对应 PPT P60–69）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1gbxCNrW_Ty25brNx31cvs1BUNvACCkBU/view?usp=drivesdk">05_物理1-电阻_P193-261.pdf</a>（PPT P60–69）｜<em>注：融合原笔记 <code>t1.4.1</code>，筛除过长科普描写，保留压平眼压计半桥原理、柯氏音放气定量误差推导及示波法幅度系数/斜率判据。</em></p>
+</blockquote>
+<h3 id="目录-4">目录</h3>
+<ul>
+<li><a href="#一-眼压检测与半桥应变结构p6061">一、 眼压检测与半桥应变结构（P60–61）</a></li>
+<li><a href="#二-柯氏音听诊法机理与放气误差推导p6365">二、 柯氏音听诊法机理与放气误差推导（P63–65）</a></li>
+<li><a href="#三-示波法自动测压系统与定量判据p6669">三、 示波法自动测压系统与定量判据（P66–69）</a></li>
+</ul>
+<hr>
+<h3 id="一-眼压检测与半桥应变结构p6061">一、 眼压检测与半桥应变结构（P60–61）</h3>
+<ul>
+<li><strong>压平式眼压传感器结构（P61）</strong>：悬臂弹性片上下表面各粘贴一片应变片（受压弯曲时上片受拉 $R+\Delta R$、下片受压 $R-\Delta R$），与两个固定电阻 $R$ 组成<strong>差动半桥</strong>，消除了单臂非线性并实现温度补偿。</li>
+<li><strong>材料选型对比</strong>：金属电阻应变片线性度好但灵敏度低；半导体压阻式应变系数 $G$ 大、灵敏度高，但线性度差、温漂大。</li>
+</ul>
+<hr>
+<h3 id="二-柯氏音听诊法机理与放气误差推导p6365">二、 柯氏音听诊法机理与放气误差推导（P63–65）</h3>
+<h4 id="21-标准操作与血流动力学三阶段ppt-p63">2.1 标准操作与血流动力学三阶段（PPT P63）</h4>
+<ol>
+<li><strong>阻断期</strong>：袖带缚于上臂（听诊器置于袖带下游肱动脉处），快速充气至 $SP + 30\;\text{mmHg}$ 以上，血管完全闭合无声；</li>
+<li><strong>间断喷射期（$DP &lt; P_{\text{cuff}} \le SP$）</strong>：以 <strong>$2\sim 3\;\text{mmHg/s}$</strong> 匀速放气。袖带压刚低于 $SP$ 时，动脉在收缩峰瞬间冲开、舒张期闭合，血液间断湍流冲击管壁产生<strong>柯氏音</strong>（第一声对应 $SP$）；</li>
+<li><strong>完全连续期（$P_{\text{cuff}} \le DP$）</strong>：血管全周期保持张开，血液恢复平稳流动，柯氏音变调减弱直至消失（对应 $DP$）。</li>
+</ol>
+<h4 id="22-柯氏音系统误差与放气速率定量分析ppt-p6465常考计算简答">2.2 柯氏音系统误差与放气速率定量分析（PPT P64–65，常考计算/简答！）</h4>
+<ul>
+<li><strong>四大误差源（P64）</strong>：①操作者低频听觉灵敏度与主观性；②<strong>袖带宽度</strong>（标准应为上臂周长的 <strong>$40\%$</strong>；<strong>袖带过窄、固定不牢或漏气会使测得血压显著偏高</strong>）；③<strong>测量高度</strong>（须与心脏同高）；④受试者柯氏音强度分布差异。</li>
+<li><strong>典型偏倚范围（P65）</strong>：传统柯氏音法常使测得 <strong>$SP$ 偏低 $5\sim 20\;\text{mmHg}$</strong>，而 <strong>$DP$ 偏高 $12\sim 20\;\text{mmHg}$</strong>。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么放气速率 $r$ 过快会导致收缩压 $SP$ 偏低？（PPT P65）】</strong>
+设动脉血压心动周期为 $T$，袖带放气速率为 $r\;(\text{mmHg/s})$。若袖带压力曲线在刚高于某次心搏峰值时错过该波峰（未产生柯氏音），则袖带压在等待下一个收缩波峰到来的 $T$ 秒内会继续下降 $r T$。因此，直到下一波峰才听到第一声柯氏音时，对应的袖带压（$B$ 点）<strong>最低可偏低于真实收缩压 $SP$</strong>：
+$$\boxed{P_{\min} = SP - r T}$$</p>
+<ul>
+<li><strong>PPT P65 算例</strong>：若放气速率 $r = 3\;\text{mmHg/s}$，心动周期 $T = 1\;\text{s}$，则测得的收缩压最多可偏低 <strong>$3\;\text{mmHg}$</strong>。</li>
+</ul>
+</blockquote></details>
+<hr>
+<h3 id="三-示波法自动测压系统与定量判据p6669">三、 示波法自动测压系统与定量判据（P66–69）</h3>
+<h4 id="31-系统硬件链路与四阶段特征ppt-p6667">3.1 系统硬件链路与四阶段特征（PPT P66–67）</h4>
+<ul>
+<li><strong>原理</strong>：无需听诊器，直接检测放气过程中动脉搏动引起的<strong>袖带内气体压力振荡波</strong>，与袖带静压同步记录。</li>
+<li><strong>系统框图与参数（P67）</strong>：压力传感器 $\to$ 双路分离（低通滤波提取<strong>袖带静压</strong>；带通/高通滤波提取<strong>脉搏振荡波</strong>并经交流放大）$\to$ 多路开关与 A/D 转换（<strong>采样频率 $100\;\text{Hz}$</strong>，放气速率 <strong>$3\sim 5\;\text{mmHg/s}$</strong>）。</li>
+<li><strong>放气四阶段振荡波演变（P66）</strong>：<ol>
+<li>$P_{\text{cuff}} &gt; SP$：血管虽闭锁，但近端脉搏撞击袖带边缘产生微弱振荡波；</li>
+<li>$SP \to MP$：血管逐渐张开，振荡波幅值<strong>急剧增大</strong>；</li>
+<li><strong>$P_{\text{cuff}} = MP$</strong>：血管壁内外跨壁压为零（管壁处于最松弛顺应状态），搏动体积变化最大，<strong>振荡波达到峰值 $A_M$</strong>；</li>
+<li>$MP \to DP$ 以下：血管张开时间延长，振荡波迅速衰减至恒定小幅。</li>
+</ol>
+</li>
+</ul>
+<h4 id="32-示波法定量识别-spdp-的两大算法ppt-p6869必背">3.2 示波法定量识别 $SP/DP$ 的两大算法（PPT P68–69，必背！）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">识别算法</th>
+<th align="left">数学判据（PPT P68–69）</th>
+<th align="left">特点与工程评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 幅度系数法（归一化比例法，P68）</strong></td>
+<td align="left">以最大振荡波幅 $A_M$ 对应 <strong>$MP$</strong>；按经验比例系数确定 $SP$ 与 $DP$ 处的波幅 $A_S, A_D$：<br>$$\frac{A_S}{A_M} = 0.45 \sim 0.57, \qquad \frac{A_D}{A_M} = 0.69 \sim 0.89$$</td>
+<td align="left">电子血压计最常用，但比例系数受血管弹性个体差异影响较大</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 斜率法（拐点法，P69）</strong></td>
+<td align="left">仍以 $A_M$ 对应 <strong>$MP$</strong>；取振荡波包络线<strong>上升段斜率最大处</strong>对应 $SP$，<strong>下降段斜率最大处</strong>对应 $DP$</td>
+<td align="left">无需固定经验比例，但对运动伪迹和包络线平滑滤波算法敏感</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-06">06 电容式传感器</h2>
+<h2 id="06-电容式传感器原理差动线性化与接口电路对应-ppt-p7095" class="doc-title">06 电容式传感器原理、差动线性化与接口电路（对应 PPT P70–95）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1Ye-e1ovKanfUQyyjskcxrRqPXqVO5WEj/view?usp=drivesdk">06_物理1-电容_P262-283.pdf</a>（PPT P70–95）｜<em>注：融合原笔记 <code>t5.2.1.1</code>～<code>t5.2.1.2</code>，完整覆盖三种电容变化机制、单端/差动变极距泰勒展开、P80–83 三类电容电桥与全区线性推导、P84–95 心音/驻极体助听器/指纹识别生物医学应用。</em></p>
+</blockquote>
+<h3 id="目录-5">目录</h3>
+<ul>
+<li><a href="#一-平板电容公式与三大工作类型p7071-p7879">一、 平板电容公式与三大工作类型（P70–71, P78–79）</a></li>
+<li><a href="#二-单端变极距型泰勒展开与非线性误差推导p7274">二、 单端变极距型：泰勒展开与非线性误差推导（P72–74）</a></li>
+<li><a href="#三-差动变极距型偶次项抵消与双倍灵敏度推导p7577">三、 差动变极距型：偶次项抵消与双倍灵敏度推导（P75–77）</a></li>
+<li><a href="#四-电容高频等效电路与三类测量电桥p8083">四、 电容高频等效电路与三类测量电桥（P80–83）</a></li>
+<li><a href="#五-生物医学应用心音听诊驻极体助听器与指纹识别p8495">五、 生物医学应用：心音听诊、驻极体助听器与指纹识别（P84–95）</a></li>
+</ul>
+<hr>
+<h3 id="一-平板电容公式与三大工作类型p7071-p7879">一、 平板电容公式与三大工作类型（P70–71, P78–79）</h3>
+<h4 id="11-平板电容器基本方程ppt-p7071">1.1 平板电容器基本方程（PPT P70–71）</h4>
+<p>忽略边缘效应时，两平行极板构成的电容量为：
+$$C = \frac{\varepsilon S}{\delta} = \frac{\varepsilon_0 \varepsilon_r S}{\delta}$$
+其中 $\varepsilon_0 = 8.854\times 10^{-12}\;\text{F/m}$ 为真空介电常数，$\varepsilon_r$ 为极板间介质的相对介电常数（空气介质 $\varepsilon_r \approx 1$），$S$ 为极板正对面积，$\delta$ 为极板间距。</p>
+<h4 id="12-三种电容变化机制与优缺点ppt-p71-p7879">1.2 三种电容变化机制与优缺点（PPT P71, P78–79）</h4>
+<ol>
+<li><strong>变极距型（$\delta$ 变）</strong>：非线性但分辨力极高（可测 $0.01\;\mu\text{m}$ 微位移），在微位移/压力检测中应用最广；</li>
+<li><strong>变面积型（$S$ 变）</strong>：如极板相对平动 $\Delta x$（面积 $S = b(a-\Delta x)$），$\Delta C = -\frac{\varepsilon b}{\delta}\Delta x$，<strong>天然线性</strong>但灵敏度较低，适于较大位移测量；</li>
+<li><strong>变介电常数型（$\varepsilon_r$ 变，P78）</strong>：依靠极板间介电层材料（如多孔柔性介电层受压排出空气使等效 $\varepsilon_r$ 增大）或液位高度变化改变电容量。</li>
+</ol>
+<ul>
+<li><strong>核心优缺点（P79）</strong>：<ul>
+<li><strong>优点</strong>：输入能量极小、分辨力极高；温度稳定性好、能量损耗小；结构简单耐高低温/强辐射/强磁场；动态特性好；可非接触测量且具有平均效应；</li>
+<li><strong>缺点</strong>：<strong>输出阻抗极高</strong>（容抗 $1/(\omega C)$ 大）、负载能力差；<strong>寄生电容 $C_p$ 影响大</strong>；变极距型存在非线性。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="二-单端变极距型泰勒展开与非线性误差推导p7274">二、 单端变极距型：泰勒展开与非线性误差推导（P72–74）</h3>
+<p>设初始极距为 $\delta_0$，初始电容 $C_0 = \frac{\varepsilon S}{\delta_0}$。当动极板上移 $\Delta\delta$（间距缩小为 $\delta = \delta_0 - \Delta\delta$）时：
+$$\Delta C = \frac{\varepsilon S}{\delta_0 - \Delta\delta} - \frac{\varepsilon S}{\delta_0} = C_0 \frac{\Delta\delta}{\delta_0 - \Delta\delta} \implies \frac{\Delta C}{C_0} = \frac{\Delta\delta / \delta_0}{1 - \Delta\delta / \delta_0}$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：单端变极距幂级数展开与非线性误差 $\gamma$ 推导（PPT P73–74）】</strong>
+在小位移条件 $\frac{\Delta\delta}{\delta_0} \ll 1$ 下，利用无穷几何级数 $\frac{1}{1-u} = 1 + u + u^2 + u^3 + \cdots$ 展开：
+$$\frac{\Delta C}{C_0} = \frac{\Delta\delta}{\delta_0}\left[1 + \frac{\Delta\delta}{\delta_0} + \left(\frac{\Delta\delta}{\delta_0}\right)^2 + \cdots\right] = \frac{\Delta\delta}{\delta_0} + \left(\frac{\Delta\delta}{\delta_0}\right)^2 + \left(\frac{\Delta\delta}{\delta_0}\right)^3 + \cdots$$</p>
+<ol>
+<li><strong>线性近似与灵敏度</strong>：略去二次及以上高次项，得 $\frac{\Delta C}{C_0} \approx \frac{\Delta\delta}{\delta_0}$，故绝对灵敏度为：
+$$\boxed{K = \frac{\Delta C}{\Delta\delta} = \frac{C_0}{\delta_0} = \frac{\varepsilon S}{\delta_0^2} \propto \frac{1}{\delta_0^2}}$$
+<strong>极距 $\delta_0$ 越小，灵敏度按平方反比急剧提高</strong>（电容压力传感器常取 $\delta_0 = 0.1\sim 0.2\;\text{mm},\; C_0 = 20\sim 100\;\text{pF}$）。</li>
+<li><strong>相对非线性误差 $\gamma$（PPT P74）</strong>：以最主要的二次误差项与一次线性项之比衡量：
+$$\boxed{\gamma = \frac{(\Delta\delta/\delta_0)^2}{\Delta\delta/\delta_0}\times 100\% = \frac{\Delta\delta}{\delta_0}\times 100\%}$$
+<em>工程权衡</em>：$\delta_0$ 越小灵敏度越高，但同一位移 $\Delta\delta$ 造成的相对非线性误差 $\frac{\Delta\delta}{\delta_0}$ 也越大，故单端型只能工作在极小位移区间。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-差动变极距型偶次项抵消与双倍灵敏度推导p7577">三、 差动变极距型：偶次项抵消与双倍灵敏度推导（P75–77）</h3>
+<p>两个定极板夹一个动极板构成差动电容，初始间隙均为 $\delta_0$，初始电容均为 $C_0 = \frac{\varepsilon S}{\delta_0}$。动极板上移 $\Delta\delta$ 后，$\delta_1 = \delta_0 - \Delta\delta$，$\delta_2 = \delta_0 + \Delta\delta$。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：差动变极距偶次非线性抵消证明（PPT P76–77）】</strong></p>
+<ol>
+<li>分别展开上下两电容（记 $u = \frac{\Delta\delta}{\delta_0}$）：
+$$C_1 = \frac{C_0}{1 - u} = C_0\big(1 + u + u^2 + u^3 + u^4 + \cdots\big)$$
+$$C_2 = \frac{C_0}{1 + u} = C_0\big(1 - u + u^2 - u^3 + u^4 - \cdots\big)$$</li>
+<li>作差 $\Delta C = C_1 - C_2$，<strong>所有偶次幂项（$u^2, u^4, \dots$）精确相互抵消</strong>：
+$$\frac{\Delta C}{C_0} = \frac{C_1 - C_2}{C_0} = 2\left(\frac{\Delta\delta}{\delta_0}\right) + 2\left(\frac{\Delta\delta}{\delta_0}\right)^3 + 2\left(\frac{\Delta\delta}{\delta_0}\right)^5 + \cdots$$</li>
+<li><strong>性能对比（P77）</strong>：<ul>
+<li><strong>灵敏度翻倍</strong>：$K_{\text{差动}} = \dfrac{2 C_0}{\delta_0} = \dfrac{2\varepsilon S}{\delta_0^2}$；</li>
+<li><strong>非线性误差降为一阶平方量级</strong>（以三次项为主误差）：
+$$\boxed{\gamma_{\text{差动}} = \frac{2(\Delta\delta/\delta_0)^3}{2(\Delta\delta/\delta_0)}\times 100\% = \left(\frac{\Delta\delta}{\delta_0}\right)^2 \times 100\%}$$
+<em>(例如 $\Delta\delta/\delta_0 = 0.1$ 时，单端非线性误差为 $10\%$，差动式骤降至 $1\%$！同时对称结构还能补偿温湿度和寄生电容漂移。)</em></li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-电容高频等效电路与三类测量电桥p8083">四、 电容高频等效电路与三类测量电桥（P80–83）</h3>
+<h4 id="41-高频全参数等效电路ppt-p80">4.1 高频全参数等效电路（PPT P80）</h4>
+<p>实际电容传感器并非理想纯电容，其高频全参数模型包含：<strong>理想电容 $C$</strong> 并联<strong>低频损耗并联电阻 $R_p$</strong>（极板漏电与介质损耗）$\to$ 串联<strong>高频损耗电阻 $R_s$</strong>（导线、极板与支座损耗）和<strong>引线电感 $L$</strong> $\to$ 整体再并联<strong>寄生电容 $C_p$</strong>（克服 $C_p$ 是提高实用性能的关键，如采用驱动屏蔽/等电位屏蔽）。</p>
+<ul>
+<li><strong>寄生电容 $C_p$ 降低灵敏度定量说明</strong>：传感器电容 $C_0$（通常仅几十 $\text{pF}$）与电缆/分布寄生电容 $C_p$（常达上百 $\text{pF}$）并联后，总电容变为 $C_{\text{总}} = C_0 + C_p + \Delta C$，导致实测相对变化率被稀释为 $\frac{\Delta C}{C_0 + C_p} \ll \frac{\Delta C}{C_0}$，灵敏度大幅下降且受电缆晃动干扰。</li>
+</ul>
+<h4 id="42-三类电容交流电桥与全区线性推导ppt-p8183">4.2 三类电容交流电桥与全区线性推导（PPT P81–83）</h4>
+<p>PPT P81 给出三种常用电容交流电桥拓扑：<strong>(a) 电阻平衡臂交流电桥</strong>（$R, R$ 配 $C_{r1}, C_{r2}$）；<strong>(b) 纯电容交流电桥</strong>（固定电容 $C, C$ 配 $C_{r1}, C_{r2}$）；<strong>(c) 变压器耦合电感臂电桥</strong>（紧耦合电感 $L, L$ 配 $C_{r1}, C_{r2}$，抗寄生电容能力强）。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：纯电容交流电桥全区无近似绝对线性证明（PPT P82–83）】</strong>
+设差动电容 $C_1 = \frac{\varepsilon_0\varepsilon_r S}{d_0 - x}$、$C_2 = \frac{\varepsilon_0\varepsilon_r S}{d_0 + x}$ 接入图 (b) 纯电容电桥左侧两臂，右侧两臂均为固定电容 $C$，激励电压为 $V_{\text{in}}$：</p>
+<ol>
+<li><strong>容抗分压求节点电压</strong>（注意 $Z_C = \frac{1}{j\omega C}$ 与电容成反比！）：
+$$V_A = \frac{\frac{1}{j\omega C_2}}{\frac{1}{j\omega C_1} + \frac{1}{j\omega C_2}} V_{\text{in}} = \frac{C_1}{C_1 + C_2}V_{\text{in}}, \qquad V_B = \frac{C}{C + C}V_{\text{in}} = \frac{1}{2}V_{\text{in}}$$</li>
+<li><strong>求差分输出 $V_o$ 并代入 $C_1, C_2$ 表达式</strong>：
+$$V_o = V_A - V_B = \left(\frac{C_1}{C_1 + C_2} - \frac{1}{2}\right)V_{\text{in}} = \frac{1}{2}\left(\frac{C_1 - C_2}{C_1 + C_2}\right)V_{\text{in}}$$
+$$\frac{C_1 - C_2}{C_1 + C_2} = \frac{\dfrac{1}{d_0 - x} - \dfrac{1}{d_0 + x}}{\dfrac{1}{d_0 - x} + \dfrac{1}{d_0 + x}} = \frac{(d_0 + x) - (d_0 - x)}{(d_0 + x) + (d_0 - x)} = \frac{2x}{2d_0} = \frac{x}{d_0}$$</li>
+<li><strong>严格全区线性输出</strong>（不依赖 $x \ll d_0$ 小信号近似！）：
+$$\boxed{V_o = \frac{V_{\text{in}}}{2 d_0}\,x}$$</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="五-生物医学应用心音听诊驻极体助听器与指纹识别p8495">五、 生物医学应用：心音听诊、驻极体助听器与指纹识别（P84–95）</h3>
+<h4 id="51-心音产生机理与四大心音特征ppt-p8486">5.1 心音产生机理与四大心音特征（PPT P84–86）</h4>
+<ul>
+<li><strong>心音频率范围（P86）</strong>：$5\sim 1000\;\text{Hz}$，主要能量集中在 <strong>$20\sim 200\;\text{Hz}$</strong>；四大听诊区为 <strong>A</strong>（主动脉，右上）、<strong>P</strong>（肺动脉，左上）、<strong>T</strong>（三尖瓣，右下）、<strong>M</strong>（二尖瓣，左下）。</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">心音</th>
+<th align="left">发生时间</th>
+<th align="left">生理产生机理（PPT P85）</th>
+<th align="left">声学特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>第一心音</strong></td>
+<td align="left">心室快速收缩期开始（ECG QRS 后半段）</td>
+<td align="left">①心室射血引起大血管扩张及血涡流；②房室瓣突然关闭振动</td>
+<td align="left"><strong>频率低，持续时间长</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>第二心音</strong></td>
+<td align="left">心室舒张期开始（ECG T 波后半段）</td>
+<td align="left">动脉瓣关闭及动脉血回流冲击动脉瓣</td>
+<td align="left"><strong>频率高，持续时间短</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>第三心音</strong></td>
+<td align="left">心室快速充盈期末</td>
+<td align="left">血液充盈减慢、流速突变使心室壁及瓣膜振动</td>
+<td align="left">低频低振幅，常听不到</td>
+</tr>
+<tr>
+<td align="left"><strong>第四心音</strong></td>
+<td align="left">心房收缩期（ECG P 波）</td>
+<td align="left">心房收缩</td>
+<td align="left">一般听不到，心房收缩异常有力时可听到</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>弹性膜电容心音传感器（P88）</strong>：金属化绷紧振膜动片与固定电极构成平板电容，频响宽、失真小。</li>
+</ul>
+<h4 id="52-驻极体电容传声器与助听器ppt-p89">5.2 驻极体电容传声器与助听器（PPT P89）</h4>
+<ul>
+<li><strong>驻极体物理机制（P89）</strong>：驻极体电介质在强外电场作用下极化并**“永久”保留表面极化电荷 $q$**，无需外接高压直流偏置电源即可等效提供恒定偏压源 $V_s$。</li>
+<li><strong>力—电转换关系</strong>：振膜受声压振动使极距 $d$ 变化 $\Delta d$，电容 $C = \frac{\varepsilon A}{d}$ 变化而极板电荷 $Q$ 在高阻负载 $R$ 上来不及泄放（保持近似恒定），引起开路输出电压变化 $\Delta V = \frac{Q}{\varepsilon A}\Delta d \propto \Delta d$，经放大处理后驱动受话器发声。</li>
+</ul>
+<h4 id="53-电容式指纹识别ppt-p9495">5.3 电容式指纹识别（PPT P94–95）</h4>
+<ul>
+<li><strong>机理</strong>：传感器芯片表面布满微米级电容感应像素，预先充电至同一参考电压；手指按压后，<strong>凸起的“嵴”<strong>距像素极板近 $\implies$ 形成较大电容 $C_{\text{嵴}}$ $\implies$ 恒流/RC 放电速率</strong>较慢</strong>；<strong>凹下的“峪”<strong>距像素极板远 $\implies$ 形成较小电容 $C_{\text{峪}}$ $\implies$ 放电速率</strong>较快</strong>（由一阶 RC 放电时间常数 $\tau = R C$，$C_{\text{嵴}} &gt; C_{\text{峪}} \implies \tau_{\text{嵴}} &gt; \tau_{\text{峪}}$，故相同采样时刻嵴像素电压高于峪像素）。检测各像素放电速率差异即可精确重构指纹嵴峪图像。</li>
+</ul>
+<hr>
+<h3 id="六-物理公理与底层简单证明补强短板">六、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="61-高斯定理gausss-law4-行导出平板电容公式-c--fracvarepsilon_0varepsilon_r-sdelta">6.1 高斯定理（Gauss's Law）4 行导出平板电容公式 $C = \frac{\varepsilon_0\varepsilon_r S}{\delta}$</h4>
+<ol>
+<li><strong>高斯定理</strong>：穿过任意闭合曲面的电通量等于其包围自由电荷除以介电常数 $\oint_S \vec{E}\cdot d\vec{S} = \frac{Q}{\varepsilon_0\varepsilon_r}$。</li>
+<li><strong>求极板间匀强电场 $E$</strong>：对面积为 $S$、带电 $\pm Q$（面密度 $\sigma = Q/S$）的平行极板，取垂直穿过其中一块极板的柱形高斯面，电场仅从极板间一侧穿出：
+$$E\cdot S = \frac{Q}{\varepsilon_0\varepsilon_r} \implies E = \frac{Q}{\varepsilon_0\varepsilon_r S}$$</li>
+<li><strong>求两极板间电势差 $U$</strong>：沿间距 $\delta$ 积分：
+$$U = \int_0^\delta E\,dx = E\delta = \frac{Q\delta}{\varepsilon_0\varepsilon_r S}$$</li>
+<li><strong>电容定义 $C \equiv Q/U$</strong>：
+$$\boxed{C = \frac{Q}{U} = \frac{\varepsilon_0\varepsilon_r S}{\delta}}$$</li>
+</ol>
+<h4 id="62-为什么插入电介质varepsilon_r--1能增大电容量">6.2 为什么插入电介质（$\varepsilon_r &gt; 1$）能增大电容量？</h4>
+<p>极板间插入电介质后，极板外电场 $\vec{E}_0$ 会使介质内分子电偶极矩取向排列，在介质上下表面感应出与极板<strong>符号相反的束缚极化电荷</strong>。这些束缚电荷产生一个反向的退极化电场 $\vec{E}'$，使板间净电场削弱为 $E = E_0 / \varepsilon_r$。在极板电荷 $Q$ 不变时，电势差 $U = E\delta$ 同步减小为原来的 $1/\varepsilon_r$，因此储电能力 $C = Q/U$ 放大为原来的 $\varepsilon_r$ 倍！</p>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-07">07 电感与LVDT</h2>
+<h2 id="07-电感式传感器与差动变压器lvdt对应-ppt-p115--p284298" class="doc-title">07 电感式传感器与差动变压器（LVDT，对应 PPT P1–15 / P284–298）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1glke7yEqNwL6pMZ87toJQvjQIVhQVjHD/view?usp=drivesdk">07_物理1-电感_P284-298.pdf</a>（PPT P1–15）｜<em>注：融合原笔记 <code>t5.3.1.1</code>～<code>t5.3.1.2</code>，完整保留霍普金森磁路串联模型、单端/差动自感非线性误差推导、自感等效阻抗分析，以及 LVDT 空载/带载复数相量推导与零点残余电压消除机理。</em></p>
+</blockquote>
+<h3 id="目录-6">目录</h3>
+<ul>
+<li><a href="#一-自感式传感器磁路霍普金森定律与非线性推导p36">一、 自感式传感器：磁路霍普金森定律与非线性推导（P3–6）</a></li>
+<li><a href="#二-自感等效电路分布电容限制与交流电桥p78">二、 自感等效电路、分布电容限制与交流电桥（P7–8）</a></li>
+<li><a href="#三-互感式传感器差动变压器lvdt完整复数推导p915">三、 互感式传感器：差动变压器（LVDT）完整复数推导（P9–15）</a></li>
+</ul>
+<hr>
+<h3 id="一-自感式传感器磁路霍普金森定律与非线性推导p36">一、 自感式传感器：磁路霍普金森定律与非线性推导（P3–6）</h3>
+<h4 id="11-磁路欧姆定律霍普金森定律完整推导ppt-p34">1.1 磁路欧姆定律（霍普金森定律）完整推导（PPT P3–4）</h4>
+<p>自感式传感器由线圈（匝数 $N$）、固定铁芯与可动衔铁组成，通过改变气隙厚度 $\delta$（变气隙型）或导磁截面积 $A$（变面积型）改变自感量 $L$。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从霍普金森定律导出 $L = \dfrac{\mu_0 A N^2}{2\delta}$（PPT P4）】</strong></p>
+<ol start="0">
+<li><strong>物理公理出发点</strong>：由安培环路定理 $\oint \vec{H}\cdot d\vec{l} = N I$ 与 $B = \mu H,\; \Phi = B A$，沿闭合磁路积分得 $N I = \oint \frac{B}{\mu}dl = \Phi\left(\frac{l_{\text{铁}}}{\mu_0\mu_r A_{\text{铁}}} + \frac{2\delta}{\mu_0 A}\right) \equiv \Phi R_m$。</li>
+<li><strong>磁路全磁阻串联模型</strong>：磁力线穿过长度为 $l_{\text{铁}}$、相对磁导率为 $\mu_r$ 的铁芯，并往返两次穿过长度为 $\delta$、截面积为 $A$ 的空气隙（真空磁导率 $\mu_0 = 4\pi\times 10^{-7}\;\text{H/m}$），故总磁阻为串联之和：
+$$R_m = R_{m,\text{铁}} + R_{m,\text{气隙}} = \frac{l_{\text{铁}}}{\mu_0 \mu_r A_{\text{铁}}} + \frac{2\delta}{\mu_0 A}$$</li>
+<li><strong>铁芯磁阻可忽略条件</strong>：由于铁磁性材料 $\mu_r \sim 10^3\text{–}10^4 \gg 1$，即使气隙很小，气隙磁阻仍远大于铁芯磁阻，故 $R_m \approx \frac{2\delta}{\mu_0 A}$。</li>
+<li><strong>代入霍普金森定律与自感定义</strong>：由磁通势 $N I = \Phi R_m \implies \Phi = \frac{N I}{R_m}$，磁链 $\Psi = N\Phi = \frac{N^2 I}{R_m}$，得自感系数：
+$$\boxed{L \equiv \frac{\Psi}{I} = \frac{N^2}{R_m} = \frac{\mu_0 A N^2}{2\delta}}$$
+<em>(可见 $L$ 与气隙厚度 $\delta$ 成反比，与导磁面积 $A$ 成正比，与匝数平方 $N^2$ 成正比。)</em></li>
+</ol>
+</blockquote></details>
+<h4 id="12-单端-vs-差动变气隙自感灵敏度与非线性对比ppt-p56">1.2 单端 vs. 差动变气隙自感灵敏度与非线性对比（PPT P5–6）</h4>
+<ul>
+<li><strong>单端变气隙型</strong>：初始气隙 $\delta_0$ 时 $L_0 = \frac{\mu_0 A N^2}{2\delta_0}$。气隙减小 $\Delta\delta$（$\Delta\delta \ll \delta_0$）时做泰勒展开：
+$$\frac{\Delta L}{L_0} = \frac{\Delta\delta / \delta_0}{1 - \Delta\delta / \delta_0} = \frac{\Delta\delta}{\delta_0} + \left(\frac{\Delta\delta}{\delta_0}\right)^2 + \left(\frac{\Delta\delta}{\delta_0}\right)^3 + \cdots$$<ul>
+<li>灵敏度 $K = \frac{\Delta L}{\Delta\delta} = \frac{L_0}{\delta_0} = \frac{\mu_0 A N^2}{2\delta_0^2}$；相对非线性误差 $\gamma = \frac{\Delta\delta}{\delta_0}\times 100\%$。</li>
+</ul>
+</li>
+<li><strong>差动变气隙型（P5–6）</strong>：两个完全相同的传感线圈共用一个中间衔铁（初始 $d_1 = d_2 = d_0,\; L_1 = L_2 = L_0$）。衔铁向线圈 1 移动 $\Delta d$ 后，$d_1 = d_0 - \Delta d,\; d_2 = d_0 + \Delta d$：
+$$\frac{\Delta L}{L_0} = \frac{L_1 - L_2}{L_0} = \frac{1}{1 - \Delta d/d_0} - \frac{1}{1 + \Delta d/d_0} = 2\left(\frac{\Delta d}{d_0}\right) + 2\left(\frac{\Delta d}{d_0}\right)^3 + \cdots$$<ul>
+<li><strong>偶次非线性项全部抵消</strong>，灵敏度提高一倍（$2\frac{L_0}{d_0}$），相对非线性误差降至 $\gamma_{\text{差动}} = \left(\frac{\Delta d}{d_0}\right)^2\times 100\%$。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="二-自感等效电路分布电容限制与交流电桥p78">二、 自感等效电路、分布电容限制与交流电桥（P7–8）</h3>
+<ul>
+<li><strong>高频等效电路（P7）</strong>：实际电感线圈等效为理想电感 $L$ 与损耗电阻 $R_e$（线圈铜损 + 铁芯涡流/磁滞损耗）串联后，再与匝间/引线分布电容 $C_e$ 并联。<ul>
+<li><strong>激励频率上限</strong>：激励角频率 $\omega$ 必须远低于自感与分布电容的并联谐振频率 $\omega_{\text{谐振}} = \frac{1}{\sqrt{L C_e}}$，否则线圈将呈容性而失效。</li>
+</ul>
+</li>
+<li><strong>测量电路（P8）</strong>：采用<strong>电阻平衡臂交流电桥</strong>（左侧两臂为传感线圈 $Z_1 = R_1 + j\omega L_1$ 与 $Z_2 = R_2 + j\omega L_2$，右侧两臂为纯电阻 $R_3, R_4$）或变压器臂电桥，后接交流放大与相敏检波。设传感器两差动线圈阻抗为 $Z_{1,2} = (R_0 \pm \Delta R) + j\omega(L_0 \pm \Delta L)$，平衡臂为纯电阻 $R_3 = R_4 = R$，则交流电桥复数输出为 $\dot{U}_o \approx \frac{\Delta R + j\omega\Delta L}{2(R_0 + j\omega L_0)}\dot{U}_i$。</li>
+</ul>
+<hr>
+<h3 id="三-互感式传感器差动变压器lvdt完整复数推导p915">三、 互感式传感器：差动变压器（LVDT）完整复数推导（P9–15）</h3>
+<h4 id="31-物理结构与理想化模型ppt-p910">3.1 物理结构与理想化模型（PPT P9–10）</h4>
+<ul>
+<li><strong>结构（P9）</strong>：一个交变激励的<strong>初级线圈</strong>（自感 $L_1$，内阻 $R_1$）+ 两个对称绕制、<strong>反向串联</strong>的<strong>次级线圈</strong>（与初级线圈的互感分别为 $M_1, M_2$）+ 内部可轴向移动的导磁铁芯（起到“磁通聚光镜”耦合调节作用）。</li>
+<li><strong>理想化假设（P10）</strong>：忽略铁芯涡流损耗、磁滞损耗和分布电容。</li>
+</ul>
+<h4 id="32-次级输出电压相量推导空载-vs-带载ppt-p1112">3.2 次级输出电压相量推导（空载 vs. 带载，PPT P11–12）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：LVDT 次级开路及带负载 $R_L$ 时的复数输出推导】</strong></p>
+<ol>
+<li><strong>初级回路电流（次级开路时）</strong>：
+$$\dot{I}_1 = \frac{\dot{U}_i}{R_1 + j\omega L_1}$$</li>
+<li><strong>次级反向串联感应电动势（PPT P11–12）</strong>：初级交变磁场在两半次级绕组中分别感应电动势 $\dot{E}_1 = -j\omega M_1 \dot{I}_1$ 与 $\dot{E}_2 = -j\omega M_2 \dot{I}_1$。因两绕组<strong>反向串联</strong>，总开路输出电压相量为：
+$$\dot{U}_0 = \dot{E}_1 - \dot{E}_2 = -j\omega(M_1 - M_2)\dot{I}_1 = \frac{-j\omega(M_1 - M_2)}{R_1 + j\omega L_1}\dot{U}_i$$</li>
+<li><strong>求输出有效值（取复数模，PPT P12 核心公式！）</strong>：
+$$\boxed{U_0 = \frac{\omega (M_1 - M_2)\,U_i}{\sqrt{R_1^2 + (\omega L_1)^2}}}$$<ul>
+<li><em>高频极限</em>：当 $\omega L_1 \gg R_1$ 时，简化为 $U_0 \approx \frac{M_1 - M_2}{L_1}U_i$，灵敏度与电源频率波动无关！</li>
+</ul>
+</li>
+<li><strong>次级接入负载 $R_L$ 时的修正</strong>：设次级两绕组总自感为 $L_2$、总内阻为 $R_2$，则次级回路电流 $\dot{I}_2 = \frac{\dot{E}_1 - \dot{E}_2}{R_2 + j\omega L_2 + R_L}$，且次级电流会在初级产生互感反射电动势，因此实际测量中要求后级输入阻抗 <strong>$R_L \gg \sqrt{R_2^2 + (\omega L_2)^2}$</strong> 以逼近空载线性特性。</li>
+</ol>
+</blockquote></details>
+<h4 id="33-输出特性曲线零点残余电压及其消除ppt-p1315">3.3 输出特性曲线、零点残余电压及其消除（PPT P13–15）</h4>
+<ul>
+<li><strong>理想输出特性（P13）</strong>：铁芯位于中心零位时 $M_1 = M_2 \implies U_0 = 0$；向上/向下偏离对称移动时，$U_0$ 大小对称线性增加，但<strong>输出电压相位相差 $180^\circ$</strong>（必须通过<strong>相敏检波</strong>才能区分正负位移方向！）。</li>
+<li><strong>零点残余电压（P13–14）</strong>：实际衔铁在机械零位时，输出并不为零（残留数 $\text{mV}$ 至数十 $\text{mV}$）。<ul>
+<li><strong>两大物理成因</strong>：<ol>
+<li><strong>基波分量</strong>：两半次级绕组几何/匝数不完全对称、分布电容不等，导致 $\dot{E}_1$ 与 $\dot{E}_2$ 存在<strong>同相基波残差</strong>和<strong>$90^\circ$ 正交基波残差</strong>；</li>
+<li><strong>高次谐波分量</strong>：铁芯 $B\text{–}H$ 磁化曲线非线性与磁滞效应，使励磁电流产生奇次谐波（以<strong>三次谐波</strong>为主），不能在零位完全抵消。</li>
+</ol>
+</li>
+<li><strong>四大消除措施（P14）</strong>：<ol>
+<li>工艺上保证骨架对称、均匀绕线与铁芯材料一致；</li>
+<li>后端串联<strong>相敏检波器</strong>（利用正交性抑制 $90^\circ$ 正交基波分量）+ <strong>低通滤波器</strong>（滤除高次谐波）；</li>
+<li>并联/串联阻容补偿网络调节相位与幅值平衡；</li>
+<li>适当降低励磁电压避开铁芯磁饱和区。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>生物医学应用（P15）</strong>：<strong>差动变压器导管内血压传感器</strong>——导磁金属膜片同时作为感压膜片与差动电感的共用活动衔铁，直接置于导管尖端，避免液体耦合导管传压带来的二阶谐振失真。</li>
+</ul>
+<hr>
+<h3 id="四-物理公理与底层简单证明补强短板-2">四、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="41-为什么磁压降几乎全落在空气隙上安培环路定理直觉">4.1 为什么磁压降几乎全落在空气隙上？（安培环路定理直觉）</h4>
+<p>把磁通 $\Phi$ 类比成电路里的电流 $I$，磁通势 $N I$ 类比成电池电动势 $U$，磁阻 $R_m = \frac{l}{\mu_0\mu_r A}$ 类比成电阻：</p>
+<ul>
+<li>铁芯的相对磁导率 $\mu_r \sim 10^3\text{–}10^4$（相当于“超良导体”），而空气隙 $\mu_r = 1$（相当于“高阻负载”）。</li>
+<li>串联电路中，总电压几乎全部降落在大电阻上；同理，串联闭合磁路中，哪怕空气隙 $\delta$ 只有毫米级、铁芯长几十厘米，气隙磁阻依然比铁芯磁阻大几个数量级，因此磁通 $\Phi = \frac{NI}{R_m}$ 几乎<strong>完全由气隙厚度 $\delta$ 唯一决定</strong>。</li>
+</ul>
+<h4 id="42-互感互易定理-m_12--m_21-与感抗-jomega-l-的相位来源">4.2 互感互易定理 $M_{12} = M_{21}$ 与感抗 $j\omega L$ 的相位来源</h4>
+<ol>
+<li><strong>互感互易性</strong>：由诺依曼公式 $M_{12} = \frac{\mu_0}{4\pi}\oint_{C_1}\oint_{C_2}\frac{d\vec{l}_1\cdot d\vec{l}_2}{r_{12}}$，积分核对两线圈完全对称，故 $M_{12} \equiv M_{21} = M$。</li>
+<li><strong>为什么电感电压超前电流 $90^\circ$？</strong>：由法拉第定律 $u_L(t) = L\frac{di(t)}{dt}$。若正弦电流 $i(t) = I_m\sin(\omega t)$，求导得 $u_L(t) = \omega L I_m\cos(\omega t) = \omega L I_m\sin(\omega t + 90^\circ)$；用相量法表示即 $\dot{U}_L = j\omega L \dot{I}$（乘以虚数单位 $j = e^{j90^\circ}$ 即逆时针旋转 $90^\circ$）。</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-08">08 电桥与接口电路</h2>
+<h2 id="08-传感器接口电路电桥运放线性化与温度补偿对应-ppt-p107130--p299323" class="doc-title">08 传感器接口电路：电桥、运放线性化与温度补偿（对应 PPT P107–130 / P299–323）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1p35TmnRstzt6_zJhCGou55lGkDMCCrMw/view?usp=drivesdk">08_物理1-接口电路_P299-323.pdf</a>（PPT P107–130）｜<em>注：融合原笔记 <code>t5.4.1.1</code>～<code>t5.4.1.3</code>，完整保留直流电桥广义臂比与三种接法推导、串并联调零、运放有源线性化 KCL 证明、双丝自补偿 $\beta_e$ 数学真相、热敏电阻补偿、三线制消引线，以及交流电桥平衡调节与桥式相敏检波全象限分析。</em></p>
+</blockquote>
+<h3 id="目录-7">目录</h3>
+<ul>
+<li><a href="#一-直流电桥平衡条件与三种组态完整推导p108113">一、 直流电桥平衡条件与三种组态完整推导（P108–113）</a></li>
+<li><a href="#二-电桥平衡调整与运放有源线性化电路p114115">二、 电桥平衡调整与运放有源线性化电路（P114–115）</a></li>
+<li><a href="#三-应变片温度误差与五大温度补偿技术p116124">三、 应变片温度误差与五大温度补偿技术（P116–124）</a></li>
+<li><a href="#四-交流电桥调制解调与相敏检波p125129">四、 交流电桥平衡调节、调制解调与相敏检波（P125–129）</a></li>
+</ul>
+<hr>
+<h3 id="一-直流电桥平衡条件与三种组态完整推导p108113">一、 直流电桥平衡条件与三种组态完整推导（P108–113）</h3>
+<h4 id="11-通用电桥开路输出与平衡条件ppt-p108">1.1 通用电桥开路输出与平衡条件（PPT P108）</h4>
+<p>四臂电桥（$R_1, R_2$ 在左侧，$R_3, R_4$ 在右侧，激励 $V_i$ 接在 $a\text{–}c$，输出取 $d\text{–}b$）：
+$$V_o = V_d - V_b = \left(\frac{R_4}{R_3 + R_4} - \frac{R_2}{R_1 + R_2}\right)V_i$$</p>
+<ul>
+<li><strong>电桥平衡条件（$V_o = 0$）</strong>：<strong>相对桥臂阻抗乘积相等</strong>（对直流、交流电桥均成立）：
+$$\boxed{R_1 R_4 = R_2 R_3}$$</li>
+<li><strong>输出阻抗</strong>：直流电桥输出阻抗 $R_{\text{eq}} = (R_1 // R_2) + (R_3 // R_4)$（数百欧姆），远小于后级放大器输入阻抗，故通常视为输出开路。</li>
+</ul>
+<h4 id="12-三种组态完整推导与对比ppt-p109113">1.2 三种组态完整推导与对比（PPT P109–113）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：1/4 桥（广义臂比 $n$）、双臂三种接法与全桥严密推导】</strong></p>
+<ol>
+<li><strong>1/4 桥（单臂工作，P109–110）</strong>：设初始平衡时臂比 $n = \frac{R_2}{R_1} = \frac{R_4}{R_3}$，仅 $R_1$ 变化 $\Delta R_1$：
+$$V_o = \left(\frac{n}{1+n} - \frac{n R_1}{R_1 + \Delta R_1 + n R_1}\right)V_i = \frac{n\cdot\frac{\Delta R_1}{R_1}}{(1+n)\left(1 + n + \frac{\Delta R_1}{R_1}\right)}V_i \approx \frac{n}{(1+n)^2}\frac{\Delta R_1}{R_1}V_i$$<ul>
+<li>当 $n = 1$（等臂电桥 $R_1=R_2=R_3=R_4=R$）时，灵敏度函数 $f(n)=\frac{n}{(1+n)^2}$ 取<strong>最大值 $\frac{1}{4}$</strong>：
+$$V_o = \frac{1}{2\left(2 + \frac{\Delta R}{R}\right)}\frac{\Delta R}{R}V_i \approx \frac{1}{4}\frac{\Delta R}{R}V_i$$</li>
+<li><strong>PPT P110 例题</strong>：当 $\frac{\Delta R}{R} = 1\%$ 时，线性近似 $V_o = 2.5\times 10^{-3}V_i$，精确值 $V_o = \frac{0.01}{2\times 2.01}V_i = 2.488\times 10^{-3}V_i$，相对非线性误差约 <strong>$0.5\%$</strong>。</li>
+</ul>
+</li>
+<li><strong>双臂工作电桥的三种接法（P111）</strong>：<ul>
+<li><strong>接法①（差动半桥，相邻两臂反向变化 $R_1 = R+\Delta R,\; R_2 = R-\Delta R$）</strong>：
+$$V_o = \left(\frac{1}{2} - \frac{R - \Delta R}{2R}\right)V_i = \boxed{\frac{1}{2}\frac{\Delta R}{R}V_i}$$
+<strong>绝对线性（非线性误差为 $0$）</strong>，灵敏度 $K_v = V_i / 2$（为 $1/4$ 桥的 $2$ 倍）。</li>
+<li><strong>接法②（非差动半桥，相对两臂同向变化 $R_1 = R+\Delta R,\; R_4 = R+\Delta R$）</strong>：
+$$V_o = \left(\frac{R+\Delta R}{2R+\Delta R} - \frac{R}{2R+\Delta R}\right)V_i = \frac{\Delta R}{2R + \Delta R}V_i \approx \frac{1}{2}\frac{\Delta R}{R}V_i$$
+灵敏度虽也提高一倍，但分母仍含 $\Delta R$，<strong>存在非线性误差</strong>（与 $1/4$ 桥同阶）。</li>
+<li><em>(警示：若将两个同向变化的应变片接在<strong>同侧相邻</strong>两臂，则 $V_o = 0$ 完全抵消无输出！)</em></li>
+</ul>
+</li>
+<li><strong>差动全桥（P112）</strong>：一对相对桥臂为 $R+\Delta R$，另一对相对桥臂为 $R-\Delta R$：
+$$V_o = \left(\frac{R+\Delta R}{2R} - \frac{R-\Delta R}{2R}\right)V_i = \boxed{\frac{\Delta R}{R}V_i}$$
+<strong>绝对线性</strong>，灵敏度 $K_v = V_i$（为 $1/4$ 桥的 <strong>$4$ 倍</strong>），温度漂移共模抑制最优。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="二-电桥平衡调整与运放有源线性化电路p114115">二、 电桥平衡调整与运放有源线性化电路（P114–115）</h3>
+<h4 id="21-电桥零位平衡调整ppt-p114">2.1 电桥零位平衡调整（PPT P114）</h4>
+<p>由于桥臂电阻存在制造公差，初始时常需在 $R_1$ 与 $R_2$ 之间串联可调电位器 $R_P$（滑动抽头分为 $R_{P1}, R_{P2}$，满足 $R_{P1}+R_{P2}=R_P$），调节抽头使 $(R_1 + R_{P1})R_4 = (R_2 + R_{P2})R_3$ 实现精确调零（或采用高阻值电位器并联微调）。</p>
+<h4 id="22-运算放大器有源线性化电路ppt-p115核心推导">2.2 运算放大器有源线性化电路（PPT P115，核心推导！）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：运放有源线性化电路节点电压法严密推导】</strong>
+左侧支路为两个固定电阻 $R$ 串联接直流基准 $V_B$，中点接理想运放<strong>同相端 $P$</strong>；右侧支路为固定电阻 $R$ 接 $V_B$、应变片 $R+\Delta R$ 接运放<strong>输出端 $V_{\text{OUT}}$</strong>，中点接<strong>反相端 $N$</strong>。</p>
+<ol>
+<li><strong>虚断求 $V_P$</strong>（$I_P = 0$）：$V_P = V_B \frac{R}{R + R} = \frac{V_B}{2}$。</li>
+<li><strong>虚短与 $N$ 点 KCL 方程</strong>（$V_N = V_P = \frac{V_B}{2}$，$I_N = 0$）：
+$$\frac{V_B - V_N}{R} + \frac{V_{\text{OUT}} - V_N}{R + \Delta R} = 0 \implies \frac{V_B}{2R} + \frac{V_{\text{OUT}} - \frac{V_B}{2}}{R + \Delta R} = 0$$</li>
+<li><strong>移项同乘 $(R + \Delta R)$</strong>：
+$$V_{\text{OUT}} - \frac{V_B}{2} = -\frac{V_B}{2R}(R + \Delta R) = -\frac{V_B}{2} - V_B\frac{\Delta R}{2R}$$</li>
+<li><strong>消去常数项 $-\frac{V_B}{2}$</strong>：
+$$\boxed{V_{\text{OUT}} = -\frac{V_B}{2}\frac{\Delta R}{R}}$$
+<strong>双重优势</strong>：①彻底消除分母中的 $\Delta R$，实现<strong>全区绝对线性</strong>；②灵敏度比普通 $1/4$ 桥提高 <strong>$1$ 倍</strong>！</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-应变片温度误差与五大温度补偿技术p116124">三、 应变片温度误差与五大温度补偿技术（P116–124）</h3>
+<h4 id="31-温度误差热输出双物理机制ppt-p116117">3.1 温度误差（热输出）双物理机制（PPT P116–117）</h4>
+<p>环境温度变化 $\Delta t$ 引起的虚假电阻相对变化为：
+$$\boxed{\left(\frac{\Delta R}{R}\right)_t = \left(\frac{\Delta R}{R}\right)_1 + \left(\frac{\Delta R}{R}\right)_2 = \alpha_t\Delta t + K(\beta_e - \beta_g)\Delta t}$$</p>
+<ol>
+<li><strong>$\alpha_t\Delta t$</strong>：敏感栅材料的电阻温度系数效应；</li>
+<li><strong>$K(\beta_e - \beta_g)\Delta t$</strong>：被测构件（线膨胀系数 $\beta_e$）与敏感栅（$\beta_g$）热膨胀失配引起的附加应变。</li>
+</ol>
+<h4 id="32-五大温度补偿方案ppt-p118124必考">3.2 五大温度补偿方案（PPT P118–124，必考！）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">补偿方案</th>
+<th align="left">核心原理与数学判据（PPT P118–124）</th>
+<th align="left">工程特点与局限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 单丝自补偿（P118）</strong></td>
+<td align="left">选配合金使 $\alpha_t + K(\beta_e - \beta_g) = 0 \implies \alpha_t = K(\beta_g - \beta_e)$</td>
+<td align="left">结构简单，但只能绑定一种特定 $\beta_e$ 的试件材料</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 双丝组合自补偿（P119）</strong></td>
+<td align="left">串联正温度系数丝（$R_a, \alpha_{tA}&gt;0$）与负温度系数丝（$R_b, \alpha_{tB}&lt;0$），令 $(\Delta R_a)_T = -(\Delta R_b)_T$，即：<br>$\left(\frac{R_a}{R_{\text{tot}}}\alpha_{tA}+\frac{R_b}{R_{\text{tot}}}\alpha_{tB}\right) - K\left(\frac{R_a}{R_{\text{tot}}}\beta_{gA}+\frac{R_b}{R_{\text{tot}}}\beta_{gB}\right) + K\beta_e = 0$</td>
+<td align="left">并非数学上无关 $\beta_e$，而是通过调节 $R_a/R_b$ <strong>裁剪长度比</strong>灵活适配不同材料 $\beta_e$</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 电路（桥路）补偿法（P120–121）</strong></td>
+<td align="left"><strong>工作片 $R_1$</strong> 贴受力试件（$\Delta R_1 = \Delta R_\varepsilon + \Delta R_t$）；<strong>补偿片 $R_2$</strong> 贴于<strong>同材料、同温度、不受力</strong>补偿块（$\Delta R_2 = \Delta R_t$），接入<strong>相邻两臂</strong>：<br>$V_o \approx \frac{V_i}{4R}[(\Delta R_\varepsilon + \Delta R_t) - \Delta R_t] = \frac{1}{4}K\varepsilon V_i$</td>
+<td align="left"><strong>三大条件缺一不可</strong>：①同批号同阻值 $R_1, R_2$；②补偿块与试件同材料 $\beta_e$；③同温度环境</td>
+</tr>
+<tr>
+<td align="left"><strong>4. 热敏电阻分流补偿（P122）</strong></td>
+<td align="left">供电端接入 $\text{NTC}$ 热敏电阻 $R_t$ 与分流电阻 $R_5$：温度升高时灵敏度 $K\downarrow$，同时 $R_t\downarrow$ 使电桥实际供电电压 $E'\uparrow$，在 $U_o = \frac{E'}{4}\frac{\Delta R_1}{R_1}$ 中相互抵消</td>
+<td align="left">专门补偿<strong>灵敏度温漂</strong>（前述 1–3 主要补偿零点温漂）</td>
+</tr>
+<tr>
+<td align="left"><strong>5. 远程三线制接法（P123–124）</strong></td>
+<td align="left">将长引线电阻 $r$ 分别串入电源端与电桥两个相邻桥臂中（$R_1+r$ 与 $R_2+r$），引线电阻温漂 $\Delta r$ 在相邻桥臂作差时抵消</td>
+<td align="left">解决远程测温/测应变时<strong>长导线电阻温漂</strong></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="四-交流电桥调制解调与相敏检波p125129">四、 交流电桥、调制解调与相敏检波（P125–129）</h3>
+<h4 id="41-交流电桥双重平衡条件与平衡调节ppt-p125126">4.1 交流电桥双重平衡条件与平衡调节（PPT P125–126）</h4>
+<p>令各臂复阻抗 $Z_i = |Z_i|\angle\varphi_i$，平衡条件 $Z_1 Z_4 = Z_2 Z_3$ 必须同时满足：</p>
+<ol>
+<li><strong>模平衡</strong>：$|Z_1|\cdot|Z_4| = |Z_2|\cdot|Z_3|$；</li>
+<li><strong>相位平衡</strong>：$\varphi_1 + \varphi_4 = \varphi_2 + \varphi_3$。</li>
+</ol>
+<ul>
+<li><strong>平衡调节（P126）</strong>：因同时存在实部与虚部两个平衡条件，调节时需用<strong>可变电阻 $R_p$</strong> 与<strong>可变电容 $C_p$</strong> 协同调节直至输出严格归零。</li>
+</ul>
+<h4 id="42-调制解调与桥式相敏检波ppt-p127129">4.2 调制解调与桥式相敏检波（PPT P127–129）</h4>
+<ul>
+<li><p><strong>为什么用交流电桥？（P127）</strong>：缓慢生理信号 $x(t)$ 调制在 $5\sim 10\;\text{kHz}$ 高频载波 $V_i(t)$ 上，经交流放大器放大后与放大器自身的低频直流漂移完全频率分离，彻底消除直流温漂。</p>
+</li>
+<li><p><strong>调幅（DSB-SC）数学本质</strong>：设缓慢生理信号引起相对阻抗变化 $x(t) = \frac{\Delta Z}{Z_0} = m\cos(\Omega t)$，高频载波为 $V_i(t) = V_m\sin(\omega_c t)$（$\omega_c \gg \Omega$），则交流半桥输出为<strong>抑制载波双边带调幅波</strong>：
+$$V_O(t) = \frac{1}{2}V_m m\cos(\Omega t)\sin(\omega_c t) = \frac{1}{4}V_m m\big[\sin(\omega_c + \Omega)t + \sin(\omega_c - \Omega)t\big]$$
+由于信号在 $\cos(\Omega t)$ 过零变号时发生 <strong>$180^\circ$ 相位翻转</strong>，普通包络检波器无法区分正负，必须用同步相敏检波！</p>
+</li>
+<li><p><strong>为什么必须用相敏检波？（P127–129）</strong>：当 $x(t)&gt;0$ 时调幅输出 $V_O(t)$ 与载波 $V_i(t)$ <strong>同相</strong>；当 $x(t)&lt;0$ 时二者<strong>反相（相差 $180^\circ$）</strong>。普通二极管包络检波只能读出 $|x(t)|$ 而丢失正负号。</p>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：桥式相敏检波四象限开关导通分析（PPT P129）】</strong>
+在由 $D_1\sim D_4$ 组成的桥式相敏检波电路中，参考载波幅值必须远大于被测信号（<strong>$V_i \gg V_O$</strong>），故二极管通断完全由参考电压 $V_i(t)$ 极性控制：</p>
+<ol>
+<li><strong>$V_i(t) &gt; 0$ 半周</strong>：$D_1, D_4$ 导通、$D_2, D_3$ 截止 $\implies$ 若同相（$V_O &gt; 0$）则输出 $V_A &gt; 0$；若反相（$V_O &lt; 0$）则输出 $V_A &lt; 0$；</li>
+<li><strong>$V_i(t) &lt; 0$ 半周</strong>：$D_2, D_3$ 导通、$D_1, D_4$ 截止（相当于对 $V_O$ 乘以 $-1$ 翻转）$\implies$ 若 $V_O &lt; 0$（原同相信号的负半周）翻转后仍输出 $V_A &gt; 0$；若 $V_O &gt; 0$（原反相信号的负半周）翻转后仍输出 $V_A &lt; 0$！</li>
+<li><strong>结论</strong>：经低通滤波后，同相信号稳定输出正直流电压（$x&gt;0$），反相信号稳定输出负直流电压（$x&lt;0$），完美还原被测量的<strong>幅值与正负方向</strong>。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="五-物理公理与底层简单证明补强短板-3">五、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="51-理想运放虚短与虚断的物理来源">5.1 理想运放“虚短”与“虚断”的物理来源</h4>
+<ol>
+<li><strong>虚短（$V_+ \approx V_-$）</strong>：运算放大器的开环差模增益极大（$A_{OL} \sim 10^5\text{–}10^6$），且输出电压受电源轨限制（例如 $\pm 15\;\text{V}$）。当电路存在<strong>负反馈</strong>稳定工作时，净输入压差必须满足：
+$$V_+ - V_- = \frac{V_{\text{out}}}{A_{OL}} \sim \frac{15\;\text{V}}{10^6} = 15\;\mu\text{V} \approx 0 \implies V_+ \approx V_-$$
+*(注意：没有负反馈时运放处于饱和比较器状态，<strong>不能</strong>使用虚短！)*</li>
+<li><strong>虚断（$I_+ \approx I_- \approx 0$）</strong>：运放输入级由高输入阻抗的场效应管（FET）或高 $\beta$ 差分对构成（输入电阻 $R_i \sim 10^9\text{–}10^{12}\;\Omega$），流入输入端的偏置电流仅 $\text{pA}\sim\text{nA}$ 级，在 KCL 节点方程中可严格忽略。</li>
+</ol>
+<h4 id="52-正弦函数正交性公理相敏检波与交流电桥基石">5.2 正弦函数正交性公理（相敏检波与交流电桥基石）</h4>
+<p>为什么同频参考波 $\sin(\omega t)$ 乘以 $90^\circ$ 正交干扰 $\cos(\omega t)$ 后经过低通滤波会严格归零？</p>
+<ul>
+<li>利用二倍角恒等式 $\sin(\omega t)\cos(\omega t) = \frac{1}{2}\sin(2\omega t)$。在一个完整周期 $T = \frac{2\pi}{\omega}$ 内积分，正半周与负半周面积严格相等抵消：
+$$\int_0^T \sin(\omega t)\cos(\omega t)\,dt = \frac{1}{2}\int_0^T \sin(2\omega t)\,dt = \boxed{0}$$</li>
+<li>而同相分量 $\sin(\omega t)\cdot\sin(\omega t) = \frac{1 - \cos(2\omega t)}{2}$ 在一个周期内积分平均值为 $\frac{1}{2} \neq 0$。这就是**相敏检波（锁相放大）**能够从强正交干扰中精确提取微弱同相信号的全部数学公理！</li>
+</ul>
+<hr>
+<h3 id="六-真题靶向加厚有载电桥精确解与大应变温漂耦合26-计4">六、 真题靶向加厚：有载电桥精确解与大应变/温漂耦合（26-计4）</h3>
+<p>当真题明确给出**有限负载电阻 $R_L$（或内阻为 $R_A$ 的电流表）<strong>以及</strong>大应变（如 $\varepsilon = 5\%$）**时，<strong>严禁使用 $\Delta R \ll R$ 小信号近似</strong>，必须用戴维南等效求精确封闭解：</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：1/4 等臂电桥接电流表（$R_A = R$）精确输出电流推导】</strong>
+设四臂初始均为 $R$，仅工作臂变为 $R + \Delta R$，激励为理想电压源 $V_i$：</p>
+<ol>
+<li><strong>开路戴维南电压</strong>：
+$$V_{th} = V_i\left(\frac{1}{2} - \frac{R}{2R + \Delta R}\right) = \frac{V_i\Delta R}{2(2R + \Delta R)}$$</li>
+<li><strong>戴维南等效内阻</strong>：
+$$R_{th} = \big[R // (R + \Delta R)\big] + (R // R) = \frac{R(R + \Delta R)}{2R + \Delta R} + \frac{R}{2} = \frac{R(4R + 3\Delta R)}{2(2R + \Delta R)}$$</li>
+<li><strong>接电流表（$R_A = R$）输出电流</strong>：
+$$I_o = \frac{V_{th}}{R_{th} + R_A} = \frac{V_i\Delta R}{R(4R+3\Delta R) + 2R(2R+\Delta R)} = \boxed{\frac{V_i\Delta R}{R(8R + 5\Delta R)}}$$</li>
+<li><strong>大应变 + 温漂双因素耦合</strong>：
+当应变片同时承受机械应变 $\varepsilon$（灵敏度 $k$）与温升 $\Delta T$（温度系数 $\alpha$）时，工作臂总电阻变化量为：
+$$\boxed{\Delta R_{\text{total}} = \Delta R_\varepsilon + \Delta R_T = R(k\varepsilon + \alpha\Delta T)}$$
+将 $\Delta R_{\text{total}}$ 直接代入上述精确封闭解即可，切勿在最后一步漏掉分母中的 $5\Delta R_{\text{total}}$。</li>
+</ol>
+</blockquote></details>
+</section>
+</article>
+{% endraw %}
+{% include shengyi-foot.html %}

@@ -1,0 +1,659 @@
+---
+layout: front
+title: "传感器重构笔记 · 物理二：压电与磁电（09–10章）"
+lang: zh-CN
+body_class: notes shengyi
+section: notes
+nav_current: notes
+permalink: /notes/shengyi/chuanganqi/wuli2/
+katex: true
+---
+
+<header class="topic-head">
+    <p class="page-kicker"><a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a> · <a href="{{ '/notes/shengyi/' | prepend: site.baseurl }}">生物医学电子学</a> · <a href="{{ '/notes/shengyi/chuanganqi/' | prepend: site.baseurl }}">传感器重构笔记</a> · 物理二：压电与磁电（09–10章）</p>
+    <h1>物理二：压电与磁电（09–10章）</h1>
+</header>
+<nav class="note-toc" aria-label="目录">
+<ol>
+<li class="toc-h2 toc-tab"><a href="#tab-09-1">09-1 压电效应与材料</a></li>
+<li class="toc-h2"><a href="#09-1-压电效应石英晶体与压电陶瓷物理推导对应-ppt-p316">09-1 压电效应、石英晶体与压电陶瓷物理推导（对应 PPT P3–16）</a></li>
+<li class="toc-h3"><a href="#一-正逆压电效应与石英晶体三大晶轴p34">一、 正/逆压电效应与石英晶体三大晶轴（P3–4）</a></li>
+<li class="toc-h3"><a href="#二-石英晶体压电效应微观矢量合成与纵横向公式推导p511">二、 石英晶体压电效应微观矢量合成与纵/横向公式推导（P5–11）</a></li>
+<li class="toc-h3"><a href="#三-压电陶瓷多晶体极化机制与公式推导p1215">三、 压电陶瓷（多晶体）极化机制与公式推导（P12–15）</a></li>
+<li class="toc-h3"><a href="#四-常用压电材料关键物性参数对比表p16">四、 常用压电材料关键物性参数对比表（P16）</a></li>
+<li class="toc-h3"><a href="#五-ppt-细节补漏与物理公理简单证明">五、 PPT 细节补漏与物理公理简单证明</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-09-2">09-2 等效电路与电荷放大</a></li>
+<li class="toc-h2"><a href="#09-2-压电等效电路与电压电荷放大器推导对应-ppt-p1722">09-2 压电等效电路与电压、电荷放大器推导（对应 PPT P17–22）</a></li>
+<li class="toc-h3"><a href="#一-压电元件双端口等效电路与全等性证明p1718">一、 压电元件双端口等效电路与全等性证明（P17–18）</a></li>
+<li class="toc-h3"><a href="#二-电压放大器阻抗变换器复频域推导与缺陷p19">二、 电压放大器（阻抗变换器）复频域推导与缺陷（P19）</a></li>
+<li class="toc-h3"><a href="#三-电荷放大器完整-kcl-推导与长电缆免疫特性p2021">三、 电荷放大器完整 KCL 推导与长电缆免疫特性（P20–21）</a></li>
+<li class="toc-h3"><a href="#四-ppt-细节补漏与物理公理简单证明">四、 PPT 细节补漏与物理公理简单证明</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-09-3">09-3 血流超声与脉搏波</a></li>
+<li class="toc-h2"><a href="#09-3-血流动力学超声多普勒与脉搏波解析对应-ppt-p2337">09-3 血流动力学、超声多普勒与脉搏波解析（对应 PPT P23–37）</a></li>
+<li class="toc-h3"><a href="#一-心血管血流核心定量指标与雷诺数判据p2328">一、 心血管血流核心定量指标与雷诺数判据（P23–28）</a></li>
+<li class="toc-h3"><a href="#二-超声物理特性与多普勒频移公式零跳步推导p2932">二、 超声物理特性与多普勒频移公式零跳步推导（P29–32）</a></li>
+<li class="toc-h3"><a href="#三-多普勒血流检测三大硬约束与频谱展宽p3233">三、 多普勒血流检测三大硬约束与频谱展宽（P32–33）</a></li>
+<li class="toc-h3"><a href="#四-a-超--b-超换能器与压电脉搏波特征p3437">四、 A 超 / B 超换能器与压电脉搏波特征（P34–37）</a></li>
+<li class="toc-h3"><a href="#五-ppt-细节补漏与物理公理简单证明-2">五、 PPT 细节补漏与物理公理简单证明</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-10-1">10-1 磁电感应与运动模型</a></li>
+<li class="toc-h2"><a href="#10-1-磁电感应式传感器与两种运动模型推导对应-ppt-p12--p362363">10-1 磁电感应式传感器与两种运动模型推导（对应 PPT P1–2 / P362–363）</a></li>
+<li class="toc-h3"><a href="#一-磁电感应物理公理动生电动势与伽利略变换p2">一、 磁电感应物理公理：动生电动势与伽利略变换（P2）</a></li>
+<li class="toc-h3"><a href="#二-模型-a恒定磁场中线圈直线运动推导p2">二、 模型 (a)：恒定磁场中线圈直线运动推导（P2）</a></li>
+<li class="toc-h3"><a href="#三-模型-b平行磁场中线圈旋转运动推导p2">三、 模型 (b)：平行磁场中线圈旋转运动推导（P2）</a></li>
+<li class="toc-h3"><a href="#四-恒定磁通式-vs-变磁通磁阻式对比">四、 恒定磁通式 vs. 变磁通（磁阻）式对比</a></li>
+<li class="toc-h3"><a href="#五-物理公理证明与-ppt-p2-细节对齐">五、 物理公理证明与 PPT P2 细节对齐</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-10-2">10-2 电磁流量计与泊松方程</a></li>
+<li class="toc-h2"><a href="#10-2-电磁流量计二维泊松方程权重函数与相敏解调对应-ppt-p311--p364373">10-2 电磁流量计：二维泊松方程、权重函数与相敏解调（对应 PPT P3–11 / P364–373）</a></li>
+<li class="toc-h3"><a href="#一-电磁流量计基本原理与体积流量公式p34">一、 电磁流量计基本原理与体积流量公式（P3–4）</a></li>
+<li class="toc-h3"><a href="#二-二维泊松方程与流速剖面无关性严密推导p4">二、 二维泊松方程与流速剖面无关性严密推导（P4）</a></li>
+<li class="toc-h3"><a href="#三-直流励磁极化痛点-vs-交流励磁正交干扰p58">三、 直流励磁极化痛点 vs. 交流励磁正交干扰（P5–8）</a></li>
+<li class="toc-h3"><a href="#四-相敏检波器psd抑制正交干扰与电磁流量计总结p811">四、 相敏检波器（PSD）抑制正交干扰与电磁流量计总结（P8–11）</a></li>
+<li class="toc-h3"><a href="#五-ppt-p4148-细节补漏与物理公理简单证明">五、 PPT P41–48 细节补漏与物理公理简单证明</a></li>
+</ol>
+</nav>
+<div class="toolbar">
+    <button type="button" id="fold-toggle" aria-expanded="true">折叠闭环与概念</button>
+</div>
+{% raw %}
+<article class="article">
+<section class="note-tab">
+<h2 class="tab-label" id="tab-09-1">09-1 压电效应与材料</h2>
+<h2 id="09-1-压电效应石英晶体与压电陶瓷物理推导对应-ppt-p316" class="doc-title">09-1 压电效应、石英晶体与压电陶瓷物理推导（对应 PPT P3–16）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1FaJoaexnaGdbqR05It3d9fb3yPmZAbwd/view?usp=drivesdk">09_物理2-压电_P324-361.pdf</a>（PPT P3–16）｜<em>注：融合原笔记 <code>t5.5.1.1</code>、<code>t5.5.1.2</code>、<code>t5.5.1.4</code>、<code>t5.5.1.5</code>，完整保留正/逆压电效应、石英六边形电偶极矩矢量合成、纵向/横向压电电荷推导及压电陶瓷极化机制。</em></p>
+</blockquote>
+<h3 id="目录">目录</h3>
+<ul>
+<li><a href="#一-正逆压电效应与石英晶体三大晶轴p34">一、 正/逆压电效应与石英晶体三大晶轴（P3–4）</a></li>
+<li><a href="#二-石英晶体压电效应微观矢量合成与纵横向公式推导p511">二、 石英晶体压电效应微观矢量合成与纵/横向公式推导（P5–11）</a></li>
+<li><a href="#三-压电陶瓷多晶体极化机制与公式推导p1215">三、 压电陶瓷（多晶体）极化机制与公式推导（P12–15）</a></li>
+<li><a href="#四-常用压电材料关键物性参数对比表p16">四、 常用压电材料关键物性参数对比表（P16）</a></li>
+</ul>
+<hr>
+<h3 id="一-正逆压电效应与石英晶体三大晶轴p34">一、 正/逆压电效应与石英晶体三大晶轴（P3–4）</h3>
+<h4 id="11-正压电效应与逆压电效应ppt-p3">1.1 正压电效应与逆压电效应（PPT P3）</h4>
+<ul>
+<li><strong>正（顺）压电效应（机械能 $\to$ 电能）</strong>：某些电介质沿特定方向受外力变形时，内部发生极化，在两个相对表面产生符号相反、与外力成正比的<strong>束缚电荷</strong>；外力撤去后恢复中性；外力反向则电荷极性翻转。</li>
+<li><strong>逆压电效应 / 电致伸缩效应（电能 $\to$ 机械能）</strong>：在极化方向施加外电场时，材料产生机械变形或应力；撤去电场后变形消失（如超声发射探头）。</li>
+<li><strong>可逆性铁律（P11）</strong>：<strong>晶体在哪个方向上存在正压电效应，则在此方向上一定存在逆压电效应</strong>（均由同一非零压电系数 $d_{ij}$ 控制）。</li>
+</ul>
+<h4 id="12-石英晶体的三大晶轴ppt-p4必背">1.2 石英晶体的三大晶轴（PPT P4，必背！）</h4>
+<p>石英晶体（$\text{SiO}_2$）呈六角形晶柱，两端为对称棱锥：</p>
+<ol>
+<li><strong>光轴（Z 轴）</strong>：纵向对称轴，沿 Z 轴<strong>无压电效应</strong>；</li>
+<li><strong>电轴（X 轴）</strong>：通过六棱线且垂直于 Z 轴；沿 X 轴施力产生的压电效应称为**“纵向压电效应”**；</li>
+<li><strong>机械轴（Y 轴）</strong>：垂直于六棱柱体的棱面（与 X、Z 轴正交）；沿 Y 轴施力在 X 轴表面产生电荷的效应称为**“横向压电效应”**。</li>
+</ol>
+<hr>
+<h3 id="二-石英晶体压电效应微观矢量合成与纵横向公式推导p511">二、 石英晶体压电效应微观矢量合成与纵/横向公式推导（P5–11）</h3>
+<h4 id="21-正六边形硅氧离子电偶极矩平衡与破坏ppt-p58">2.1 正六边形硅氧离子电偶极矩平衡与破坏（PPT P5–8）</h4>
+<p>在垂直于 Z 轴的 $xy$ 平面投影上，一个单元组体的 $\text{Si}^{4+}$（正离子）和 $2\text{O}^{2-}$（负离子）等效分布在一个<strong>正六边形</strong>的六个顶角上，等效为三个互成 $120^\circ$ 夹角的电偶极矩 $\vec{P}_1, \vec{P}_2, \vec{P}_3$（方向由负指向正，大小 $P = q L$）：</p>
+<ol>
+<li><strong>未受外力（$F = 0$，P6）</strong>：三个电偶极矩大小相等、互成 $120^\circ$，正负电荷中心完全重合：
+$$\vec{P}_1 + \vec{P}_2 + \vec{P}_3 = \vec{0} \implies \text{晶体呈电中性}$$</li>
+<li><strong>沿 X 轴受力（$F_x$，P7）</strong>：<ul>
+<li>压缩（$F_x &lt; 0$）：六边形沿 X 轴压扁，偶极矩 $P_1$ 减小、$P_2$ 与 $P_3$ 增大且向 X 轴靠拢，矢量和在 X 轴分量 $(P_1+P_2+P_3)_x &gt; 0$，而 <strong>Y、Z 方向对称抵消仍为 $0$</strong>；</li>
+<li>拉伸（$F_x &gt; 0$）：$(P_1+P_2+P_3)_x &lt; 0$，表面电荷极性翻转，Y、Z 方向仍无电荷。</li>
+</ul>
+</li>
+<li><strong>沿 Y 轴受力（$F_y$，P8）</strong>：拉伸（$F_y &gt; 0$）使 X 轴方向压缩（同 $F_x&lt;0$ 形变）；压缩（$F_y &lt; 0$）使 X 轴方向伸长（同 $F_x&gt;0$ 形变）——因此 <strong>沿 Y 轴施力仍在 X 轴垂直面上产生电荷，Y、Z 轴均不出现电荷！</strong></li>
+</ol>
+<h4 id="22-纵向压电效应-vs-横向压电效应公式推导ppt-p911必考计算">2.2 纵向压电效应 vs. 横向压电效应公式推导（PPT P9–11，必考计算！）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从极化强度 $P = d\sigma$ 与高斯面电荷 $\sigma_b = \vec{P}\cdot\hat{n}$ 导出 $q_x, q_{12}$】</strong>
+设石英切片沿 $x, y, z$ 方向的边长分别为厚度 $a$、长度 $b$、宽度 $c$（故垂直于 $x$ 轴的电极面积 $A_x = bc$，垂直于 $y$ 轴的端面面积 $A_y = ac$）。在晶体线性弹性范围内，电极化强度分量与机械应力成正比，而极化强度在数值上等于电极面上的束缚电荷面密度（$\sigma_b = \vec{P}\cdot\hat{n} = q/A_x$）：</p>
+<ol>
+<li><p><strong>纵向压电效应（沿电轴 X 施力 $F_x$，P9）</strong>：
+应力 $\sigma_x = \frac{F_x}{bc}$，极化强度 $P_{11} = d_{11}\sigma_x = d_{11}\frac{F_x}{bc}$。由 $P_{11} = \frac{q_x}{bc}$ 联立消去面积 $bc$：
+$$\boxed{q_x = d_{11} F_x}$$
+<em>核心结论</em>：纵向压电电荷 $q_x$ <strong>仅与作用力 $F_x$ 成正比，与晶片几何尺寸 $a, b, c$ 无关</strong>！</p>
+</li>
+<li><p><strong>横向压电效应（沿机械轴 Y 施力 $F_y$，仍在 X 轴表面集电荷，P10）</strong>：
+应力 $\sigma_y = \frac{F_y}{ac}$，极化强度 $P_{12} = d_{12}\sigma_y = d_{12}\frac{F_y}{ac}$。电荷仍在垂直于 X 轴的 $bc$ 面上收集（$P_{12} = \frac{q_{12}}{bc}$）：
+$$q_{12} = P_{12}\cdot bc = d_{12}\frac{bc}{ac}F_y = d_{12}\frac{b}{a}F_y$$
+由石英晶体 $D_3$ 点群三fold对称性，横纵向压电系数满足 <strong>$d_{12} = -d_{11}$</strong>，代入得：
+$$\boxed{q_{12} = -d_{11}\frac{b}{a}F_y}$$
+<em>核心结论</em>：横向压电电荷与晶片的<strong>长厚比 $b/a$ 成正比</strong>！工程上可通过把切片做薄（$a\downarrow$）、做长（$b\uparrow$）来成倍放大电荷灵敏度（并可多片并联叠加电荷）。</p>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-压电陶瓷多晶体极化机制与公式推导p1215">三、 压电陶瓷（多晶体）极化机制与公式推导（P12–15）</h3>
+<h4 id="31-电畴人工极化与静电荷动态平衡ppt-p1214">3.1 电畴、人工极化与静电荷动态平衡（PPT P12–14）</h4>
+<ul>
+<li><strong>为什么原始压电陶瓷没有压电性？（P12）</strong>：压电陶瓷内部晶粒存在自发极化的<strong>电畴（Domain）</strong>，但原始状态下电畴空间杂乱取向，宏观净极化强度为零。</li>
+<li><strong>人工极化处理（P12）</strong>：施加极强直流高压电场使电畴转向并与外电场一致，撤去外场后保留很强的<strong>剩余极化强度</strong>，从此具备压电性（取极化方向为 <strong>$z$ 轴</strong>，垂直于 $z$ 轴的平面各向同性）。</li>
+<li><strong>正压电效应为什么会有电流/电荷输出？（P13）</strong>：静止时陶瓷两端束缚电荷被电极表面吸附的等量异号<strong>自由电荷</strong>完全屏蔽；当沿极化方向施加压力 $F$ 时，陶瓷被压缩、正负束缚电荷间距减小导致极化强度变小，电极上多余的自由电荷被释放出来形成<strong>放电电流</strong>；撤力恢复原状时极化增强，再次从外电路吸回自由电荷形成<strong>充电电流</strong>。</li>
+<li><strong>逆压电效应（P14）</strong>：外加与极化同向电场 $\to$ 极化增强、陶瓷伸长；反向电场 $\to$ 极化减弱、陶瓷缩短。</li>
+</ul>
+<h4 id="32-压电陶瓷纵横向电荷公式ppt-p15">3.2 压电陶瓷纵/横向电荷公式（PPT P15）</h4>
+<p>设陶瓷片垂直于 $z$ 轴的电极面积为 $A_z$，垂直于 $x, y$ 轴的侧面面积为 $A_x, A_y$：</p>
+<ol>
+<li><strong>沿极化方向 $z$ 施力 $F_z$（纵向效应）</strong>：
+$$\boxed{q_z = d_{33} F_z}$$</li>
+<li><strong>沿垂直方向 $x$ 或 $y$ 施力 $F_x, F_y$（横向效应）</strong>：因横观各向同性，一般 $d_{31} = d_{32}$：
+$$\boxed{q_z = -d_{31}\frac{A_z}{A_x}F_x, \qquad q_z = -d_{32}\frac{A_z}{A_y}F_y}$$</li>
+</ol>
+<hr>
+<h3 id="四-常用压电材料关键物性参数对比表p16">四、 常用压电材料关键物性参数对比表（P16）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">压电材料</th>
+<th align="center">压电系数 $d$ ($10^{-12}\;\text{C/N}$)</th>
+<th align="center">相对介电常数 $\varepsilon_r$</th>
+<th align="center">杨氏模量 $E$ ($10^9\;\text{N/m}^2$)</th>
+<th align="center">最大安全应力 ($10^6\;\text{N/m}^2$)</th>
+<th align="center">电阻率 ($10^9\;\Omega\cdot\text{m}$)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>石英晶体</strong></td>
+<td align="center">$2.3$</td>
+<td align="center">$4.5$</td>
+<td align="center">$80$</td>
+<td align="center">$98$</td>
+<td align="center">$&gt;1000$</td>
+</tr>
+<tr>
+<td align="left"><strong>钛酸钡陶瓷</strong></td>
+<td align="center">$140$</td>
+<td align="center">$1200$</td>
+<td align="center">$110$</td>
+<td align="center">$80$</td>
+<td align="center">$&gt;100$</td>
+</tr>
+<tr>
+<td align="left"><strong>铌镁酸锂陶瓷</strong></td>
+<td align="center">$105$</td>
+<td align="center">$1600$</td>
+<td align="center">$55$</td>
+<td align="center">—</td>
+<td align="center">$&gt;30$</td>
+</tr>
+<tr>
+<td align="left"><strong>锆钛酸铅（PZT）</strong></td>
+<td align="center"><strong>$410$</strong></td>
+<td align="center">$1050$</td>
+<td align="center">$83.3$</td>
+<td align="center">$76$</td>
+<td align="center">$&gt;100$</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>选型对比（P16）</strong>：<strong>压电陶瓷（PZT）<strong>压电系数 $d$ 是石英的近 200 倍、灵敏度极高；但</strong>石英晶体</strong>电阻率最高、居里温度高、时间与温度稳定性以及力学强度远胜陶瓷（常用于精密计量与 QCM）。</li>
+</ul>
+<hr>
+<h3 id="五-ppt-细节补漏与物理公理简单证明">五、 PPT 细节补漏与物理公理简单证明</h3>
+<h4 id="51-物理公理证明为什么极化强度-p-数值上等于束缚电荷面密度-sigma_b">5.1 物理公理证明：为什么极化强度 $P$ 数值上等于束缚电荷面密度 $\sigma_b$？</h4>
+<p>很多同学疑惑：极化强度 $\vec{P}$ 的定义是“单位体积内的电偶极矩矢量和”（体密度），为什么推导时可以直接写成 $P_{11} = \frac{q_x}{bc}$（面密度）？</p>
+<ul>
+<li><strong>微元柱证明</strong>：取垂直于极化方向（面积为 $A = bc$、厚度为 $a$）的均匀极化介质块。其总电偶极矩大小为 $P_{\text{总}} = P\cdot V = P\cdot(A a)$。</li>
+<li>宏观上这等价于上下两表面分别聚集了 $+q_b$ 和 $-q_b$ 的束缚电荷，相距 $a$，构成一个大电偶极矩 $P_{\text{总}} = q_b \cdot a$。</li>
+<li>联立消去厚度 $a$：$P\cdot A a = q_b \cdot a \implies \boxed{P = \frac{q_b}{A} = \sigma_b}$（方向由 $\sigma_b = \vec{P}\cdot\hat{n}$ 决定）。</li>
+</ul>
+<h4 id="52-物理公理证明为什么石英沿光轴z-轴没有压电效应">5.2 物理公理证明：为什么石英沿光轴（Z 轴）没有压电效应？</h4>
+<ul>
+<li>由 PPT P5–6 的微观投影图，正离子 $\text{Si}^{4+}$ 与负离子 $2\text{O}^{2-}$ 在垂直于 Z 轴的 $xy$ 平面上呈三重旋转对称（$120^\circ$ 等夹角）。</li>
+<li>当沿 Z 轴施加均匀拉/压力 $F_z$ 时，各键角与原子在 $xy$ 平面上的相对径向比例保持完全同步缩放，三个电偶极矩依然大小相等、互成 $120^\circ$，故 $\vec{P}_1 + \vec{P}_2 + \vec{P}_3 = \vec{0}$ 始终成立；同时沿 Z 轴方向晶胞本身具有上下对称性，也不产生净偶极矩分量，因此<strong>沿 Z 轴无任何压电效应</strong>。</li>
+</ul>
+<h4 id="53-ppt-补漏压电系数下标规律多层晶片接法与居里温度p916">5.3 PPT 补漏：压电系数下标规律、多层晶片接法与居里温度（P9–16）</h4>
+<ol>
+<li><strong>压电系数 $d_{ij}$ 下标物理意义（PPT P9–10）</strong>：第一个下标 $i \in \{1,2,3\}$ 表示<strong>产生极化电荷的电极面法向轴</strong>（对应 $x, y, z$）；第二个下标 $j \in \{1,2,3\}$ 表示<strong>施加外力/正应力的轴向</strong>。例如石英 $d_{11}$ 为 $x$ 面收集电荷、$x$ 轴施力；$d_{12}$ 为 $x$ 面收集电荷、$y$ 轴施力；压电陶瓷 $d_{33}$ 为 $z$ 面收集电荷、$z$ 轴施力。</li>
+<li><strong>多层压电晶片并联 vs. 串联接法（高频考点！）</strong>：工程中常将两片相同的压电晶片叠合使用以增大输出（设单片电容 $C_a$、受同一力产生电荷 $q$、电压 $U_a = q/C_a$）：<ul>
+<li><strong>并联接法</strong>（两片负极贴一起、正极接外端或同极性端并联）：总电荷翻倍 <strong>$q_{\text{并}} = 2q$</strong>，总电容翻倍 <strong>$C_{\text{并}} = 2C_a$</strong>，输出开路电压不变（$U_{\text{并}} = U_a$）——<strong>适合接电荷放大器</strong>（灵敏度翻倍）；</li>
+<li><strong>串联接法</strong>（正负异极性首尾相接）：总电荷不变 <strong>$q_{\text{串}} = q$</strong>，总电容减半 <strong>$C_{\text{串}} = C_a / 2$</strong>，输出开路电压翻倍 <strong>$U_{\text{串}} = 2U_a$</strong>——<strong>适合接电压放大器</strong>。</li>
+</ul>
+</li>
+<li><strong>居里温度（Curie Temperature）与五大选型准则（PPT P16）</strong>：压电陶瓷必须在居里点以下使用（如 $\text{BaTiO}_3$ 约 $120^\circ\text{C}$，PZT 约 $300^\circ\text{C}$ 以上），温度超过居里点电畴热运动破坏定向极化，压电性永久消失。PPT P16 要求压电材料满足五大准则：<strong>转换性能</strong>（压电常数大）、<strong>机械性能</strong>（强度高、刚度大）、<strong>电性能</strong>（高电阻率、大介电常数）、<strong>环境适应性</strong>（温湿度稳定性好、工作温域宽）、<strong>时间稳定性</strong>（性能不随时间老化衰减）。</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-09-2">09-2 等效电路与电荷放大</h2>
+<h2 id="09-2-压电等效电路与电压电荷放大器推导对应-ppt-p1722" class="doc-title">09-2 压电等效电路与电压、电荷放大器推导（对应 PPT P17–22）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1FaJoaexnaGdbqR05It3d9fb3yPmZAbwd/view?usp=drivesdk">09_物理2-压电_P324-361.pdf</a>（PPT P17–22）｜<em>注：融合原笔记 <code>t5.5.1.6</code>～<code>t5.5.1.7</code>，完整保留电荷源/电压源双端口等效证明、电压放大器高通截止频率与电缆电容衰减推导，以及电荷放大器 KCL 节点电荷平衡推导。</em></p>
+</blockquote>
+<h3 id="目录-2">目录</h3>
+<ul>
+<li><a href="#一-压电元件双端口等效电路与全等性证明p1718">一、 压电元件双端口等效电路与全等性证明（P17–18）</a></li>
+<li><a href="#二-电压放大器阻抗变换器复频域推导与缺陷p19">二、 电压放大器（阻抗变换器）复频域推导与缺陷（P19）</a></li>
+<li><a href="#三-电荷放大器完整-kcl-推导与长电缆免疫特性p2021">三、 电荷放大器完整 KCL 推导与长电缆免疫特性（P20–21）</a></li>
+</ul>
+<hr>
+<h3 id="一-压电元件双端口等效电路与全等性证明p1718">一、 压电元件双端口等效电路与全等性证明（P17–18）</h3>
+<h4 id="11-固有电容-c_a-与两种理想等效模型ppt-p17">1.1 固有电容 $C_a$ 与两种理想等效模型（PPT P17）</h4>
+<p>压电晶片上下两面覆金属电极，构成一个平板电容器，其固有电容为：
+$$C_a = \frac{\varepsilon S}{\delta} = \frac{\varepsilon_0 \varepsilon_r S}{\delta}$$
+受外力产生电荷 $q$ 时，压电元件可完全等效为以下两种电路（诺顿 vs. 戴维南对偶）：</p>
+<ul>
+<li><strong>(a) 电荷源等效</strong>：理想电荷源 $q$ 与固有电容 $C_a$ <strong>并联</strong>（适合接电荷放大器）；</li>
+<li><strong>(b) 电压源等效</strong>：理想电压源 $U_a = \frac{q}{C_a}$ 与固有电容 $C_a$ <strong>串联</strong>（适合接电压放大器）。
+<em>(复频域验证：由 $i(t) = \frac{dq}{dt} \implies I(s) = s Q(s)$，诺顿端开路电压 $U_a(s) = I(s)\cdot\frac{1}{s C_a} = \frac{Q(s)}{C_a}$，输出阻抗均为 $\frac{1}{s C_a}$，故两电路外特性严格全等。)</em></li>
+</ul>
+<h4 id="12-计入实际寄生参数的完整等效电路ppt-p18">1.2 计入实际寄生参数的完整等效电路（PPT P18）</h4>
+<p>实际测量时必须并联三项实际参数：压电片体绝缘电阻 $R_a$（极高，约 $10^{11}\sim 10^{14}\;\Omega$）、连接导线/屏蔽电缆的分布电容 $C_c$、前置放大器输入电阻 $R_i$ 与输入电容 $C_i$。</p>
+<hr>
+<h3 id="二-电压放大器阻抗变换器复频域推导与缺陷p19">二、 电压放大器（阻抗变换器）复频域推导与缺陷（P19）</h3>
+<p>将压电传感器接入高输入阻抗电压放大器（等效并联总电阻 $R = \frac{R_a R_i}{R_a + R_i}$，总负载电容 $C = C_c + C_i$，开路电压 $u_a = \frac{q}{C_a}$）。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：电压放大器传递函数与动态高通特性推导（PPT P19）】</strong></p>
+<ol>
+<li><strong>KCL / 分压求输出相量 $\dot{U}_o$</strong>（注意总电容 $C_{\Sigma} = C_a + C_c + C_i = C_a + C$）：
+电压源 $\dot{U}_a$ 通过 $C_a$ 串联向 $R // C$ 支路供电，由阻抗分压（或电荷源 $\dot{I}_q = j\omega q$ 直接注入 $R // C_{\Sigma}$）：
+$$\dot{U}_o = \frac{R // \frac{1}{j\omega C}}{\frac{1}{j\omega C_a} + \left(R // \frac{1}{j\omega C}\right)}\dot{U}_a = \frac{j\omega R C_a}{1 + j\omega R(C_a + C_c + C_i)}\dot{U}_a$$
+代入 $\dot{U}_a = \frac{q}{C_a}$，消去分子中的 $C_a$：
+$$\boxed{\dot{U}_o = \frac{j\omega R\, q}{1 + j\omega R(C_a + C_c + C_i)}}$$</li>
+<li><strong>幅值与高通截止特性</strong>：
+$$U_o = \frac{\omega R\, q}{\sqrt{1 + [\omega R(C_a + C_c + C_i)]^2}}$$<ul>
+<li><strong>高频通带（$\omega R(C_a + C_c + C_i) \gg 1$）</strong>：分母中 $1$ 可忽略，幅值趋于平坦平台：
+$$U_o \approx \frac{q}{C_a + C_c + C_i}$$</li>
+<li><strong>低频下限截止频率</strong>：$\omega_L = \frac{1}{R(C_a + C_c + C_i)}$。当信号频率过低（或纯静态力 $\omega = 0$）时，电荷通过 $R$ 漏放完毕，$U_o \to 0$。</li>
+</ul>
+</li>
+<li><strong>电压放大器的两大致命缺陷</strong>：<ol>
+<li><strong>无法测纯静态直流力</strong>（必须使用高输入阻抗运放增大 $R_i$ 以压低 $\omega_L$，才能测准静态/低频脉搏波）；</li>
+<li><strong>灵敏度严重受电缆分布电容 $C_c$ 影响</strong>：一旦更换或加长屏蔽电缆，$C_c$ 改变会直接稀释输出电压 $\frac{q}{C_a+C_c+C_i}$，导致传感器<strong>必须连同电缆一起重新标定</strong>！</li>
+</ol>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-电荷放大器完整-kcl-推导与长电缆免疫特性p2021">三、 电荷放大器完整 KCL 推导与长电缆免疫特性（P20–21）</h3>
+<p>为彻底消除电缆分布电容 $C_c$ 的影响，工程上广泛采用带电容负反馈的高增益反相运放——<strong>电荷放大器</strong>（PPT P20–21）。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：电荷放大器输出电压 $U_o$ 完整推导（PPT P20–21）】</strong>
+设运放开环电压增益为 $-A$（即 $U_o = -A U_-$），反相输入端电压为 $U_-$，反馈电容为 $C_f$（忽略极高的 $R_a, R_i, R_f$）：</p>
+<ol>
+<li><strong>列写反相输入端节点 KCL 电荷守恒方程</strong>：
+传感器产生的电荷 $q$ 一部分留在输入端总对地电容 $(C_a + C_c + C_i)$ 上，另一部分充入反馈电容 $C_f$（其两端压差为 $U_- - U_o$）：
+$$q = (C_a + C_c + C_i)U_- + C_f(U_- - U_o)$$</li>
+<li><strong>代入运放增益关系 $U_- = -\dfrac{U_o}{A}$</strong>：
+$$q = \left(C_a + C_c + C_i\right)\left(-\frac{U_o}{A}\right) + C_f\left(-\frac{U_o}{A} - U_o\right) = -U_o\left[\frac{C_a + C_c + C_i + (1+A)C_f}{A}\right]$$</li>
+<li><strong>解出精确输出电压（PPT P21 核心公式！）</strong>：
+$$\boxed{U_o = \frac{-A\, q}{C_a + C_c + C_i + (1 + A)C_f}}$$</li>
+<li><strong>大开环增益近似（$A = 10^4 \sim 10^8$）</strong>：
+因 $A$ 极大，极易满足 $(1 + A)C_f \gg C_a + C_c + C_i$，且 $1 + A \approx A$，分子分母消去 $A$ 后得：
+$$\boxed{U_o \approx -\frac{q}{C_f}}$$<ul>
+<li><strong>物理本质（“米勒效应虚拟大电容”）</strong>：由于运放的深度负反馈，在输入端看来反馈电容 $C_f$ 被放大了 $(1+A)$ 倍（等效对地电容高达微法级），把传感器电荷几乎 $100\%$ 吸进 $C_f$ 中，电缆电容 $C_c$ 分不到电荷！</li>
+<li><strong>工程优势（P21）</strong>：输出电压 $U_o$ 仅取决于输入电荷 $q$ 与反馈电容 $C_f$，<strong>与电缆电容 $C_c$ 无关</strong>——即使连接百米以上长电缆，灵敏度也无明显变化；实际中 $C_f$ 设为可切换挡位（$100\sim 10^4\;\text{pF}$）用于调节量程。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-ppt-细节补漏与物理公理简单证明">四、 PPT 细节补漏与物理公理简单证明</h3>
+<h4 id="41-物理公理为什么压电传感器绝对不能测纯静态直流力">4.1 物理公理：为什么压电传感器绝对不能测纯静态直流力？</h4>
+<ul>
+<li>压电效应产生的电荷 $q$ 是有限的束缚/自由电荷。只要传感器接入任何实际测量电路（哪怕压电片绝缘电阻 $R_a \sim 10^{12}\;\Omega$、FET 运放输入电阻 $R_i \sim 10^{12}\;\Omega$），总并联泄漏电阻 $R = R_a // R_i$ 总是有限值。</li>
+<li>当施加恒定不变的静态力 $F_0$（$t=0$ 突加后保持不变）时，电荷必然通过电阻 $R$ 构成的一阶 RC 回路按指数规律泄放：
+$$u_o(t) = \frac{q_0}{C_a + C_c + C_i}\, e^{-\frac{t}{\tau}}, \qquad \tau = R(C_a + C_c + C_i)$$</li>
+<li>当 $t \gg \tau$ 时输出电压衰减为零！因此压电传感器本质上只适用于<strong>动态力、振动、冲击与交变脉搏波</strong>测量；要测准静态/低频信号，必须极大提高时间常数 $\tau$（增大 $R_i$）。</li>
+</ul>
+<h4 id="42-ppt-p1920-补漏电压放大器相频特性与电荷放大器实际-r_f-约束">4.2 PPT P19–20 补漏：电压放大器相频特性与电荷放大器实际 $R_f$ 约束</h4>
+<ol>
+<li><strong>电压放大器相频特性（PPT P19）</strong>：由传递函数 $\dot{U}_o = \frac{j\omega R\, q}{1 + j\omega R C_\Sigma}$，输出相对输入电荷的相角为：
+$$\varphi(\omega) = 90^\circ - \arctan\big(\omega R C_\Sigma\big)$$
+当工作频率远高于下限截止频率（$\omega R C_\Sigma \gg 1$）时，$\arctan(\omega R C_\Sigma) \to 90^\circ$，故相移趋近 $0^\circ$（相位无失真），幅值趋于平坦平台 $\frac{q}{C_\Sigma}$。</li>
+<li><strong>电荷放大器反馈电阻 $R_f$ 的工程必要性（PPT P20 补充）</strong>：PPT P20 标注了理想推演时“忽略 $R_a, R_i$ 及 $R_f$ 的影响”，但实际电荷放大器<strong>必须在 $C_f$ 两端并联一个高阻值反馈电阻 $R_f$</strong>（约 $10^9\sim 10^{12}\;\Omega$），否则运放微小的输入偏置电流会对 $C_f$ 持续充电导致输出电压漂移至电源轨饱和！计入 $R_f$ 后，真实下限截止频率为 $f_L = \frac{1}{2\pi R_f C_f}$（可低至 $0.01\;\text{Hz}$ 以下，满足超低频脉搏/呼吸测量）。</li>
+</ol>
+<h4 id="43-ppt-p22-压电传感器在生物医学中的七大典型应用">4.3 PPT P22 压电传感器在生物医学中的七大典型应用</h4>
+<ol>
+<li><strong>眼压传感器</strong>（压平/压陷式眼内压测量）；</li>
+<li><strong>血压传感器</strong>（袖带微音器法及血管脉搏传导压力波）；</li>
+<li><strong>心内导管微音器</strong>（心腔内微弱心音与杂音采集）；</li>
+<li><strong>压电微震传感器</strong>（心冲击图 BCG、体表微振动监测）；</li>
+<li><strong>心音传感器</strong>（第一、第二心音及瓣膜杂音拾取）；</li>
+<li><strong>压电式流量计</strong>（超声多普勒血流探头、压电涡街流量计）；</li>
+<li><strong>压电脉搏波传感器</strong>（桡动脉/颈动脉脉搏波采集，用于动脉硬化 PWV 评估）。</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-09-3">09-3 血流超声与脉搏波</h2>
+<h2 id="09-3-血流动力学超声多普勒与脉搏波解析对应-ppt-p2337" class="doc-title">09-3 血流动力学、超声多普勒与脉搏波解析（对应 PPT P23–37）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1FaJoaexnaGdbqR05It3d9fb3yPmZAbwd/view?usp=drivesdk">09_物理2-压电_P324-361.pdf</a>（PPT P23–37）｜<em>注：融合原笔记 <code>t5.5.1.9</code>～<code>t5.5.1.11</code>，完整覆盖心血管核心定量指标、雷诺数层流/湍流判据、超声声学参数、多普勒频移两步接力推导、三大工程硬约束与脉搏波六大特征。</em></p>
+</blockquote>
+<h3 id="目录-3">目录</h3>
+<ul>
+<li><a href="#一-心血管血流核心定量指标与雷诺数判据p2328">一、 心血管血流核心定量指标与雷诺数判据（P23–28）</a></li>
+<li><a href="#二-超声物理特性与多普勒频移公式零跳步推导p2932">二、 超声物理特性与多普勒频移公式零跳步推导（P29–32）</a></li>
+<li><a href="#三-多普勒血流检测三大硬约束与频谱展宽p3233">三、 多普勒血流检测三大硬约束与频谱展宽（P32–33）</a></li>
+<li><a href="#四-a-超--b-超换能器与压电脉搏波特征p3437">四、 A 超 / B 超换能器与压电脉搏波特征（P34–37）</a></li>
+</ul>
+<hr>
+<h3 id="一-心血管血流核心定量指标与雷诺数判据p2328">一、 心血管血流核心定量指标与雷诺数判据（P23–28）</h3>
+<h4 id="11-血流的三大特征与核心衡量参数ppt-p2426">1.1 血流的三大特征与核心衡量参数（PPT P24–26）</h4>
+<ul>
+<li><strong>三大特征（P24）</strong>：连续性（弹性贮器效应）、脉动性（大动脉明显，微动脉/毛细血管渐平）、层流为主（分叉/狭窄/弯曲处易形成湍流）。</li>
+<li><strong>血流动力学四大核心临床指标（P26，必背公式与正常值！）</strong>：<ol>
+<li><strong>每搏输出量（SV）</strong>：一侧心室每次搏动射出的血量，正常约 <strong>$60\sim 80\;\text{mL}$</strong>；</li>
+<li><strong>心输出量（CO）</strong>：每分钟一侧心室射出的血量，$\text{CO} = \text{SV} \times \text{HR}$（心率），正常约 <strong>$4.5\sim 6.0\;\text{L/min}$</strong>；</li>
+<li><strong>心指数（CI）</strong>：以单位体表面积（BSA）标准化的心输出量，$\text{CI} = \frac{\text{CO}}{\text{体表面积}}$，正常 <strong>$3.0\sim 3.5\;\text{L/(min}\cdot\text{m}^2\text{)}$</strong>；</li>
+<li><strong>射血分数（EF）</strong>：每搏输出量占心室舒张末期容积（EDV）的百分比，$\text{EF} = \frac{\text{SV}}{\text{心室舒张末期容积}}$，正常 <strong>$55\%\sim 65\%$</strong>（心衰早期 EF 明显下降）。</li>
+</ol>
+</li>
+</ul>
+<h4 id="12-雷诺数reynolds-number与层流湍流压降规律ppt-p28">1.2 雷诺数（Reynolds Number）与层流/湍流压降规律（PPT P28）</h4>
+<ul>
+<li><strong>雷诺数定义</strong>：表征流体惯性力与粘性力之比的无量纲数：
+$$\boxed{Re = \frac{\rho v D}{\eta}}$$
+其中 $\rho$ 为血液密度（$\text{kg/m}^3$），$v$ 为平均血流速（$\text{m/s}$），$D$ 为血管直径（$\text{m}$），$\eta$ 为血液粘滞系数（$\text{Pa}\cdot\text{s}$）。</li>
+<li><strong>流态判据与阻力差异（P28）</strong>：<ul>
+<li><strong>$Re &lt; 1000$（层流）</strong>：遵守泊肃叶定律 $\Delta p = \frac{8\eta L}{\pi r^4}Q \propto Q$（压差与流量呈线性）；</li>
+<li><strong>$Re = 1000\sim 2000$（过渡状态）</strong>；</li>
+<li><strong>$Re &gt; 2000$（湍流）</strong>：出现漩涡耗能，$\Delta p \approx k Q^\alpha\;(\alpha &gt; 1)$（压差随流量非线性陡增，是血管杂音和动脉粥样硬化斑块处压力损失剧增的原因）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="二-超声物理特性与多普勒频移公式零跳步推导p2932">二、 超声物理特性与多普勒频移公式零跳步推导（P29–32）</h3>
+<h4 id="21-超声波在人体介质中的传播参数ppt-p30">2.1 超声波在人体介质中的传播参数（PPT P30）</h4>
+<p>医用超声频率 $&gt;20\;\text{kHz}$，多普勒血流检测常用 <strong>$2\sim 10\;\text{MHz}$</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">传播介质</th>
+<th align="center">传播速度 $c$（$\text{m/s}$）</th>
+<th align="center">平均衰减系数（$\text{dB/(cm}\cdot\text{MHz)}$）</th>
+<th align="left">声学特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>空气</strong></td>
+<td align="center">$330$</td>
+<td align="center">$10$</td>
+<td align="left">声阻抗极小且衰减大（临床须涂<strong>超声耦合剂</strong>排尽空气）</td>
+</tr>
+<tr>
+<td align="left"><strong>水</strong></td>
+<td align="center">$1480$</td>
+<td align="center">$0.002$</td>
+<td align="left">几乎无衰减</td>
+</tr>
+<tr>
+<td align="left"><strong>人体软组织</strong></td>
+<td align="center"><strong>$\sim 1540$</strong></td>
+<td align="center"><strong>$1\sim 2$</strong></td>
+<td align="left">医用超声仪器默认标定声速基准</td>
+</tr>
+<tr>
+<td align="left"><strong>骨骼</strong></td>
+<td align="center">$\sim 4000$</td>
+<td align="center">$\sim 20$</td>
+<td align="left">衰减极剧烈，形成声影</td>
+</tr>
+</tbody></table></div>
+<h4 id="22-超声多普勒频移-f_d-两步接力推导ppt-p3132必考核心推导">2.2 超声多普勒频移 $f_D$ 两步接力推导（PPT P31–32，必考核心推导！）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从两次相对运动导出 $f_D \approx \pm\dfrac{2 v \cos\theta}{c}f_0$（PPT P31）】</strong>
+设超声探头发射频率为 $f_0$，超声波在软组织中的传播速度为 $c \approx 1540\;\text{m/s}$，红细胞以速度 $v$（远小于声速，$v \ll c$）沿血管运动，探头声束方向与血流速度矢量夹角为 $\theta$（先以背离探头方向运动为例）：</p>
+<ol>
+<li><strong>阶段 A（发射：探头固定，血细胞作为接收端运动）</strong>：
+探头发射的波在介质中波长为 $\lambda_0 = \frac{c}{f_0}$。血细胞以沿声束分量 $v\cos\theta$ 远离声源运动，相对波速变为 $c - v\cos\theta$，故血细胞每秒截获的波数（接收频率 $f'$）为：
+$$f' = \frac{c - v\cos\theta}{\lambda_0} = f_0 \cdot \frac{c - v\cos\theta}{c}$$</li>
+<li><strong>阶段 B（接收：血细胞作为反射声源运动，探头作为接收端固定）</strong>：
+血细胞以频率 $f'$ 向回散射超声波。由于声源在远离固定探头，反射波在介质中被拉长，波长变为 $\lambda_R = \frac{c + v\cos\theta}{f'}$。固定探头以声速 $c$ 接收到该波，故探头测得反射频率 $f_R$ 为：
+$$f_R = \frac{c}{\lambda_R} = f'\cdot\frac{c}{c + v\cos\theta} = f_0 \cdot \frac{c - v\cos\theta}{c + v\cos\theta}$$</li>
+<li><strong>小速度泰勒展开（因人体血流 $v \sim 0.1\sim 1\;\text{m/s} \ll c = 1540\;\text{m/s}$）</strong>：
+令 $\beta = \frac{v\cos\theta}{c} \ll 1$，利用 $\frac{1-\beta}{1+\beta} \approx (1-\beta)^2 \approx 1 - 2\beta$：
+$$f_R = f_0 \frac{1 - \beta}{1 + \beta} \approx f_0 \left(1 - \frac{2 v\cos\theta}{c}\right)$$</li>
+<li><strong>多普勒频移 $f_D = f_R - f_0$（PPT P31–32）</strong>：
+$$\boxed{f_D = f_R - f_0 \approx \pm\frac{2 v\cos\theta}{c}f_0}$$<ul>
+<li><strong>符号法则（P32）</strong>：**正号（$f_D &gt; 0$）**表示血流朝向探头方向运动；**负号（$f_D &lt; 0$）**表示血流背对探头方向运动。反解血流速度为 $v = \pm\frac{c f_D}{2 f_0 \cos\theta}$。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-多普勒血流检测三大硬约束与频谱展宽p3233">三、 多普勒血流检测三大硬约束与频谱展宽（P32–33）</h3>
+<ol>
+<li><strong>音频范围优势（P32）</strong>：代入 $f_0 = 2\sim 10\;\text{MHz},\; v \sim 0.1\sim 1\;\text{m/s}$，算得 $f_D$ 恰好落在 <strong>$0\sim 13\;\text{kHz}$</strong>（人耳可听音频范围，直接接入扬声器即可“听血流”）。</li>
+<li><strong>垂直致盲与最优夹角（P32）</strong>：若声束垂直血管（$\theta = 90^\circ$），$\cos 90^\circ = 0 \implies f_D = 0$（完全测不出流速）；角度过小又难以穿透皮肤/贴合耦合，故临床常取 <strong>$\theta = 30^\circ\sim 60^\circ$</strong>。</li>
+<li><strong>灵敏度与穿透深度的频率博弈（P32）</strong>：提高发射频率 $f_0$ 可增大频移 $f_D$ 提高测速灵敏度，但软组织超声衰减系数（$1\sim 2\;\text{dB/(cm}\cdot\text{MHz)}$）正比于 $f_0$，导致探测深度急剧变浅——浅表血管用高频（$8\sim 10\;\text{MHz}$），深部心脏/腹腔血管用低频（$2\sim 3.5\;\text{MHz}$）。</li>
+<li><strong>频谱展宽机制（P33）</strong>：血管内层流呈抛物线速度剖面（中心流速快 $f_D$ 大，管壁附近流速慢 $f_D$ 小），因此实际接收到的多普勒功率谱 $P(f)$ 不是单根尖峰，而是以 $f_0 + f_D$ 为边界展宽的频谱包络。</li>
+</ol>
+<hr>
+<h3 id="四-a-超--b-超换能器与压电脉搏波特征p3437">四、 A 超 / B 超换能器与压电脉搏波特征（P34–37）</h3>
+<ul>
+<li><strong>A 型超声（P35）</strong>：单压电陶瓷片（前配声透镜/匹配层、后配阻尼吸收块发射宽带窄脉冲），以幅度—时间波形显示脏器径线与组织特性（实质/液体/气体）。</li>
+<li><strong>B 型超声多元线阵（P35）</strong>：将矩形压电薄片切割成 <strong>$64\sim 96$ 个独立阵元</strong>，通过电子开关序列控制发射/接收，实时提取人体切面声阻抗分布并转为灰度图像。</li>
+<li><strong>压电脉搏波六大核心特征（P37，常考读图！）</strong>：<ol>
+<li><strong>升支</strong>：心室快速射血期；</li>
+<li><strong>降支</strong>：心室射血后期至下一次心动周期开始；</li>
+<li><strong>主波</strong>：脉图最高峰，反映动脉内压力与容积最大值；</li>
+<li><strong>潮波（重搏前波）</strong>：左心室停止射血、动脉扩张降压时的逆向反射波；</li>
+<li><strong>降中峡</strong>：主动脉静压排空点，为<strong>心脏收缩与舒张的分界点</strong>；</li>
+<li><strong>重搏波</strong>：降支中突出的小上升波，由<strong>主动脉瓣关闭、主动脉弹性回缩</strong>产生。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="五-ppt-细节补漏与物理公理简单证明-2">五、 PPT 细节补漏与物理公理简单证明</h3>
+<h4 id="51-物理公理证明雷诺数量纲来源与声阻抗全反射公式">5.1 物理公理证明：雷诺数量纲来源与声阻抗全反射公式</h4>
+<ol>
+<li><strong>为什么雷诺数 $Re = \frac{\rho v D}{\eta}$ 代表“惯性力 / 粘性力”？</strong>
+流体微元单位体积的<strong>惯性力</strong>量级为 $\rho (\vec{v}\cdot\nabla)\vec{v} \sim \frac{\rho v^2}{D}$；单位体积的<strong>粘性力</strong>量级为 $\eta \nabla^2 \vec{v} \sim \frac{\eta v}{D^2}$。两者直接相除即得无量纲雷诺数：
+$$Re \sim \frac{\text{惯性力}}{\text{粘性力}} = \frac{\rho v^2 / D}{\eta v / D^2} = \boxed{\frac{\rho v D}{\eta}}$$
+<em>物理直觉</em>：$Re$ 越大，流体惯性冲劲远超粘性束缚，微扰动无法被粘性耗散而演变为湍流漩涡。</li>
+<li><strong>为什么超声检查必须涂耦合剂排尽空气？（声阻抗公理，PPT P30）</strong>
+介质声阻抗定义为 $Z = \rho c$。声波垂直入射两种介质交界面时，由界面声压连续与质点振速连续边界条件，导出声强反射率：
+$$R = \left(\frac{Z_2 - Z_1}{Z_2 + Z_1}\right)^2$$
+空气声阻抗 $Z_{\text{空气}} \approx 400\;\text{Pa}\cdot\text{s/m}$，人体软组织 $Z_{\text{软组织}} \approx 1.63\times 10^6\;\text{Pa}\cdot\text{s/m}$，代入算得 $R \approx 99.9\%$（几乎全反射）！涂抹水基超声耦合剂（$Z \approx 1.5\times 10^6$）排尽空气，使 $Z_1 \approx Z_2 \implies R \to 0$，声波才能顺畅透入人体。</li>
+</ol>
+<h4 id="52-ppt-p23-p25-p29-补漏临床意义组织灌注量与测量方法分类">5.2 PPT P23, P25, P29 补漏：临床意义、组织灌注量与测量方法分类</h4>
+<ol>
+<li><strong>血流动力学测量的五大临床意义（PPT P23）</strong>：①心脏射血功能评定；②大血管生理功能评定（狭窄、斑块等）；③极端情况（监护、手术、剧烈运动、失重等）血液循环评定；④<strong>肿瘤的早期诊断</strong>（如乳腺癌新生血管丰富导致局部灌注异常升高）；⑤药物疗效评价。</li>
+<li><strong>血流量积分关系与组织灌注量（PPT P25）</strong>：<ul>
+<li>体积流量与截面流速积分关系：$Q = \int_A v\,dA = \bar{v}\cdot \pi r^2 = \frac{dV}{dt}$（单位 $\text{m}^3/\text{s}$ 或 $\text{L/s}$）；</li>
+<li><strong>组织灌注量 $q$</strong>：单位质量生物组织在单位时间内获得的血流量，单位为 $\text{m}^3/(\text{s}\cdot\text{kg})$ 或 $\text{L}/(\text{s}\cdot 100\text{g})$。</li>
+</ul>
+</li>
+<li><strong>血流量测量的四大分类维度（PPT P29）</strong>：①直接测量 vs. 间接测量；②测流速 $v$ / 流量 $Q$ / 血容量 $V$；③局部（单个器官/血管）vs. 全身（心输出量）；④无创（超声多普勒、激光多普勒）vs. 微创/有创（电磁流量计、热稀释心导管）。</li>
+</ol>
+<h4 id="53-ppt-p34--p36-前沿可穿戴超声器件进展">5.3 PPT P34 &amp; P36 前沿可穿戴超声器件进展</h4>
+<ul>
+<li><strong>柔性共形多普勒超声贴片（PPT P34，<em>Science Advances</em> 2021）</strong>：利用柔性可拉伸压电阵列与皮肤良好声耦合，实现颈动脉血流检测与肱动脉袖带实验，结果与商用大型超声机高度一致。</li>
+<li><strong>48 小时连续超声成像贴片（PPT P36，<em>Science</em> 2022）</strong>：采用柔软、坚韧的<strong>生物粘附耦合剂</strong>将薄而硬的压电超声阵列牢固粘附于人体表面，实现血管、心脏、肌肉、膈肌、胃和肺长达 <strong>48 小时连续动态成像</strong>。</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-10-1">10-1 磁电感应与运动模型</h2>
+<h2 id="10-1-磁电感应式传感器与两种运动模型推导对应-ppt-p12--p362363" class="doc-title">10-1 磁电感应式传感器与两种运动模型推导（对应 PPT P1–2 / P362–363）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1qnn30GpbBL5jsxl60MefIEYsERPBw9Vs/view?usp=drivesdk">10_物理2-磁电_P362-373.pdf</a>（PPT P1–2）｜<em>注：融合原笔记 <code>t5.6.1.1</code>～<code>t5.6.1.3</code>，完整保留洛伦兹力动生电动势线积分定义、直线运动与旋转运动两种磁电感应模型的矢量微积分严密推导。</em></p>
+</blockquote>
+<h3 id="目录-4">目录</h3>
+<ul>
+<li><a href="#一-磁电感应物理公理动生电动势与伽利略变换p2">一、 磁电感应物理公理：动生电动势与伽利略变换（P2）</a></li>
+<li><a href="#二-模型-a恒定磁场中线圈直线运动推导p2">二、 模型 (a)：恒定磁场中线圈直线运动推导（P2）</a></li>
+<li><a href="#三-模型-b平行磁场中线圈旋转运动推导p2">三、 模型 (b)：平行磁场中线圈旋转运动推导（P2）</a></li>
+<li><a href="#四-恒定磁通式-vs-变磁通磁阻式对比">四、 恒定磁通式 vs. 变磁通（磁阻）式对比</a></li>
+</ul>
+<hr>
+<h3 id="一-磁电感应物理公理动生电动势与伽利略变换p2">一、 磁电感应物理公理：动生电动势与伽利略变换（P2）</h3>
+<h4 id="11-法拉第电磁感应定律与动生电动势本质">1.1 法拉第电磁感应定律与动生电动势本质</h4>
+<p>磁电感应式传感器（有源/发电型传感器）直接将机械<strong>速度或角速度</strong>转换为感应电动势 $e$：
+$$e = -\frac{d\Psi}{dt} = -N\frac{d\Phi}{dt}$$
+在恒定稳恒磁场（$\frac{\partial\vec{B}}{\partial t} = \vec{0}$）中，导体随线圈以速度 $\vec{v}$ 运动，导体内的自由电荷受<strong>洛伦兹力</strong> $\vec{F}_m = q(\vec{v}\times\vec{B})$ 驱动产生等效动生非静电场强 $\vec{E}_k = \vec{v}\times\vec{B}$。沿闭合线圈积分即得<strong>动生电动势</strong>：
+$$\boxed{\mathcal{E} = \oint_C (\vec{v}\times\vec{B})\cdot d\vec{l}}$$</p>
+<hr>
+<h3 id="二-模型-a恒定磁场中线圈直线运动推导p2">二、 模型 (a)：恒定磁场中线圈直线运动推导（P2）</h3>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：动圈式直线速度传感器 $e = N B l v$ 的叉积线积分推导】</strong>
+设矩形线圈（有效切割边长为 $l$，匝数为 $N$）处于磁感应强度大小为 $B$、方向沿径向/垂直于线圈平面的恒定均匀磁场中（$\vec{B} = B\hat{z}$），线圈整体以线速度 $\vec{v} = v\hat{x}$ 沿 $x$ 轴做直线运动：</p>
+<ol>
+<li><strong>计算四条边上的动生场强 $\vec{E}_k = \vec{v}\times\vec{B}$</strong>：
+$$\vec{E}_k = (v\hat{x}) \times (B\hat{z}) = -B v \hat{y}$$</li>
+<li><strong>沿闭合矩形回路分四段求曲线积分</strong>：<ul>
+<li><strong>两平行于运动方向 $x$ 的侧边</strong>（$d\vec{l} = \pm dx\hat{x}$）：$\vec{E}_k \cdot d\vec{l} = (-Bv\hat{y})\cdot(\pm dx\hat{x}) = 0$（不切割磁感线，无电动势贡献）；</li>
+<li><strong>位于磁场外的另一端边</strong>：$B = 0 \implies$ 积分为 $0$；</li>
+<li><strong>位于气隙磁场内的有效切割边</strong>（长 $l$，沿 $-\hat{y}$ 方向积分 $d\vec{l} = -dy\hat{y}$）：
+$$e_{\text{单匝}} = \int_0^l (-Bv\hat{y})\cdot(-dy\hat{y}) = B l v$$</li>
+</ul>
+</li>
+<li><strong>叠加 $N$ 匝串联绕组</strong>：
+$$\boxed{e = N B l v}$$<ul>
+<li><strong>物理意义</strong>：$N, B, l$ 均为常数，故输出感应电动势 $e$ <strong>严格正比于机械线速度 $v$</strong>（测振动速度、心音动圈拾振器）。若需测位移 $x$ 需积分，若需测加速度 $a$ 需微分。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-模型-b平行磁场中线圈旋转运动推导p2">三、 模型 (b)：平行磁场中线圈旋转运动推导（P2）</h3>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：旋转角速度传感器 $e(t) = N B S \omega \sin(\omega t)$ 推导】</strong>
+设面积为 $S$、匝数为 $N$ 的矩形平面线圈置于均匀平行恒定磁场 $\vec{B}$ 中，以角速度 $\omega$ 绕垂直于 $\vec{B}$ 的中心轴匀速旋转（$t=0$ 时刻线圈法向量 $\hat{n}$ 与 $\vec{B}$ 平行，即 $\theta(t) = \omega t$）：</p>
+<ol>
+<li><strong>写出任意时刻 $t$ 穿过单匝线圈的磁通量 $\Phi(t)$</strong>：
+$$\Phi(t) = \int_S \vec{B}\cdot\hat{n}\,dS = B S \cos\theta(t) = B S \cos(\omega t)$$</li>
+<li><strong>对总磁链 $\Psi(t) = N\Phi(t)$ 应用法拉第定律求导</strong>：
+$$\boxed{e(t) = -\frac{d\Psi}{dt} = -N B S \frac{d}{dt}\big[\cos(\omega t)\big] = N B S \omega \sin(\omega t)}$$<ul>
+<li><em>(等价洛伦兹力验证：上下两条长为 $l$ 的旋转边线速度 $v = \omega r$，有效切割分量 $v_\perp = \omega r\sin(\omega t)$，两边相加乘以 $N$ 得 $e = 2 N B l (\omega r\sin\omega t) = N B (2rl)\omega\sin\omega t = N B S \omega \sin(\omega t)$，两法严格自洽！)</em></li>
+<li><strong>物理意义</strong>：输出交变电动势的<strong>幅值 $E_m = N B S \omega$ 与频率均严格正比于角速度 $\omega$</strong>。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-恒定磁通式-vs-变磁通磁阻式对比">四、 恒定磁通式 vs. 变磁通（磁阻）式对比</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">工作机理</th>
+<th align="left">典型结构</th>
+<th align="left">典型应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>恒定磁通式（动圈/动铁）</strong></td>
+<td align="left">磁路气隙不变，总磁通 $\Phi$ 恒定，靠<strong>线圈或磁铁相对运动</strong>切割磁感线</td>
+<td align="left">动圈式（线圈动）、动铁式（磁铁动）</td>
+<td align="left">线速度、振动速度、心音动圈拾音器</td>
+</tr>
+<tr>
+<td align="left"><strong>变磁通式（磁阻式）</strong></td>
+<td align="left">线圈与磁铁固定，<strong>导磁体（如齿轮）运动周期性改变气隙磁阻 $R_m$</strong>，从而使磁通 $\Phi(t)$ 脉动</td>
+<td align="left">磁铁 + 线圈 + 旋转导磁齿盘</td>
+<td align="left">转速、脉搏/血流旋转叶轮测速（输出脉冲频率 $f = Z n / 60$）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="五-物理公理证明与-ppt-p2-细节对齐">五、 物理公理证明与 PPT P2 细节对齐</h3>
+<h4 id="51-物理公理证明为什么切割磁感线与磁通变化率在稳恒磁场下严格等价">5.1 物理公理证明：为什么“切割磁感线”与“磁通变化率”在稳恒磁场下严格等价？</h4>
+<p>很多同学常混淆：法拉第定律 $e = -\frac{d\Phi}{dt}$ 和洛伦兹力动生公式 $e = \oint (\vec{v}\times\vec{B})\cdot d\vec{l}$ 是两条独立定律还是同一回事？</p>
+<ul>
+<li><strong>数学统一证明（通量输运定理）</strong>：设闭合回路 $C(t)$ 在磁场 $\vec{B}(\vec{r},t)$ 中以速度 $\vec{v}$ 运动，在 $dt$ 时间内扫过的侧面积微元为 $(d\vec{l}\times\vec{v}dt)$。由磁通连续性 $\nabla\cdot\vec{B} = 0$（无磁单极子），闭合柱体总磁通为零，导出<strong>全磁通变化率公式</strong>：
+$$-\frac{d\Phi}{dt} = -\iint_{S(t)} \frac{\partial\vec{B}}{\partial t}\cdot d\vec{S} + \oint_{C(t)} (\vec{v}\times\vec{B})\cdot d\vec{l}$$<ul>
+<li>右侧第一项是磁场本身随时间变化产生的<strong>感生电动势</strong>（变压器效应）；</li>
+<li>右侧第二项正是导体切割磁感线产生的<strong>动生电动势</strong>！</li>
+</ul>
+</li>
+<li><strong>结论</strong>：在稳恒磁场（$\frac{\partial\vec{B}}{\partial t} = \vec{0}$）中，第一项为零，因此法拉第磁通求导法与洛伦兹力切割磁感线法<strong>在数学上严格恒等</strong>。</li>
+</ul>
+<h4 id="52-ppt-p2-记号对齐">5.2 PPT P2 记号对齐</h4>
+<ul>
+<li>PPT P2 对旋转线圈写成 $e = E_m = n B A \omega$（其中 $n$ 为匝数，$A$ 为线圈所包围面积，指运动方向与磁场方向垂直瞬间的<strong>最大感应电动势幅值</strong>），与正弦瞬时表达式 $e(t) = N B S \omega \sin(\omega t)$ 中的峰值 $E_m$ 完全一致。</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-10-2">10-2 电磁流量计与泊松方程</h2>
+<h2 id="10-2-电磁流量计二维泊松方程权重函数与相敏解调对应-ppt-p311--p364373" class="doc-title">10-2 电磁流量计：二维泊松方程、权重函数与相敏解调（对应 PPT P3–11 / P364–373）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1qnn30GpbBL5jsxl60MefIEYsERPBw9Vs/view?usp=drivesdk">10_物理2-磁电_P362-373.pdf</a>（PPT P3–11）｜<em>注：融合原笔记 <code>t5.6.1.4</code>～<code>t5.6.1.7</code>，完整保留 $E=Bdv$ 动生平衡推导、二维泊松方程与轴对称流速剖面无关性证明、直流极化痛点、交流励磁正交干扰推导及相敏检波抑制原理。</em></p>
+</blockquote>
+<h3 id="目录-5">目录</h3>
+<ul>
+<li><a href="#一-电磁流量计基本原理与体积流量公式p34">一、 电磁流量计基本原理与体积流量公式（P3–4）</a></li>
+<li><a href="#二-二维泊松方程与流速剖面无关性严密推导p4">二、 二维泊松方程与流速剖面无关性严密推导（P4）</a></li>
+<li><a href="#三-直流励磁极化痛点-vs-交流励磁正交干扰p58">三、 直流励磁极化痛点 vs. 交流励磁正交干扰（P5–8）</a></li>
+<li><a href="#四-相敏检波器psd抑制正交干扰与电磁流量计总结p811">四、 相敏检波器（PSD）抑制正交干扰与电磁流量计总结（P8–11）</a></li>
+</ul>
+<hr>
+<h3 id="一-电磁流量计基本原理与体积流量公式p34">一、 电磁流量计基本原理与体积流量公式（P3–4）</h3>
+<h4 id="11-物理机制与核心公式ppt-p34">1.1 物理机制与核心公式（PPT P3–4）</h4>
+<p>**电磁流量计（EMF）**利用导电液体（如血液、生理盐水）在垂直外加磁场中流动切割磁感线，在管壁两侧对称电极间产生感应电动势，从而无创/无阻流地测量瞬时流速与体积流量（血液测量需加镍铁 Ni-Fe 磁屏蔽，Ni 含量 $&gt;30\%$，P5）。</p>
+<ul>
+<li><strong>平衡电动势公式</strong>：设匀强磁场磁感应强度为 $B$，血管/管道内径为 $d$，血液截面平均流速为 $\bar{v}$，当洛伦兹力 $q(\vec{v}\times\vec{B})$ 与分离电荷建立的静电场力 $q\vec{E}$ 达到动态平衡时（$E = B\bar{v}$），两电极间感应电势差为：
+$$\boxed{E = B d \bar{v}}$$</li>
+<li><strong>体积流量公式</strong>：由圆管截面积 $A = \frac{\pi d^2}{4}$，体积流量 $Q = A\bar{v}$ 为：
+$$\boxed{Q = \frac{\pi d^2}{4}\cdot\frac{E}{B d} = \frac{\pi d}{4 B}E}$$</li>
+</ul>
+<hr>
+<h3 id="二-二维泊松方程与流速剖面无关性严密推导p4">二、 二维泊松方程与流速剖面无关性严密推导（P4）</h3>
+<p>真实血液在血管内并不是均匀平推流，而是呈抛物线层流分布 $v(r) = v_{\max}\left(1 - \frac{r^2}{R^2}\right)$（或湍流分布）。为什么两电极测得的电压仍然严格等于 $B d \bar{v}$ 而不受流速剖面形状影响？</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从 Maxwell/欧姆定律导出二维泊松方程及平均流速不变性】</strong></p>
+<ol>
+<li><strong>运动导电介质欧姆定律</strong>：在电导率为 $\sigma$ 的运动血液中，传导电流密度为：
+$$\vec{J} = \sigma\big(\vec{E} + \vec{v}\times\vec{B}\big)$$</li>
+<li><strong>引入稳态无源条件与静电势</strong>：在稳态（或低频准静态）下电荷守恒 $\nabla\cdot\vec{J} = 0$，且电场保守无旋 $\vec{E} = -\nabla U$。代入上式并设 $\sigma$ 均匀：
+$$\nabla\cdot\big(-\nabla U + \vec{v}\times\vec{B}\big) = 0 \implies \boxed{\nabla^2 U = \nabla\cdot(\vec{v}\times\vec{B})}$$
+利用矢量恒等式 $\nabla\cdot(\vec{v}\times\vec{B}) = \vec{B}\cdot(\nabla\times\vec{v}) - \vec{v}\cdot(\nabla\times\vec{B})$，因外加磁场无旋（$\nabla\times\vec{B} = \vec{0}$），得<strong>二维泊松控制方程</strong>：
+$$\nabla^2 U = \vec{B}\cdot(\nabla\times\vec{v})$$</li>
+<li><strong>边界条件与轴对称权重函数结论</strong>：管壁绝缘（法向电流 $\vec{J}\cdot\hat{n} = 0 \implies \frac{\partial U}{\partial n}\big|_{r=R} = 0$）。取磁场 $\vec{B} = B\hat{y}$、流速 $\vec{v} = v(r)\hat{z}$，两电极位于 $x = \pm R\;(y=0)$ 处。利用极坐标下的格林函数法求解该 Neumann 边值问题（Shercliff 权重函数 $W(r,\theta)$），对任何<strong>轴对称流速剖面 $v(r)$</strong>（无论层流抛物线还是湍流平顶），积分后角度项对称消去，最终两点电极电势差严格为：
+$$U(+R, 0) - U(-R, 0) = \frac{2B}{R}\int_0^R v(r)\cdot 2r\,dr = B(2R)\left(\frac{1}{\pi R^2}\int_0^R v(r)\cdot 2\pi r\,dr\right) = \boxed{B d \bar{v}}$$
+<strong>核心物理结论</strong>：只要流速分布轴对称且充满管道，电磁流量计输出电压<strong>严格仅正比于截面平均流速 $\bar{v}$，与层流/湍流具体分布形状、流体粘度 $\eta$、密度 $\rho$ 完全无关</strong>！</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-直流励磁极化痛点-vs-交流励磁正交干扰p58">三、 直流励磁极化痛点 vs. 交流励磁正交干扰（P5–8）</h3>
+<h4 id="31-为什么不能直接用恒定直流磁场励磁ppt-p6">3.1 为什么不能直接用恒定直流磁场励磁？（PPT P6）</h4>
+<ul>
+<li><strong>致命缺陷——电极极化效应</strong>：血液是电解质溶液，电极与血液/血管壁界面存在电流通路，直流励磁下电极表面发生电化学极化，产生高达数十至数百毫伏的<strong>极化电压</strong>（远大于毫伏级的流量感应信号 $E$）且极不稳定，同时后级直流放大器零点漂移严重。</li>
+<li><strong>解决方案（P7）</strong>：采用<strong>交流励磁</strong>（频率约 <strong>$500\;\text{Hz}$</strong>，波形可选正弦波、方波、梯形波）。</li>
+</ul>
+<h4 id="32-交流励磁引入的两大干扰ppt-p78必考">3.2 交流励磁引入的两大干扰（PPT P7–8，必考！）</h4>
+<p>交流磁场 $B(t) = B_m \sin(\omega t)$ 随时间交变，不可避免地带来寄生感应：</p>
+<ol>
+<li><strong>变压器效应正交干扰 $e_T$（P8）</strong>：两根测量电极引线与导电血液构成一个<strong>寄生闭合回路</strong>，交变磁通 $\Phi_B(t) = B_m S_{\text{等效}}\sin(\omega t)$ 穿过该回路产生法拉第变压器感应电动势：
+$$e_T(t) = -\frac{d\Phi_B}{dt} = -\omega B_m S_{\text{等效}}\cos(\omega t)$$
+而真实的流速感应信号为：
+$$e_v(t) = B(t) d \bar{v} = \big(B_m d \bar{v}\big)\sin(\omega t)$$
+<strong>关键特征</strong>：正交干扰 $e_T$ 与有用流量信号 $e_v$ <strong>相位严格相差 $90^\circ$</strong>！</li>
+<li><strong>同相干扰（P9）</strong>：励磁线圈与信号引线间的分布电容耦合或绝缘漏电流产生与 $e_v$ 同相的干扰（需采用静电屏蔽和优良绝缘消除）。</li>
+</ol>
+<hr>
+<h3 id="四-相敏检波器psd抑制正交干扰与电磁流量计总结p811">四、 相敏检波器（PSD）抑制正交干扰与电磁流量计总结（P8–11）</h3>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：相敏检波器如何利用正交性“一键抹除” $90^\circ$ 变压器干扰？】</strong>
+传感器总输出电压为信号与正交干扰叠加：$u_{\text{in}}(t) = E_{vm}\sin(\omega t) + E_{Tm}\cos(\omega t)$。将其送入以同频同相参考信号 $u_{\text{ref}}(t) = \sin(\omega t)$ 控制的<strong>相敏检波器（乘法混频 + 低通滤波）</strong>：
+$$u_{\text{out}}(t) = \big[E_{vm}\sin(\omega t) + E_{Tm}\cos(\omega t)\big]\cdot\sin(\omega t) = \frac{E_{vm}}{2}\big[1 - \cos(2\omega t)\big] + \frac{E_{Tm}}{2}\sin(2\omega t)$$
+经低通滤波器（LPF）滤除 $2\omega$ 倍频交流分量（等价于一个周期内积分平均，因 $\int_0^T \cos(\omega t)\sin(\omega t)\,dt = 0$）：
+$$\boxed{U_{\text{DC}} = \frac{1}{2}E_{vm} \propto B_m d \bar{v}}$$
+**正交干扰项 $E_{Tm}$ 在直流输出中严格归零！**同时保留了流速的正负方向。（<em>注：工程上也可采用方波励磁，在磁场平顶稳态区 $\frac{dB}{dt}=0$ 时采样，从时间上避开 $e_T$ 尖峰。</em>）</p>
+</blockquote></details>
+<h4 id="42-电磁流量计核心优缺点ppt-p10">4.2 电磁流量计核心优缺点（PPT P10）</h4>
+<ul>
+<li><strong>优点</strong>：①原理简单，可测任一时刻截面平均流速与瞬时流量；②测量结果与流体密度、粘度、温度、压力、电导率（在一定阈值以上）无关；③无阻流部件，无额外压力损失，线性度极佳。</li>
+<li><strong>缺点</strong>：①只能测<strong>导电液体</strong>（不能测气体或纯油类）；②信号微弱（毫伏级），易受外界电磁场与正交干扰影响。</li>
+</ul>
+<hr>
+<h3 id="五-ppt-p4148-细节补漏与物理公理简单证明">五、 PPT P41–48 细节补漏与物理公理简单证明</h3>
+<h4 id="51-物理公理证明为什么洛伦兹力分离电荷后会瞬间建立平衡电压-e--b-d-barv">5.1 物理公理证明：为什么洛伦兹力分离电荷后会瞬间建立平衡电压 $E = B d \bar{v}$？</h4>
+<ol>
+<li>当导电血液（含正负离子 $\pm q$）以速度 $\vec{v}$ 垂直穿过磁场 $\vec{B}$ 时，正离子受洛伦兹力 $\vec{F}_m = +q(\vec{v}\times\vec{B})$ 向一侧管壁偏转，负离子受反向力向另一侧管壁偏转。</li>
+<li>两侧电极聚积异号电荷后，在管腔内部建立起横向静电场 $\vec{E}_{\text{静}}$，对离子施加反方向的静电力 $\vec{F}_e = q\vec{E}_{\text{静}}$。</li>
+<li>极短时间内达到动态平衡 $\vec{F}_e + \vec{F}_m = \vec{0} \implies \vec{E}_{\text{静}} = -(\vec{v}\times\vec{B})$，其大小 $E_{\text{静}} = B\bar{v}$。对管径 $d$ 积分即得两电极间开路电动势 $E = E_{\text{静}}\cdot d = B d \bar{v}$，故速度灵敏度为 $K = \frac{dE}{dv} = Bd$（PPT P42）。</li>
+</ol>
+<h4 id="52-ppt-p4148-完整补漏清单">5.2 PPT P41–48 完整补漏清单</h4>
+<ol>
+<li><strong>血管应用尺度与微型探头（PPT P41）</strong>：电磁流量计是完整血管内动脉血流量测量的<strong>标准方法</strong>，适用范围覆盖<strong>人体最粗的血管直至约 $1\;\text{mm}$ 左右的微血管</strong>；临床并发展出<strong>心导管型</strong>和<strong>穿刺型</strong>微型电磁血流探头。</li>
+<li><strong>探头屏蔽结构（PPT P43）</strong>：由铁芯、励磁线圈、对称测量电极、绝缘护套（如聚四氟乙烯）以及外层 **Ni-Fe 镍铁合金磁屏蔽（Ni 含量 $&gt;30\%$）**组成，防止外部杂散磁场干扰。</li>
+<li><strong>直流励磁的第三大杀手——心电图（ECG）干扰（PPT P44 必考！）</strong>：<ul>
+<li>除了电极极化电压和放大器低频 $1/f$ 噪声外，<strong>心电图（ECG）与血流量信号的波形、频谱高度类似</strong>，且在心脏附近心电信号往往比血流感应信号更强，直流励磁下<strong>极难通过滤波分离</strong>！</li>
+<li>采用 <strong>$500\;\text{Hz}$ 交流励磁</strong>把血流信号搬移到高频载波上后，即可与低频电极极化、ECG 及低频噪声彻底频域分离（PPT P45）。</li>
+</ul>
+</li>
+<li><strong>消除交流正交干扰 $e_T$ 的两大方法（PPT P46–47 完整补齐！）</strong>：<ul>
+<li><strong>方法 1：相敏检波法（PPT P46）</strong>：利用参考波控制 $90^\circ$ 相敏检波器，使与参考波相差 $90^\circ$ 的变压器正交干扰 $e_T$ 在低通滤波后严格归零（见第四节推导）。</li>
+<li><strong>方法 2：正交补偿调节电路（PPT P47）</strong>：在电路中增加由电阻电位器和移相反馈网络构成的补偿支路，人为引入一个<strong>与正交干扰 $e_T$ 等幅反相的补偿电压</strong>，在进入主放大器前直接把 $e_T$ 对消掉，防止前级高增益放大器被强正交干扰推入饱和！</li>
+</ul>
+</li>
+<li><strong>电磁流量计性能定量指标（PPT P48）</strong>：准确度较高，<strong>可达 $\pm 3\sim 5\%$（高于其他血流测量方法）</strong>，响应时间短；缺点为<strong>有创测量</strong>，且对<strong>电气安全性</strong>与<strong>生物兼容性</strong>要求非常高。</li>
+</ol>
+</section>
+</article>
+{% endraw %}
+{% include shengyi-foot.html %}
