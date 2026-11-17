@@ -1,0 +1,1895 @@
+---
+layout: front
+title: "传感器重构笔记 · 化学传感器（13–17章）"
+lang: zh-CN
+body_class: notes shengyi
+section: notes
+nav_current: notes
+permalink: /notes/shengyi/chuanganqi/huaxue/
+katex: true
+---
+
+<header class="topic-head">
+    <p class="page-kicker"><a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a> · <a href="{{ '/notes/shengyi/' | prepend: site.baseurl }}">生物医学电子学</a> · <a href="{{ '/notes/shengyi/chuanganqi/' | prepend: site.baseurl }}">传感器重构笔记</a> · 化学传感器（13–17章）</p>
+    <h1>化学传感器（13–17章）</h1>
+</header>
+<nav class="note-toc" aria-label="目录">
+<ol>
+<li class="toc-h2 toc-tab"><a href="#tab-13-1">13-1 概论与电导分析</a></li>
+<li class="toc-h2"><a href="#13-1-化学传感器概论与电导分析法对应-ppt-p115">13-1 化学传感器概论与电导分析法（对应 PPT P1–15）</a></li>
+<li class="toc-h3"><a href="#0-本节全局符号与量纲约定">0. 本节全局符号与量纲约定</a></li>
+<li class="toc-h3"><a href="#一-化学传感器概论与系统架构p17">一、 化学传感器概论与系统架构（P1–7）</a></li>
+<li class="toc-h3"><a href="#二-电化学原理基础化学量如何转变为电学参量p8">二、 电化学原理基础：化学量如何转变为电学参量（P8）</a></li>
+<li class="toc-h3"><a href="#三-电导分析法测量系统与交流电桥p9">三、 电导分析法：测量系统与交流电桥（P9）</a></li>
+<li class="toc-h3"><a href="#四-电导率的微观物理机制与六大影响因素p10">四、 电导率的微观物理机制与六大影响因素（P10）</a></li>
+<li class="toc-h3"><a href="#五-摩尔电导率推导与科尔劳施独立运动定律p1112">五、 摩尔电导率推导与科尔劳施独立运动定律（P11–12）</a></li>
+<li class="toc-h3"><a href="#六-经典必考例题纯水电阻率计算与工程局限p1315">六、 经典必考例题：纯水电阻率计算与工程局限（P13–15）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-13-2">13-2 电化学池与动力学</a></li>
+<li class="toc-h2"><a href="#13-2-电化学池能斯特方程与传质极化动力学对应-ppt-p1639">13-2 电化学池、能斯特方程与传质极化动力学（对应 PPT P16–39）</a></li>
+<li class="toc-h3"><a href="#0-本节全局符号与极性铁律表">0. 本节全局符号与极性铁律表</a></li>
+<li class="toc-h3"><a href="#一-电化学池原电池与电解池p1621">一、 电化学池：原电池与电解池（P16–21）</a></li>
+<li class="toc-h3"><a href="#二-电极电位与能斯特nernst方程闭环推导p2228">二、 电极电位与能斯特（Nernst）方程闭环推导（P22–28）</a></li>
+<li class="toc-h3"><a href="#三-电流ir-降与电极表面传质机制p2930">三、 电流、 降与电极表面传质机制（P29–30）</a></li>
+<li class="toc-h3"><a href="#四-斐克fick定律与科特雷尔cottrell方程推导p3136">四、 斐克（Fick）定律与科特雷尔（Cottrell）方程推导（P31–36）</a></li>
+<li class="toc-h3"><a href="#五-电极的极化与过电位-etap3739">五、 电极的极化与过电位 （P37–39）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-14-1">14-1 金属基电极与ISE</a></li>
+<li class="toc-h2"><a href="#14-1-电位分析法金属基电极与-ise-膜电位推导对应-ppt-p4054">14-1 电位分析法、金属基电极与 ISE 膜电位推导（对应 PPT P40–54）</a></li>
+<li class="toc-h3"><a href="#0-本节全局符号与极性约定表">0. 本节全局符号与极性约定表</a></li>
+<li class="toc-h3"><a href="#一-电位分析法的核心定义与四类金属基电极p4044">一、 电位分析法的核心定义与四类金属基电极（P40–44）</a></li>
+<li class="toc-h3"><a href="#二-离子选择性电极ise构造与电位代数解耦p4546p54">二、 离子选择性电极（ISE）构造与电位代数解耦（P45–46、P54）</a></li>
+<li class="toc-h3"><a href="#三-三种相界电位的本质对比与盐桥消噪原理p4751">三、 三种相界电位的本质对比与盐桥消噪原理（P47–51）</a></li>
+<li class="toc-h3"><a href="#四-跨膜电位varphi_text膜的五层拆解与对数消元推导p5253">四、 跨膜电位（ ）的五层拆解与对数消元推导（P52–53）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-14-2">14-2 参比电极与pH电极</a></li>
+<li class="toc-h2"><a href="#14-2-参比电极三电极体系与玻璃-ph-电极对应-ppt-p5575">14-2 参比电极、三电极体系与玻璃 pH 电极（对应 PPT P55–75）</a></li>
+<li class="toc-h3"><a href="#0-本节全局符号与极性切换预警表">0. 本节全局符号与极性切换预警表</a></li>
+<li class="toc-h3"><a href="#一-电位分析法全系统合拢与三大测量条件p5556">一、 电位分析法全系统合拢与三大测量条件（P55–56）</a></li>
+<li class="toc-h3"><a href="#二-参比电极要求与三大经典参比电极p5763">二、 参比电极要求与三大经典参比电极（P57–63）</a></li>
+<li class="toc-h3"><a href="#三-工作电极--参比电极--对电极三电极双回路p64">三、 工作电极 / 参比电极 / 对电极：三电极双回路（P64）</a></li>
+<li class="toc-h3"><a href="#四-玻璃电极ph-电极构造硅氧断链与水化层膜电位p6569">四、 玻璃电极（pH 电极）：构造、硅氧断链与水化层膜电位（P65–69）</a></li>
+<li class="toc-h3"><a href="#五-ph-测量范围误差碱差酸差与离子选择性系数p7071">五、 pH 测量范围误差（碱差/酸差）与离子选择性系数（P70–71）</a></li>
+<li class="toc-h3"><a href="#六-ph-实用测量定义单双点校准与第-6-章全景总结p7275">六、 pH 实用测量定义、单/双点校准与第 6 章全景总结（P72–75）</a></li>
+<li class="toc-h3"><a href="#七-真题靶向加厚溶度积-k_sp--nernst--选择性系数误差边界26-计8">七、 真题靶向加厚：溶度积 + Nernst + 选择性系数误差边界（26-计8）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-15">15 离子与气体传感器</a></li>
+<li class="toc-h2"><a href="#15-离子选择性电极ise与气体传感器对应-ppt-p119">15 离子选择性电极（ISE）与气体传感器（对应 PPT P1–19）</a></li>
+<li class="toc-h3"><a href="#0-本章全局分类与核心机制总览p16">0. 本章全局分类与核心机制总览（P1–6）</a></li>
+<li class="toc-h3"><a href="#一-非晶离子选择性电极玻璃膜组分调制p7">一、 非晶离子选择性电极：玻璃膜组分调制（P7）</a></li>
+<li class="toc-h3"><a href="#二-晶体离子选择性电极氟电极与晶体膜分类p810">二、 晶体离子选择性电极：氟电极与晶体膜分类（P8–10）</a></li>
+<li class="toc-h3"><a href="#三-活动载体电极液膜电极钙电极与缬氨霉素钾电极p1114">三、 活动载体电极（液膜电极）：钙电极与缬氨霉素钾电极（P11–14）</a></li>
+<li class="toc-h3"><a href="#四-气体传感器气敏电极textco_2-电极与多级平衡p1519">四、 气体传感器（气敏电极）： 电极与多级平衡（P15–19）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-16-1">16-1 伏安与极谱理论</a></li>
+<li class="toc-h2"><a href="#16-1-伏安分析法与极谱法理论对应-ppt-p2031">16-1 伏安分析法与极谱法理论（对应 PPT P20–31）</a></li>
+<li class="toc-h3"><a href="#0-本节全局符号与方法定位">0. 本节全局符号与方法定位</a></li>
+<li class="toc-h3"><a href="#一-伏安法与经典直流极谱法基础p2126">一、 伏安法与经典直流极谱法基础（P21–26）</a></li>
+<li class="toc-h3"><a href="#二-尤考维奇ilkovič方程推导p26">二、 尤考维奇（Ilkovič）方程推导（P26）</a></li>
+<li class="toc-h3"><a href="#三-极谱波方程与半波电位-varphi_12p27">三、 极谱波方程与半波电位 （P27）</a></li>
+<li class="toc-h3"><a href="#四-单扫描极谱法与-randles-sevcik-方程p2829">四、 单扫描极谱法与 Randles-Sevcik 方程（P28–29）</a></li>
+<li class="toc-h3"><a href="#五-循环伏安法cv与可逆判据p3031">五、 循环伏安法（CV）与可逆判据（P30–31）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-16-2">16-2 氧电极与超微电极</a></li>
+<li class="toc-h2"><a href="#16-2-修饰电极clark-氧电极超微电极与固态电位测氧对应-ppt-p3238">16-2 修饰电极、Clark 氧电极、超微电极与固态电位测氧（对应 PPT P32–38）</a></li>
+<li class="toc-h3"><a href="#一-伏安法中的化学修饰电极p32">一、 伏安法中的化学修饰电极（P32）</a></li>
+<li class="toc-h3"><a href="#二-clark-电流型氧电极与血气分析仪p3335">二、 Clark 电流型氧电极与血气分析仪（P33–35）</a></li>
+<li class="toc-h3"><a href="#三-extra超微电极p3637">三、 Extra：超微电极（P36–37）</a></li>
+<li class="toc-h3"><a href="#四-电位法测量氧气含量textzro_2-浓差电池p38">四、 电位法测量氧气含量： 浓差电池（P38）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-17-1">17-1 半导体与ISFET</a></li>
+<li class="toc-h2"><a href="#17-1-半导体基础与离子敏感场效应管isfet对应-ppt-p3952">17-1 半导体基础与离子敏感场效应管（ISFET，对应 PPT P39–52）</a></li>
+<li class="toc-h3"><a href="#一-半导体物理最小前置底座p3943">一、 半导体物理最小前置底座（P39–43）</a></li>
+<li class="toc-h3"><a href="#二-离子敏感场效应管isfet结构与工作原理p4449">二、 离子敏感场效应管（ISFET）结构与工作原理（P44–49）</a></li>
+<li class="toc-h3"><a href="#三-isfet-固态-ph-传感器数学闭环推导p5052">三、 ISFET 固态 pH 传感器数学闭环推导（P50–52）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-17-2">17-2 光/压电/热敏换能器</a></li>
+<li class="toc-h2"><a href="#17-2-光化学压电石英晶振与热敏换能器对应-ppt-p5374">17-2 光化学、压电石英晶振与热敏换能器（对应 PPT P53–74）</a></li>
+<li class="toc-h3"><a href="#一-光化学换能器与指夹血氧化学发光p5358">一、 光化学换能器与指夹血氧/化学发光（P53–58）</a></li>
+<li class="toc-h3"><a href="#二-压电石英晶体换能器与-sauerbrey-方程p5964">二、 压电石英晶体换能器与 Sauerbrey 方程（P59–64）</a></li>
+<li class="toc-h3"><a href="#三-热敏电阻换能器p6566">三、 热敏电阻换能器（P65–66）</a></li>
+<li class="toc-h3"><a href="#四-第七章换能器总结与-extra分子印迹--textsno_2-气敏p6774">四、 第七章换能器总结与 Extra：分子印迹 / 气敏（P67–74）</a></li>
+</ol>
+</nav>
+<div class="toolbar">
+    <button type="button" id="fold-toggle" aria-expanded="true">折叠闭环与概念</button>
+</div>
+{% raw %}
+<article class="article">
+<section class="note-tab">
+<h2 class="tab-label" id="tab-13-1">13-1 概论与电导分析</h2>
+<h2 id="13-1-化学传感器概论与电导分析法对应-ppt-p115" class="doc-title">13-1 化学传感器概论与电导分析法（对应 PPT P1–15）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1ulSWZNQ7w3GVmFcRcytukM-CPkU3rGdE/view?usp=drivesdk">13_化学1-概论与电化学基础_P442-480.pdf</a>（P1–15）｜原笔记：<a href="https://drive.google.com/file/d/1NRc1UyWMa-d4wTo9F4EwCJFuhnLeIBhR/view?usp=drivesdk">t6.1.1.1</a>、<a href="https://drive.google.com/file/d/1dxv-KcjYl9VRB3UZjSPHWD_TzgwPyNTu/view?usp=drivesdk">t6.1.2.1</a>、<a href="https://drive.google.com/file/d/1-xoIYnORRA2fCFHUPnj-RXlKQRJeHluD/view?usp=drivesdk">t6.1.2.2</a>、<a href="https://drive.google.com/file/d/17_982EtjJLdaNs5XQh-R9OVUOJHSDEtl/view?usp=drivesdk">t6.1.2.3</a></p>
+</blockquote>
+<h3 id="目录">目录</h3>
+<ul>
+<li><a href="#0-本节全局符号与量纲约定">0. 本节全局符号与量纲约定</a></li>
+<li><a href="#一-化学传感器概论与系统架构p17">一、 化学传感器概论与系统架构（P1–7）</a></li>
+<li><a href="#二-电化学原理基础化学量如何转变为电学参量p8">二、 电化学原理基础：化学量如何转变为电学参量（P8）</a></li>
+<li><a href="#三-电导分析法测量系统与交流电桥p9">三、 电导分析法：测量系统与交流电桥（P9）</a></li>
+<li><a href="#四-电导率的微观物理机制与六大影响因素p10">四、 电导率的微观物理机制与六大影响因素（P10）</a></li>
+<li><a href="#五-摩尔电导率推导与科尔劳施独立运动定律p1112">五、 摩尔电导率推导与科尔劳施独立运动定律（P11–12）</a></li>
+<li><a href="#六-经典必考例题纯水电阻率计算与工程局限p1315">六、 经典必考例题：纯水电阻率计算与工程局限（P13–15）</a></li>
+</ul>
+<hr>
+<h3 id="0-本节全局符号与量纲约定">0. 本节全局符号与量纲约定</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">物理名称</th>
+<th align="left">标准单位 / 量纲</th>
+<th align="left">核心关系与考研注意点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$G$</td>
+<td align="left">电导 (Conductance)</td>
+<td align="left">$\text{S}$（西门子，$\Omega^{-1}$）</td>
+<td align="left">$G = \frac{1}{R} = k\frac{A}{L}$</td>
+</tr>
+<tr>
+<td align="left">$\rho$</td>
+<td align="left">电阻率 (Resistivity)</td>
+<td align="left">$\Omega\cdot\text{cm}$</td>
+<td align="left">$\rho = \frac{1}{k}$（$25^\circ\text{C}$ 纯水理论极限为 $18.3\text{ M}\Omega\cdot\text{cm}$）</td>
+</tr>
+<tr>
+<td align="left">$k$</td>
+<td align="left">电导率 (Conductivity)</td>
+<td align="left">$\text{S}\cdot\text{cm}^{-1}$</td>
+<td align="left">表征溶液本征导电能力；稀溶液极限下 $k = K c$</td>
+</tr>
+<tr>
+<td align="left">$L/A$</td>
+<td align="left">电导池常数</td>
+<td align="left">$\text{cm}^{-1}$</td>
+<td align="left">$L$ 为极板间距 ($\text{cm}$)，$A$ 为极板有效面积 ($\text{cm}^2$)</td>
+</tr>
+<tr>
+<td align="left">$c$</td>
+<td align="left">摩尔浓度</td>
+<td align="left">$\text{mol}\cdot\text{L}^{-1}\;(\text{M})$</td>
+<td align="left">换算核心：$1\text{ L} = 1000\text{ cm}^3 \implies V = \frac{1000}{c}\;\text{cm}^3/\text{mol}$</td>
+</tr>
+<tr>
+<td align="left">$a, \gamma$</td>
+<td align="left">活度、活度系数</td>
+<td align="left">—</td>
+<td align="left">$a = \gamma c$；无限稀释 ($c \to 0$) 时 $\gamma \to 1$，$a = c$</td>
+</tr>
+<tr>
+<td align="left">$u_i$</td>
+<td align="left">离子淌度 (Mobility)</td>
+<td align="left">$\text{cm}^2\cdot\text{V}^{-1}\cdot\text{s}^{-1}$</td>
+<td align="left">单位电场下的稳态漂移速度：$v_i = u_i E$</td>
+</tr>
+<tr>
+<td align="left">$\Lambda, \Lambda^0$</td>
+<td align="left">摩尔电导率、无限稀释摩尔电导率</td>
+<td align="left">$\text{S}\cdot\text{cm}^2\cdot\text{mol}^{-1}$</td>
+<td align="left">$\Lambda = kV = \frac{1000k}{c}$；$\Lambda^0 = \Lambda_+^0 + \Lambda_-^0$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="一-化学传感器概论与系统架构p17">一、 化学传感器概论与系统架构（P1–7）</h3>
+<h4 id="11-核心定义ppt-p2">1.1 核心定义（PPT P2）</h4>
+<p><strong>化学传感器（Chemical Sensor）</strong> 是生物医学测量中最常用、最基本的测量装置之一，指<strong>一种对特定化学物质敏感，并能将其浓度、组分或分压等化学量按一定规律转换成可用电信号的测定装置</strong>。</p>
+<h4 id="12-人体感官类比与三大传感器边界ppt-p45">1.2 人体感官类比与三大传感器边界（PPT P4–5）</h4>
+<p>人的鼻子和舌头本身就是精密的化学与生物传感器。通过感官映射可明确三类传感器的技术边界：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">人类感官</th>
+<th align="left">典型感知对象</th>
+<th align="left">对应传感器实例</th>
+<th align="left">所属大类</th>
+<th align="left">核心识别壁垒</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>视觉 / 听觉 / 触觉</strong></td>
+<td align="left">光、振动、压力、温度</td>
+<td align="left">光、振动、压力、温度传感器</td>
+<td align="left"><strong>物理传感器</strong></td>
+<td align="left">物理量直接通过物理效应（光电、压电、热电）换能</td>
+</tr>
+<tr>
+<td align="left"><strong>嗅觉 / 味觉</strong></td>
+<td align="left">气体、气味、离子、无机物</td>
+<td align="left">气体、气味、鲜度、离子传感器</td>
+<td align="left"><strong>化学传感器</strong></td>
+<td align="left">依赖<strong>敏感膜</strong>对特定化学组分的<strong>选择性化学识别</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>病状 / 特异生化感知</strong></td>
+<td align="left">代谢物、抗原抗体、核酸</td>
+<td align="left">酶、免疫、基因传感器</td>
+<td align="left"><strong>生物传感器</strong></td>
+<td align="left">利用生物活性分子（酶、抗体、DNA）的高特异性识别</td>
+</tr>
+</tbody></table></div>
+<h4 id="13-传感器的基本构成三要素ppt-p67核心框图">1.3 传感器的基本构成三要素（PPT P6–7，核心框图）</h4>
+<p>所有化学与生物传感器在系统架构上均遵循三级串联链路：
+$$\text{被测量（浓度/分压）} \longrightarrow \boxed{\text{感受器 (Receptor)}} \xrightarrow{\text{非电量变化}} \boxed{\text{换能器 (Transducer)}} \xrightarrow{\text{电量}} \boxed{\text{输出放大器 (Amplifier)}}$$</p>
+<ul>
+<li><strong>感受器（分子识别元件）</strong>：决定传感器的<strong>选择性（Selectivity）</strong>——能否在复杂体液中只抓取目标分子。</li>
+<li><strong>换能器</strong>：将识别引起的化学势、电荷、光强、质量或热量变化转换为电信号（电位、电流、电导等）。</li>
+<li><strong>输出放大器</strong>：进行阻抗匹配与信号放大，决定信噪比与分辨率。</li>
+</ul>
+<hr>
+<h3 id="二-电化学原理基础化学量如何转变为电学参量p8">二、 电化学原理基础：化学量如何转变为电学参量（P8）</h3>
+<p>要让“化学物质浓度”变成“电信号”，底层依赖两条物理化学机制：</p>
+<ol>
+<li><strong>氧化还原反应（伴随电子转移或偏移）</strong>：反应前后相关元素的**氧化态（化合价）**发生改变。<ul>
+<li><strong>PPT P8 经典实例（氯元素的 6 种化学形态）</strong>：
+$$\text{Cl}^- (-1) \;\Big|\; \text{Cl}_2 (0) \;\Big|\; \text{ClO}^- (+1) \;\Big|\; \text{ClO}_2^- (+3) \;\Big|\; \text{ClO}_3^- (+5) \;\Big|\; \text{ClO}_4^- (+7)$$</li>
+</ul>
+</li>
+<li><strong>离子的定向迁移（不伴随价态变化）</strong>：电解质解离出的阴阳离子在外电场或浓度梯度下定向移动，形成离子电流。</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么化学传感器测的是“化学物种”而非“元素”？】</strong></p>
+<ul>
+<li><strong>氧化态速算</strong>：单质为 $0$，化合物中 $\text{O}$ 通常为 $-2$、$\text{H}$ 为 $+1$，多元离子化合价代数和等于净电荷（如 $\text{ClO}_4^-$：$x + 4\times(-2) = -1 \implies x = +7$）。</li>
+<li><strong>物理本质</strong>：从 $\text{Cl}^-$ 到 $\text{ClO}_4^-$，氯原子核内质子数均为 $17$（同属氯元素），但因氧的电负性 ($\chi_{\text{O}} = 3.44$) 大于氯 ($\chi_{\text{Cl}} = 3.16$)，共价键电子云向氧偏移，导致氯周围的电子云密度、空间构型（$\text{ClO}_3^-$ 为三角锥形，$\text{ClO}_4^-$ 为正四面体）和氧化还原活性完全不同。<strong>传感器识别的是特定价态与构型的“化学物种（Species）”，而非抽象元素</strong>。</li>
+</ul>
+</blockquote></details>
+<hr>
+<h3 id="三-电导分析法测量系统与交流电桥p9">三、 电导分析法：测量系统与交流电桥（P9）</h3>
+<h4 id="31-宏观控制方程ppt-p9">3.1 宏观控制方程（PPT P9）</h4>
+<p>电导分析法通过测量电解质溶液的<strong>电导 $G$</strong> 来反推离子浓度 $c$。由导体电阻公式 $R = \rho \frac{L}{A}$ 取倒数，结合稀溶液线性规律 $k = Kc$，得：
+$$G = \frac{1}{R} = \frac{1}{\rho}\frac{A}{L} = k\frac{A}{L} = K\frac{A}{L}c$$</p>
+<ul>
+<li><strong>$L/A$ 为电导池常数</strong>：极板几何尺寸一旦固定，$G$ 与溶液电导率 $k$（及稀溶液下的浓度 $c$）呈严格正比。</li>
+</ul>
+<h4 id="32-测量电路交流平衡电桥ppt-p9-右图">3.2 测量电路：交流平衡电桥（PPT P9 右图）</h4>
+<ul>
+<li><strong>电路拓扑</strong>：交流电源 $V_a$ 接在 $A, C$ 两端；右臂为纯电阻 $R_1, R_2$ 分压（中点 $B$）；左上臂为可调电阻 $R_3$ 与可调电容 $C$ 并联，左下臂为待测电导池复阻抗 $Z_x$（中点 $E$）。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么必须用交流电桥，且上臂要并联电容 $C$？】</strong></p>
+<ol>
+<li><strong>必须用交流激励（消除极化）</strong>：若用直流电，电极表面会持续发生电解反应并导致离子堆积（电极极化），改变界面局部浓度并产生反向极化电动势，使欧姆电阻测量完全失真；高频交流电使正负半周反应相互抵消，仅测纯离子迁移导电。</li>
+<li><strong>复导纳平衡解耦（消除双电层电容）</strong>：电极/溶液界面天然存在双电层寄生电容 $C_x$，故电导池等效为纯溶液电阻 $R_x$ 与 $C_x$ 的并联网络（复导纳 $Y_x = \frac{1}{R_x} + j\omega C_x = G_x + j\omega C_x$）。
+调节 $R_3$ 和 $C$ 使电桥平衡（$V_E = V_B$），即满足 $\frac{Y_x}{Y_3} = \frac{R_1}{R_2}$，代入得：
+$$G_x + j\omega C_x = \frac{R_1}{R_2}\left(\frac{1}{R_3} + j\omega C\right)$$
+实部与虚部分别相等，实现<strong>正交独立解耦</strong>：
+$$G_x = \frac{R_1}{R_2}\cdot\frac{1}{R_3}, \qquad C_x = \frac{R_1}{R_2}C$$
+可见待测溶液电导 $G_x$ <strong>仅由电阻 $R_3$ 决定，且完全消除了交流角频率 $\omega$ 的影响</strong>。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-电导率的微观物理机制与六大影响因素p10">四、 电导率的微观物理机制与六大影响因素（P10）</h3>
+<p>PPT P10 明确列出影响溶液电导率 $k$ 的六大因素：<strong>离子带电量、离子迁移能力（淌度）、解离能力、活度系数 ($a = \gamma c$)、温度、溶剂</strong>。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从微观漂移电流推出电导率母式，一次看穿六大因素】</strong></p>
+<ol>
+<li><strong>宏观电流密度与微观迁移</strong>：设离子 $i$ 的有效导电浓度为 $c_i = \alpha \gamma c$（$\alpha$ 为解离度，$\gamma$ 为活度系数），在电场 $E$ 驱动下达到稳态漂移速度 $v_i = u_i E$（$u_i$ 为淌度）。单位时间内通过单位截面积的总电流密度 $J$ 为各离子电荷通量之和：
+$$J = \sum_i |z_i| F c_i v_i = \left(\sum_i |z_i| F c_i u_i\right) E$$
+对比微分欧姆定律 $J = kE$，直接得到电导率微观母式：
+$$k = \sum_i |z_i| F c_i u_i$$</li>
+<li><strong>斯托克斯（Stokes）流体力学定淌度</strong>：将水化离子视为半径 $r_i$ 的刚性球，在粘度为 $\eta$ 的溶剂中匀速运动时，电场力等于粘滞阻力：
+$$|z_i| e E = 6\pi \eta r_i v_i \implies u_i = \frac{v_i}{E} = \frac{|z_i| e}{6\pi \eta r_i}$$</li>
+<li><strong>合体控制方程</strong>：代入上式得
+$$k = \sum_i \frac{|z_i|^2 F e}{6\pi \eta r_i} (\alpha \gamma c)$$
+该式直接锁死了全部六大因素：<strong>带电量 $|z_i|^2$</strong>、<strong>淌度 $u_i$</strong>（受<strong>溶剂</strong>粘度 $\eta$ 与水化半径 $r_i$ 控制）、<strong>解离能力 $\alpha$</strong>、<strong>活度系数 $\gamma$</strong> 以及<strong>温度 $T$</strong>（$T\uparrow \implies$ 粘度 $\eta\downarrow$ 且促进解离，故 $k\uparrow$）。</li>
+</ol>
+</blockquote></details>
+<ul>
+<li><strong>读懂 PPT P10《溶液电导与浓度的关系图》的三个关键现象</strong>：<ol>
+<li><strong>$\text{HCl}$、$\text{KOH}$ 曲线远高于普通盐类</strong>：$\text{H}^+$ 和 $\text{OH}^-$ 在水中不靠整个水化球搬运，而是通过水分子氢键网络进行“<strong>质子跳跃（Grotthuss 机制）</strong>”，等效阻力极小，淌度异常高。</li>
+<li><strong>$\text{KCl}$ 高于 $\text{LiCl}$</strong>：$\text{Li}^+$ 裸半径虽小，但电荷密度极高，吸引更厚的水化层，导致<strong>有效水化半径 $r_{\text{Li}^+} &gt; r_{\text{K}^+}$</strong>，淌度反而更小。</li>
+<li><strong>强电解质高浓度区（$C &gt; 4\text{ M}$）电导率反降</strong>：浓度过高时，异号离子间的“离子氛”弛豫效应与电泳效应拖拽加剧（<strong>德拜-休克尔极限公式</strong> $\lg\gamma_i = -A z_i^2\sqrt{I}$，其中离子强度 $I = \frac{1}{2}\sum c_j z_j^2$；进一步由<strong>德拜-休克尔-昂萨格方程</strong> $u_i = u_i^0 - S\sqrt{c}$ 代入 $k \propto c u_i$ 得渐近式 <strong>$k \approx \Lambda^0 c - S c^{3/2}$</strong>）。随着 $c$ 增大，负修正项 $-Sc^{3/2}$ 迅速压倒线性项并伴随粘度 $\eta$ 剧增，使曲线出现极大值拐点并下降。<strong>工程铁律：电导传感器必须工作在低浓度线性上升区；同时在后续第 15 章离子电极测量中，为防止背景离子改变 $I$ 从而调制活度系数 $\gamma_i$，常加入高浓度总离子强度调节缓冲液（TISAB）锁死 $I$ 与 $\gamma_i$</strong>。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="五-摩尔电导率推导与科尔劳施独立运动定律p1112">五、 摩尔电导率推导与科尔劳施独立运动定律（P11–12）</h3>
+<h4 id="51-为什么引入摩尔电导率-lambda几何模型与公式推导">5.1 为什么引入摩尔电导率 $\Lambda$？（几何模型与公式推导）</h4>
+<p>电导率 $k$ 混杂了“离子数量（浓度 $c$）”与“单个离子的本征导电能力”两个因素。为了剥离数量干扰、单独度量<strong>每摩尔电解质的本征导电能力</strong>，PPT P11 给出了如下物理构造：</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：摩尔电导率 $\Lambda = k V = \frac{1000k}{c}$ 是怎么一步步推出来的？】</strong></p>
+<ol>
+<li><strong>几何定义构造（PPT P11 原文）</strong>：把<strong>含有 $1\text{ mol}$ 电解质的溶液</strong>，全部灌入<strong>相距固定为 $L = 1\text{ cm}$</strong> 的两块平行平面电极板之间。此时测得的宏观电导 $G$，就定义为该电解质的<strong>摩尔电导率 $\Lambda$</strong>。</li>
+<li><strong>面积与体积映射</strong>：设这 $1\text{ mol}$ 溶液所占的体积为 $V$（单位：$\text{cm}^3\cdot\text{mol}^{-1}$）。为了在极板间距 $L = 1\text{ cm}$ 的条件下刚好装下体积 $V$，平行极板所需的有效面积 $A$ 必须满足：
+$$A = \frac{V}{L} = \frac{V}{1\text{ cm}} = V \quad (\text{数值上 } A = V)$$
+将 $L = 1\text{ cm}$ 与 $A = V$ 代入基本电导公式 $G = k \frac{A}{L}$，立刻得到定义式：
+$$\Lambda \equiv G = k \cdot \frac{V}{1} = k V$$</li>
+<li><strong>单位空间换算（“1000”因子的由来）</strong>：实验上浓度 $c$ 的单位是 $\text{mol}\cdot\text{L}^{-1}$，而电导率 $k$ 的几何尺度是 $\text{cm}$（$\text{S}\cdot\text{cm}^{-1}$）。因为 $1\text{ L} = 1000\text{ cm}^3$，所以 $1\text{ cm}^3$ 溶液中含溶质 $\frac{c}{1000}\text{ mol}$；反过来，含有 $1\text{ mol}$ 溶质的溶液体积 $V$ 必然为：
+$$V = \frac{1000}{c} \quad (\text{cm}^3\cdot\text{mol}^{-1})$$
+代回 $\Lambda = kV$，得到核心控制方程：
+$$\boxed{\Lambda = k V = k \frac{1000}{c}}$$</li>
+<li><strong>量纲校验</strong>：$[\Lambda] = \frac{\text{S}\cdot\text{cm}^{-1} \times \text{cm}^3\cdot\text{L}^{-1}}{\text{mol}\cdot\text{L}^{-1}} = \text{S}\cdot\text{cm}^2\cdot\text{mol}^{-1}$，与 PPT P11 标注完全一致。</li>
+</ol>
+</blockquote></details>
+<h4 id="52-无限稀释摩尔电导率与通用电导方程ppt-p12">5.2 无限稀释摩尔电导率与通用电导方程（PPT P12）</h4>
+<ul>
+<li><p><strong>科尔劳施（Kohlrausch）离子独立运动定律</strong>：
+当浓度 $c \to 0$（无限稀释）时，离子间平均距离趋于无穷大，库仑干扰与离子氛消失（$\gamma \to 1$），阴、阳离子完全独立导电，总无限稀释摩尔电导率等于所有离子贡献的线性叠加：
+$$\Lambda^0 = \Lambda_+^0 + \Lambda_-^0$$</p>
+</li>
+<li><p><strong>多组分通用电导方程（PPT P12 核心公式）</strong>：
+对含多种离子的稀溶液，由 $\Lambda_i = \frac{1000k_i}{c_i}$ 反解单组分贡献 $k_i = \frac{\Lambda_i c_i}{1000}$，叠加得总电导率 $k = \frac{\sum \Lambda_i c_i}{1000}$，代入 $G = k\frac{A}{L}$ 即得：
+$$\boxed{G = k\frac{A}{L} = \frac{\sum \Lambda_i c_i}{1000}\frac{A}{L}}$$</p>
+</li>
+<li><p><strong>PPT P12 常见离子无限稀释摩尔电导率表（$25^\circ\text{C}$，单位：$\text{S}\cdot\text{cm}^2\cdot\text{mol}^{-1}$）</strong>：</p>
+<ul>
+<li><strong>必记计算常数</strong>：<strong>$\Lambda^0(\text{H}^+) = 349.8$</strong>，<strong>$\Lambda^0(\text{OH}^-) = 197.6$</strong></li>
+<li><strong>其他离子</strong>：$\text{K}^+$ (73.52) &gt; $\text{NH}_4^+$ (73.4) &gt; $\text{Ag}^+$ (61.92) &gt; $\frac{1}{2}\text{Mg}^{2+}$ (53.06) &gt; $\text{Na}^+$ (50.11)；$\text{I}^-$ (76.8) ≈ $\text{Cl}^-$ (76.34) &gt; $\text{NO}_3^-$ (71.44) &gt; $\text{HCO}_3^-$ (44.5) &gt; $\text{CH}_3\text{COO}^-$ (40.9)。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="六-经典必考例题纯水电阻率计算与工程局限p1315">六、 经典必考例题：纯水电阻率计算与工程局限（P13–15）</h3>
+<h4 id="例-61计算纯水的电阻率25circtextcppt-p1314-原题">【例 6.1】计算纯水的电阻率（$25^\circ\text{C}$，PPT P13–14 原题）</h4>
+<p>已知 $25^\circ\text{C}$ 下无限稀释摩尔电导率：$\Lambda^0(\text{H}^+) = 349.8\;\text{S}\cdot\text{cm}^2\cdot\text{mol}^{-1}$，$\Lambda^0(\text{OH}^-) = 197.6\;\text{S}\cdot\text{cm}^2\cdot\text{mol}^{-1}$。</p>
+<p><strong>标准解题步骤（严格对齐 PPT P14）</strong>：</p>
+<ol>
+<li><strong>由水的自偶电离推导离子浓度</strong>：
+纯水微弱电离 $\text{H}_2\text{O} \rightleftharpoons \text{H}^+ + \text{OH}^-$，由质量作用定律得：
+$$K = \frac{a(\text{H}^+)\,a(\text{OH}^-)}{a(\text{H}_2\text{O})}$$
+因纯液态水活度 $a(\text{H}_2\text{O})\equiv 1$ 且极稀溶液中 $\gamma\to 1$，在 $25^\circ\text{C}$ 下简写为水的离子积：
+$$K_w = c(\text{H}^+)\,c(\text{OH}^-) = 1.0\times 10^{-14}$$
+再施加体相<strong>电中性约束</strong> $\sum z_j c_j = 0$，即 $(+1)c(\text{H}^+) + (-1)c(\text{OH}^-) = 0 \implies c(\text{H}^+) = c(\text{OH}^-)$，联立解得：
+$$[c(\text{H}^+)]^2 = 10^{-14} \implies c(\text{H}^+) = c(\text{OH}^-) = 10^{-7}\;\text{mol/L}$$</li>
+<li><strong>代入通用方程求电导率 $k$</strong>：
+$$k = \frac{\sum \Lambda_i c_i}{1000} = \frac{349.8 \times 10^{-7} + 197.6 \times 10^{-7}}{1000} = 5.48 \times 10^{-8}\;\text{S}\cdot\text{cm}^{-1}$$</li>
+<li><strong>取倒数求电阻率 $\rho$</strong>：
+$$\rho = \frac{1}{k} = \frac{1}{5.48 \times 10^{-8}} = 1.83 \times 10^7\;\Omega\cdot\text{cm} = \boxed{18.3\;\text{M}\Omega\cdot\text{cm}}$$</li>
+</ol>
+<h4 id="工程映射与方法局限ppt-p15--引出后续章节">工程映射与方法局限（PPT P15 &amp; 引出后续章节）</h4>
+<ol>
+<li><strong>超纯水系统金标准（PPT P15）</strong>：实验室 Direct-Q 超纯水机 I 级产水的电阻率指标为 <strong>$18.2\;\text{M}\Omega\cdot\text{cm}\;(25^\circ\text{C})$</strong>，其物理天花板正是例 6.1 求得的 $18.3\;\text{M}\Omega\cdot\text{cm}$。任何微量杂质离子都会使 $k$ 升高、$\rho$ 跌破该阈值。</li>
+<li><strong>电导分析法的根本短板（引出 13-2 与第 14 章）</strong>：由 $k = \frac{\sum \Lambda_i c_i}{1000}$ 可见，电导测量是一个“总和输出”——它只能反映<strong>所有离子的总导电贡献</strong>，完全<strong>缺乏对单一离子的选择性</strong>。要实现对特定离子（如 $\text{H}^+$、$\text{Na}^+$、$\text{Ca}^{2+}$）的专一检测，必须转向基于界面氧化还原或选择性离子交换的<strong>电极电位与电位分析法</strong>。</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-13-2">13-2 电化学池与动力学</h2>
+<h2 id="13-2-电化学池能斯特方程与传质极化动力学对应-ppt-p1639" class="doc-title">13-2 电化学池、能斯特方程与传质极化动力学（对应 PPT P16–39）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1ulSWZNQ7w3GVmFcRcytukM-CPkU3rGdE/view?usp=drivesdk">13_化学1-概论与电化学基础_P442-480.pdf</a>（P16–39）｜原笔记：<a href="https://drive.google.com/file/d/1JW0oXvnouSSxFohVQWke7s8JFq2TSiMw/view?usp=drivesdk">t6.1.3.1</a>–<a href="https://drive.google.com/file/d/1_ujNtvNKhJXRj3MqQpsuYlvUXQP9oumf/view?usp=drivesdk">t6.1.3.8</a></p>
+</blockquote>
+<h3 id="目录-2">目录</h3>
+<ul>
+<li><a href="#0-本节全局符号与极性铁律表">0. 本节全局符号与极性铁律表</a></li>
+<li><a href="#一-电化学池原电池与电解池p1621">一、 电化学池：原电池与电解池（P16–21）</a></li>
+<li><a href="#二-电极电位与能斯特nernst方程闭环推导p2228">二、 电极电位与能斯特（Nernst）方程闭环推导（P22–28）</a></li>
+<li><a href="#三-电流ir-降与电极表面传质机制p2930">三、 电流、IR 降与电极表面传质机制（P29–30）</a></li>
+<li><a href="#四-斐克fick定律与科特雷尔cottrell方程推导p3136">四、 斐克（Fick）定律与科特雷尔（Cottrell）方程推导（P31–36）</a></li>
+<li><a href="#五-电极的极化与过电位-etap3739">五、 电极的极化与过电位 $\eta$（P37–39）</a></li>
+</ul>
+<hr>
+<h3 id="0-本节全局符号与极性铁律表">0. 本节全局符号与极性铁律表</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">符号 / 术语</th>
+<th align="left">物理定义与数值基准</th>
+<th align="left">考研核心极性与代数约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>阳极 (Anode)</strong></td>
+<td align="left">发生<strong>氧化反应</strong>（失电子）的电极</td>
+<td align="left">电池图式中<strong>永远写在左侧</strong>；原电池中为负极，电解池中为正极</td>
+</tr>
+<tr>
+<td align="left"><strong>阴极 (Cathode)</strong></td>
+<td align="left">发生<strong>还原反应</strong>（得电子）的电极</td>
+<td align="left">电池图式中<strong>永远写在右侧</strong>；原电池中为正极，电解池中为负极</td>
+</tr>
+<tr>
+<td align="left">$E_{\text{cell}}$</td>
+<td align="left">电池电动势 ($\text{V}$)</td>
+<td align="left">$E_{\text{cell}} = \varphi_{\text{右}} - \varphi_{\text{左}} = \varphi_{\text{阴}} - \varphi_{\text{阳}}$（原电池 $&gt;0$，电解池 $&lt;0$）</td>
+</tr>
+<tr>
+<td align="left">$\varphi, \varphi^\ominus$</td>
+<td align="left">电极电位、标准电极电位 ($\text{V}$)</td>
+<td align="left">$\varphi = \varphi_M - \varphi_S$（金属相与溶液相间的相间电位）</td>
+</tr>
+<tr>
+<td align="left">$R, F, T$</td>
+<td align="left">气体常数、法拉第常数、绝对温度</td>
+<td align="left">$R = 8.314\;\text{J}\cdot\text{K}^{-1}\cdot\text{mol}^{-1}$，$F = 96485\;\text{C/mol}$；$25^\circ\text{C}$ 时 $\frac{2.303RT}{F} \approx 0.059\;\text{V}$</td>
+</tr>
+<tr>
+<td align="left">$c^*, c$</td>
+<td align="left">主体浓度、电极表面浓度</td>
+<td align="left">扩散控制时 $c &lt; c^*$；表面完全消耗 ($c=0$) 时达<strong>极限扩散电流 $i_d$</strong></td>
+</tr>
+<tr>
+<td align="left">$\delta$</td>
+<td align="left">平面电极扩散层有效厚度 ($\text{cm}$)</td>
+<td align="left">$\delta = \sqrt{\pi D t}$，随电解时间按 $\sqrt{t}$ 向深层溶液扩展</td>
+</tr>
+<tr>
+<td align="left">$\eta$</td>
+<td align="left">过电位 / 超电位 ($\text{V}$)</td>
+<td align="left">$\eta = \varphi - \varphi_{\text{eq}}$（阴极超电位使阴极电位变负；阳极使阳极变正）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="一-电化学池原电池与电解池p1621">一、 电化学池：原电池与电解池（P16–21）</h3>
+<h4 id="11-定义与四大电化学测量维度ppt-p16">1.1 定义与四大电化学测量维度（PPT P16）</h4>
+<p><strong>电化学池</strong>是实现<strong>化学能与电能相互转换</strong>的装置（电子导体与化学反应串联形成闭环）。通过测量其中的<strong>电位</strong>（电位法）、<strong>电流</strong>（伏安/极谱法）、<strong>电导</strong>（电导法）、<strong>电量</strong>（库仑法），即可定量解析溶液中的物质含量。</p>
+<h4 id="12-原电池-vs-电解池全维度对比ppt-p1721以锌铜体系为例">1.2 原电池 vs. 电解池全维度对比（PPT P17–21，以锌铜体系为例）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">对比维度</th>
+<th align="left">原电池（Galvanic Cell，PPT P17–19）</th>
+<th align="left">电解池（Electrolytic Cell，PPT P20–21）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>能量转换方向</strong></td>
+<td align="left"><strong>化学能 $\to$ 电能</strong>（自发过程，$\Delta G &lt; 0$）</td>
+<td align="left"><strong>电能 $\to$ 化学能</strong>（非自发过程，$\Delta G &gt; 0$，需外电源）</td>
+</tr>
+<tr>
+<td align="left"><strong>阳极（左，氧化）</strong></td>
+<td align="left">$\text{Zn} \to \text{Zn}^{2+} + 2e^-$（负极，$\varphi_{\text{阳}} = -0.763\;\text{V}$）</td>
+<td align="left">$\text{Cu} \to \text{Cu}^{2+} + 2e^-$（接正极，$\varphi_{\text{阳}} = +0.337\;\text{V}$）</td>
+</tr>
+<tr>
+<td align="left"><strong>阴极（右，还原）</strong></td>
+<td align="left">$\text{Cu}^{2+} + 2e^- \to \text{Cu}$（正极，$\varphi_{\text{阴}} = +0.337\;\text{V}$）</td>
+<td align="left">$\text{Zn}^{2+} + 2e^- \to \text{Zn}$（接负极，$\varphi_{\text{阴}} = -0.763\;\text{V}$）</td>
+</tr>
+<tr>
+<td align="left"><strong>电池总反应</strong></td>
+<td align="left">$\text{Zn} + \text{Cu}^{2+} \to \text{Zn}^{2+} + \text{Cu}$</td>
+<td align="left">$\text{Zn}^{2+} + \text{Cu} \to \text{Zn} + \text{Cu}^{2+}$</td>
+</tr>
+<tr>
+<td align="left"><strong>电池图式表达式</strong></td>
+<td align="left">$\text{Zn} \mid \text{ZnSO}_4(c_1) \parallel \text{CuSO}_4(c_2) \mid \text{Cu}$</td>
+<td align="left">$\text{Cu} \mid \text{CuSO}_4(c_1) \parallel \text{ZnSO}_4(c_2) \mid \text{Zn}$</td>
+</tr>
+<tr>
+<td align="left"><strong>电动势计算</strong></td>
+<td align="left">$E_{\text{cell}} = 0.337 - (-0.763) = \mathbf{+1.1\;\text{V} &gt; 0}$</td>
+<td align="left">$E_{\text{cell}} = -0.763 - 0.337 = \mathbf{-1.1\;\text{V} &lt; 0}$</td>
+</tr>
+<tr>
+<td align="left"><strong>核心电学特征</strong></td>
+<td align="left">原电池电动势 $E_{\text{cell}} = 1.1\;\text{V} &gt; 0$</td>
+<td align="left"><strong>理论分解电压 $= |E_{\text{cell}}| = 1.1\;\text{V}$</strong></td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>电池图式语法（PPT P18）</strong>：单竖线 <code>|</code> 表示两相界面；双竖线 <code>||</code> 表示<strong>盐桥</strong>（连接两溶液、消除液接电位并维持电中性）；括号 <code>(c)</code> 标明溶液物种浓度。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：吉布斯自由能 $\Delta G$ 与盐桥电中性的底层逻辑】</strong></p>
+<ol>
+<li><strong>为什么 $E_{\text{cell}} &gt; 0$ 才自发？</strong> 恒温恒压可逆条件下，系统吉布斯自由能的降低量等于对外输出的最大非体积功（电功）：
+$$\Delta G = W_{\text{电, max}} = q E_{\text{cell}} = -n F E_{\text{cell}}$$
+因此 $E_{\text{cell}} &gt; 0 \iff \Delta G &lt; 0$（原电池自发）；而电解池反应 $\Delta G &gt; 0$（$E_{\text{cell}} &lt; 0$），外加电源必须提供至少等于 $|E_{\text{cell}}|$ 的反向电压才能克服化学势垒，这就是<strong>理论分解电压</strong>的物理来源。</li>
+<li><strong>为什么没有盐桥电流会瞬间归零？</strong> 若无盐桥，阳极不断产生 $\text{Zn}^{2+}$ 带净正电、阴极不断消耗 $\text{Cu}^{2+}$ 留下 $\text{SO}_4^{2-}$ 带净负电，微秒内即在液相拉出反向静电场锁死电子流动。盐桥中的 $\text{Cl}^-$ 迁向阳极池、$\text{K}^+$ 迁向阴极池，维持电中性并闭合内电路。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="二-电极电位与能斯特nernst方程闭环推导p2228">二、 电极电位与能斯特（Nernst）方程闭环推导（P22–28）</h3>
+<h4 id="21-电极电位的定义与双电层平衡ppt-p22">2.1 电极电位的定义与双电层平衡（PPT P22）</h4>
+<ul>
+<li><strong>定义</strong>：金属导体与电解质溶液间的<strong>相间电位</strong>，即 $\varphi = \varphi_M - \varphi_S$。</li>
+<li><strong>物理成因（以 $\text{Zn}|\text{Zn}^{2+}$ 为例）</strong>：金属中 $\text{Zn}^{2+}$ 的化学势大于溶液中的 $\text{Zn}^{2+}$，锌倾向于溶解入溶液（$\text{Zn} \to \text{Zn}^{2+} + 2e^-$），把电子留在金属上使金属带负电，与溶液中阳离子形成<strong>双电层</strong>；金属负电又反过来吸引 $\text{Zn}^{2+}$。3. <strong>达成平衡与纳米级超强电场</strong>：当溶解倾向与静电吸引达到动态平衡时，界面两侧形成的稳定电位差即为<strong>平衡电极电位 $\varphi$</strong>。紧密双电层厚度仅约 $\delta \approx 1\;\text{nm} = 10^{-9}\;\text{m}$，以 $\text{Zn}$ 电极 $\varphi = -0.763\;\text{V}$ 估算，界面局部场强高达 $|\vec{E}| \approx \frac{0.763}{10^{-9}} = 7.63\times 10^8\;\text{V/m}$——正是这近 $10^9\;\text{V/m}$ 的超强局部电场，使溶液中离子浓度的微小对数变化能稳稳调制宏观可测电位。</li>
+</ul>
+<h4 id="22-能斯特方程与-25circtextc-工程化简ppt-p2324">2.2 能斯特方程与 $25^\circ\text{C}$ 工程化简（PPT P23–24）</h4>
+<ul>
+<li><strong>IUPAC 统一还原写法（PPT P23）</strong>：所有半电极反应一律写成还原形式 <strong>$\text{Ox} + n e^- \to \text{Red}$</strong>（如 $\text{Cu}^{2+} + 2e^- \to \text{Cu}$，电极表达式 <code>CuSO4(x mol/L)|Cu</code>）。</li>
+<li><strong>能斯特（Nernst）方程标准式</strong>：
+$$\varphi = \varphi^\ominus_{\text{Ox,Red}} + \frac{RT}{nF} \ln \frac{a_{\text{Ox}}}{a_{\text{Red}}}$$
+<em>(注：纯固体、纯液体活度恒为 $1$；气体取分压 $p$。)</em></li>
+<li><strong>$25^\circ\text{C}\;(298.15\text{ K})$ 常用对数式（PPT P24 必背）</strong>：
+利用 $\ln x = 2.303 \lg x$，代入 $R=8.314$、$F=96485$，得 $\frac{2.303RT}{F} \approx 0.059\;\text{V}$：
+$$\boxed{\varphi = \varphi^\ominus_{\text{Ox,Red}} + \frac{0.059}{n} \lg \frac{a_{\text{Ox}}}{a_{\text{Red}}} = \varphi^\ominus_{\text{Ox,Red}} + \frac{0.059}{n} \lg \frac{\gamma_{\text{Ox}} c_{\text{Ox}}}{\gamma_{\text{Red}} c_{\text{Red}}}}$$
+<em>(稀溶液中近似 $\gamma \approx 1$，直接用浓度 $c$ 代入；单价离子 $n=1$ 时浓度每变 10 倍，电位移动 $59\text{ mV}$。)</em></li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从热力学基本方程 $\to$ 化学势对数项 $\to$ Nernst 方程完整推导】</strong>
+0. <strong>为什么化学势里会有 $RT\ln a_i$？</strong>
+   由热力学基本方程 $dG = VdP - SdT$，在恒温条件（$dT=0$）下，对 $1\;\text{mol}$ 理想气体（$V_m = \frac{RT}{P}$）有：
+   $$d\mu = dG_m = V_m\,dP = \frac{RT}{P}\,dP$$
+   从标准压力 $P^\ominus$ 积分至任意压力 $P$：
+   $$\int_{\mu^\ominus}^{\mu} d\mu = \int_{P^\ominus}^{P} \frac{RT}{P}\,dP \implies \mu = \mu^\ominus + RT\ln\frac{P}{P^\ominus}$$
+   对于真实溶液，以有效浓度（活度 $a_i = \gamma_i c_i$）替代相对压力，即得化学势通式：
+   $$\mu_i = \mu_i^\ominus + RT\ln a_i$$</p>
+<ol>
+<li><strong>电化学势导出 Nernst 方程</strong>：带电粒子在相内的总能量（电化学势）为 $\bar{\mu}_i = \mu_i^\ominus + RT\ln a_i + z_i F\phi$（标准本征化学势 + 浓度熵效应 + 静电能）。当界面反应 $\text{Ox} + ne^- \rightleftharpoons \text{Red}$ 平衡时，反应物与产物总电化学势相等：
+$$\bar{\mu}_{\text{Ox}}^S + n\bar{\mu}_e^M = \bar{\mu}_{\text{Red}}^S$$
+将静电项 $nF(\varphi_M - \varphi_S)$ 归拢到左侧，标准化学势差合并定义为 $nF\varphi^\ominus \equiv \mu_{\text{Ox}}^{\ominus,S} + n\mu_e^{\ominus,M} - \mu_{\text{Red}}^{\ominus,S}$，两边同除以 $nF$ 即得：
+$$\varphi = \varphi_M - \varphi_S = \varphi^\ominus + \frac{RT}{nF}\ln\frac{a_{\text{Ox}}}{a_{\text{Red}}}$$</li>
+<li><strong>为什么阳极实际发生氧化，写能斯特方程却也按还原写？</strong> 电极电位 $\varphi$ 是度量半电池“电子能量高低”的<strong>状态量</strong>。两边都按还原算出 $\varphi_{\text{右}}$ 和 $\varphi_{\text{左}}$ 后，总电动势公式 $E_{\text{cell}} = \varphi_{\text{右}} - \varphi_{\text{左}}$ 中的<strong>负号（$-\varphi_{\text{左}}$）已经在代数上自动把左侧反应反转为氧化反应</strong>，无需人工改写方程内部方向。</li>
+</ol>
+</blockquote></details>
+<h4 id="23-相对测量与标准氢电极she--nheppt-p2526">2.3 相对测量与标准氢电极（SHE / NHE，PPT P25–26）</h4>
+<ul>
+<li><strong>无法单测</strong>：单一界面的绝对电极电位无法直接测量，必须与参比电极组成原电池测电动势 $E_{\text{cell}} = \varphi_{\text{右}} - \varphi_{\text{左}}$。</li>
+<li><strong>标准氢电极（NHE）零点基准</strong>：半反应 $2\text{H}^+ + 2e^- \rightleftharpoons \text{H}_2(g)$，人为规定在 $c(\text{H}^+)=1\;\text{mol/L}, p(\text{H}_2)=1\;\text{atm}$ 时 <strong>$\varphi^\ominus_{\text{H}^+,\text{H}_2} \equiv 0\;\text{V}$</strong>。
+组池 <code>Pt, H2(1 atm)|H+(1 mol/L)||被测电极</code>，则 $E_{\text{cell}} = \varphi_{\text{被测}} - 0 = \varphi_{\text{被测}}$（若被测电极作阳极、NHE 作阴极，则 $\varphi_{\text{被测}} = -E_{\text{cell}}$）。</li>
+</ul>
+<h4 id="24-例-62复杂电池电动势计算ppt-p2728-原题">2.4 【例 6.2】复杂电池电动势计算（PPT P27–28 原题）</h4>
+<p>计算电池 $\text{Cu} \mid \text{CuSO}_4(0.02\;\text{mol/L}) \parallel \text{Fe}^{2+}(0.2\;\text{mol/L}), \text{Fe}^{3+}(0.01\;\text{mol/L}), \text{H}^+(0.1\;\text{mol/L}) \mid \text{Pt}$ 在 $25^\circ\text{C}$ 时的电动势。已知 $\varphi^\ominus_{\text{Fe}^{3+},\text{Fe}^{2+}} = 0.700\;\text{V}$，$\varphi^\ominus_{\text{Cu}^{2+},\text{Cu}} = 0.337\;\text{V}$。</p>
+<p><strong>标准解题步骤（严格对齐 PPT P28）</strong>：</p>
+<ol>
+<li><strong>计算右侧阴极（$\text{Pt}$ 惰性电极上的 $\text{Fe}^{3+}/\text{Fe}^{2+}$，$n=1$）</strong>：
+<em>(注：$\text{H}^+$ 仅用于抑制 $\text{Fe}^{3+}$ 水解，不参与半反应 $\text{Fe}^{3+} + e^- \to \text{Fe}^{2+}$，不代入方程。)</em>
+$$\varphi_{\text{右}} = \varphi^\ominus_{\text{Fe}^{3+},\text{Fe}^{2+}} + \frac{0.059}{1}\lg\frac{c_{\text{Fe}^{3+}}}{c_{\text{Fe}^{2+}}} = 0.700 + 0.059\lg\frac{0.01}{0.2} = 0.623\;\text{V}$$</li>
+<li><strong>计算左侧阳极（$\text{Cu}^{2+}/\text{Cu}$，$n=2$，纯固体 $\text{Cu}$ 活度为 $1$）</strong>：
+$$\varphi_{\text{左}} = \varphi^\ominus_{\text{Cu}^{2+},\text{Cu}} + \frac{0.059}{2}\lg c_{\text{Cu}^{2+}} = 0.337 + \frac{0.059}{2}\lg 0.02 = 0.287\;\text{V}$$</li>
+<li><strong>计算全电池电动势</strong>：
+$$E_{\text{cell}} = \varphi_{\text{右}} - \varphi_{\text{左}} = 0.623 - 0.287 = \boxed{0.336\;\text{V}}$$</li>
+</ol>
+<hr>
+<h3 id="三-电流ir-降与电极表面传质机制p2930">三、 电流、$IR$ 降与电极表面传质机制（P29–30）</h3>
+<ul>
+<li><strong>$IR$ 降与法拉第定量（PPT P29 &amp; P16）</strong>：无净电流 ($I=0$) 时电极处于平衡态，服从 Nernst 方程；当有较大电流流过时，溶液内阻 $R$ 产生欧姆压降 $IR$，使<strong>原电池输出电动势降低</strong>（$E_{\text{输出}} = E_{\text{cell}} - IR$），使<strong>电解池所需外加电压增大</strong>（$V_{\text{外}} = |E_{\text{cell}}| + IR$）。同时通过电量 $Q = \int I\,dt = nzF$ 对应电极表面反应质量 $\Delta m = \pm\frac{Q}{nF}M$（库仑分析法基础）。</li>
+<li><strong>电极表面三种传质方式（PPT P30）</strong>：<ol>
+<li><strong>扩散（Diffusion）</strong>：浓度梯度驱动（伏安/电流传感器定量核心）；</li>
+<li><strong>电迁移（Migration）</strong>：电场力驱动带电离子移动；</li>
+<li><strong>对流（Convection）</strong>：搅拌或自然流体运动。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="四-斐克fick定律与科特雷尔cottrell方程推导p3136">四、 斐克（Fick）定律与科特雷尔（Cottrell）方程推导（P31–36）</h3>
+<h4 id="41-fick-第一定律与第二定律ppt-p3134">4.1 Fick 第一定律与第二定律（PPT P31–34）</h4>
+<ul>
+<li><strong>Fick 第一定律（稳态扩散，PPT P31–32）</strong>：单位时间内通过面积为 $A$ 的截面的扩散质量速率与浓度梯度及面积成正比：
+$$\frac{dm}{dt} = -DA\frac{dc}{dx} \quad \text{或通量形式} \quad \frac{dN_{x,t}}{A\cdot dt} = D\frac{\partial c(x,t)}{\partial x}$$<ul>
+<li><strong>$D$ 为扩散系数</strong>：单位浓度梯度、单位时间通过单位截面积的物质质量（$\text{cm}^2/\text{s}$）。</li>
+<li><strong>负号意义</strong>：扩散自发指向浓度降低的方向（$\frac{dc}{dx} &lt; 0$ 时 $\frac{dm}{dt} &gt; 0$）。</li>
+</ul>
+</li>
+<li><strong>Fick 第二定律（非稳态扩散，PPT P33–34）</strong>：<ul>
+<li><strong>常系数标准式（$D$ 为常数）</strong>：$$\frac{\partial c}{\partial t} = D\frac{\partial^2 c}{\partial x^2}$$</li>
+<li><strong>变系数普遍式（$D$ 受浓度影响）</strong>：$$\frac{\partial c}{\partial t} = \frac{\partial}{\partial x}\left(D\frac{\partial c}{\partial x}\right)$$</li>
+</ul>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：Fick 第一定律统计起源与 Fick 第二定律严格微元推导】</strong></p>
+<ol>
+<li><strong>Fick 第一定律的随机漫步 + 泰勒展开推导</strong>：
+设一维溶液截面 $A$ 处，$\Delta t$ 时间内粒子以相等概率 $\frac{1}{2}$ 向左或向右跳跃步长 $\Delta x$，则净向右输运质量为：
+$$\Delta m = \frac{1}{2}A\Delta x\left[c\left(x-\frac{\Delta x}{2},t\right) - c\left(x+\frac{\Delta x}{2},t\right)\right]$$
+在 $x$ 处做一阶泰勒展开 $c\left(x\pm\frac{\Delta x}{2},t\right) \approx c(x,t) \pm \frac{\Delta x}{2}\frac{\partial c}{\partial x}$，代入相减并除以 $\Delta t$：
+$$\frac{\Delta m}{\Delta t} = -\left[\frac{(\Delta x)^2}{2\Delta t}\right]A\frac{\partial c}{\partial x}$$
+取连续极限 $\Delta x, \Delta t \to 0$，定义扩散系数 $D \equiv \lim\frac{(\Delta x)^2}{2\Delta t}$，即得：
+$$\frac{\partial m}{\partial t} = -DA\frac{\partial c}{\partial x}$$</li>
+<li><strong>Fick 第二定律（PPT P33–34 质量守恒）</strong>：
+取截面 $A$、厚度 $dx$ 的微元控制体（体积 $A\,dx$），进入 $AB$ 面通量 $J_x = -D\frac{\partial c}{\partial x}$，离开 $EF$ 面通量对整体 $J$ 做一阶泰勒展开：
+$$J_{x+dx} \approx J_x + \frac{\partial J}{\partial x}dx = -D\frac{\partial c}{\partial x} - \frac{\partial}{\partial x}\left(D\frac{\partial c}{\partial x}\right)dx$$
+微元内物质净积累速率等于流入通量减流出通量：
+$$\frac{\partial c}{\partial t} = \frac{J_x - J_{x+dx}}{dx} = \frac{\partial}{\partial x}\left(D\frac{\partial c}{\partial x}\right)$$
+当稀溶液中 $D$ 为常数时提出算子外，即退化为常系数形式 $\frac{\partial c}{\partial t} = D\frac{\partial^2 c}{\partial x^2}$。
+<em>(物理直觉：某点浓度随时间变化取决于浓度曲线的*<em>二阶导曲率 $\frac{\partial^2 c}{\partial x^2}$</em></em>；线性分布时曲率为 0，流入=流出，达到稳态。)*</li>
+</ol>
+</blockquote></details>
+<h4 id="42-平面电极的-cottrell-方程ppt-p3536核心必考公式">4.2 平面电极的 Cottrell 方程（PPT P35–36，核心必考公式）</h4>
+<p>设平面电极位于 $x=0$，发生还原反应 $O + ne^- \to R$（PPT P35 模型）：</p>
+<ul>
+<li><strong>初始条件 ($t=0,\; x \ge 0$)</strong>：$C_O = C^*$（主体浓度），$C_R = 0$</li>
+<li><strong>边界条件 ($t&gt;0$)</strong>：$x=0$ 处 $C_O = C$（表面浓度），$C_R = C^* - C$；$x \to \infty$ 处 $C_O = C^*$，$C_R = 0$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：拉普拉斯变换 + 伽马函数一步不跳求解 Cottrell 方程】</strong></p>
+<ol>
+<li><strong>定浓度亏损变量</strong>：令 $\Delta c(x,t) = c^* - c(x,t)$，满足 $\frac{\partial(\Delta c)}{\partial t} = D\frac{\partial^2(\Delta c)}{\partial x^2}$，初值 $\Delta c(x,0)=0$，边界 $\Delta c(0,t)=c^*-c$（常数），$\Delta c(\infty,t)=0$。</li>
+<li><strong>拉氏变换将 PDE 降维为常系数 ODE</strong>：定义 $\overline{\Delta c}(x,s) = \int_0^\infty \Delta c(x,t)e^{-st}dt$。利用微分性质 $\mathcal{L}\{\partial(\Delta c)/\partial t\} = s\overline{\Delta c} - \Delta c(x,0) = s\overline{\Delta c}$，方程变为二阶齐次常微分方程：
+$$\frac{d^2\overline{\Delta c}}{dx^2} - \frac{s}{D}\overline{\Delta c} = 0$$
+特征方程 $r^2 - \frac{s}{D} = 0 \implies r_{1,2} = \pm\sqrt{\frac{s}{D}}$，通解为 $\overline{\Delta c}(x,s) = A(s)e^{\sqrt{s/D}x} + B(s)e^{-\sqrt{s/D}x}$。</li>
+<li><strong>边界条件定系数</strong>：① 当 $x\to\infty$ 时物理要求 $\overline{\Delta c}\to 0$，故发散项系数强制 $A(s)\equiv 0$；② 当 $x=0$ 时 $\overline{\Delta c}(0,s) = \mathcal{L}\{c^*-c\} = \frac{c^*-c}{s}$，得 $B(s) = \frac{c^*-c}{s}$。因此频域精确解为：
+$$\overline{\Delta c}(x,s) = \frac{c^*-c}{s}e^{-\sqrt{\frac{s}{D}}x}$$</li>
+<li><strong>求表面梯度并严格证明 $\mathcal{L}^{-1}\{\frac{1}{\sqrt{s}}\} = \frac{1}{\sqrt{\pi t}}$</strong>：对 $x$ 求导并令 $x=0$，得浓度梯度幅值 $\left.\frac{d\bar{c}}{dx}\right|_{x=0} = \frac{c^*-c}{\sqrt{Ds}}$。正向计算 $\mathcal{L}\{t^{-1/2}\} = \int_0^\infty t^{-1/2}e^{-st}dt$，令 $u = st\;(dt = du/s)$：
+$$\mathcal{L}\{t^{-1/2}\} = \frac{1}{\sqrt{s}}\int_0^\infty u^{-1/2}e^{-u}du = \frac{1}{\sqrt{s}}\Gamma\left(\frac{1}{2}\right)$$
+再令 $u = y^2\;(du = 2y\,dy)$，得 $\Gamma(\frac{1}{2}) = 2\int_0^\infty e^{-y^2}dy = \int_{-\infty}^\infty e^{-y^2}dy = \sqrt{\pi}$（高斯积分），故 $\mathcal{L}\{\frac{1}{\sqrt{\pi t}}\} = \frac{1}{\sqrt{s}}$。回到时域立得 PPT P36 第一式：
+$$\left(\frac{\partial c}{\partial x}\right)_{x=0} = \frac{c^* - c}{\sqrt{\pi D t}}$$</li>
+<li><strong>法拉第电流桥接</strong>：$dt$ 时间内反应掉 $dN$ 摩尔物质需转移 $n\cdot dN$ 摩尔电子，电荷量 $dQ = nF\,dN$，故瞬时电流 $i = \frac{dQ}{dt} = nF\frac{dN}{dt}$。代入 Fick 第一定律的摩尔通量 $\frac{dN}{dt} = A D \left(\frac{\partial c}{\partial x}\right)_{x=0}$，得平面电极表面扩散电流：
+$$i = nFAD\frac{c^* - c}{\sqrt{\pi D t}} = nFAD\frac{c^* - c}{\delta}, \qquad \text{其中扩散层厚度 }\delta \equiv \sqrt{\pi D t}$$</li>
+</ol>
+</blockquote></details>
+<ul>
+<li><strong>极限扩散电流——Cottrell 方程（PPT P36 红字核心）</strong>：
+施加足够大电压使表面反应物瞬间耗尽（<strong>表面浓度 $c \to 0$</strong>），扩散电流达到极限值 $i_d$：
+$$\boxed{i_d = \frac{n F A D_O c^*}{\sqrt{\pi D_O t}} = \frac{n F A D_O^{1/2} c^*}{\sqrt{\pi t}}}$$
+<strong>核心结论</strong>：在固定采样时间 $t$ 下，<strong>极限扩散电流 $i_d$ 与电活性物质主体浓度 $c^*$ 严格成正比</strong>，这是伏安与电流型生物传感器的定量基石。</li>
+</ul>
+<hr>
+<h3 id="五-电极的极化与过电位-etap3739">五、 电极的极化与过电位 $\eta$（P37–39）</h3>
+<h4 id="51-极化定义与两大分类ppt-p3738">5.1 极化定义与两大分类（PPT P37–38）</h4>
+<p>当有<strong>较大电流</strong>流过原电池或电解池时，电极电位<strong>偏离平衡电极电位 ($\varphi_{\text{eq}}$)</strong> 的现象称为<strong>极化（Polarization）</strong>。
+电极反应是一条串联步骤链：$\text{溶液本体 } O \xrightarrow{\text{物质传递}} \text{表面层} \xrightarrow{\text{化学反应/水化吸附}} \text{电子传递 } (+ne^-) \xrightarrow{\text{脱附/晶体化}} R$，哪一步最慢就引发哪种极化：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">极化类型</th>
+<th align="left">动力学瓶颈（慢步骤）</th>
+<th align="left">关键影响因素（PPT P38）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>浓差极化</strong></td>
+<td align="left">**物质传递（扩散）**速度跟不上电极反应消耗，导致表面浓度 $c \neq c^*$</td>
+<td align="left"><strong>搅拌、温度、电极面积、电流密度</strong>（搅拌可压缩扩散层、消除浓差极化）</td>
+</tr>
+<tr>
+<td align="left"><strong>电化学极化</strong></td>
+<td align="left"><strong>电子传递、多步反应活化能差异、水化/吸脱附/晶体化</strong>等界面步骤迟缓</td>
+<td align="left"><strong>电流密度、温度、电极材料（如 $\text{Pt}$ 催化）、产物物态（气体过电位大）</strong></td>
+</tr>
+</tbody></table></div>
+<h4 id="52-过电位超电位eta-及其方向律ppt-p39">5.2 过电位（超电位）$\eta$ 及其方向律（PPT P39）</h4>
+<ul>
+<li><strong>定义式</strong>：$\boxed{\eta = \varphi - \varphi_{\text{eq}}}$</li>
+<li><strong>极化方向铁律（PPT P39 必考）</strong>：<ul>
+<li><strong>阴极超电位使阴极电位向负的方向移动</strong>（$\varphi_{\text{阴}} &lt; \varphi_{\text{eq,阴}}$，$\eta_{\text{阴}} &lt; 0$）；</li>
+<li><strong>阳极超电位使阳极电位向正的方向移动</strong>（$\varphi_{\text{阳}} &gt; \varphi_{\text{eq,阳}}$，$\eta_{\text{阳}} &gt; 0$）。
+<em>(直觉：阴极本应得电子消耗，若反应慢则电子在阴极表面堆积，电位更负；阳极失电子后金属溶解慢则正电荷积聚，电位更正。无论哪种极化，都会拉低原电池输出电压、抬高电解池外加电压。)</em></li>
+</ul>
+</li>
+<li><strong>过电位四大影响因素（PPT P39）</strong>：① 电流密度；② 温度；③ 电极材料（如 $\text{Pt}$）；④ 产物的物态（气体 &gt; 金属离子）。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>全章收官闭环</summary><blockquote>
+<p><strong>【全章收官闭环：静则能斯特，动则科特雷尔】</strong></p>
+<ul>
+<li><strong>第 14–15 章（电位分析法 / pH 计）</strong>：死守 $I \to 0$ 边界，消除 $IR$ 降与极化 $\eta = 0$，保证 $c = c^*$，用 <strong>Nernst 方程（$\varphi \propto \lg c^*$）</strong> 测电位。</li>
+<li><strong>第 16 章（伏安 / 极谱 / Clark 氧电极）</strong>：施加高过电位使表面耗尽 ($c = 0$)，进入纯扩散控制的极限浓差极化区，用 <strong>Cottrell 方程（$i_d \propto c^*$）</strong> 测电流。</li>
+</ul>
+</blockquote></details>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-14-1">14-1 金属基电极与ISE</h2>
+<h2 id="14-1-电位分析法金属基电极与-ise-膜电位推导对应-ppt-p4054" class="doc-title">14-1 电位分析法、金属基电极与 ISE 膜电位推导（对应 PPT P40–54）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1_Gr5th73j-P7CmlzgUK3ZkFQT2yC02vj/view?usp=drivesdk">14_化学1-电位分析法与pH_P481-516.pdf</a>（PPT P40–54，对应 PDF 第 1–15 页）｜原笔记：<a href="https://drive.google.com/file/d/1dJqQUDP3avfofp4QL0BVsqt_zFv7oOjb/view?usp=drivesdk">t6.1.4.1</a>、<a href="https://drive.google.com/file/d/1SsmXw9dDPof3wWUusJ63db4lVfk65XSo/view?usp=drivesdk">t6.1.4.2</a>、<a href="https://drive.google.com/file/d/1TADYwGwimUV-qyPgW_TXMyM4OQpg0Jj3/view?usp=drivesdk">t6.1.4.3</a></p>
+</blockquote>
+<h3 id="目录-3">目录</h3>
+<ul>
+<li><a href="#0-本节全局符号与极性约定表">0. 本节全局符号与极性约定表</a></li>
+<li><a href="#一-电位分析法的核心定义与四类金属基电极p4044">一、 电位分析法的核心定义与四类金属基电极（P40–44）</a></li>
+<li><a href="#二-离子选择性电极ise构造与电位代数解耦p4546p54">二、 离子选择性电极（ISE）构造与电位代数解耦（P45–46、P54）</a></li>
+<li><a href="#三-三种相界电位的本质对比与盐桥消噪原理p4751">三、 三种相界电位的本质对比与盐桥消噪原理（P47–51）</a></li>
+<li><a href="#四-跨膜电位varphi_text膜的五层拆解与对数消元推导p5253">四、 跨膜电位（$\varphi_{\text{膜}}$）的五层拆解与对数消元推导（P52–53）</a></li>
+</ul>
+<hr>
+<h3 id="0-本节全局符号与极性约定表">0. 本节全局符号与极性约定表</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">物理定义与下标含义</th>
+<th align="left">标准公式 / 极性约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$a, c$</td>
+<td align="left">离子活度、摩尔浓度</td>
+<td align="left">稀溶液近似下 $a \approx c$（PPT P41–44 用 $c$，P52–54 膜电位推导用 $a$）</td>
+</tr>
+<tr>
+<td align="left">$K_{sp}$</td>
+<td align="left">难溶盐溶度积常数</td>
+<td align="left">如 $\text{AgCl}(s) \rightleftharpoons \text{Ag}^+ + \text{Cl}^-$，$K_{sp} = c_{\text{Ag}^+} c_{\text{Cl}^-}$</td>
+</tr>
+<tr>
+<td align="left">$\varphi_{\text{ISE}}$</td>
+<td align="left">离子选择性电极总电位</td>
+<td align="left">$\varphi_{\text{ISE}} = \varphi_M - \varphi_{\text{外}} = (\varphi_M - \varphi_{\text{内}}) + (\varphi_{\text{内}} - \varphi_{\text{外}}) = \varphi_{\text{内参比}} + \varphi_{\text{膜}}$</td>
+</tr>
+<tr>
+<td align="left">$\varphi_{\text{膜}}$</td>
+<td align="left">跨膜电位（Membrane Potential）</td>
+<td align="left">$\varphi_{\text{膜}} = \varphi_{\text{内}} - \varphi_{\text{外}} = \varphi_2^s - \varphi_1^s = -\varphi_2 + \varphi_d + \varphi_1$</td>
+</tr>
+<tr>
+<td align="left">上标 $s, m$</td>
+<td align="left">溶液相（Solution）、敏感膜相（Membrane）</td>
+<td align="left">下标 $1$ 为<strong>外部被测溶液侧</strong>，下标 $2$ 为<strong>内部参比溶液侧</strong></td>
+</tr>
+<tr>
+<td align="left">$\varphi_1, \varphi_2$</td>
+<td align="left">外界面相界电位、内界面相界电位</td>
+<td align="left">统一按“膜减液”定义：$\varphi_1 \equiv \varphi_1^m - \varphi_1^s$，$\varphi_2 \equiv \varphi_2^m - \varphi_2^s$</td>
+</tr>
+<tr>
+<td align="left">$\varphi_d$</td>
+<td align="left">扩散电位（液接电位或膜内扩散电位）</td>
+<td align="left">液-液界面为 $\varphi_d = \varphi_2 - \varphi_1 = \pm\frac{0.059}{n}\lg\frac{c_2}{c_1}$；膜内为 $\varphi_d = \varphi_2^m - \varphi_1^m = \frac{0.059}{n}\lg\frac{a_1^m}{a_2^m}$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="一-电位分析法的核心定义与四类金属基电极p4044">一、 电位分析法的核心定义与四类金属基电极（P40–44）</h3>
+<h4 id="11-电位分析法定义ppt-p40">1.1 电位分析法定义（PPT P40）</h4>
+<p><strong>电位分析法（Potentiometry）</strong>：测定含有被测物的电池电动势（$E_{\text{cell}}$），利用电极电位和溶液中待测离子的活度/浓度关系（能斯特方程），测量待测离子的活度/浓度。</p>
+<h4 id="12-第一类电极金属--金属离子电极ppt-p41">1.2 第一类电极：金属 / 金属离子电极（PPT P41）</h4>
+<ul>
+<li><strong>构成与反应</strong>：纯金属 $M$ 浸入含自身阳离子 $M^{n+}$ 的溶液中；还原半反应 $M^{n+} + n e^- \to M(s)$。</li>
+<li><strong>电极表达式</strong>：$\text{M}^{n+}(x\;\text{mol/L}) \mid \text{M}$（如 $\text{Cu}^{2+}(x\;\text{mol/L}) \mid \text{Cu}$）。</li>
+<li><strong>能斯特控制方程</strong>（纯金属固体活度为 $1$，直接对本金属阳离子呈<strong>正斜率</strong>响应）：
+$$\varphi_{\text{Cu}^{2+},\text{Cu}} = \varphi^\ominus_{\text{Cu}^{2+},\text{Cu}} + \frac{0.059}{2}\lg c_{\text{Cu}^{2+}}, \qquad \boxed{\varphi_{M^{n+},M} = \varphi^\ominus_{M^{n+},M} + \frac{0.059}{n}\lg c_{M^{n+}}}$$</li>
+</ul>
+<h4 id="13-第二类电极金属--金属难溶盐电极ppt-p42以-textagagcl-为例">1.3 第二类电极：金属 / 金属难溶盐电极（PPT P42，以 $\text{Ag/AgCl}$ 为例）</h4>
+<p>用于测量<strong>阴离子</strong>（如 $\text{Cl}^-$）或当阴离子浓度固定时用作<strong>参比电极</strong>。</p>
+<ul>
+<li><strong>总电极反应</strong>：$\text{AgCl} + e^- \to \text{Ag} + \text{Cl}^-$</li>
+<li><strong>电极表达式（必考图式）</strong>：
+$$\boxed{\text{Cl}^-(x\;\text{mol/L}), \text{AgCl} \mid \text{Ag}}$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：PPT P42 双重平衡级联消元推导（为什么对阴离子呈负号响应？）】</strong>
+第二类电极界面同时受控于两个平衡反应：</p>
+<ol>
+<li><strong>沉淀溶解平衡</strong>：$\text{AgCl}(s) \rightleftharpoons \text{Ag}^+ + \text{Cl}^-$，受溶度积约束 $K_{sp} = c_{\text{Ag}^+}\cdot c_{\text{Cl}^-} \implies c_{\text{Ag}^+} = \frac{K_{sp}}{c_{\text{Cl}^-}}$</li>
+<li><strong>电子转移半反应（本质为第一类银电极）</strong>：$\text{Ag}^+ + e^- \to \text{Ag}$
+$$\varphi_{\text{AgCl,Ag}} = \varphi^\ominus_{\text{Ag}^+,\text{Ag}} + 0.059\lg c_{\text{Ag}^+}$$</li>
+<li><strong>代入消去未知的 $c_{\text{Ag}^+}$ 并重组标准电位</strong>：
+$$\begin{aligned}
+   \varphi_{\text{AgCl,Ag}} &amp;= \varphi^\ominus_{\text{Ag}^+,\text{Ag}} + 0.059\lg\left(\frac{K_{sp}}{c_{\text{Cl}^-}}\right) \\
+   &amp;= \underbrace{\varphi^\ominus_{\text{Ag}^+,\text{Ag}} + 0.059\lg K_{sp}}_{\text{合并定义为 }\varphi^\ominus_{\text{AgCl,Ag}}} - 0.059\lg c_{\text{Cl}^-}
+   \end{aligned}$$
+最终得到第二类电极控制方程：
+$$\boxed{\varphi_{\text{AgCl,Ag}} = \varphi^\ominus_{\text{AgCl,Ag}} - 0.059\lg c_{\text{Cl}^-}}$$
+<em>(注：PPT P42 左下角有一行中间过渡式误印为 $-\frac{0.059}{2}\lg c_{\text{Cl}^-}$，单电子反应 $n=1$ 分母恒为 $1$，应以 PPT 最底行 $-0.059\lg c_{\text{Cl}^-}$ 为准。物理直觉：$\text{Cl}^-$ 浓度升高会通过同离子效应压低游离 $\text{Ag}^+$，导致电极电位负移，故对数项前为*<em>负号</em></em>。)*</li>
+</ol>
+</blockquote></details>
+<h4 id="14-第三类电极金属--两种金属难溶盐电极ppt-p43以测-textca2-为例">1.4 第三类电极：金属 / 两种金属难溶盐电极（PPT P43，以测 $\text{Ca}^{2+}$ 为例）</h4>
+<p>利用有共同阴离子（如 $\text{C}_2\text{O}_4^{2-}$）的两种难溶盐，使金属电极（$\text{Ag}$）能间接响应无法直接发生可逆电子交换的另一种金属阳离子（$\text{Ca}^{2+}$）。</p>
+<ul>
+<li><strong>总电极反应</strong>：$\text{Ag}_2\text{C}_2\text{O}_4 + \text{Ca}^{2+} + 2e^- \to 2\text{Ag} + \text{CaC}_2\text{O}_4$（PPT P43 简写为半反应 $\text{Ag}_2\text{C}_2\text{O}_4 + 2e^- \to 2\text{Ag} + \text{C}_2\text{O}_4^{2-}$）</li>
+<li><strong>电极表达式（必考图式）</strong>：
+$$\boxed{\text{Ca}^{2+}(x\;\text{mol/L}), \text{CaC}_2\text{O}_4, \text{Ag}_2\text{C}_2\text{O}_4 \mid \text{Ag}}$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：PPT P43 三重平衡级联消元推导（负负得正，符号再次反转）】</strong>
+体系包含三个耦合反应：</p>
+<ol>
+<li>$\text{Ca}^{2+} + \text{C}_2\text{O}_4^{2-} \rightleftharpoons \text{CaC}_2\text{O}_4(s)$，溶度积 $K_{sp2} = c_{\text{Ca}^{2+}}\cdot c_{\text{C}_2\text{O}_4^{2-}} \implies c_{\text{C}_2\text{O}_4^{2-}} = \frac{K_{sp2}}{c_{\text{Ca}^{2+}}}$</li>
+<li>$\text{Ag}_2\text{C}_2\text{O}_4(s) \rightleftharpoons 2\text{Ag}^+ + \text{C}_2\text{O}_4^{2-}$，溶度积 $K_{sp1} = c_{\text{Ag}^+}^2 \cdot c_{\text{C}_2\text{O}_4^{2-}} \implies c_{\text{Ag}^+}^2 = \frac{K_{sp1}}{c_{\text{C}_2\text{O}_4^{2-}}}$</li>
+<li>$2\text{Ag}^+ + 2e^- \to 2\text{Ag}$（按 $n=2$ 展开第一类银电极方程）：
+$$\begin{aligned}
+   \varphi_{\text{Ag}_2\text{C}_2\text{O}_4,\text{Ag}} &amp;= \varphi^\ominus_{\text{Ag}^+,\text{Ag}} + \frac{0.059}{2}\lg c_{\text{Ag}^+}^2 \\
+   &amp;= \varphi^\ominus_{\text{Ag}^+,\text{Ag}} + \frac{0.059}{2}\lg\frac{K_{sp1}}{c_{\text{C}_2\text{O}_4^{2-}}} \\
+   &amp;= \varphi^\ominus_{\text{Ag}^+,\text{Ag}} + \frac{0.059}{2}\lg\left(\frac{K_{sp1}}{K_{sp2}}c_{\text{Ca}^{2+}}\right) \\
+   &amp;= \underbrace{\varphi^\ominus_{\text{Ag}^+,\text{Ag}} + \frac{0.059}{2}\lg\frac{K_{sp1}}{K_{sp2}}}_{\text{合并为第三类标准电位 }\varphi^{\ominus\prime}} + \frac{0.059}{2}\lg c_{\text{Ca}^{2+}}
+   \end{aligned}$$
+<em>(物理直觉：当待测 $\text{Ca}^{2+}$ 浓度增大 $\implies$ 沉淀消耗 $\text{C}_2\text{O}_4^{2-}$ 使其降低 $\implies$ 迫使 $\text{Ag}_2\text{C}_2\text{O}_4$ 溶解度增大释放更多 $\text{Ag}^+$ $\implies$ 电位正移，对数项前恢复为*<em>正号</em></em>！)*</li>
+</ol>
+</blockquote></details>
+<h4 id="15-第零类电极惰性金属电极ppt-p44">1.5 第零类电极：惰性金属电极（PPT P44）</h4>
+<p>惰性金属（如 $\text{Pt}$、$\text{Au}$）<strong>电极本身不发生化学反应</strong>，仅作为纯粹的电子导体（提供电子交换场所）测定气体或溶液中氧化还原电对的电位：</p>
+<ol>
+<li><strong>气体电极（标准氢电极）</strong>：<ul>
+<li><strong>电极反应</strong>：$2\text{H}^+ + 2e^- \to \text{H}_2(g)$</li>
+<li><strong>电极表达式</strong>：$\boxed{\text{H}^+(x\;\text{mol/L}) \mid \text{H}_2(y\;\text{Pa}), \text{Pt}}$</li>
+<li><strong>能斯特方程</strong>：$$\varphi_{\text{H}^+,\text{H}_2} = \varphi^\ominus_{\text{H}^+,\text{H}_2} + \frac{0.059}{2}\lg\frac{c_{\text{H}^+}^2}{p_{\text{H}_2}}$$</li>
+</ul>
+</li>
+<li><strong>均相氧化还原电对电极</strong>：<ul>
+<li><strong>电极反应</strong>：$\text{Fe}^{3+} + e^- \to \text{Fe}^{2+}$</li>
+<li><strong>电极表达式</strong>：$\boxed{\text{Fe}^{3+}(x\;\text{mol/L}), \text{Fe}^{2+}(y\;\text{mol/L}) \mid \text{Pt}}$</li>
+<li><strong>能斯特方程</strong>：$$\varphi_{\text{Fe}^{3+},\text{Fe}^{2+}} = \varphi^\ominus_{\text{Fe}^{3+},\text{Fe}^{2+}} + 0.059\lg\frac{c_{\text{Fe}^{3+}}}{c_{\text{Fe}^{2+}}}$$</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二-离子选择性电极ise构造与电位代数解耦p4546p54">二、 离子选择性电极（ISE）构造与电位代数解耦（P45–46、P54）</h3>
+<ul>
+<li><strong>为什么需要 ISE？</strong> 金属基电极依赖氧化还原反应，容易受溶液中其他氧化还原物质干扰，且无法直接检测 $\text{K}^+, \text{Na}^+, \text{F}^-$ 等活泼或非电活性离子。<strong>ISE 依靠敏感膜的选择性离子交换/渗透产生电位，不伴随氧化还原反应</strong>。</li>
+<li><strong>ISE 的三层基本构造（PPT P45 图）</strong>：<ol>
+<li><strong>内参比电极</strong>（如 $\text{Ag/AgCl}$ 银丝，内部电位记为 $\varphi_M$）；</li>
+<li><strong>内参比溶液</strong>（密封恒定浓度的电解质溶液，电位记为 $\varphi_{\text{内}}$）；</li>
+<li><strong>敏感膜</strong>（位于电极底部，<strong>选择性让某些特定离子通过/交换</strong>，外部待测溶液电位记为 $\varphi_{\text{外}}$）。</li>
+</ol>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：PPT P46 &amp; P54“加减 $\varphi_{\text{内}}$”拆解 ISE 总电位】</strong>
+根据电极电位的广义定义，整个 ISE 探头相对于外部待测溶液的总相间电位为 $\varphi_{\text{ISE}} = \varphi_M - \varphi_{\text{外}}$。
+在中间插入一个恒等零项 $(-\varphi_{\text{内}} + \varphi_{\text{内}})$，即可将宏观总电位拆解为两个物理界面之和：
+$$\varphi_{\text{ISE}} = \varphi_M - \varphi_{\text{外}} = \underbrace{(\varphi_M - \varphi_{\text{内}})}_{\text{内参比电极的电位}} + \underbrace{(\varphi_{\text{内}} - \varphi_{\text{外}})}_{\text{跨膜电位 }\varphi_{\text{膜}}}$$</p>
+<ul>
+<li><strong>第一项 $(\varphi_M - \varphi_{\text{内}})$</strong>：因为内参比溶液完全密封、成分恒定（如 $\text{Cl}^-$ 活度锁死），故内参比电极电位是一个<strong>严格不变的常数</strong>。</li>
+<li><strong>第二项 $(\varphi_{\text{内}} - \varphi_{\text{外}})$</strong>：即<strong>跨膜电位 $\varphi_{\text{膜}}$</strong>，是整个电极唯一随外部待测离子活度 $a_1^s$ 变化的项。待第 4 节证明 $\varphi_{\text{膜}} = \text{常数} + \frac{0.059}{n}\lg a_1^s$ 后，代入即得 PPT P54 结论：
+$$\boxed{\varphi_{\text{ISE}} = \text{常数} + \frac{0.059}{n}\lg a_1^s}$$</li>
+</ul>
+</blockquote></details>
+<hr>
+<h3 id="三-三种相界电位的本质对比与盐桥消噪原理p4751">三、 三种相界电位的本质对比与盐桥消噪原理（P47–51）</h3>
+<h4 id="31-扩散电位液接电位ppt-p4748">3.1 扩散电位（液接电位，PPT P47–48）</h4>
+<ul>
+<li><strong>定义（PPT P47）</strong>：在液-液接触界面上，由于<strong>不同离子通过界面的迁移率（扩散速度）不相等</strong>，从高浓度侧（$c_1$）向低浓度侧（$c_2$）扩散时形成<strong>电荷的不对称分布</strong>；当静电场力与扩散驱动力达到稳态平衡时，界面上产生的电位差称为<strong>扩散电位（液接电位）</strong>。</li>
+<li><strong>计算通式（PPT P48）</strong>：
+$$\varphi_d = \varphi_2 - \varphi_1 = \pm\frac{0.059}{n}\lg\frac{c_2}{c_1} \qquad (\text{正负号由快慢阴阳离子的电性决定})$$</li>
+</ul>
+<h4 id="32-道南电位donnan-potentialppt-p49">3.2 道南电位（Donnan Potential，PPT P49）</h4>
+<ul>
+<li><strong>定义（PPT P49）</strong>：两溶液间的隔膜是<strong>选择性渗透膜</strong>（如阳离子交换膜），<strong>仅允许特定离子穿过</strong>（如阳离子），绝对阻挡反号离子，从而造成选择性的离子扩散和膜两侧电荷分布不均，达到电化学势真平衡时形成的电位差。</li>
+<li><strong>计算通式（PPT P49）</strong>：
+$$\varphi_{\text{Donnan}} = \varphi_2 - \varphi_1 = \pm\frac{0.059}{n}\lg\frac{c_2}{c_1} \qquad (\text{正负号由可穿透阴阳离子的电性决定})$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：3 步从电化学势相等推出道南电位与符号规律】</strong>
+设可穿透选择性膜的离子电荷数为 $z$（阳离子 $z=+n$，阴离子 $z=-n$），两侧达到热力学真平衡时电化学势相等：
+$$\bar{\mu}_1 = \bar{\mu}_2 \implies \mu^\ominus + RT\ln a_1 + zF\varphi_1 = \mu^\ominus + RT\ln a_2 + zF\varphi_2$$
+移项归拢电位差与活度比：
+$$zF(\varphi_2 - \varphi_1) = RT\ln\frac{a_1}{a_2} = -RT\ln\frac{a_2}{a_1}$$
+在 $25^\circ\text{C}$ 下换为常用对数（$\frac{2.303RT}{F} = 0.059\;\text{V}$）并取稀溶液近似 $a\approx c$：
+$$\varphi_2 - \varphi_1 = -\frac{0.059}{z}\lg\frac{c_2}{c_1}$$
+当可穿透离子为阳离子 ($z=+n$) 时取<strong>负号</strong>；当为阴离子 ($z=-n$) 时负负得正取<strong>正号</strong>——这正是 PPT P49 标注“正负号由阴阳离子电性决定”的数学根源。</p>
+</blockquote></details>
+<h4 id="33-三种电位核心对比表ppt-p50-原文必考">3.3 三种电位核心对比表（PPT P50 原文必考）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">电位类型</th>
+<th align="left">相际转移粒子与反应特征</th>
+<th align="left">热力学状态</th>
+<th align="left">与离子浓度的关系及工程取舍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 电极电位</strong></td>
+<td align="left"><strong>电子</strong>在固-液两相间转移，<strong>伴随氧化还原反应</strong></td>
+<td align="left"><strong>热力学平衡电位</strong></td>
+<td align="left">有确定关系（服从 <strong>Nernst 方程</strong>），<strong>可用于离子检测 (√)</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>2. 道南电位</strong></td>
+<td align="left"><strong>特定离子</strong>在膜两侧转移，<strong>不伴随氧化还原反应</strong></td>
+<td align="left"><strong>热力学平衡电位</strong></td>
+<td align="left">有确定关系（服从 <strong>Nernst 方程</strong>），<strong>可用于离子检测 (√，ISE 核心)</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>3. 液接电位</strong></td>
+<td align="left">所有离子自由跨液-液界面扩散，无氧化还原反应</td>
+<td align="left"><strong>非热力学平衡电位</strong></td>
+<td align="left">关系复杂，<strong>受动力学（迁移率）因素影响</strong>，很难应用，<strong>应设法消除 (×)</strong></td>
+</tr>
+</tbody></table></div>
+<h4 id="34-盐桥消除液接电位的原理ppt-p51">3.4 盐桥消除液接电位的原理（PPT P51）</h4>
+<ul>
+<li><strong>功能</strong>：用于电化学池中<strong>消除液接电位</strong>。</li>
+<li><strong>核心配方与机理</strong>：盐桥内包含<strong>高浓度的 $\text{KCl}$ 或 $\text{KNO}_3$</strong>。<ol>
+<li><strong>高浓度压制</strong>：高浓度盐桥向两侧稀溶液扩散的通量完全主导液接界面，压制了待测液中其他杂乱离子的扩散贡献；</li>
+<li><strong>阴阳离子扩散速度相当（等淌度）</strong>：$\text{K}^+$ 与 $\text{Cl}^-$（或 $\text{NO}_3^-$）的迁移率（无限稀释摩尔电导率：$\text{K}^+ = 73.52$，$\text{Cl}^- = 76.34$，$\text{NO}_3^- = 71.44$）几乎完全相等，同步跨界扩散时不产生净电荷不对称堆积，使液接电位趋近于 $0$。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="四-跨膜电位varphi_text膜的五层拆解与对数消元推导p5253">四、 跨膜电位（$\varphi_{\text{膜}}$）的五层拆解与对数消元推导（P52–53）</h3>
+<p>这是 ISE 与 pH 玻璃电极最核心的理论推导：证明为什么无需知道敏感膜内部的任何微观参数，宏观跨膜电位就能直接线性响应外部待测溶液的离子活度 $\lg a_1^s$。</p>
+<h4 id="41-跨膜电位的空间阶梯拆解ppt-p52">4.1 跨膜电位的空间阶梯拆解（PPT P52）</h4>
+<p>设敏感膜左侧为<strong>外部待测溶液（下标 $1$，电位 $\varphi_1^s$，活度 $a_1^s$）</strong>，右侧为<strong>内参比溶液（下标 $2$，电位 $\varphi_2^s$，活度 $a_2^s$）</strong>，膜外侧表层为 $\varphi_1^m (a_1^m)$，膜内侧表层为 $\varphi_2^m (a_2^m)$。
+按 PPT P52 顺序逐步插项拆解：</p>
+<ol>
+<li><strong>宏观定义</strong>：$$\varphi_{\text{膜}} = \varphi_{\text{内}} - \varphi_{\text{外}} = \varphi_2^s - \varphi_1^s$$</li>
+<li><strong>插入膜两侧表层电位 $\varphi_2^m, \varphi_1^m$</strong>：
+$$\varphi_{\text{膜}} = (\varphi_2^s - \varphi_2^m) + (\varphi_2^m - \varphi_1^m) + (\varphi_1^m - \varphi_1^s)$$</li>
+<li><strong>对齐界面道南电位与膜内扩散电位符号</strong>：
+定义外侧相界电位 $\varphi_1 \equiv \varphi_1^m - \varphi_1^s$，内侧相界电位 $\varphi_2 \equiv \varphi_2^m - \varphi_2^s$（故 $\varphi_2^s - \varphi_2^m = -\varphi_2$），膜内扩散电位 $\varphi_d \equiv \varphi_2^m - \varphi_1^m$，得：
+$$\boxed{\varphi_{\text{膜}} = -\varphi_2 + \varphi_d + \varphi_1}$$</li>
+</ol>
+<h4 id="42-代入能斯特项与对数级联消元ppt-p53-完整推导">4.2 代入能斯特项与对数级联消元（PPT P53 完整推导）</h4>
+<p>写出三项分量的热力学表达式（PPT P53 上半页）：
+$$\varphi_1 = k_1 + \frac{0.059}{n}\lg\frac{a_1^s}{a_1^m}, \qquad \varphi_d = \frac{0.059}{n}\lg\frac{a_1^m}{a_2^m}, \qquad \varphi_2 = k_2 + \frac{0.059}{n}\lg\frac{a_2^s}{a_2^m}$$</p>
+<p><strong>一步不跳的代数消元（PPT P53 下半页）</strong>：</p>
+<ol>
+<li><strong>代入总式 $\varphi_{\text{膜}} = -\varphi_2 + \varphi_d + \varphi_1$</strong>：
+$$\varphi_{\text{膜}} = -k_2 - \frac{0.059}{n}\lg\frac{a_2^s}{a_2^m} + \frac{0.059}{n}\lg\frac{a_1^m}{a_2^m} + \frac{0.059}{n}\lg\frac{a_1^s}{a_1^m} + k_1$$</li>
+<li><strong>翻转负对数项并合并</strong>：利用 $-\lg\frac{a_2^s}{a_2^m} = +\lg\frac{a_2^m}{a_2^s}$，将三个对数项做乘积合并：
+$$\begin{aligned}
+   \varphi_{\text{膜}} &amp;= -k_2 + \frac{0.059}{n}\lg\frac{a_2^m}{a_2^s} + \frac{0.059}{n}\lg\frac{a_1^m}{a_2^m} + \frac{0.059}{n}\lg\frac{a_1^s}{a_1^m} + k_1 \\
+   &amp;= \frac{0.059}{n}\lg\left(\frac{\cancel{a_2^m}}{a_2^s} \cdot \frac{\cancel{a_1^m}}{\cancel{a_2^m}} \cdot \frac{a_1^s}{\cancel{a_1^m}}\right) + (k_1 - k_2) \\
+   &amp;= \frac{0.059}{n}\lg\frac{a_1^s}{a_2^s} + (k_1 - k_2)
+   \end{aligned}$$</li>
+<li><strong>施加“膜对称”条件与内参比锁死</strong>：<ul>
+<li>若敏感膜两侧完全对称，则 $\varphi_d = 0$（即 $a_1^m = a_2^m$）且界面常数相等 <strong>$k_1 - k_2 = 0$</strong>；</li>
+<li>又因为内参比溶液密封，内部离子活度 <strong>$a_2^s$ 是常数</strong>，故 $-\frac{0.059}{n}\lg a_2^s$ 为常数。最终导出跨膜电位核心方程：
+$$\boxed{\varphi_{\text{膜}} = \frac{0.059}{n}\lg\frac{a_1^s}{a_2^s} = \text{常数} + \frac{0.059}{n}\lg a_1^s}$$</li>
+</ul>
+</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么“膜对称”就一定有 $k_1 = k_2$ 且 $a_1^m = a_2^m$（$\varphi_d = 0$）？】</strong></p>
+<ol>
+<li><strong>为什么 $k_1 = k_2$？</strong> 相界电位的常数项源于标准态化学势差 $k = \frac{\mu^{\ominus,s} - \mu^{\ominus,m}}{nF}$。膜内外两侧接触的均为水溶液（$\mu^{\ominus,s}$ 相同），只要膜左右两个表面的材料结构与化学组成完全对称（$\mu^{\ominus,m}_{\text{左}} = \mu^{\ominus,m}_{\text{右}}$），必有 $k_1 = k_2$。（若膜老化或内外表面不完全一致，残留的 $k_1 - k_2 + \varphi_d \neq 0$ 就是 14-2 节要讲的<strong>不对称电位</strong>！）</li>
+<li><strong>为什么 $a_1^m = a_2^m$ 且 $\varphi_d = 0$？</strong> 敏感膜内部均匀分布着固定浓度的负电格点（如玻璃膜中的 $\equiv\text{Si}-\text{O}^-$）。根据固体内部的<strong>电中性原理</strong>，进入膜内的阳离子浓度必须严格等于固定负格点的浓度；只要膜材质均匀对称，两侧表层结合的阳离子活度必然相等（$a_1^m = a_2^m$），膜内无浓度梯度，故 $\varphi_d = \frac{0.059}{n}\lg\frac{a_1^m}{a_2^m} = 0$。</li>
+<li><strong>更妙的数学鲁棒性</strong>：观察上面的第 2 步乘积式——哪怕不假设 $\varphi_d = 0$，把 $\varphi_d = \frac{0.059}{n}\lg\frac{a_1^m}{a_2^m}$ 代进去后，对数内部的 $a_1^m$ 和 $a_2^m$ 依然会在分子分母中<strong>自动对消</strong>！真正决定零点是否漂移的只有对称性差值 $(k_1 - k_2)$。</li>
+</ol>
+</blockquote></details>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-14-2">14-2 参比电极与pH电极</h2>
+<h2 id="14-2-参比电极三电极体系与玻璃-ph-电极对应-ppt-p5575" class="doc-title">14-2 参比电极、三电极体系与玻璃 pH 电极（对应 PPT P55–75）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1_Gr5th73j-P7CmlzgUK3ZkFQT2yC02vj/view?usp=drivesdk">14_化学1-电位分析法与pH_P481-516.pdf</a>（PPT P55–75，对应 PDF 第 16–36 页）｜原笔记：<a href="https://drive.google.com/file/d/1Vhp8nObrrK7i0jZJnp3JBzSjK_KogK-4/view?usp=drivesdk">t6.1.4.4</a>、<a href="https://drive.google.com/file/d/1P7Tv0ecFsG9tw9VS5IFfik1U7SWfmE5O/view?usp=drivesdk">t6.1.4.5</a></p>
+</blockquote>
+<h3 id="目录-4">目录</h3>
+<ul>
+<li><a href="#0-本节全局符号与极性切换预警表">0. 本节全局符号与极性切换预警表</a></li>
+<li><a href="#一-电位分析法全系统合拢与三大测量条件p5556">一、 电位分析法全系统合拢与三大测量条件（P55–56）</a></li>
+<li><a href="#二-参比电极要求与三大经典参比电极p5763">二、 参比电极要求与三大经典参比电极（P57–63）</a></li>
+<li><a href="#三-工作电极--参比电极--对电极三电极双回路p64">三、 工作电极 / 参比电极 / 对电极：三电极双回路（P64）</a></li>
+<li><a href="#四-玻璃电极ph-电极构造硅氧断链与水化层膜电位p6569">四、 玻璃电极（pH 电极）：构造、硅氧断链与水化层膜电位（P65–69）</a></li>
+<li><a href="#五-ph-测量范围误差碱差酸差与离子选择性系数p7071">五、 pH 测量范围误差（碱差/酸差）与离子选择性系数（P70–71）</a></li>
+<li><a href="#六-ph-实用测量定义单双点校准与第-6-章全景总结p7275">六、 pH 实用测量定义、单/双点校准与第 6 章全景总结（P72–75）</a></li>
+</ul>
+<hr>
+<h3 id="0-本节全局符号与极性切换预警表">0. 本节全局符号与极性切换预警表</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">符号 / 概念</th>
+<th align="left">物理定义与公式</th>
+<th align="left">考研极易踩坑点预警</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$E_{\text{cell}}$（一般 ISE，P56）</td>
+<td align="left">$E_{\text{cell}} = \varphi_{\text{阴}} - \varphi_{\text{阳}} = \varphi_{\text{ISE}} - \varphi_{\text{参比}} = \frac{0.059}{n}\lg a_1^s + \text{常数}$</td>
+<td align="left">P56 默认将 <strong>ISE 接阴极（正）</strong>、<strong>参比电极接阳极（负）</strong></td>
+</tr>
+<tr>
+<td align="left">$E_s, E_x$（pH 测量，P72）</td>
+<td align="left"><code>玻璃电极(阳极) || 待测液 pHx || S.C.E.(阴极)</code><br>$E_x = \varphi_{\text{SCE}} - \varphi_{\text{玻璃}} = k_x + \frac{2.303RT}{F}\text{pH}_x$</td>
+<td align="left"><strong>极性反转预警</strong>：P72 中<strong>玻璃电极作阳极</strong>、<strong>SCE 作阴极</strong>，相减后负负得正，$\text{pH}$ 前变为<strong>正号</strong>！</td>
+</tr>
+<tr>
+<td align="left">$K_{i,j}^{\text{pot}}$</td>
+<td align="left">干扰离子 $j$ 对响应离子 $i$ 的<strong>电位选择性系数</strong></td>
+<td align="left">值越小说明抗干扰能力越强（优质 pH 电极对 $\text{Na}^+$ 约为 $10^{-12}$ 量级）</td>
+</tr>
+<tr>
+<td align="left">碱差（钠差）</td>
+<td align="left">$\text{pH} &gt; 10$ 或高 $\text{Na}^+$ 时，<strong>测得 $\text{pH}$ 偏低</strong></td>
+<td align="left">$\text{Na}^+$ 参与水化层交换贡献电位 $\implies$ 表观 $a(\text{H}^+)$ 偏高 $\implies$ $\text{pH} = -\lg a(\text{H}^+)$ <strong>偏低</strong></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="一-电位分析法全系统合拢与三大测量条件p5556">一、 电位分析法全系统合拢与三大测量条件（P55–56）</h3>
+<h4 id="11-指示电极与全电池电动势四步合拢ppt-p5556">1.1 指示电极与全电池电动势四步合拢（PPT P55–56）</h4>
+<ul>
+<li><strong>指示电极 / 工作电极定义（PPT P55）</strong>：电极电位在一定实验条件下能够<strong>跟踪被检测物的活度/浓度变化</strong>的电极。</li>
+<li><strong>全电池电动势四步代数合拢（PPT P56 左列）</strong>：
+如图 P56 所示，将参比电极接外电路负极（阳极），将指示电极（ISE）接外电路正极（阴极），底部配磁力搅拌子使溶液浓度均匀：<ol>
+<li>$E_{\text{cell}} = \varphi_{\text{阴}} - \varphi_{\text{阳}}$</li>
+<li>$E_{\text{cell}} = \varphi_{\text{ISE}} - \varphi_{\text{参比}}$</li>
+<li>代入 $\varphi_{\text{ISE}} = \varphi_{\text{膜}} + \varphi_{\text{内参比}}$：
+$$E_{\text{cell}} = \varphi_{\text{膜}} + \varphi_{\text{内参比}} - \varphi_{\text{参比}}$$</li>
+<li>代入 14-1 节推导的 $\varphi_{\text{膜}} = \frac{0.059}{n}\lg a_1^s + \text{常数}$，并将恒温下不变的 $(\text{常数} + \varphi_{\text{内参比}} - \varphi_{\text{参比}})$ 合并为总常数：
+$$\boxed{E_{\text{cell}} = \frac{0.059}{n}\lg a_1^s + \text{常数}}$$</li>
+</ol>
+</li>
+</ul>
+<h4 id="12-电位分析法的三大核心测量条件ppt-p56-右下必背简答点">1.2 电位分析法的三大核心测量条件（PPT P56 右下，必背简答点）</h4>
+<ol>
+<li><strong>测量参数</strong>：<strong>电动势</strong>（$E_{\text{cell}}$）</li>
+<li><strong>测量装置</strong>：<strong>原电池</strong>（无需外加激励电源，靠化学势差自发建立界面电位）</li>
+<li><strong>测量条件</strong>：<strong>电流趋近于 $0$（$I \to 0$）</strong></li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么必须保证“电流趋近于 0”？】</strong>
+回顾 13-2 节：一旦回路中有电流 $I &gt; 0$ 流过，会产生两重破坏：① 溶液与玻璃膜高内阻产生巨大的欧姆压降 $IR$；② 电极表面发生净反应消耗待测离子，引发浓差极化与电化学极化（产生过电位 $\eta \neq 0$），使电极偏离热力学平衡态，Nernst 方程不再成立。因此电位计/pH 计必须采用高输入阻抗（$&gt;10^{12}\;\Omega$）运算放大器锁死 $I \to 0$。</p>
+</blockquote></details>
+<hr>
+<h3 id="二-参比电极要求与三大经典参比电极p5763">二、 参比电极要求与三大经典参比电极（P57–63）</h3>
+<h4 id="21-理想参比电极的五项要求ppt-p57-原文">2.1 理想参比电极的五项要求（PPT P57 原文）</h4>
+<ol>
+<li><strong>电位已知</strong>；</li>
+<li><strong>电位稳定</strong>；</li>
+<li><strong>电位重现</strong>（重现性好）；</li>
+<li><strong>不极化、内阻小、液接电位小</strong>；</li>
+<li><strong>反应可逆</strong>（化学反应可逆，严格服从 Nernst 方程）。</li>
+</ol>
+<h4 id="22-三大常用参比电极对比总表ppt-p5863含电极表达式与推导">2.2 三大常用参比电极对比总表（PPT P58–63，含电极表达式与推导）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">参比电极类型</th>
+<th align="left">结构要点与电极表达式（必考图式）</th>
+<th align="left">电极反应与 Nernst 方程（$25^\circ\text{C}$）</th>
+<th align="left">核心特性与优缺点（PPT 原文）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 甘汞电极</strong><br>（饱和 $\text{KCl}$ 时称 <strong>饱和甘汞电极 SCE</strong>，PPT P58–60）</td>
+<td align="left">• <strong>内玻璃管</strong>：铂丝插入纯汞和甘汞 ($\text{Hg}_2\text{Cl}_2$) 糊状物<br>• <strong>外玻璃管</strong>：一定浓度 $\text{KCl}$ 溶液（常为饱和 $\text{KCl}$），下端为多孔薄膜<br>• <strong>表达式</strong>：$\boxed{\text{Cl}^-(x\;\text{mol/L}), \text{Hg}_2\text{Cl}_2 \mid \text{Hg}}$</td>
+<td align="left">• 总反应：$\text{Hg}_2\text{Cl}_2 + 2e^- \to 2\text{Hg} + 2\text{Cl}^-$<br>• 分解为：$\text{Hg}_2\text{Cl}_2 \rightleftharpoons \text{Hg}_2^{2+} + 2\text{Cl}^-$ 与 $\text{Hg}_2^{2+} + 2e^- \to 2\text{Hg}$<br>• 方程：$$\varphi_{\text{Hg}_2\text{Cl}_2,\text{Hg}} = \varphi^\ominus_{\text{Hg}_2\text{Cl}_2,\text{Hg}} - 0.059\lg c_{\text{Cl}^-}$$</td>
+<td align="left">• 温度一定时电位仅取决于 $\text{Cl}^-$ 活度（$\text{KCl}$ 浓度不同则电位不同；饱和 SCE 在 $25^\circ\text{C}$ 下为 $+0.2412\;\text{V}$）<br>• <strong>优点</strong>：电极电位<strong>非常稳定</strong><br>• <strong>缺点</strong>：<strong>汞有毒</strong>；温度变化时存在热滞后</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 银-氯化银电极</strong><br>（$\text{Ag/AgCl}$，PPT P61–62）</td>
+<td align="left">• 镀有 $\text{AgCl}$ 层的银丝浸入一定浓度 $\text{KCl}$ 溶液（带多孔砂芯）<br>• <strong>表达式</strong>：$\boxed{\text{Cl}^-(x\;\text{mol/L}), \text{AgCl} \mid \text{Ag}}$</td>
+<td align="left">• 总反应：$\text{AgCl} + e^- \to \text{Ag} + \text{Cl}^-$<br>• 方程：$$\varphi_{\text{AgCl,Ag}} = \varphi^\ominus_{\text{AgCl,Ag}} - 0.059\lg c_{\text{Cl}^-}$$<br>• $25^\circ\text{C}$ 电位随 $\text{KCl}$ 浓度变化：<br>$0.1\;\text{M} \to +0.2880\;\text{V}$<br>$1.0\;\text{M} \to +0.2223\;\text{V}$<br>$\text{饱和} \to +0.2000\;\text{V}$<br><em>(注：$0.1\to 1.0\;\text{M}$ 实测降幅 $65.7\;\text{mV}$ 略大于理想 $59\;\text{mV}$，因高浓度下活度系数 $\gamma_{\text{Cl}^-}$ 下降所致)</em></td>
+<td align="left">• <strong>重现性最好</strong>，结构简单、体积小、无毒<br>• <strong>独特优势</strong>：<strong>不需要自身盐桥，可作为无液接参比电极使用</strong>（前提：<strong>被测溶液中含有氯离子且被氯化银饱和过</strong>）</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 标准氢电极</strong><br>（SHE / NHE，PPT P63）</td>
+<td align="left">• 镀铂黑的 $\text{Pt}$ 通入 $\text{H}_2$ 浸于酸液<br>• <strong>表达式</strong>：$\boxed{\text{H}^+(x\;\text{mol/L}) \mid \text{H}_2(y\;\text{Pa}), \text{Pt}}$</td>
+<td align="left">• 反应：$2\text{H}^+ + 2e^- \to \text{H}_2(g)$<br>• 方程：$$\varphi_{\text{H}^+,\text{H}_2} = \varphi^\ominus_{\text{H}^+,\text{H}_2} + \frac{0.059}{2}\lg\frac{c_{\text{H}^+}^2}{p_{\text{H}_2}}$$</td>
+<td align="left">• <strong>重现性最好的电极</strong>，作为<strong>所有电极电位的参考标准</strong>（$\varphi^\ominus \equiv 0\;\text{V}$）<br>• <strong>缺点</strong>：<strong>难以制备、难以使用</strong>（需纯氢气流稳压，铂黑极易中毒）</td>
+</tr>
+</tbody></table></div>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：甘汞电极系数“2”是如何完美约分的？什么叫“无液接参比”？】</strong></p>
+<ol>
+<li><strong>甘汞电极推导</strong>：由 $\text{Hg}_2^{2+} + 2e^- \to 2\text{Hg}$ ($n=2$) 和 $K_{sp} = c_{\text{Hg}_2^{2+}}\cdot c_{\text{Cl}^-}^2$，代入得：
+$$\varphi = \varphi^\ominus_{\text{Hg}_2^{2+},\text{Hg}} + \frac{0.059}{2}\lg\left(\frac{K_{sp}}{c_{\text{Cl}^-}^2}\right) = \left(\varphi^\ominus_{\text{Hg}_2^{2+},\text{Hg}} + \frac{0.059}{2}\lg K_{sp}\right) - \frac{0.059}{\cancel{2}}\cdot \cancel{2}\lg c_{\text{Cl}^-} = \varphi^\ominus_{\text{Hg}_2\text{Cl}_2,\text{Hg}} - 0.059\lg c_{\text{Cl}^-}$$
+转移电子数 $n=2$ 与氯离子化学计量数 $2$ 恰好约分，最终斜率依然是 $-59\;\text{mV/decade}$！</li>
+<li><strong>为什么 $\text{Ag/AgCl}$ 可以做“无液接参比电极”（PPT P62）？</strong> 普通参比电极需要外玻璃套管和陶瓷砂芯盐桥把内充 $\text{KCl}$ 与待测液隔开（存在液接界面）。如果待测溶液本身含有固定浓度的 $\text{Cl}^-$（例如血液/细胞外液生理盐水环境，且预先被 $\text{AgCl}$ 饱和防止银丝上的 $\text{AgCl}$ 溶解剥落），直接把一根裸露的 $\text{Ag/AgCl}$ 丝插进待测液，其电位就被待测液恒定的 $c_{\text{Cl}^-}$ 锁死，<strong>在物理上彻底消灭了“液-液接触界面”与砂芯套管</strong>，故液接电位严格为 $0$。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-工作电极--参比电极--对电极三电极双回路p64">三、 工作电极 / 参比电极 / 对电极：三电极双回路（P64）</h3>
+<p>在需要通过电流的电化学测量（如第 16 章伏安法）或高精度测控中，为了防止电流流过参比电极引起极化和 $IR$ 降，引入三电极体系（PPT P64）：</p>
+<ul>
+<li><strong>三个电极的功能定位</strong>：<ol>
+<li><strong>指示电极 / 工作电极（WE）</strong>：电极电位（或电流）在一定实验条件下能够跟踪被检测物的活度/浓度变化。</li>
+<li><strong>参比电极（RE）</strong>：提供恒定标准电位的电极（内部高阻抗断路，<strong>绝对不走电流</strong>，从而永不极化）。</li>
+<li><strong>辅助电极 / 对电极（CE）</strong>：和工作电极形成闭合回路，<strong>专门提供电流通过的场所</strong>（通常为惰性 $\text{Pt}$ 丝或石墨）。</li>
+</ol>
+</li>
+<li><strong>双回路解耦（PPT P64 必记对应关系）</strong>：<ul>
+<li><strong>工作电极与参比电极（WE – RE）</strong>：构成<strong>电压回路</strong>（高阻测电位，$I \approx 0$）；</li>
+<li><strong>工作电极与对电极（WE – CE）</strong>：构成<strong>电流回路</strong>（低阻承载全部电解电流）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="四-玻璃电极ph-电极构造硅氧断链与水化层膜电位p6569">四、 玻璃电极（pH 电极）：构造、硅氧断链与水化层膜电位（P65–69）</h3>
+<h4 id="41-宏观四部分构造ppt-p65">4.1 宏观四部分构造（PPT P65）</h4>
+<ol>
+<li><strong>高阻玻璃壳体</strong>（支撑与绝缘隔离）；</li>
+<li><strong>内参比电极</strong>：<strong>银-氯化银电极（$\text{Ag/AgCl}$）</strong>；</li>
+<li><strong>内参比溶液</strong>：<strong>$0.1\;\text{mol/L HCl}$</strong>（一举两得：既提供固定浓度的 $\text{Cl}^-$ 锁死内参比 $\text{Ag/AgCl}$ 电位，又提供固定浓度的 $\text{H}^+$ 锁死玻璃膜内表面活度 $a_2^s$）；</li>
+<li><strong>敏感膜</strong>：底部约 <strong>$100\;\mu\text{m}$ ($0.1\;\text{mm}$) 厚的特制玻璃膜</strong>。</li>
+</ol>
+<h4 id="42-特制玻璃膜的硅氧键断裂与三明治水化层ppt-p6667">4.2 特制玻璃膜的硅氧键断裂与“三明治”水化层（PPT P66–67）</h4>
+<ul>
+<li><strong>为什么普通石英玻璃不导电，而特制玻璃膜对 $\text{H}^+$ 敏感（PPT P66）？</strong>
+纯石英玻璃是致密的三维硅氧网络（$\equiv\text{Si}^{\text{IV}}-\text{O}-\text{Si}^{\text{IV}}\equiv$）。熔炼特制玻璃膜时加入<strong>碱金属氧化物（如 $\text{Na}_2\text{O}$）</strong>，使部分的<strong>硅氧键断裂</strong>，生成带负电的固定硅氧交换质点（$\equiv\text{Si}^{\text{IV}}-\text{O}^-$）和可移动的抗衡离子（$\text{Na}^+$），大幅提升离子透过性与交换性：
+$$\equiv\text{Si}^{\text{IV}}-\text{O}-\text{Si}^{\text{IV}}\equiv \;+\; \text{Na}_2\text{O} \longrightarrow 2\left(\equiv\text{Si}^{\text{IV}}-\text{O}^- \text{Na}^+\right)$$</li>
+<li><strong>浸泡活化后的“三明治”五层空间结构（PPT P67 图）</strong>：
+玻璃电极使用前必须在水中浸泡活化，膜两侧表面吸水溶胀形成约 $10^{-4}\;\text{mm}$ ($100\;\text{nm}$) 厚的<strong>水化凝胶层</strong>，发生水相 $\text{H}^+$ 与玻璃相 $\text{Na}^+$ 的离子交换平衡：
+$$\equiv\text{Si}-\text{O}^-\text{Na}^+_{\text{(膜)}} + \text{H}^+_{\text{(液)}} \rightleftharpoons \equiv\text{Si}-\text{O}^-\text{H}^+_{\text{(膜)}} + \text{Na}^+_{\text{(液)}}$$
+空间结构从外到内依次为（对应 PPT P67 图示标注）：
+$$\text{外部试液 }\big[a(\text{H}^+)=x\big] \;\Big|\; \text{外水化层 }(10^{-4}\text{ mm}) \;\Big|\; \text{干玻璃层 }(0.1\text{ mm，}\text{Na}^+\text{ 迁移导电}) \;\Big|\; \text{内水化层 }(10^{-4}\text{ mm}) \;\Big|\; \text{内部试液 }\big[a(\text{H}^+)=\text{定值}\big]$$
+<em>(注：在水化层内，越靠近溶液侧 $a(\text{H}^+)$ 越高，越靠近干玻璃层 $a(\text{Na}^+)$ 越高；干玻璃层内部 $\text{H}^+$ 无法穿透，靠 $\text{Na}^+$ 在晶格间隙内微距跃迁完成电荷接力传导。)</em></li>
+</ul>
+<h4 id="43-玻璃电极膜电位推导与不对称电位ppt-p6869">4.3 玻璃电极膜电位推导与不对称电位（PPT P68–69）</h4>
+<p>如图 P68 所示，由于左右两侧各有一个水化层，内部扩散电位拆成外水化层扩散电位 $\varphi_{d1}$ 与内水化层扩散电位 $\varphi_{d2}$：
+$$\varphi_{\text{膜}} = -\varphi_2 + \varphi_{d1} + \varphi_{d2} + \varphi_1 = -k_2 - \frac{0.059}{n}\lg\frac{a_2^s}{a_2^m} + \varphi_{d1} + \varphi_{d2} + \frac{0.059}{n}\lg\frac{a_1^s}{a_1^m} + k_1$$</p>
+<ul>
+<li><strong>对称消元（PPT P69）</strong>：如果玻璃膜两侧的水化凝胶层<strong>完全对称</strong>，则：
+$$\varphi_{d1} + \varphi_{d2} = 0, \qquad a_2^m = a_1^m, \qquad k_1 = k_2$$
+代入 $n=1$ 及 $\text{pH} = -\lg a(\text{H}^+)$，由于内部试液 $a_2^s$ 是定值，方程化简为：
+$$\boxed{\varphi_{\text{膜}} = \frac{0.059}{1}\lg\frac{a_1^s}{a_2^s} = \text{常数} + 0.059\lg c(\text{H}^+) = \text{常数} - 0.059\,\text{pH}}$$
+<strong>结论</strong>：在一定温度下，玻璃电极膜电位与溶液 $\text{pH}$ 值呈严格线性关系（每单位 $\text{pH}$ 变化对应 $59\;\text{mV}$）。</li>
+<li><strong>不对称电位（Asymmetry Potential，PPT P69）</strong>：
+实际玻璃膜内外表面的几何曲率、热历史和水化程度不可能绝对对称（即使两侧装完全相同的溶液，$\varphi_{d1}+\varphi_{d2}$ 与 $k_1-k_2$ 也不完全为 $0$），残留的常数偏差称为<strong>不对称电位</strong>。通过充分浸泡<strong>稳定玻璃膜水化凝胶层</strong>并在使用前用标准缓冲液校准即可消除。</li>
+</ul>
+<hr>
+<h3 id="五-ph-测量范围误差碱差酸差与离子选择性系数p7071">五、 pH 测量范围误差（碱差/酸差）与离子选择性系数（P70–71）</h3>
+<h4 id="51-测量范围两端的偏差碱差与酸差ppt-p70-必考简答">5.1 测量范围两端的偏差：碱差与酸差（PPT P70 必考简答）</h4>
+<p>普通玻璃 pH 电极的线性测量范围通常为 $\text{pH } 1 \sim 10$，在两端极端条件下会产生偏差：</p>
+<ol>
+<li><strong>碱差 / 钠差（$\text{pH} &gt; 10$ 或 $\text{Na}^+$ 浓度较高时）</strong>：<ul>
+<li><strong>现象</strong>：<strong>测得的 $\text{pH}$ 值往往偏低</strong>（$\text{pH}_{\text{测}} &lt; \text{pH}_{\text{真}}$）。</li>
+<li><strong>原因（PPT P70 原文）</strong>：在 $\text{pH} &gt; 10$（$c_{\text{H}^+}$ 极低）且 $\text{Na}^+$ 浓度较高时，水化凝胶层形成的离子交换过程中，<strong>钠离子也与氢离子竞争、共同参与离子交换</strong>，因此<strong>钠离子也对膜电位产生正贡献</strong>，使电极反映出来的表观氢离子活度偏高，取负对数后测得的 <strong>$\text{pH}$ 偏低</strong>。（工程改进：用半径更大的 $\text{Li}_2\text{O}$ 代替 $\text{Na}_2\text{O}$ 制造锂玻璃电极，可将上限扩展至 $\text{pH } 13\sim 14$）。</li>
+</ul>
+</li>
+<li><strong>酸差（$\text{pH} &lt; 1$ 的强酸溶液）</strong>：<ul>
+<li><strong>现象</strong>：测得的 $\text{pH}$ 值产生偏差（往往<strong>偏高</strong>，$\text{pH}_{\text{测}} &gt; \text{pH}_{\text{真}}$）。</li>
+<li><strong>原因</strong>：水化凝胶层表面位点已被 $\text{H}^+$ 饱和，且强酸高浓度下水分子活度下降、酸根阴离子渗入水化层破坏道南排斥平衡。</li>
+</ul>
+</li>
+</ol>
+<h4 id="52-离子选择性系数与尼科尔斯基-艾森曼方程ppt-p71">5.2 离子选择性系数与尼科尔斯基-艾森曼方程（PPT P71）</h4>
+<p>理想情况下 ISE 只对主响应离子 $i$（电荷数 $n_i$）响应；当被测体系中还含有干扰离子 $j$（电荷数 $n_j$）时，干扰离子对电极电位的贡献用扩展的 Nernst 方程（Nicolsky-Eisenman 方程）表示为：</p>
+<ul>
+<li><strong>单一干扰离子形式</strong>：
+$$\boxed{\varphi_{\text{膜}} = \text{常数} \pm \frac{2.303RT}{n_i F}\lg\left(a_i + K_{i,j}^{\text{pot}}\,a_j^{\frac{n_i}{n_j}}\right)}$$
+<em>(其中阳离子电极取 $+$ 号，阴离子电极取 $-$ 号。)</em></li>
+<li><strong>多干扰离子通用求和形式（PPT P71 底部）</strong>：
+$$\varphi_{\text{膜}} = \text{常数} \pm \frac{2.303RT}{n_i F}\lg\left(a_i + \sum_j K_{i,j}^{\text{pot}}\,a_j^{\frac{n_i}{n_j}}\right)$$</li>
+<li><strong>$K_{i,j}^{\text{pot}}$ 的物理意义</strong>：称为<strong>干扰离子 $j$ 对被测离子 $i$ 的选择性系数</strong>，度量敏感膜对 $j$ 相对于 $i$ 的响应能力比值。<strong>$K_{i,j}^{\text{pot}}$ 越小，说明电极对主离子 $i$ 的选择性越好、抗 $j$ 干扰能力越强</strong>。</li>
+</ul>
+<hr>
+<h3 id="六-ph-实用测量定义单双点校准与第-6-章全景总结p7275">六、 pH 实用测量定义、单/双点校准与第 6 章全景总结（P72–75）</h3>
+<h4 id="61-ph-测量的实用定义与校准方法ppt-p72核心计算必考">6.1 pH 测量的实用定义与校准方法（PPT P72，核心计算必考）</h4>
+<p>由于玻璃电极存在无法预先准确测出的常数项 $k$（包含内/外参比电位、液接电位及随时间缓慢漂移的<strong>不对称电位</strong>），实际测量采用<strong>与标准缓冲溶液比较</strong>的方法：</p>
+<ul>
+<li><strong>电池组成与极性约定（PPT P72 原文）</strong>：<ul>
+<li>标准液电池：$\boxed{\text{玻璃电极（阳极）} \parallel \text{标准溶液 pH}_s \parallel \text{S.C.E.（阴极）}}$</li>
+<li>待测液电池：$\boxed{\text{玻璃电极（阳极）} \parallel \text{待测溶液 pH}_x \parallel \text{S.C.E.（阴极）}}$</li>
+</ul>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么 P69 中 $\varphi_{\text{膜}} = \text{常数} - 0.059\,\text{pH}$ 是负号，而 P72 中 $E = k + \frac{2.303RT}{F}\text{pH}$ 变成了正号？】</strong>
+关键在于 <strong>PPT P72 明确将玻璃电极规定为阳极（左），将饱和甘汞电极（S.C.E.）规定为阴极（右）</strong>！
+代入全电池电动势定义 $E = \varphi_{\text{阴}} - \varphi_{\text{阳}}$：
+$$E = \varphi_{\text{SCE}} - \varphi_{\text{玻璃}} = \varphi_{\text{SCE}} - \left(\varphi_{\text{内参比}} + \text{常数}_{\text{膜}} - \frac{2.303RT}{F}\text{pH}\right) = \underbrace{\left(\varphi_{\text{SCE}} - \varphi_{\text{内参比}} - \text{常数}_{\text{膜}}\right)}_{\text{合并为总截距常数 }k} + \frac{2.303RT}{F}\text{pH}$$
+因为玻璃电极作阳极被减去，<strong>负负得正</strong>，所以电动势 $E$ 与 $\text{pH}$ 的斜率项变成了<strong>正号</strong>！</p>
+</blockquote></details>
+<ul>
+<li><strong>比较法消除未知截距 $k$（PPT P72 推导）</strong>：<ol>
+<li>测标准缓冲溶液（已知 $\text{pH}_s$）：$$E_s = k_s + \frac{2.303RT}{F}\text{pH}_s$$</li>
+<li>测待测溶液（未知 $\text{pH}_x$）：$$E_x = k_x + \frac{2.303RT}{F}\text{pH}_x$$</li>
+<li><strong>测试条件相同时 $k_s = k_x$</strong>，两式相减消去 $k$：
+$$E_x - E_s = \frac{2.303RT}{F}(\text{pH}_x - \text{pH}_s) \implies \boxed{\text{pH}_x = \text{pH}_s + \frac{F(E_x - E_s)}{2.303RT}}$$</li>
+</ol>
+</li>
+<li><strong>单点校准（定位）vs. 双点校准（斜率校准，PPT P72 底部原话）</strong>：<ul>
+<li><strong>已知温度且电极斜率理想时（单点比较法）</strong>：只需 <strong>1 种</strong>标准缓冲液（$\text{pH}_s$）标定截距 $k$（即定位零点，消除不对称电位）。</li>
+<li><strong>若温度未知，或电极老化导致实际斜率偏离理论值 $\frac{2.303RT}{F}$ 时（双点校准）</strong>：需用 <strong>两个标准 $\text{pH}$ 缓冲溶液（$\text{pH}_{s1}, \text{pH}_{s2}$）校准斜率</strong> $S = \frac{E_{s2} - E_{s1}}{\text{pH}_{s2} - \text{pH}_{s1}}$，再计算 $\text{pH}_x = \text{pH}_{s1} + \frac{E_x - E_{s1}}{S}$。</li>
+</ul>
+</li>
+</ul>
+<p><em>(附：PPT P73 提及 1930s–40s Dr. Werner Ingold 发明将玻璃指示电极与参比电极融为一体的*<em>复合 pH 电极</em></em>，奠定了现代工业与临床 pH 计基础，头部制造商为梅特勒-托利多 Mettler-Toledo。)*</p>
+<hr>
+<h4 id="62-第六章化学传感器上全章知识总览表完美还原-ppt-p74">6.2 第六章《化学传感器（上）》全章知识总览表（完美还原 PPT P74）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">模块分支</th>
+<th align="left">核心公式与判据</th>
+<th align="left">关键器件与核心要素（PPT P74 思维导图）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>6.1 概论</strong></td>
+<td align="left">$\text{感受器} \to \text{换能器} \to \text{放大器}$</td>
+<td align="left">感受器决定选择性，换能器转为电信号</td>
+</tr>
+<tr>
+<td align="left"><strong>6.2.1 电导分析法</strong></td>
+<td align="left">$$G = k\frac{A}{L} = K\frac{A}{L}c = \frac{\sum \Lambda_i c_i}{1000}\frac{A}{L}$$</td>
+<td align="left">测总离子导电性（无选择性）；交流电桥防极化、消电容；纯水 $\rho = 18.3\;\text{M}\Omega\cdot\text{cm}$</td>
+</tr>
+<tr>
+<td align="left"><strong>6.2.2 电化学池与电极电位</strong></td>
+<td align="left">• $E_{\text{cell}} = \varphi_{\text{阴}} - \varphi_{\text{阳}}$<br>• Nernst：$\varphi = \varphi^\ominus_{\text{Ox,Red}} + \frac{RT}{nF}\ln\frac{a_{\text{Ox}}}{a_{\text{Red}}}$</td>
+<td align="left">• <strong>原电池</strong>（$E_{\text{cell}}&gt;0$，自发）vs. <strong>电解池</strong>（$E_{\text{cell}}&lt;0$，理论分解电压）<br>• <strong>传质</strong>：扩散（Fick 第一、第二定律，Cottrell 方程）、电迁移、对流<br>• <strong>有电流时</strong>：产生 <strong>$IR$ 降</strong>与<strong>极化</strong>（浓差极化、电化学极化，过电位 $\eta = \varphi - \varphi_{\text{eq}}$）</td>
+</tr>
+<tr>
+<td align="left"><strong>6.2.3 电位分析法与 pH</strong></td>
+<td align="left">• <strong>三种界面电位取舍</strong>：<br>电极电位 <strong>√</strong>（Nernst）<br>道南电位 <strong>√</strong>（Nernst）<br>液接电位 <strong>×</strong>（用盐桥消除）<br>• $E_{\text{cell}} = \frac{0.059}{n}\lg a_1^s + \text{常数}$</td>
+<td align="left">• <strong>测量三条件</strong>：测电动势、原电池装置、<strong>电流趋近于 0（$I \to 0$）</strong><br>• <strong>三电极回路</strong>：WE–RE 为<strong>电压回路</strong>，WE–CE 为<strong>电流回路</strong><br>• <strong>指示电极/工作电极</strong>：第 1/2/3/0 类金属基电极、ISE、玻璃 pH 电极（水化层、不对称电位、碱差/酸差、选择性系数 $K_{i,j}^{\text{pot}}$、单/双点校准）<br>• <strong>参比电极</strong>：饱和甘汞电极（SCE）、$\text{Ag/AgCl}$ 电极（可作无液接参比）、标准氢电极（SHE，零点基准）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="七-真题靶向加厚溶度积-k_sp--nernst--选择性系数误差边界26-计8">七、 真题靶向加厚：溶度积 $K_{sp}$ + Nernst + 选择性系数误差边界（26-计8）</h3>
+<p>此类压轴计算题将“化学沉淀平衡 + 能斯特校准 + 干扰离子误差限”三合一，固定按以下三步拆解：</p>
+<ol>
+<li><strong>标准液单点校准常数 $K$</strong>：将已知标准浓度 $[A]_1$ 与测得电动势 $E_1$ 代入 $E = K + S\lg[A]$（注意 $25^\circ\text{C}$ 下 $S = \frac{0.0592}{n}\;\text{V}$），反解仪器常数 $K$。</li>
+<li><strong>由溶度积 $K_{sp}$ 求待测液游离主离子浓度 $[A]_{\text{真}}$</strong>：对于难溶盐 $A_p B_q(s) \rightleftharpoons p A + q B$，由 $K_{sp} = [A]^p [B]^q$ 与已知沉淀剂过量离子浓度 $[B]$，算出 $[A]_{\text{真}}$ 并代回校准后的能斯特方程求 $E_2$。</li>
+<li><strong>Nikolsky-Eisenman 误差边界反推干扰离子浓度上限</strong>：
+$$[A]_{\text{测}} = [A]_{\text{真}} + K_{A,B}^{\text{pot}}\cdot\big([B]\big)^{n_A/n_B}$$
+由允许相对误差上限 $\delta_{\max}$（如 $5\%$）：
+$$\boxed{\text{相对误差} = \frac{K_{A,B}^{\text{pot}}\cdot\big([B]\big)^{n_A/n_B}}{[A]_{\text{真}}} \le \delta_{\max}}$$
+解此不等式即可直接求出干扰离子 $[B]$ 的最大允许浓度！</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-15">15 离子与气体传感器</h2>
+<h2 id="15-离子选择性电极ise与气体传感器对应-ppt-p119" class="doc-title">15 离子选择性电极（ISE）与气体传感器（对应 PPT P1–19）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1uwcTrN3rJqY9gVEjOAQ9tsdjO7q1br8_/view?usp=drivesdk">15_化学2-离子与气体传感器_P517-535.pdf</a>（全 19 页）｜原笔记：<a href="https://drive.google.com/file/d/1Tb825u6dmz6jmTUU4JZeA0Rn9p2vUWFx/view?usp=drivesdk">t6.1.5.1</a></p>
+</blockquote>
+<h3 id="目录-5">目录</h3>
+<ul>
+<li><a href="#0-本章全局分类与核心机制总览p16">0. 本章全局分类与核心机制总览（P1–6）</a></li>
+<li><a href="#一-非晶离子选择性电极玻璃膜组分调制p7">一、 非晶离子选择性电极：玻璃膜组分调制（P7）</a></li>
+<li><a href="#二-晶体离子选择性电极氟电极与晶体膜分类p810">二、 晶体离子选择性电极：氟电极与晶体膜分类（P8–10）</a></li>
+<li><a href="#三-活动载体电极液膜电极钙电极与缬氨霉素钾电极p1114">三、 活动载体电极（液膜电极）：钙电极与缬氨霉素钾电极（P11–14）</a></li>
+<li><a href="#四-气体传感器气敏电极textco_2-电极与多级平衡p1519">四、 气体传感器（气敏电极）：$\text{CO}_2$ 电极与多级平衡（P15–19）</a></li>
+</ul>
+<hr>
+<h3 id="0-本章全局分类与核心机制总览p16">0. 本章全局分类与核心机制总览（P1–6）</h3>
+<p><em>(PPT P2–5 为第 13–14 章回顾：电导分析法、电化学池、电位分析法测量三条件与玻璃 pH 电极，此处直接切入 PPT P6 新内容。)</em></p>
+<p>依据敏感膜材料与离子识别机制，其他离子选择性电极（ISE）与气敏电极分为四大类（PPT P6）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">电极大类</th>
+<th align="left">典型代表</th>
+<th align="left">敏感膜材质</th>
+<th align="left">选择性识别与传质机制</th>
+<th align="left">典型响应斜率（$25^\circ\text{C}$）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 非晶 ISE</strong></td>
+<td align="left">$\text{Na}^+, \text{K}^+, \text{H}^+$ 玻璃电极</td>
+<td align="left">$\text{SiO}_2\text{–Al}_2\text{O}_3\text{–Na}_2\text{O}$ 玻璃膜</td>
+<td align="left">水化凝胶层离子交换（调控 $[\text{AlO}_4]^-$ 场强）</td>
+<td align="left">$+59\;\text{mV/dec}$</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 晶体 ISE</strong></td>
+<td align="left">$\text{F}^-$ 电极、卤素/重金属电极</td>
+<td align="left">$\text{LaF}_3$ 单晶或 $\text{AgX/MS–Ag}_2\text{S}$ 压片</td>
+<td align="left"><strong>晶格离子空位跳跃</strong>传导</td>
+<td align="left">$\pm\frac{59}{n}\;\text{mV/dec}$</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 活动载体电极</strong>（液膜电极）</td>
+<td align="left">$\text{Ca}^{2+}$ 电极、缬氨霉素 $\text{K}^+$ 电极</td>
+<td align="left">多孔疏水膜 + 有机离子交换剂 / 中性载体</td>
+<td align="left">“油膜”内载体配位/静电跨相摆渡</td>
+<td align="left">$+\frac{59}{n}\;\text{mV/dec}$（$\text{Ca}^{2+}$ 为 $+29.5\;\text{mV}$）</td>
+</tr>
+<tr>
+<td align="left"><strong>4. 气敏电极</strong></td>
+<td align="left">$\text{CO}_2$ 电极（Severinghaus）</td>
+<td align="left"><strong>疏水透气膜</strong> + 中介液 + 内层 $\text{pH}$ 电极</td>
+<td align="left">气体跨膜溶解解离改变中介液 $\text{pH}$</td>
+<td align="left">$+59\;\text{mV/dec}\;(\lg p_{\text{CO}_2})$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="一-非晶离子选择性电极玻璃膜组分调制p7">一、 非晶离子选择性电极：玻璃膜组分调制（P7）</h3>
+<h4 id="11-ppt-p7-玻璃膜组分与选择性系数表">1.1 PPT P7 玻璃膜组分与选择性系数表</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">主要响应离子</th>
+<th align="center">$\text{Na}_2\text{O}$ (%)</th>
+<th align="center">$\text{Al}_2\text{O}_3$ (%)</th>
+<th align="center">$\text{SiO}_2$ (%)</th>
+<th align="left">典型选择性系数 $K_{i,j}^{\text{pot}}$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>$\text{Na}^+$</strong>（NAS 11-18-71）</td>
+<td align="center">$11$</td>
+<td align="center">$18$</td>
+<td align="center">$71$</td>
+<td align="left">$K_{\text{Na}^+,\text{K}^+}^{\text{pot}} = 3.3\times 10^{-3}$；<strong>$K_{\text{Na}^+,\text{Ag}^+}^{\text{pot}} = 500$</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{K}^+$</strong>（NAS 27-5-68）</td>
+<td align="center">$27$</td>
+<td align="center">$5$</td>
+<td align="center">$68$</td>
+<td align="left">$K_{\text{K}^+,\text{Na}^+}^{\text{pot}} = 5\times 10^{-2}$</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{Ag}^+$</strong></td>
+<td align="center">$11$</td>
+<td align="center">$18$</td>
+<td align="center">$71$</td>
+<td align="left">$K_{\text{Ag}^+,\text{Na}^+}^{\text{pot}} = 1\times 10^{-3}$</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{Li}^+$</strong></td>
+<td align="center">$28.8$（$\text{Li}_2\text{O}$/碱）</td>
+<td align="center">$19.1$</td>
+<td align="center">$52.1$</td>
+<td align="left">$K_{\text{Li}^+,\text{H}^+}^{\text{pot}} = 1\times 10^{-5}$</td>
+</tr>
+</tbody></table></div>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么在石英玻璃里掺 $\text{Al}_2\text{O}_3$ 就能从测 $\text{H}^+$ 变成测 $\text{Na}^+ / \text{K}^+$？】</strong></p>
+<ol>
+<li><strong>纯硅氧玻璃（强酸格点 $\equiv\text{Si}-\text{O}^-$）</strong>：负电荷高度集中在单个氧原子上，静电场强极高，优先死死抓住半径最小、电荷密度最高的质子 $\text{H}^+$，故只测 $\text{pH}$。</li>
+<li><strong>掺入 $\text{Al}_2\text{O}_3$（弱酸格点 $[\text{AlO}_4]^-$）</strong>：$\text{Al}^{3+}$ 挤入硅氧网络后与 4 个氧配位形成四面体 $[\text{AlO}_4]^-$，$-1$ 个电荷被<strong>离域分散到 4 个氧原子上</strong>，局部静电场强断崖式下降。场强减弱后不再偏爱高度水化的 $\text{H}^+$，转而优先交换水化能更低的碱金属离子（$\text{Na}^+, \text{K}^+$）。</li>
+<li><strong>表中两个必考细节</strong>：<ul>
+<li><strong>$\text{Na}^+$ 电极的致命干扰是 $\text{Ag}^+$（$K_{\text{Na}^+,\text{Ag}^+}^{\text{pot}} = 500$）</strong>：电极对 $\text{Ag}^+$ 的灵敏度是 $\text{Na}^+$ 的 500 倍，测 $\text{Na}^+$ 时严禁混入 $\text{Ag}^+$。</li>
+<li><strong>玻璃 $\text{K}^+$ 电极选择性有限（$K_{\text{K}^+,\text{Na}^+}^{\text{pot}} = 0.05$）</strong>：血液中 $\text{Na}^+$ 浓度远高于 $\text{K}^+$，故临床已被第 3 节的<strong>缬氨霉素液膜电极</strong>取代。</li>
+</ul>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="二-晶体离子选择性电极氟电极与晶体膜分类p810">二、 晶体离子选择性电极：氟电极与晶体膜分类（P8–10）</h3>
+<h4 id="21-氟离子选择性电极textlaf_3-单晶膜ppt-p89">2.1 氟离子选择性电极（$\text{LaF}_3$ 单晶膜，PPT P8–9）</h4>
+<ul>
+<li><strong>膜结构与导电机制（PPT P8）</strong>：由 $\text{LaF}_3$ 单晶片掺杂 $\text{EuF}_2$ 或 $\text{CaF}_2$ 等二价阳离子引入<strong>晶格缺陷（氟离子空位）</strong>，通过 $\text{F}^-$ 在晶格空位间“跳跃”导电：
+$$\text{LaF}_3 + \text{空位} \longrightarrow \text{LaF}_2^+ + \text{F}^-$$
+<em>(注：PPT P8 习惯写成“空穴”，在固体电化学物理本质上指晶格中缺失 $\text{F}^-$ 留下的*<em>离子空位 Lattice Vacancy</em></em>，而非半导体中的电子空穴。)*</li>
+<li><strong>能斯特控制方程</strong>（由于 $\text{F}^-$ 带 $-1$ 电荷，$z = -1$）：
+$$\boxed{\varphi_{\text{膜}} = \text{常数} - 0.059\lg a(\text{F}^-)}$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：氟电极的检测下限与酸碱双向干扰（PPT P9 原文填空逻辑）】</strong></p>
+<ol>
+<li><strong>为什么检测下限锁定在 $1\times 10^{-6}\;\text{mol/L}$？</strong> $\text{LaF}_3$ 是难溶盐，浸入水中存在溶解平衡 $\text{LaF}_3(s) \rightleftharpoons \text{La}^{3+} + 3\text{F}^-$（$K_{sp} = [\text{La}^{3+}][\text{F}^-]^3 \approx 2\times 10^{-19}$）。设自身微溶度为 $s$，则 $K_{sp} = s(3s)^3 = 27s^4 \implies s \approx (2\times 10^{-19}/27)^{1/4} \approx 9.3\times 10^{-6}\;\text{mol/L}$，故游离 $\text{F}^-$ 本底在 $10^{-6}\;\text{mol/L}$ 量级，低于此值时信号被晶体自溶噪声淹没。</li>
+<li><strong>为什么 $\text{OH}^-$ 是主要干扰离子，且使检测结果偏高？</strong> $\text{OH}^-$ 半径与 $\text{F}^-$ 极接近，且 $\text{La(OH)}_3$ 比 $\text{LaF}_3$ 更难溶，发生<strong>沉淀转化反应</strong>：
+$$\text{LaF}_3 + 3\text{OH}^- \longrightarrow \text{La(OH)}_3\downarrow + 3\text{F}^-$$
+该反应在电极表面释放出额外的游离 $\text{F}^-$，导致<strong>测得 $\text{F}^-$ 浓度偏高</strong>（PPT P9 第 6 行结论）。</li>
+<li><strong>为什么 $\text{pH}$ 过小时检测结果偏低？</strong> $\text{pH}$ 过低（强酸）时，$\text{H}^+$ 与 $\text{F}^-$ 结合成不电离的弱酸分子 $\text{HF}$（及 $\text{HF}_2^-$），而氟电极只响应游离 $\text{F}^-$，导致<strong>测得 $\text{F}^-$ 浓度偏低</strong>（PPT P9 第 7 行结论）。</li>
+<li><strong>最佳 $\text{pH}$ 窗口与 TISAB</strong>：因此测 $\text{F}^-$ 时需将 $\text{pH}$ 控制在 <strong>$5 \sim 6.5$</strong>，并加入**总离子强度调节缓冲液（TISAB）**以同时稳住 $\text{pH}$、掩蔽干扰金属离子并固定活度系数 $\gamma$。</li>
+</ol>
+</blockquote></details>
+<h4 id="22-晶体膜电极品种与性能总表ppt-p10-原表精选">2.2 晶体膜电极品种与性能总表（PPT P10 原表精选）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">电极</th>
+<th align="left">膜材料</th>
+<th align="center">线性范围 ($\text{mol/L}$)</th>
+<th align="center">适用 $\text{pH}$</th>
+<th align="left">主要干扰离子（按 $K_{sp}$ 沉淀转化规律）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$\text{F}^-$</td>
+<td align="left">$\text{LaF}_3 + \text{Eu}^{2+}$</td>
+<td align="center">$5\times 10^{-7}\sim 10^{-1}$</td>
+<td align="center">$5\sim 6.5$</td>
+<td align="left">$\text{OH}^-$</td>
+</tr>
+<tr>
+<td align="left">$\text{Cl}^-$</td>
+<td align="left">$\text{AgCl} + \text{Ag}_2\text{S}$</td>
+<td align="center">$5\times 10^{-5}\sim 10^{-1}$</td>
+<td align="center">$2\sim 12$</td>
+<td align="left">$\text{Br}^-, \text{S}_2\text{O}_3^{2-}, \text{I}^-, \text{CN}^-, \text{S}^{2-}$</td>
+</tr>
+<tr>
+<td align="left">$\text{Br}^-$</td>
+<td align="left">$\text{AgBr} + \text{Ag}_2\text{S}$</td>
+<td align="center">$5\times 10^{-6}\sim 10^{-1}$</td>
+<td align="center">$2\sim 12$</td>
+<td align="left">$\text{S}_2\text{O}_3^{2-}, \text{I}^-, \text{CN}^-, \text{S}^{2-}$</td>
+</tr>
+<tr>
+<td align="left">$\text{I}^-$</td>
+<td align="left">$\text{AgI} + \text{Ag}_2\text{S}$</td>
+<td align="center">$1\times 10^{-7}\sim 10^{-1}$</td>
+<td align="center">$2\sim 11$</td>
+<td align="left">$\text{S}^{2-}$</td>
+</tr>
+<tr>
+<td align="left">$\text{Cu}^{2+} / \text{Pb}^{2+} / \text{Cd}^{2+}$</td>
+<td align="left">$\text{MS} + \text{Ag}_2\text{S}$</td>
+<td align="center">$5\times 10^{-7}\sim 10^{-1}$</td>
+<td align="center">视离子而定</td>
+<td align="left">$\text{Ag}^+, \text{Hg}^{2+}, \text{Fe}^{3+}$ 等（$K_{sp}$ 更小的硫化物）</td>
+</tr>
+</tbody></table></div>
+<p><em>(注：混入 $\text{Ag}_2\text{S}$ 是因为其具有半导体导电性可降低膜内阻，且 $K_{sp}(\text{Ag}_2\text{S}) \approx 10^{-50}$ 极小，极难自溶。)</em></p>
+<hr>
+<h3 id="三-活动载体电极液膜电极钙电极与缬氨霉素钾电极p1114">三、 活动载体电极（液膜电极）：钙电极与缬氨霉素钾电极（P11–14）</h3>
+<h4 id="31-钙离子选择性电极带电荷流动载体ppt-p1112">3.1 钙离子选择性电极（带电荷流动载体，PPT P11–12）</h4>
+<ul>
+<li><strong>构成（PPT P11）</strong>：<ul>
+<li><strong>内参比</strong>：$\text{Ag/AgCl}$ 电极 + $0.1\;\text{mol/L}\;\text{CaCl}_2$ 凝胶；</li>
+<li><strong>电活性载体</strong>：$0.1\;\text{mol/L}$ 二癸基磷酸钙（溶于癸醇）或二(正辛基苯基)磷酸钙（溶于苯基磷酸二辛酯）；</li>
+<li><strong>膜支撑体</strong>：聚四氟乙烯（PTFE）或纤维素微孔疏水膜（将“油膜”固定在内外水相之间）。</li>
+</ul>
+</li>
+<li><strong>多相交换平衡与能斯特方程（PPT P12）</strong>：
+有机相中磷酸二酯阴离子（简记为 $\text{S}^-$ 或 $(\text{RO})_2\text{PO}_2^-$）与水相 $\text{Ca}^{2+}$ 发生可逆离子交换：
+$$\text{CaS}_2\text{ (油相)} \rightleftharpoons \text{Ca}^{2+}\text{ (水相)} + 2\text{S}^-\text{ (油相)}$$
+由于钙离子电荷数 $z = +2$，理论能斯特斜率减半：
+$$\boxed{\varphi_{\text{膜}} = \text{常数} + \frac{0.059}{2}\lg a(\text{Ca}^{2+}) = \text{常数} + 0.0295\lg a(\text{Ca}^{2+})}$$</li>
+<li><strong>性能与干扰</strong>：检测下限 <strong>$1\times 10^{-5}\;\text{mol/L}$</strong>；主要干扰离子为同价且半径相近的 <strong>$\text{Zn}^{2+}$</strong>。</li>
+</ul>
+<h4 id="32-带电荷载体-vs-中性载体ppt-p1314">3.2 带电荷载体 vs. 中性载体（PPT P13–14）</h4>
+<ul>
+<li><strong>带电荷载体</strong>（如钙电极负电载体、$\text{NO}_3^-$ 电极季铵盐正电载体）：靠静电引力抓取反号离子，易受其他高疏水性杂质离子干扰。</li>
+<li><strong>中性载体（代表：缬氨霉素 Valinomycin 测 $\text{K}^+$）</strong>：电中性大环化合物，内侧由 6 个羰基氧围成直径约 $0.27\sim 0.33\;\text{nm}$ 的极性空腔，<strong>在几何尺寸上精准匹配脱去水化层的 $\text{K}^+$（直径 $0.266\;\text{nm}$）</strong>，而比它小的 $\text{Na}^+$（$0.19\;\text{nm}$）无法同时与 6 个氧配位、能量不划算，因此对 $\text{K}^+$ 的选择性比 $\text{Na}^+$ 高出上万倍（$K_{\text{K}^+,\text{Na}^+}^{\text{pot}} \approx 10^{-4}$）。</li>
+</ul>
+<hr>
+<h3 id="四-气体传感器气敏电极textco_2-电极与多级平衡p1519">四、 气体传感器（气敏电极）：$\text{CO}_2$ 电极与多级平衡（P15–19）</h3>
+<h4 id="41-构造与级联化学平衡推导ppt-p1516核心必考推导">4.1 构造与级联化学平衡推导（PPT P15–16，核心必考推导）</h4>
+<p>气体分子不带电，无法直接产生膜电位。<strong>$\text{CO}_2$ 气敏电极（Severinghaus 电极）</strong> 采用三级串联结构：
+$$\text{待测 } \text{CO}_2 \xrightarrow{\text{疏水透气膜}} \text{中介液}(0.01\;\text{mol/L }\text{NaHCO}_3 + 0.01\;\text{mol/L }\text{NaCl}) \xrightarrow{\text{电离产 }\text{H}^+} \text{内层玻璃 }\text{pH 电极}$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：PPT P16 $\text{CO}_2$ 电极能斯特方程 4 步推导】</strong></p>
+<ol>
+<li><strong>气-液溶解平衡（亨利定律）</strong>：$\text{CO}_2 + \text{H}_2\text{O} \rightleftharpoons \text{H}_2\text{CO}_3$，平衡常数 $K_1 = \frac{a(\text{H}_2\text{CO}_3)}{p(\text{CO}_2)}$</li>
+<li><strong>碳酸一级解离平衡</strong>：$\text{H}_2\text{CO}_3 \rightleftharpoons \text{HCO}_3^- + \text{H}^+$，平衡常数 $K_2 = \frac{a(\text{HCO}_3^-)\,a(\text{H}^+)}{a(\text{H}_2\text{CO}_3)}$</li>
+<li><strong>消去中间态 $\text{H}_2\text{CO}_3$ 并利用高浓 $\text{NaHCO}_3$ 锁死 $a(\text{HCO}_3^-)$</strong>：
+中介液中含有高达 $0.01\;\text{mol/L}$ 的 $\text{NaHCO}_3$（完全电离），远大于 $\text{H}_2\text{CO}_3$ 自身解离出的 $\text{HCO}_3^-$，因此 <strong>$a(\text{HCO}_3^-)$ 很大且恒定为常数</strong>：
+$$a(\text{H}^+) = \frac{K_1 K_2\, p(\text{CO}_2)}{a(\text{HCO}_3^-)} = \text{常数} \times p(\text{CO}_2)$$</li>
+<li><strong>代入内层玻璃 pH 电极电位公式</strong>：
+$$\boxed{\varphi_{\text{膜}} = \text{常数} + 0.059\lg a(\text{H}^+) = \text{常数} + 0.059\lg p(\text{CO}_2)}$$
+<em>(物理直觉：$p(\text{CO}_2)$ 升高 $\implies$ 中介液产酸 $a(\text{H}^+)$ 增大 $\implies$ 玻璃电极电位正移，斜率为 $+59\;\text{mV/dec}$。)</em></li>
+</ol>
+</blockquote></details>
+<h4 id="42-生物医学应用与拓展ppt-p1719">4.2 生物医学应用与拓展（PPT P17–19）</h4>
+<ul>
+<li><strong>经皮 $P_{\text{CO}_2}$ 电极（PPT P17）</strong>：通过内部加热元件将皮肤局部加热至 $42\sim 44^\circ\text{C}$ 促使微血管舒张、$\text{CO}_2$ 透皮扩散，配合热敏电阻防烫伤，实现新生儿血气无创连续监护。</li>
+<li><strong>拓展至酶电极（PPT P18）</strong>：在氨 ($\text{NH}_3$) 气敏电极外膜固定<strong>尿素酶</strong>，尿素水解生成 $\text{NH}_3$ 改变中介液 $\text{pH}$，即可间接测血清尿素。</li>
+<li><strong>PPT P19 电化学传感器（上）总框架</strong>：原电极（第 1/2/3/0 类金属基电极、ISE 非晶/晶体/液膜）与敏化电极（气敏电极、酶电极）均建立在<strong>三电极/双电极零电流电位测量</strong>基础之上。</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-16-1">16-1 伏安与极谱理论</h2>
+<h2 id="16-1-伏安分析法与极谱法理论对应-ppt-p2031" class="doc-title">16-1 伏安分析法与极谱法理论（对应 PPT P20–31）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1F2Glwo22mYoMEO8hHavS0CDaICyQpTod/view?usp=drivesdk">16_化学2-伏安分析法与氧电极_P536-554.pdf</a>（PPT P20–31，对应 PDF 第 1–12 页）｜原笔记：<a href="https://drive.google.com/file/d/1pwrDtCrIsOKqILFkrWVlvI2L0-Zi3kR2/view?usp=drivesdk">t6.1.6.1</a>、<a href="https://drive.google.com/file/d/19i58uh_QBK16wt7V_eG5BwBb0zgQYaRJ/view?usp=drivesdk">t6.1.6.2</a>、<a href="https://drive.google.com/file/d/1wKNn0O6TPwSbgZLmP-VZbbNF54FPOdzR/view?usp=drivesdk">t6.1.6.3</a>、<a href="https://drive.google.com/file/d/1ZfUm2r9SZ6P9ql1MqOMNP8FtWDaTq6k7/view?usp=drivesdk">t6.1.6.4</a>、<a href="https://drive.google.com/file/d/1EsL0G8Sv0iS2bsHLDlahHYCbJhySroz7/view?usp=drivesdk">t6.1.6.6</a>、<a href="https://drive.google.com/file/d/1FwIaaFOm43uqeVYmFpEwV95gc2PZ7mSl/view?usp=drivesdk">t6.1.6.7</a></p>
+</blockquote>
+<h3 id="目录-6">目录</h3>
+<ul>
+<li><a href="#0-本节全局符号与方法定位">0. 本节全局符号与方法定位</a></li>
+<li><a href="#一-伏安法与经典直流极谱法基础p2126">一、 伏安法与经典直流极谱法基础（P21–26）</a></li>
+<li><a href="#二-尤考维奇ilkovič方程推导p26">二、 尤考维奇（Ilkovič）方程推导（P26）</a></li>
+<li><a href="#三-极谱波方程与半波电位-varphi_12p27">三、 极谱波方程与半波电位 $\varphi_{1/2}$（P27）</a></li>
+<li><a href="#四-单扫描极谱法与-randles-sevcik-方程p2829">四、 单扫描极谱法与 Randles-Sevcik 方程（P28–29）</a></li>
+<li><a href="#五-循环伏安法cv与可逆判据p3031">五、 循环伏安法（CV）与可逆判据（P30–31）</a></li>
+</ul>
+<hr>
+<h3 id="0-本节全局符号与方法定位">0. 本节全局符号与方法定位</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">物理名称与意义</th>
+<th align="left">核心公式 / 数值基准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$i_d, \bar{i}_d$</td>
+<td align="left">瞬时极限扩散电流、平均极限扩散电流</td>
+<td align="left">$i_d = i_l - i_r$（极限电流减去残余电流）；定量的依据：$i_d \propto c$</td>
+</tr>
+<tr>
+<td align="left">$\varphi_{1/2}$</td>
+<td align="left">半波电位（Half-wave Potential）</td>
+<td align="left">当 $i_c = \frac{1}{2}(i_d)_c$ 时的电极电位；<strong>定性识别物质种类</strong>的指纹</td>
+</tr>
+<tr>
+<td align="left">$m, t$</td>
+<td align="left">滴汞电极汞流速度 ($\text{mg/s}$)、滴汞周期 ($\text{s}$)</td>
+<td align="left">Ilkovič 方程中以 $m^{2/3} t^{1/6}$ 形式出现</td>
+</tr>
+<tr>
+<td align="left">$v$</td>
+<td align="left">单扫描 / 循环伏安的电位扫描速率 ($\text{V/s}$)</td>
+<td align="left">Randles-Sevcik 方程中峰值电流 $i_p \propto v^{1/2}$</td>
+</tr>
+<tr>
+<td align="left">$\Delta\varphi_p$</td>
+<td align="left">循环伏安阴极峰与阳极峰电位差</td>
+<td align="left">可逆反应判据：$\Delta\varphi_p = \varphi_{pc} - \varphi_{pa} = \frac{0.059}{n}\;(\text{或 } 2.2\frac{RT}{nF})$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="一-伏安法与经典直流极谱法基础p2126">一、 伏安法与经典直流极谱法基础（P21–26）</h3>
+<h4 id="11-定义与电极配置ppt-p2123">1.1 定义与电极配置（PPT P21–23）</h4>
+<ul>
+<li><strong>伏安分析法（Voltammetry）</strong>：通过测量电解池的<strong>电流–电压（$i–E$）曲线</strong>来进行定性与定量分析的方法（1922 年 Heyrovsky 创立极谱法，1959 年获诺贝尔奖）。</li>
+<li><strong>极谱法（Polarography）</strong>：特指使用**滴汞电极（DME）**作为工作电极的伏安法。<ul>
+<li><strong>工作电极（滴汞电极）</strong>：面积很小、电流密度大，为<strong>极化电极</strong>（电位随外加电压显著变化，发生浓差极化）。</li>
+<li><strong>参比电极（如大面积甘汞电极）</strong>：面积很大、电流密度极小，为<strong>非极化电极</strong>（电位基本恒定）。</li>
+</ul>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么极谱法要用“一滴滴落”的汞？】</strong></p>
+<ol>
+<li>汞滴周期性滴落使电极表面不断更新，<strong>彻底避免固体电极表面中毒、钝化或产物累积</strong>，重现性极高；</li>
+<li>氢在汞上的超电位极大，可在较负电位（还原金属离子）下不析出 $\text{H}_2$ 干扰。</li>
+</ol>
+</blockquote></details>
+<h4 id="12-极谱波中的三个电流ppt-p25">1.2 极谱波中的三个电流（PPT P25）</h4>
+<p>以典型金属离子在滴汞电极上的还原反应为例（PPT P25 原式）：
+$$\text{Cd}^{2+} + 2e^- + \text{Hg} \rightleftharpoons \text{Cd(Hg)}$$
+在极谱波中，从零电流到平台区包含三个关键参量：
+$$\boxed{i_d = i_l - i_r}$$</p>
+<ul>
+<li><strong>$i_l$（极限电流）</strong>：电位足够负时达到的平台总电流；</li>
+<li><strong>$i_r$（残余电流）</strong>：背景电解质与双电层充电电流构成的基线本底；</li>
+<li><strong>$i_d$（极限扩散电流）</strong>：扣除残余电流后，纯粹由待测离子扩散控制的极限电流（<strong>$i_d$ 正比于待测物浓度 $c$</strong>）。</li>
+</ul>
+<hr>
+<h3 id="二-尤考维奇ilkovič方程推导p26">二、 尤考维奇（Ilkovič）方程推导（P26）</h3>
+<p>回顾 13-2 节平面电极 Cottrell 方程：$i_d = \frac{nFAD_O c^*}{\sqrt{\pi D_O t}}$（扩散层厚度 $\delta_{\text{平面}} = \sqrt{\pi D t}$）。
+在<strong>滴汞电极</strong>上，汞滴一边生长（面积 $A$ 随时间增大），一边向内扩张的球面使扩散层更薄：</p>
+<ul>
+<li><strong>滴汞电极扩散层厚度（PPT P26）</strong>：$$\delta_{\text{滴汞}} = \sqrt{\frac{3}{7}\pi D t}$$</li>
+<li><strong>瞬时极限扩散电流（Ilkovič 方程）</strong>：
+$$i_d = 708\, n\, D^{1/2}\, m^{2/3}\, t^{1/6}\, c$$</li>
+<li><strong>平均极限扩散电流（一个滴汞周期 $0\sim t$ 内积分平均，PPT P26 红字）</strong>：
+$$\boxed{\bar{i}_d = \frac{1}{t}\int_0^t i_d\,dt = 607\, n\, D^{1/2}\, m^{2/3}\, t^{1/6}\, c}$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从球体体积积分一步不跳推出 Ilkovič 方程系数 $708$ 与 $607$】</strong></p>
+<ol>
+<li><strong>精确求汞滴表面积 $A(t)$</strong>：汞流速度为 $m\;(\text{mg/s})$，经时间 $t$ 滴出的汞质量为 $mt$，体积 $V = \frac{mt}{\rho_{\text{Hg}}} = \frac{4}{3}\pi r^3$（$\rho_{\text{Hg}} = 13.53\;\text{g/cm}^3$），解出半径 $r(t) = \left(\frac{3mt}{4\pi\rho_{\text{Hg}}}\right)^{1/3}$。代入球面积公式 $A(t) = 4\pi r^2$：
+$$A(t) = 4\pi\left(\frac{3}{4\pi\rho_{\text{Hg}}}\right)^{2/3} m^{2/3} t^{2/3}$$</li>
+<li><strong>代入膨胀球面扩散电流方程</strong>：滴汞向外生长压缩了扩散层厚度，精确求解膨胀球坐标扩散方程得 $\delta_{\text{滴汞}} = \sqrt{\frac{3}{7}\pi D t}$。将 $A(t)$ 与 $\delta_{\text{滴汞}}$ 同时代入 $i_d = nFAD\frac{c}{\delta}$：
+$$i_d(t) = nF \cdot 4\pi\left(\frac{3}{4\pi\rho_{\text{Hg}}}\right)^{2/3} m^{2/3} t^{2/3} \cdot D\frac{c}{\sqrt{\frac{3}{7}\pi D t}} = \underbrace{4\pi\left(\frac{3}{4\pi\rho_{\text{Hg}}}\right)^{2/3}\sqrt{\frac{7}{3\pi}} F \cdot (\text{单位换算})}_{=\,708}\cdot n\,D^{1/2}\,m^{2/3}\,t^{1/6}\,c$$
+可见幂律 $\frac{2}{3} - \frac{1}{2} = \frac{1}{6}$ 完全由球面几何面积与扩散层生长相除自然涌现！</li>
+<li><strong>积分求平均极限扩散电流系数 $607$</strong>：在一个滴汞周期 $[0, t]$ 内对 $i_d(\tau)$ 取时间积分平均：
+$$\bar{i}_d = \frac{1}{t}\int_0^t 708\,n D^{1/2} m^{2/3} c \cdot \tau^{1/6}\,d\tau = 708\,n D^{1/2} m^{2/3} c \cdot \frac{1}{t}\left[\frac{6}{7}\tau^{7/6}\right]_0^t = \left(708\times\frac{6}{7}\right) n D^{1/2} m^{2/3} t^{1/6} c = \mathbf{607}\,n D^{1/2} m^{2/3} t^{1/6} c$$</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-极谱波方程与半波电位-varphi_12p27">三、 极谱波方程与半波电位 $\varphi_{1/2}$（P27）</h3>
+<p>对于快速可逆电极反应 $O + n e^- \rightleftharpoons R$（初始 $C_O = C^*,\; C_R = 0$），在任意电位 $\varphi$ 下，电极表面活度（稀溶液近似浓度）仍满足 Nernst 方程：
+$$\varphi = \varphi^\circ + \frac{RT}{nF}\ln\frac{[a_O]_s}{[a_R]_s}$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从 Ilkovič 比例式 3 步推出极谱波方程与半波电位】</strong></p>
+<ol>
+<li><strong>用电流表达表面浓度</strong>：根据 Ilkovič 方程，瞬时阴极电流正比于主相与表面浓度差，极限电流对应 $[c_O]_s \to 0$：
+$$i_c = k\big([c_O] - [c_O]_s\big) = k'[c_R]_s, \qquad (i_d)_c = k[c_O]$$
+（其中 $k \propto D^{1/2}, \; k' \propto D'^{1/2}$，$D, D'$ 分别为 $O, R$ 的扩散系数）。</li>
+<li><strong>反解表面浓度比值</strong>：由上两式相减得 $k[c_O]_s = (i_d)_c - i_c \implies [c_O]_s = \frac{(i_d)_c - i_c}{k}$，且 $[c_R]_s = \frac{i_c}{k'}$。代入 Nernst 方程：
+$$\varphi = \varphi^\circ + \frac{RT}{nF}\ln\left(\frac{k'}{k}\cdot\frac{(i_d)_c - i_c}{i_c}\right) = \varphi^\circ + \frac{RT}{nF}\ln\left(\frac{D'}{D}\right)^{1/2} + \frac{RT}{nF}\ln\frac{(i_d)_c - i_c}{i_c}$$</li>
+<li><strong>定义半波电位 $\varphi_{1/2}$</strong>：令 $i_c = \frac{(i_d)_c}{2}$，对数第二项 $\ln(1) = 0$，此时对应的电位即为<strong>半波电位</strong>：
+$$\boxed{\varphi_{1/2} = \varphi^\circ + \frac{RT}{nF}\ln\left(\frac{D'}{D}\right)^{1/2}}$$
+故极谱波方程简写为：$\varphi = \varphi_{1/2} + \frac{RT}{nF}\ln\frac{(i_d)_c - i_c}{i_c}$。
+<strong>核心性质</strong>：$\varphi_{1/2}$ <strong>与待测物浓度 $c$ 无关</strong>，只取决于电对本性 $\varphi^\circ$ 和扩散系数比，因此是极谱<strong>定性分析的指纹依据</strong>（如图 P27 中 $\text{Pb}^{2+}$ 与 $\text{Cd}^{2+}$ 各自在特征 $\varphi_{1/2}$ 处出波）。</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-单扫描极谱法与-randles-sevcik-方程p2829">四、 单扫描极谱法与 Randles-Sevcik 方程（P28–29）</h3>
+<ul>
+<li><strong>单扫描极谱法（示波极谱法）</strong>：在一滴汞生长后期，快速施加一次线性扫描电压，用示波器记录电流响应。由于扫速极快，表面反应物瞬间耗尽后来不及补充，电流达到峰值后迅速衰减，形成<strong>峰形曲线</strong>而非 S 形平台。</li>
+<li><strong>Randles-Sevcik 方程（PPT P29 核心公式）</strong>：
+$$\boxed{i_p = 2.69\times 10^5\, n^{3/2}\, D^{1/2}\, v^{1/2}\, m^{2/3}\, t_p^{2/3}\, c}$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么单扫描峰值电流 $i_p$ 正比于扫描速率的平方根 $v^{1/2}$？】</strong>
+电位扫描跨越反应波宽 $\Delta E \sim \frac{RT}{nF}$ 所需的特征时间尺度为：
+$$t \sim \frac{\Delta E}{v} \propto \frac{RT}{nFv}$$
+将其代入 Cottrell 扩散电流公式 $i \propto n F A D^{1/2} c \cdot t^{-1/2}$：
+$$i_p \propto n F A D^{1/2} c \left(\frac{nFv}{RT}\right)^{1/2} \propto n^{3/2} D^{1/2} v^{1/2} c$$
+再代入单滴汞生长到峰值时刻 $t_p$ 时的球表面积 $A \propto m^{2/3} t_p^{2/3}$，即完整涌现出 Randles-Sevcik 方程中的全部幂次因子。</p>
+</blockquote></details>
+<ul>
+<li><strong>峰电位</strong>：$\varphi_p = \varphi_{1/2} - 1.1\frac{RT}{nF} = \varphi_{1/2} - \frac{0.028}{n}$</li>
+<li><strong>单扫描极谱 vs. 经典直流极谱对比（PPT P29 原表）</strong>：</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">对比维度</th>
+<th align="left">经典直流极谱</th>
+<th align="left">单扫描极谱（示波极谱）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>扫描速率</strong></td>
+<td align="left">很慢（$0.2\;\text{V/min}$）</td>
+<td align="left">很快（$0.25\;\text{V/s}$）</td>
+</tr>
+<tr>
+<td align="left"><strong>记录装置</strong></td>
+<td align="left">记录仪</td>
+<td align="left">示波器</td>
+</tr>
+<tr>
+<td align="left"><strong>极谱图形状</strong></td>
+<td align="left"><strong>S 形</strong>台阶波</td>
+<td align="left"><strong>峰形</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>记录一幅图所需汞滴数</strong></td>
+<td align="left">许多滴</td>
+<td align="left"><strong>1 滴</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>灵敏度与分辨力</strong></td>
+<td align="left">基准</td>
+<td align="left"><strong>灵敏度高两个数量级</strong>，分辨力更好</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="五-循环伏安法cv与可逆判据p3031">五、 循环伏安法（CV）与可逆判据（P30–31）</h3>
+<ul>
+<li><strong>原理（PPT P30）</strong>：在工作电极上施加<strong>等腰三角形脉冲电压</strong>（正向扫描发生还原/氧化后，立刻反向回扫把刚才生成的产物再氧化/还原回去），得到包含氧化峰与还原峰的闭合 $i–E$ 曲线。</li>
+<li><strong>可逆电极反应的两大黄金判据（PPT P31 必背）</strong>：<ol>
+<li><strong>峰电流比值</strong>：$$\boxed{\frac{i_{pc}}{i_{pa}} \approx 1}$$</li>
+<li><strong>峰电位差</strong>：$$\boxed{\Delta\varphi_p = \varphi_{pc} - \varphi_{pa} = 2.2\frac{RT}{nF} = \frac{0.059}{n}\;(\text{V},\; 25^\circ\text{C})}$$
+<em>(注意：如果 $\Delta\varphi_p &gt; \frac{0.059}{n}$ 或出现单峰无回扫峰，说明电极反应为准可逆或不可逆过程。)</em></li>
+</ol>
+</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-16-2">16-2 氧电极与超微电极</h2>
+<h2 id="16-2-修饰电极clark-氧电极超微电极与固态电位测氧对应-ppt-p3238" class="doc-title">16-2 修饰电极、Clark 氧电极、超微电极与固态电位测氧（对应 PPT P32–38）</h2>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1F2Glwo22mYoMEO8hHavS0CDaICyQpTod/view?usp=drivesdk">16_化学2-伏安分析法与氧电极_P536-554.pdf</a>（PPT P32–38，对应 PDF 第 13–19 页）｜<em>注：此部分在原笔记中完全缺失，现按 PPT 主干与最小闭环全新补齐。</em></p>
+</blockquote></details>
+<h3 id="目录-7">目录</h3>
+<ul>
+<li><a href="#一-伏安法中的化学修饰电极p32">一、 伏安法中的化学修饰电极（P32）</a></li>
+<li><a href="#二-clark-电流型氧电极与血气分析仪p3335">二、 Clark 电流型氧电极与血气分析仪（P33–35）</a></li>
+<li><a href="#三-extra超微电极p3637">三、 Extra：超微电极（P36–37）</a></li>
+<li><a href="#四-电位法测量氧气含量textzro_2-浓差电池p38">四、 电位法测量氧气含量：$\text{ZrO}_2$ 浓差电池（P38）</a></li>
+</ul>
+<hr>
+<h3 id="一-伏安法中的化学修饰电极p32">一、 伏安法中的化学修饰电极（P32）</h3>
+<ul>
+<li><strong>为什么需要修饰电极？</strong> 在生物样本（如血液）中，维生素 C（抗坏血酸）与多巴胺等电活性物质在裸电极上的氧化电位非常接近，伏安峰严重重叠无法区分。</li>
+<li><strong>PPT P32 典型实例</strong>：<ul>
+<li><strong>二茂铁修饰石墨电极</strong>：用于抗坏血酸的选择性催化检测；</li>
+<li><strong>碘修饰铂电极</strong>：催化分离维生素 C 与多巴胺的氧化峰，使两个峰位拉开。</li>
+</ul>
+</li>
+<li><strong>核心效果</strong>：选择性提高、灵敏度提高、稳定性和重现性改善，广泛应用于第 18 章（第二代葡萄糖酶电极）等生物传感器。</li>
+</ul>
+<hr>
+<h3 id="二-clark-电流型氧电极与血气分析仪p3335">二、 Clark 电流型氧电极与血气分析仪（P33–35）</h3>
+<p>1956 年 Clark 等发明了电流型氧传感器，这是生物医学测量与第 18/20 章酶/微生物传感器的<strong>核心基础器件</strong>。</p>
+<h4 id="21-clark-氧电极结构与电极反应ppt-p33-图">2.1 Clark 氧电极结构与电极反应（PPT P33 图）</h4>
+<ul>
+<li><strong>空间构造（自内向外隔离）</strong>：<ul>
+<li><strong>阴极（工作电极）</strong>：玻璃支撑体中心封装的<strong>铂（$\text{Pt}$）丝</strong>；</li>
+<li><strong>阳极（参比/对电极）</strong>：环形**银（$\text{Ag}$）**电极；</li>
+<li><strong>内充电解液</strong>：<strong>$\text{KCl}$ 溶液</strong>；</li>
+<li><strong>最前端隔离层</strong>：<strong>疏水性透气薄膜</strong>（只允许 $\text{O}_2$ 分子渗透扩散进入，将水相杂质、蛋白质和带电离子完全隔绝在外）。</li>
+</ul>
+</li>
+<li><strong>电极工作电位与反应</strong>：在 $\text{Pt}$ 阴极与 $\text{Ag/AgCl}$ 阳极间施加约 $-0.6 \sim -0.8\;\text{V}$ 的恒定极化电压：<ul>
+<li><strong>$\text{Pt}$ 阴极（还原 $\text{O}_2$）</strong>：$$\text{O}_2 + 2\text{H}_2\text{O} + 4e^- \longrightarrow 4\text{OH}^- \quad (\text{或分步经 }\text{H}_2\text{O}_2\text{ 还原})$$</li>
+<li><strong>$\text{Ag}$ 阳极（氧化提供电子）</strong>：$$4\text{Ag} + 4\text{Cl}^- \longrightarrow 4\text{AgCl} + 4e^-$$</li>
+</ul>
+</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：为什么 Clark 氧电极测出的极限电流 $i_d$ 与氧分压 $p_{\text{O}_2}$ 严格成正比？】</strong></p>
+<ol>
+<li>外部样本中的溶解氧分压 $p_{\text{O}_2}$ 由亨利定律决定膜外表面氧浓度 $c_{\text{O}_2}^* = S \cdot p_{\text{O}_2}$。</li>
+<li>施加足够的负偏压后，凡是穿过疏水透气膜到达 $\text{Pt}$ 阴极表面的 $\text{O}_2$ 瞬间被完全还原（<strong>表面浓度 $c_{\text{O}_2} = 0$</strong>）。</li>
+<li>此时 $\text{O}_2$ 跨越固定厚度 $d$ 的疏水膜发生稳态 Fick 第一定律扩散，极限扩散电流为：
+$$\boxed{i_d = n F A D_{\text{膜}} \frac{c_{\text{O}_2}^* - 0}{d} = K \cdot p_{\text{O}_2}}$$
+因此电流大小线性正比于被测体系的氧分压或溶解氧浓度。</li>
+</ol>
+</blockquote></details>
+<h4 id="22-血气分析仪三大核心指标串联ppt-p3435">2.2 血气分析仪三大核心指标串联（PPT P34–35）</h4>
+<p>现代临床<strong>血气分析仪</strong>在一台仪器内集成了第 14–16 章的三大传感器：</p>
+<ol>
+<li><strong>$\text{pH}$</strong>：玻璃 $\text{pH}$ 电极（14 章，电位法）；</li>
+<li><strong>$p_{\text{CO}_2}$</strong>：Severinghaus $\text{CO}_2$ 气敏电极（15 章，电位法）；</li>
+<li><strong>$p_{\text{O}_2}$</strong>：<strong>Clark 氧电极</strong>（16 章，电流/伏安法）。</li>
+</ol>
+<hr>
+<h3 id="三-extra超微电极p3637">三、 Extra：超微电极（P36–37）</h3>
+<ul>
+<li><strong>几何特征</strong>：电极尺寸微米级（半径 $r \sim \mu\text{m}$）。</li>
+<li><strong>电流控制方程（PPT P36）</strong>：
+$$i = 4\pi n F D c_0 \left(r + \frac{r^2}{\sqrt{\pi D_O t}}\right)$$
+由于电极半径 $r$ 极小，$\sqrt{\pi D_O t}$ 很快远远超过 $r$（即 $\frac{r}{\sqrt{\pi D_O t}} \ll 1$），括号内含时间 $t$ 的后一项可忽略不计，方程退化为与时间无关的稳态公式：
+$$\boxed{i = 4\pi n F D c_0 r}$$</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：球坐标扩散方程 4 步推出超微电极稳态电流 $i = 4\pi nFDc_0 r$】</strong></p>
+<ol>
+<li><strong>球对称 Fick 第二定律</strong>：对半径为 $r_0$ 的微球电极，球坐标下的径向扩散方程为：
+$$\frac{\partial c}{\partial t} = D\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial c}{\partial r}\right)$$</li>
+<li><strong>稳态解（$t$ 足够大时 $\frac{\partial c}{\partial t} = 0$）</strong>：方程退化为常微分方程：
+$$\frac{d}{dr}\left(r^2\frac{dc}{dr}\right) = 0 \implies r^2\frac{dc}{dr} = C_1 \implies c(r) = -\frac{C_1}{r} + C_2$$</li>
+<li><strong>代入边界条件</strong>：无穷远 $r\to\infty$ 处 $c = c_0 \implies C_2 = c_0$；电极表面 $r=r_0$ 处极限耗尽 $c(r_0) = 0 \implies C_1 = c_0 r_0$。故稳态浓度分布为：
+$$c(r) = c_0\left(1 - \frac{r_0}{r}\right)$$</li>
+<li><strong>计算表面梯度与总电流</strong>：对 $r$ 求导得表面浓度梯度 $\left.\frac{dc}{dr}\right|_{r=r_0} = \frac{c_0 r_0}{r_0^2} = \frac{c_0}{r_0}$。乘以球表面积 $A = 4\pi r_0^2$、扩散系数 $D$ 与 $nF$，即得与时间无关的稳态极限电流（记半径为 $r$）：
+$$i = nF(4\pi r^2)D\frac{c_0}{r} = \boxed{4\pi nFDc_0 r}$$
+<em>(而完整含时解正是 PPT P36 给出的 $i = 4\pi nFDc_0\left(r + \frac{r^2}{\sqrt{\pi D_O t}}\right)$：当 $\sqrt{\pi D_O t} \gg r$ 时平面瞬态项消失，只剩径向汇聚稳态项！)</em></li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-电位法测量氧气含量textzro_2-浓差电池p38">四、 电位法测量氧气含量：$\text{ZrO}_2$ 浓差电池（P38）</h3>
+<p>除了电流型 Clark 氧电极，工业与汽车尾气（氧传感器）常用基于<strong>固体电解质</strong>的<strong>电位型氧传感器</strong>（PPT P38）：</p>
+<ul>
+<li><strong>核心材料</strong>：在二氧化锆（$\text{ZrO}_2$）晶体中掺杂低价的 <strong>$\text{CaO}$ 或 $\text{Y}_2\text{O}_3$</strong>：
+$$\text{Zr}_{10000}\text{O}_{20000} \longrightarrow \text{Zr}_{9999}\text{CaO}_{19999}$$
+<em>(同第 15 章氟电极逻辑！低价 $\text{Ca}^{2+}$ 取代 $\text{Zr}^{4+}$，为维持晶体电中性产生*<em>氧离子 $\text{O}^{2-}$ 空位</em></em>，使 $\text{ZrO}_2$ 陶瓷在高温下成为纯 $\text{O}^{2-}$ 离子导体。)*</li>
+<li><strong>电池结构与控制方程</strong>：
+膜左侧为待测尾气氧分压 $p_{\text{O}_2, 1}$，右侧为参比空气氧分压 $p_{\text{O}_2, 2}$，仅允许 $\text{O}^{2-}$ 跨膜迁移达成电化学平衡，构成氧浓差电池：
+$$\boxed{E = \frac{RT}{nF}\ln\frac{p_{\text{O}_2, 1}}{p_{\text{O}_2, 2}}} \qquad (\text{每 } 1\text{ mol O}_2\text{ 对应 } \text{O}_2 + 4e^- \rightleftharpoons 2\text{O}^{2-},\; n = 4)$$
+<em>(注：需配备加热电极，因为固体晶格中 $\text{O}^{2-}$ 空位跳跃必须在高温下才具有足够高的离子电导率。)</em></li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-17-1">17-1 半导体与ISFET</h2>
+<h2 id="17-1-半导体基础与离子敏感场效应管isfet对应-ppt-p3952" class="doc-title">17-1 半导体基础与离子敏感场效应管（ISFET，对应 PPT P39–52）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1WpYQ6ZInDh_86p2lYwqL4ilmUy7vuIKN/view?usp=drivesdk">17_化学2-其他换能器_P555-591.pdf</a>（PPT P39–52，对应 PDF 第 1–14 页）｜原笔记：<a href="https://drive.google.com/file/d/13xd9haeX_R8fHtcHj9ExmAZuwGj5IXc3/view?usp=drivesdk">t6.1.7.1</a>–<a href="https://drive.google.com/file/d/1LMcOgWl7Lj-PxeoVuo_ppZzn0IvLYQNX/view?usp=drivesdk">t6.1.7.5</a></p>
+</blockquote>
+<h3 id="目录-8">目录</h3>
+<ul>
+<li><a href="#一-半导体物理最小前置底座p3943">一、 半导体物理最小前置底座（P39–43）</a></li>
+<li><a href="#二-离子敏感场效应管isfet结构与工作原理p4449">二、 离子敏感场效应管（ISFET）结构与工作原理（P44–49）</a></li>
+<li><a href="#三-isfet-固态-ph-传感器数学闭环推导p5052">三、 ISFET 固态 pH 传感器数学闭环推导（P50–52）</a></li>
+</ul>
+<hr>
+<h3 id="一-半导体物理最小前置底座p3943">一、 半导体物理最小前置底座（P39–43）</h3>
+<p>在化学传感器中，电化学换能器占约 $90\%$，而另外 $10\%$（尤其是微型化、集成化芯片和生物传感器）由半导体器件、光、压电、热敏等其他换能器承担（PPT P39）。</p>
+<ul>
+<li><strong>半导体定义（PPT P40）</strong>：电导率介于 $10^{-8} \sim 10^6\;\text{S/m}$ 之间的固体材料；纯净半导体的电导率随温度升高按指数规律上升。</li>
+<li><strong>n 型与 p 型半导体（PPT P40）</strong>：<ul>
+<li><strong>n 型掺杂</strong>：在四价硅中掺入五价元素（如磷 $\text{P}$），多出自由电子，以<strong>电子为多数载流子</strong>；</li>
+<li><strong>p 型掺杂</strong>：在四价硅中掺入三价元素（如硼 $\text{B}$），缺少电子形成空穴，以<strong>空穴为多数载流子</strong>。</li>
+</ul>
+</li>
+<li><strong>p–n 结与场效应晶体管（FET，PPT P41–43）</strong>：<ul>
+<li><strong>FET 优势</strong>：灵敏度高、响应迅速、输出阻抗低（对比玻璃电极的 $10^9\;\Omega$ 高内阻，实现了原位阻抗变换），且利用微纳加工工艺易于微型化和集成化（PPT P43）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="二-离子敏感场效应管isfet结构与工作原理p4449">二、 离子敏感场效应管（ISFET）结构与工作原理（P44–49）</h3>
+<h4 id="21-从-mosfet-到-isfet-的结构替换ppt-p4445">2.1 从 MOSFET 到 ISFET 的结构替换（PPT P44–45）</h4>
+<ul>
+<li><strong>传统 MOSFET</strong>：源极（S）、漏极（D）、金属栅极（G）、绝缘层与衬底（如 p-Si）。</li>
+<li><strong>ISFET（Ion Sensitive Field Effect Transistor）</strong>：<strong>去掉传统 FET 的金属栅极，在绝缘层上直接沉积一层离子选择性敏感膜</strong>，并将<strong>待测溶液与参比电极</strong>置于敏感膜上方构成液相栅极回路（PPT P44–45）。</li>
+</ul>
+<h4 id="22-工作原理与有效栅压方程ppt-p4647">2.2 工作原理与有效栅压方程（PPT P46–47）</h4>
+<ol>
+<li>敏感膜与被测溶液界面建立道南/能斯特膜电位 $\varphi_i$，该电位串联叠加在栅极回路中，改变实际施加在绝缘膜与半导体表面的有效栅源电压 $V'_{GS}$（PPT P47）：
+$$\boxed{V'_{GS} = V_{GS} - \varphi_i - \varphi_{\text{ref}}}$$
+<em>(其中 $V_{GS}$ 为外加偏压，$\varphi_{\text{ref}}$ 为参比电极恒定电位。)</em></li>
+<li><strong>生物传感器拓展核心（PPT P47 下）</strong>：只要设法利用生化反应过程产生的物质（如 $\text{H}^+$、电荷变化）去改变膜电位 $\varphi_i$，就能调制沟道导电性并输出漏源电流 $I_D$ 的变化——这就是第 18–21 章 <strong>BioFET（酶FET / 免疫FET / 适配体FET）</strong> 的通用原理。</li>
+<li><strong>微型 $\text{K}^+$ ISFET 实例（PPT P48–49）</strong>：在 ISFET 栅区表面涂覆含<strong>缬氨霉素</strong>的敏感膜，直接将高阻敏感膜耦合到栅极，大幅减小输出阻抗，可用于细胞膜内外 $\text{K}^+$ 活度测量。</li>
+</ol>
+<hr>
+<h3 id="三-isfet-固态-ph-传感器数学闭环推导p5052">三、 ISFET 固态 pH 传感器数学闭环推导（P50–52）</h3>
+<p>以 p-沟道 ISFET 固态 $\text{pH}$ 传感器为例（PPT P50 图 4-12）：</p>
+<ol>
+<li><strong>氢离子敏感膜建立能斯特响应（PPT P50）</strong>：
+$$E = E^0 + 2.303\frac{RT}{nF}\ln a_{\text{H}^+} \quad (\text{改写为 }\text{pH}\text{ 形式：}\Delta E = K \cdot \text{pH},\; K = \frac{2.303RT}{F})$$</li>
+<li><strong>阈值电压 $V_T$ 随 $\text{pH}$ 线性平移（PPT P51）</strong>：
+源极接地，阈值电压指漏源之间刚好导通时的栅源电压：
+$$|V_{GS}| = |E + E_{\text{ref}}|, \qquad |V_T| = |E + E_{\text{ref}}| - |\Delta E| = |E + E_{\text{ref}}| - |K\cdot\text{pH}|$$</li>
+<li><strong>线性区漏源电流 $I_{GS}$ 方程（PPT P52）</strong>：
+实际应用时应<strong>避开饱和区</strong>（工作在线性区），当外加偏压 $V_{GS}$ 恒定时，化简后的漏源电流为：
+$$\boxed{I_{GS} = \frac{-\mu C W}{2L}\big(|K\cdot\text{pH}| - 0.5|V_{GS}|\big)\cdot |V_{GS}|}$$
+<em>(其中 $\mu$ 为沟道载流子迁移率，$C$ 为单位面积栅绝缘层电容，$W/L$ 为沟道宽长比。)</em></li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从 MOSFET 线性区电流方程推导 PPT P52 的 ISFET 线性响应】</strong></p>
+<ol>
+<li><strong>MOSFET 线性区（非饱和区）标准电流公式</strong>：当 $|V_{DS}| &lt; |V'_{GS} - V_T|$ 时，沟道漏源电流为：
+$$I_{DS} = \frac{\mu C W}{L}\left[(V'_{GS} - V_T)V_{DS} - \frac{1}{2}V_{DS}^2\right]$$</li>
+<li><strong>代入 pH 引起的有效栅压增量 $\Delta E = K\cdot\text{pH}$</strong>：在 p-沟道 ISFET 中，膜电位变化等效于使有效过驱动电压 $|V'_{GS} - V_T|$ 产生线性增量 $|K\cdot\text{pH}|$；在 PPT P52 图 4-12 所示的测量回路（工作在偏置与漏源电压对等条件下，记符号为 $I_{GS}, V_{GS}$）代入化简，即得：
+$$I_{GS} = \frac{-\mu C W}{2L}\big(|K\cdot\text{pH}| - 0.5|V_{GS}|\big)\cdot |V_{GS}|$$</li>
+<li><strong>两种工程读出模式</strong>：① <strong>恒压测流模式</strong>（固定 $V_{GS}$，直接测与 $\text{pH}$ 呈线性的电流 $I_{GS}$）；② <strong>恒流测压模式</strong>（反馈调节维持 $I_D$ 恒定，直接测栅源电压 $V_{GS}$ 随 $\text{pH}$ 的线性变化，见 PPT P52 右图 $V_{GS}\text{–pH}$ 直线，斜率约为 $59\;\text{mV/pH}$）。</li>
+</ol>
+</blockquote></details>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-17-2">17-2 光/压电/热敏换能器</h2>
+<h2 id="17-2-光化学压电石英晶振与热敏换能器对应-ppt-p5374" class="doc-title">17-2 光化学、压电石英晶振与热敏换能器（对应 PPT P53–74）</h2>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1WpYQ6ZInDh_86p2lYwqL4ilmUy7vuIKN/view?usp=drivesdk">17_化学2-其他换能器_P555-591.pdf</a>（PPT P53–74，对应 PDF 第 15–37 页）｜<em>注：此部分在原笔记中完全缺失，现按 PPT 主干与最小闭环全新补齐。</em></p>
+</blockquote></details>
+<h3 id="目录-9">目录</h3>
+<ul>
+<li><a href="#一-光化学换能器与指夹血氧化学发光p5358">一、 光化学换能器与指夹血氧/化学发光（P53–58）</a></li>
+<li><a href="#二-压电石英晶体换能器与-sauerbrey-方程p5964">二、 压电石英晶体换能器与 Sauerbrey 方程（P59–64）</a></li>
+<li><a href="#三-热敏电阻换能器p6566">三、 热敏电阻换能器（P65–66）</a></li>
+<li><a href="#四-第七章换能器总结与-extra分子印迹--textsno_2-气敏p6774">四、 第七章换能器总结与 Extra：分子印迹 / $\text{SnO}_2$ 气敏（P67–74）</a></li>
+</ul>
+<hr>
+<h3 id="一-光化学换能器与指夹血氧化学发光p5358">一、 光化学换能器与指夹血氧/化学发光（P53–58）</h3>
+<h4 id="11-光化学换能器基本架构与五大核心公式ppt-p53必背公式表">1.1 光化学换能器基本架构与五大核心公式（PPT P53，必背公式表）</h4>
+<p>链路：<strong>光源 $\to$ 识别单元（光与待测物作用） $\to$ 光电器件（如光电倍增管 PMT） $\to$ 电信号输出</strong>。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">光学传感类型</th>
+<th align="left">PPT P53 核心定量公式</th>
+<th align="left">物理量含义与关键线性关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 化学发光型</strong></td>
+<td align="left">$I_{\text{CL}}(t) = \Phi_{\text{CL}}\dfrac{dc}{dt}$</td>
+<td align="left">光强正比于反应消耗速率 $\frac{dc}{dt}$；$\Phi_{\text{CL}}$ 为化学发光量子产率</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 光吸收型（Beer-Lambert）</strong></td>
+<td align="left">$A = \varepsilon l c$</td>
+<td align="left">吸光度 $A = \lg(I_0/I)$ 与摩尔吸光系数 $\varepsilon$、光程 $l$、浓度 $c$ 成正比</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 荧光型</strong></td>
+<td align="left">$I = I_0 \varepsilon l c \ln 10$</td>
+<td align="left">稀溶液下荧光强度 $I$ 与浓度 $c$ 成正比</td>
+</tr>
+<tr>
+<td align="left"><strong>4. 荧光淬灭型（Stern-Volmer）</strong></td>
+<td align="left">$\dfrac{I_0}{I_c} = 1 + k_{sv} c$</td>
+<td align="left">淬灭剂浓度 $c$ 越高，荧光强度 $I_c$ 越弱，比值 $I_0/I_c$ 与 $c$ 成线性</td>
+</tr>
+<tr>
+<td align="left"><strong>5. 光反射型</strong></td>
+<td align="left">$F_r = \dfrac{\varepsilon c}{\theta}$</td>
+<td align="left">反射光特征量与浓度 $c$ 成正比</td>
+</tr>
+</tbody></table></div>
+<h4 id="12-两大经典生物医学应用ppt-p5458">1.2 两大经典生物医学应用（PPT P54–58）</h4>
+<ol>
+<li><strong>指夹式光电血氧探头（PPT P54–55）</strong>：利用两种不同波长的光源（红光 $660\;\text{nm}$ 与近红外光 $940\;\text{nm}$）照射手指，根据氧合血红蛋白（$\text{HbO}_2$）与还原血红蛋白（$\text{Hb}$）吸光系数 $\varepsilon$ 的差异无创测算血氧饱和度。</li>
+</ol>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：Beer-Lambert 定律积分推导与双波长指夹血氧仪如何消去手指厚度 $l$？】</strong></p>
+<ol>
+<li><strong>Beer 定律微分推导</strong>：光强为 $I$ 的单色光穿过厚度 $dl$、浓度 $c$ 的吸光介质，被吸收的光强增量正比于 $I$、$c$ 与 $dl$：
+$$\frac{dI}{I} = -\kappa c\,dl$$
+从 $0\to l$（光强 $I_0 \to I$）积分得 $\ln\frac{I_0}{I} = \kappa c l$，换为常用对数定义吸光度 $A$：
+$$A \equiv \lg\frac{I_0}{I} = \frac{\kappa}{2.303} l c = \varepsilon l c$$</li>
+<li><strong>双波长消去未知光程 $l$</strong>：在手指动脉搏动脉动分量上，吸光物质为 $\text{HbO}_2$（浓度 $c_1$）和 $\text{Hb}$（浓度 $c_2$），分别在 $\lambda_1=660\;\text{nm}$ 和 $\lambda_2=940\;\text{nm}$ 测吸光度增量：
+$$\Delta A_{\lambda_1} = (\varepsilon_{1,\lambda_1} c_1 + \varepsilon_{2,\lambda_1} c_2)l, \qquad \Delta A_{\lambda_2} = (\varepsilon_{1,\lambda_2} c_1 + \varepsilon_{2,\lambda_2} c_2)l$$
+两式<strong>作比</strong> $R = \frac{\Delta A_{\lambda_1}}{\Delta A_{\lambda_2}}$，未知的手指动脉光程 $l$ 在分子分母中<strong>完全消去</strong>！再上下同除以 $(c_1 + c_2)$，即可直接解出仅与比值 $R$ 有关的血氧饱和度 $\text{SaO}_2 = \frac{c_1}{c_1 + c_2}$。</li>
+<li><strong>化学发光与电化学发光（ECL，PPT P56–58）</strong>：</li>
+</ol>
+</blockquote></details>
+<ul>
+<li><strong>电化学发光定义（PPT P56）</strong>：某些化学物质经过电极反应完成高能电子转移，生成不稳定激发态粒子，回到基态时以光辐射形式释放能量。</li>
+<li><strong>鲁米诺（Luminol）试剂</strong>：鲁米诺 + 过氧化氢（$\text{H}_2\text{O}_2$）在碱性/铁催化下发蓝光，对血迹检出限低至 $1\;\text{ppm}$（PPT P57）。</li>
+<li><strong>电化学发光甲醛传感器（PPT P58 四步反应链）</strong>：
+$$\begin{aligned}
+     \text{Ni(II)} &amp;\longrightarrow \text{Ni(III)} + e^- \\
+     \text{Ni(III)} + \text{HCHO} + 2\text{OH}^- &amp;\longrightarrow \text{Ni(II)} + \text{CH}_2(\text{O})\text{O}^- + \text{H}_2\text{O} \\
+     \text{L}^{\cdot -} + \text{Ni(II)} &amp;\longrightarrow \text{Ni} + \text{AP}^{2-*}
+     \end{aligned}$$
+激发态 $\text{AP}^{2-*} \longrightarrow \text{AP}^{2-} + h\nu\;(425\;\text{nm})$，检测 $425\;\text{nm}$ 发光强度即可定量甲醛。</li>
+</ul>
+<hr>
+<h3 id="二-压电石英晶体换能器与-sauerbrey-方程p5964">二、 压电石英晶体换能器与 Sauerbrey 方程（P59–64）</h3>
+<h4 id="21-石英晶体的晶轴与压电效应ppt-p5960">2.1 石英晶体的晶轴与压电效应（PPT P59–60）</h4>
+<ul>
+<li><strong>三大晶轴（PPT P59）</strong>：<ul>
+<li><strong>光轴（Z 轴）</strong>：对称轴，沿 Z 轴无双折射且<strong>无压电效应</strong>；</li>
+<li><strong>电轴（X 轴）</strong>：与该轴垂直的面<strong>压电效应最显著</strong>；</li>
+<li><strong>机械轴（Y 轴）</strong>：外电场作用下在此轴上产生的<strong>机械变形最大</strong>。</li>
+</ul>
+</li>
+<li><strong>正/逆压电效应与石英晶体微天平（QCM，PPT P60）</strong>：<ul>
+<li><strong>正压电效应</strong>：受外力作用产生极化与表面电荷；</li>
+<li><strong>逆压电效应</strong>：施加交变激励电压产生机械谐振（振荡器由石英晶体 + 反馈振荡电路组成）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="22-sauerbrey-方程ppt-p61--p63核心计算必考公式">2.2 Sauerbrey 方程（PPT P61 &amp; P63，核心计算必考公式！）</h4>
+<p>当石英晶体表面均匀沉积一层极薄的刚性物质（质量增加 $\Delta m$）时，谐振频率变化量 $\Delta f\;(\text{Hz})$ 与 $\Delta m$ 成严格正比（负号表示质量增加、频率下降）：
+$$\boxed{\Delta f = \frac{-2 f_0^2}{\sqrt{\rho_q \mu_q}}\cdot\frac{\Delta m}{A} = -C_f \frac{f_0^2}{A}\Delta m}$$</p>
+<ul>
+<li><strong>$f_0$</strong>：吸附物质前的石英晶体谐振基频（$\text{MHz}$）；</li>
+<li><strong>$A$</strong>：晶体表面电极有效面积；</li>
+<li><strong>$\rho_q = 2.648\;\text{g/cm}^3$</strong>（石英密度），<strong>$\mu_q = 2.947\times 10^{11}\;\text{g}\cdot\text{cm}^{-1}\cdot\text{s}^{-2}$</strong>（AT 切割晶体剪切模量）；</li>
+<li>代入常数合并得质量灵敏度常数 $C_f = 2.26\times 10^{-6}\;\text{cm}^2\cdot\text{s/g}$（注意 PPT P61 写作 $\Delta f = -2.26\times 10^{-6} f_0^2 \frac{\Delta m}{A}$，其中 $f_0$ 单位为 $\text{MHz}$），检测限可达 <strong>$10^{-12}\;\text{g}$（皮克级）</strong>，故称<strong>石英晶体微天平（QCM / QCW）</strong>。</li>
+</ul>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：Sauerbrey 方程 3 行驻波微分推导】</strong>
+厚度为 $d_q$ 的石英晶片在基频谐振时满足半波长驻波条件：$d_q = \frac{\lambda}{2} = \frac{v_q}{2 f_0}$（其中石英剪切横波声速 $v_q = \sqrt{\mu_q / \rho_q}$）。
+当表面均匀沉积极薄刚性质量 $\Delta m$ 时，等效于晶片厚度增加了 $\Delta d_q = \frac{\Delta m}{\rho_q A}$。由 $f_0 d_q = \frac{v_q}{2} = \text{常数}$ 取一阶相对微分：
+$$\frac{\Delta f}{f_0} = -\frac{\Delta d_q}{d_q} = -\frac{\Delta m / (\rho_q A)}{v_q / (2f_0)} \implies \Delta f = -\frac{2 f_0^2}{\rho_q v_q}\frac{\Delta m}{A} = \boxed{-\frac{2 f_0^2}{\sqrt{\rho_q \mu_q}}\frac{\Delta m}{A}}$$</p>
+</blockquote></details>
+<ul>
+<li><strong>PPT P62–63 应用实例</strong>：<ul>
+<li>表面沉积氨基硅烷 $\to$ 微量 $\text{CO}_2$ 传感器；</li>
+<li>吸附三甲胺（TMA）$\to$ 鱼肉<strong>鲜度传感器</strong>（弱相互作用可重复使用）；PPT P63 给出实例：$f_0 = 8\;\text{MHz}$、直径 $5\;\text{mm}$ 晶振，$\Delta f = -1\;\text{Hz}$ 对应表面吸附质量密度 $\Delta m / A = 8.62\;\text{ng/cm}^2$（<em>(注：该方程将在第 19 章压电免疫传感器中直接用于计算结合的抗体分子数！)</em>）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="三-热敏电阻换能器p6566">三、 热敏电阻换能器（P65–66）</h3>
+<ul>
+<li><strong>材料与分类（PPT P65）</strong>：由钴、锰、镍等金属氧化物高温烧结而成，分为<strong>正温度系数（PTC）</strong>、<strong>临界温度系数（CTR）</strong>、**负温度系数（NTC）**三类。</li>
+<li><strong>NTC 电阻温度特性经验公式与温度系数（PPT P65 核心公式）</strong>：
+$$\boxed{R_T \approx R_0\, e^{B\left(\frac{1}{T} - \frac{1}{T_0}\right)}}, \qquad \alpha_T \approx \frac{1}{R_T}\frac{dR_T}{dT} = -\frac{B}{T^2}$$
+<em>(其中 $T$ 为热力学开尔文温度，$R_0$ 为参考温度 $T_0$ 时的阻值，$B$ 为材料常数。)</em></li>
+<li><strong>生物医学热化学传感机理（PPT P66）</strong>：生化反应伴随放热或吸热（<strong>焓变 $\Delta H$</strong>），在绝热体系中引起微环境温度 $\Delta T$ 变化，经热敏电阻转为电阻/电压电信号。</li>
+</ul>
+<hr>
+<h3 id="四-第七章换能器总结与-extra分子印迹--textsno_2-气敏p6774">四、 第七章换能器总结与 Extra：分子印迹 / $\text{SnO}_2$ 气敏（P67–74）</h3>
+<h4 id="41-化学传感器下换能器全景ppt-p67">4.1 化学传感器（下）换能器全景（PPT P67）</h4>
+<p>在“感受器（分子识别）$\to$ 换能器 $\to$ 放大器”框架下，第七章补齐了电化学之外的四大换能器：</p>
+<ol>
+<li><strong>半导体器件 / ISFET 场效应晶体管</strong>；</li>
+<li><strong>光化学换能器</strong>（化学发光、光吸收、荧光、荧光淬灭、光反射）；</li>
+<li><strong>压电石英晶振 / 石英微天平（QCM）</strong>；</li>
+<li><strong>热化学换能器（热敏电阻）</strong>。</li>
+</ol>
+<h4 id="42-extra分子印迹与-textsno_2-半导体气体传感器ppt-p6874">4.2 Extra：分子印迹与 $\text{SnO}_2$ 半导体气体传感器（PPT P68–74）</h4>
+<ul>
+<li><strong>分子印迹聚合物（MIP，PPT P68）</strong>：人工合成“分子锁孔”——以目标分子为模板与功能单体聚合再洗脱模板，形成高选择性人工识别空腔。</li>
+<li><strong>$\text{SnO}_2$ 型 n 型半导体气体传感器机理（PPT P70–71，必考逻辑链）</strong>：<ol>
+<li><strong>洁净空气中（阻值升高）</strong>：氧分子吸附在 $\text{SnO}_2$ 表面并<strong>从半导体导带夺取电子</strong>（$\frac{1}{2}\text{O}_2(g) + 2e^- \to \text{O}^{2-}_{\text{吸附}}$），在颗粒表面形成电子耗尽层、势垒升高 $\implies$ <strong>n 型半导体器件阻值升高</strong>；</li>
+<li><strong>接触还原性气体（如 $\text{H}_2, \text{CO}$，阻值降低）</strong>：还原性气体与表面 $\text{O}^{2-}_{\text{吸附}}$ 反应，将束缚的电子<strong>归还给半导体导带</strong>，减小耗尽层势垒高度 $\implies$ <strong>器件阻值显著降低</strong>；</li>
+<li><strong>增敏剂</strong>：添加贵金属催化剂（如 $\text{Pd}$）可大幅提高灵敏度与响应速度，通过调制工作温度可实现多气体模式识别（PPT P72）。</li>
+</ol>
+</li>
+</ul>
+</section>
+</article>
+{% endraw %}
+{% include shengyi-foot.html %}

@@ -661,3 +661,157 @@ body.exam .exam-fold summary:focus-visible {
         max-height: 58vh;
     }
 }
+
+/* 生物医学电子学 notes. Selectors stay under body.notes.shengyi. */
+
+body.notes.shengyi .article {
+    overflow-wrap: break-word;
+}
+
+body.notes.shengyi .article h2,
+body.notes.shengyi .article h3,
+body.notes.shengyi .article h4 {
+    scroll-margin-top: 3.5rem;
+}
+
+body.notes.shengyi .article h2.doc-title {
+    margin-top: var(--space-8);
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+}
+
+body.notes.shengyi .article .note-tab + .note-tab {
+    margin-top: var(--space-32);
+    padding-top: var(--space-8);
+    border-top: 1px solid rgba(213, 217, 226, 0.16);
+}
+
+body.notes.shengyi .article .note-tab + .note-tab > h2.tab-label {
+    margin-top: var(--space-24);
+}
+
+body.notes.shengyi .note-toc {
+    margin: 0 0 var(--space-32);
+}
+
+body.notes.shengyi .note-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body.notes.shengyi .note-toc li {
+    margin: 0;
+}
+
+body.notes.shengyi .note-toc a {
+    display: block;
+    color: var(--quiet);
+    font-size: 14px;
+    line-height: 1.45;
+    text-decoration: none;
+    padding: 0.12rem 0;
+}
+
+body.notes.shengyi .note-toc .toc-h3 a {
+    padding-left: 1rem;
+}
+
+body.notes.shengyi .note-toc .toc-tab a {
+    color: var(--dove);
+    font-weight: 500;
+    margin-top: 0.55rem;
+}
+
+body.notes.shengyi .note-toc a:hover {
+    color: var(--ink);
+}
+
+body.notes.shengyi .article a {
+    color: var(--dove);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+body.notes.shengyi .article a:hover {
+    color: var(--ink);
+}
+
+body.notes.shengyi .article hr {
+    border: 0;
+    border-top: 1px solid rgba(213, 217, 226, 0.16);
+    margin: var(--space-32) 0;
+}
+
+body.notes.shengyi .article blockquote {
+    margin: 0 0 var(--space-16);
+    padding: 0.15rem 0 0.15rem var(--space-16);
+    border-left: 1px solid rgba(213, 217, 226, 0.35);
+    color: var(--dove);
+}
+
+body.notes.shengyi .article blockquote > :last-child {
+    margin-bottom: 0;
+}
+
+body.notes.shengyi .article code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: rgba(213, 217, 226, 0.08);
+    padding: 0.05em 0.28em;
+    border-radius: 2px;
+}
+
+body.notes.shengyi .article .note-fig {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    margin: var(--space-16) auto;
+}
+
+body.notes.shengyi .article .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0.65em 0;
+    padding-bottom: 0.15rem;
+}
+
+body.notes.shengyi .note-fold {
+    margin: 0 0 var(--space-16);
+    border-left: 1px solid rgba(213, 217, 226, 0.35);
+    padding-left: var(--space-16);
+}
+
+body.notes.shengyi .note-fold summary {
+    cursor: pointer;
+    color: var(--dove);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+    padding: 0.35rem 0;
+}
+
+body.notes.shengyi .note-fold summary:hover {
+    color: var(--ink);
+}
+
+body.notes.shengyi .note-fold summary:focus-visible {
+    outline: 1px solid var(--dove);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+body.notes.shengyi .note-fold[open] summary {
+    margin-bottom: var(--space-12);
+}
+
+body.notes.shengyi .note-fold blockquote {
+    border-left: 0;
+    padding-left: 0;
+    margin: 0 0 var(--space-8);
+}

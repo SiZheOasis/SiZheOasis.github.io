@@ -1,0 +1,794 @@
+---
+layout: front
+title: "传感器重构笔记 · 物理三：体温与温度（11–12章）"
+lang: zh-CN
+body_class: notes shengyi
+section: notes
+nav_current: notes
+permalink: /notes/shengyi/chuanganqi/wuli3/
+katex: true
+---
+
+<header class="topic-head">
+    <p class="page-kicker"><a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a> · <a href="{{ '/notes/shengyi/' | prepend: site.baseurl }}">生物医学电子学</a> · <a href="{{ '/notes/shengyi/chuanganqi/' | prepend: site.baseurl }}">传感器重构笔记</a> · 物理三：体温与温度（11–12章）</p>
+    <h1>物理三：体温与温度（11–12章）</h1>
+</header>
+<nav class="note-toc" aria-label="目录">
+<ol>
+<li class="toc-h2 toc-tab"><a href="#tab-11">11 体温生理与热诊断</a></li>
+<li class="toc-h2"><a href="#11-体温生理学基础与热诊断原理对应-ppt-p111--p374384">11 体温生理学基础与热诊断原理（对应 PPT P1–11 / P374–384）</a></li>
+<li class="toc-h3"><a href="#一-深部体温-vs-表层体温与临床测量基准p34">一、 深部体温 vs. 表层体温与临床测量基准（P3–4）</a></li>
+<li class="toc-h3"><a href="#二-体温的生理节律与影响因素p5">二、 体温的生理节律与影响因素（P5）</a></li>
+<li class="toc-h3"><a href="#三-发热的病理生理机制典型热型与生物学意义p69">三、 发热的病理生理机制、典型热型与生物学意义（P6–9）</a></li>
+<li class="toc-h3"><a href="#四-疾病热诊断原理与临床应用p10">四、 疾病热诊断原理与临床应用（P10）</a></li>
+<li class="toc-h3"><a href="#五-物理公理与底层简单证明补强短板">五、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-12-1">12-1 概论温标与热膨胀</a></li>
+<li class="toc-h2"><a href="#12-1-温度传感器概论温标与热膨胀式测温对应-ppt-p1214--p385387">12-1 温度传感器概论、温标与热膨胀式测温（对应 PPT P12–14 / P385–387）</a></li>
+<li class="toc-h3"><a href="#一-温度传感技术演进与医学三层次体温p1213">一、 温度传感技术演进与医学三层次体温（P12–13）</a></li>
+<li class="toc-h3"><a href="#二-三大温标系统与线性转换推导p14">二、 三大温标系统与线性转换推导（P14）</a></li>
+<li class="toc-h3"><a href="#三-热膨胀式温度计灵敏度与热容权衡推导">三、 热膨胀式温度计灵敏度与热容权衡推导</a></li>
+<li class="toc-h3"><a href="#四-物理公理与底层简单证明补强短板">四、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h3"><a href="#五-医用五大温度传感器全维度对比表补漏">五、 医用五大温度传感器全维度对比表（补漏）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-12-2">12-2 热电偶原理与定律</a></li>
+<li class="toc-h2"><a href="#12-2-热电偶原理微观电动势推导与四大基本定律对应-ppt-p1535--p388408">12-2 热电偶原理、微观电动势推导与四大基本定律（对应 PPT P15–35 / P388–408）</a></li>
+<li class="toc-h3"><a href="#一-赛贝克效应与热电偶工作原理p1517">一、 赛贝克效应与热电偶工作原理（P15–17）</a></li>
+<li class="toc-h3"><a href="#二-接触电动势与温差电动势微观推导p1822">二、 接触电动势与温差电动势微观推导（P18–22）</a></li>
+<li class="toc-h3"><a href="#三-热电偶五大基本性质与四大核心定律严密证明p2331">三、 热电偶五大基本性质与四大核心定律严密证明（P23–31）</a></li>
+<li class="toc-h3"><a href="#四-热电极材料选型标准热电偶矩阵与分度表p3235">四、 热电极材料选型、标准热电偶矩阵与分度表（P32–35）</a></li>
+<li class="toc-h3"><a href="#五-物理公理补强为什么金属中温差电势可忽略">五、 物理公理补强：为什么金属中温差电势可忽略？</a></li>
+<li class="toc-h3"><a href="#六-真题靶向加厚任意多边形热电偶回路证明万能模板25-计4--26-计6">六、 真题靶向加厚：任意多边形热电偶回路证明万能模板（25-计4 / 26-计6）</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-12-3">12-3 特性与冷端补偿</a></li>
+<li class="toc-h2"><a href="#12-3-热电偶特性五大冷端补偿技术与算例精解对应-ppt-p3642--p409415">12-3 热电偶特性、五大冷端补偿技术与算例精解（对应 PPT P36–42 / P409–415）</a></li>
+<li class="toc-h3"><a href="#一-热电偶的核心优缺点与医学微创优势p36">一、 热电偶的核心优缺点与医学微创优势（P36）</a></li>
+<li class="toc-h3"><a href="#二-五大冷端补偿cjc方法完整推导与算例p3742">二、 五大冷端补偿（CJC）方法完整推导与算例（P37–42）</a></li>
+<li class="toc-h3"><a href="#三-物理公理与底层简单证明补强短板">三、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h3"><a href="#四-ppt-补漏补偿导线原理与-mcu-软件冷端补偿闭环">四、 PPT 补漏：补偿导线原理与 MCU 软件冷端补偿闭环</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-12-4">12-4 热阻线性化与前沿</a></li>
+<li class="toc-h2"><a href="#12-4-热阻式ntcrtd线性化网络与医用温度芯片及前沿对应-ppt-p4367--p416441">12-4 热阻式（NTC/RTD）、线性化网络与医用温度芯片及前沿（对应 PPT P43–67 / P416–441）</a></li>
+<li class="toc-h3"><a href="#一-热电阻效应rtd-与热敏电阻结构参数p4347">一、 热电阻效应、RTD 与热敏电阻结构参数（P43–47）</a></li>
+<li class="toc-h3"><a href="#二-ntc-阻温方程推导对比-pt100-与伏安特性p4852">二、 NTC 阻温方程推导、对比 Pt100 与伏安特性（P48–52）</a></li>
+<li class="toc-h3"><a href="#三-硬件线性化网络导纳法二阶导数归零推导p5355">三、 硬件线性化网络：导纳法二阶导数归零推导（P53–55）</a></li>
+<li class="toc-h3"><a href="#四-集成温度传感器-ad590-与生物医学前沿应用p5666">四、 集成温度传感器 AD590 与生物医学前沿应用（P56–66）</a></li>
+<li class="toc-h3"><a href="#五-物理公理与底层简单证明补强短板-2">五、 物理公理与底层简单证明（补强短板）</a></li>
+<li class="toc-h3"><a href="#六-深度补充伏安曲线负阻临界温升自热电流上限与线性化对比表">六、 深度补充：伏安曲线负阻临界温升、自热电流上限与线性化对比表</a></li>
+</ol>
+</nav>
+<div class="toolbar">
+    <button type="button" id="fold-toggle" aria-expanded="true">折叠闭环与概念</button>
+</div>
+{% raw %}
+<article class="article">
+<section class="note-tab">
+<h2 class="tab-label" id="tab-11">11 体温生理与热诊断</h2>
+<h2 id="11-体温生理学基础与热诊断原理对应-ppt-p111--p374384" class="doc-title">11 体温生理学基础与热诊断原理（对应 PPT P1–11 / P374–384）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1OcbEgyA0n9pCHUJAZJCu6IRkbX2WU583/view?usp=drivesdk">11_物理3-体温生理学基础_P374-384.pdf</a>（PPT P1–11）｜<em>注：融合原笔记 <code>t5.7.1.1</code>，完整覆盖深部/表层体温分布、临床三部位定量关系、昼夜/年龄/性别节律、发热级联与四大热型曲线、疾病热诊断原理及热力学冷却公理推导。</em></p>
+</blockquote>
+<h3 id="目录">目录</h3>
+<ul>
+<li><a href="#一-深部体温-vs-表层体温与临床测量基准p34">一、 深部体温 vs. 表层体温与临床测量基准（P3–4）</a></li>
+<li><a href="#二-体温的生理节律与影响因素p5">二、 体温的生理节律与影响因素（P5）</a></li>
+<li><a href="#三-发热的病理生理机制典型热型与生物学意义p69">三、 发热的病理生理机制、典型热型与生物学意义（P6–9）</a></li>
+<li><a href="#四-疾病热诊断原理与临床应用p10">四、 疾病热诊断原理与临床应用（P10）</a></li>
+<li><a href="#五-物理公理与底层简单证明补强短板">五、 物理公理与底层简单证明（补强短板）</a></li>
+</ul>
+<hr>
+<h3 id="一-深部体温-vs-表层体温与临床测量基准p34">一、 深部体温 vs. 表层体温与临床测量基准（P3–4）</h3>
+<h4 id="11-人体体温的空间双系统划分ppt-p4">1.1 人体体温的空间双系统划分（PPT P4）</h4>
+<p>医学上所说的“体温”通常指<strong>深部温度（Core Temperature, $T_{\text{core}}$）</strong>，而非皮肤表层温度：</p>
+<ul>
+<li><strong>深部温度（$T_{\text{core}}$）</strong>：机体核心部位（脑、心、肺、腹腔内脏等）的温度，受下丘脑体温调节中枢精密控制，相对恒定。各内脏因代谢率不同略有差异，其中<strong>肝脏代谢产热最高，温度接近 $38^\circ\text{C}$（全身最高）</strong>；肾脏、胰腺及十二指肠等处温度相对较低。</li>
+<li><strong>表层温度（$T_{\text{shell}}$）</strong>：皮肤、皮下组织与外层肌肉的温度，直接作为与外界热交换的边界，温度较低且波动极大——随环境温度变化，皮肤温度可在 <strong>$20\sim 40^\circ\text{C}$</strong> 之间大幅变动。</li>
+</ul>
+<h4 id="12-临床三大测温部位定量关系ppt-p4必背">1.2 临床三大测温部位定量关系（PPT P4，必背！）</h4>
+<p>临床上常测定直肠、口腔（舌下部）或腋窝温度来代表深部体温，三者满足严格的系统偏置关系：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">测量部位</th>
+<th align="center">正常生理范围</th>
+<th align="left">与深部温度/彼此定量关系</th>
+<th align="left">物理与生理成因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>直肠温度（$T_{\text{rectal}}$）</strong></td>
+<td align="center"><strong>$36.9\sim 37.9^\circ\text{C}$</strong></td>
+<td align="left">最接近真实深部温度 $T_{\text{core}}$</td>
+<td align="left">位置深在，受外界气流及汗液蒸发散热影响极小</td>
+</tr>
+<tr>
+<td align="left"><strong>口腔温度（$T_{\text{oral}}$）</strong></td>
+<td align="center">$36.6\sim 37.6^\circ\text{C}$</td>
+<td align="left"><strong>$T_{\text{oral}} \approx T_{\text{rectal}} - 0.3^\circ\text{C}$</strong></td>
+<td align="left">舌下测量，受呼吸对流换热散热影响略低</td>
+</tr>
+<tr>
+<td align="left"><strong>腋窝温度（$T_{\text{axillary}}$）</strong></td>
+<td align="center"><strong>$36.0\sim 37.2^\circ\text{C}$</strong></td>
+<td align="left"><strong>$T_{\text{axillary}} \approx T_{\text{oral}} - 0.4^\circ\text{C} \approx T_{\text{rectal}} - 0.7^\circ\text{C}$</strong></td>
+<td align="left">属体表夹闭腔隙，受皮肤汗腺蒸发及体表散热影响</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="二-体温的生理节律与影响因素p5">二、 体温的生理节律与影响因素（P5）</h3>
+<ol>
+<li><strong>昼夜周期性节律（Circadian Rhythm）</strong>：<ul>
+<li>正常人在 24 小时内呈现周期性波动：<strong>清晨 $2\text{–}6$ 时体温最低，下午 $2\text{–}8$ 时体温最高</strong>，全天波动幅度<strong>不超过 $1^\circ\text{C}$</strong>。</li>
+<li><strong>调控机制</strong>：与人体活动/安静节律、基础代谢、血液循环及呼吸机能周期同步；若长期上夜班改变作息，该昼夜节律可发生<strong>相位颠倒</strong>（夜间升高、白昼下降）。</li>
+</ul>
+</li>
+<li><strong>年龄依赖性</strong>：<ul>
+<li><strong>新生儿（尤其是早产儿）</strong>：下丘脑体温调节机构尚未发育完善，且体表面积/体积比（比表面积）远大于成人、热容小散热快，体温极易随环境剧烈波动，需放入<strong>婴儿保温箱</strong>护理。</li>
+<li><strong>老年人</strong>：基础代谢率（BMR）较低，单位时间产热量减少，稳态体温整体偏低。</li>
+</ul>
+</li>
+<li><strong>性别与内分泌依赖性</strong>：<ul>
+<li>女性平均体温比男性高约 <strong>$0.3^\circ\text{C}$</strong>，且随月经周期呈现双相波动：月经期及卵泡期（前半期）较低，<strong>排卵日当天降至最低</strong>，排卵后（黄体期）及妊娠期明显升高——与血浆中**孕激素（Progesterone）**浓度升高使下丘脑调定点上移直接吻合。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三-发热的病理生理机制典型热型与生物学意义p69">三、 发热的病理生理机制、典型热型与生物学意义（P6–9）</h3>
+<h4 id="31-发热的热力学定义与信号级联ppt-p67">3.1 发热的热力学定义与信号级联（PPT P6–7）</h4>
+<p>正常体温由大脑皮质和<strong>丘脑下部体温调节中枢</strong>通过神经—体液调节，维持<strong>产热功率与散热功率动态平衡</strong>：
+$$\frac{dQ}{dt} = \dot{Q}_{\text{prod}} - \dot{Q}_{\text{diss}} = 0$$
+当致热原作用或中枢紊乱使<strong>调定点（Set-point）上移</strong>时，系统触发产热 $&gt;$ 散热，体温超出正常范围即称为<strong>发热（Fever）</strong>。其完整生物信号级联路径为（PPT P7）：
+$$\text{外来致热原（病毒/细菌/内毒素等）} \longrightarrow \text{激活致热原细胞（粒细胞/单核/巨噬细胞）} \longrightarrow \text{释放内生致热原（EP）}$$
+$$\longrightarrow \text{作用于丘脑下部体温调节中枢（调定点上移）} \longrightarrow \begin{cases}\text{产热 }\uparrow\text{：代谢率上升、骨骼肌寒颤}\\\text{散热 }\downarrow\text{：交感神经兴奋致外周血管收缩}\end{cases} \longrightarrow \text{热量蓄积、体温升高}$$</p>
+<h4 id="32-发热的生物学双重效应与四大典型热型ppt-p89">3.2 发热的生物学双重效应与四大典型热型（PPT P8–9）</h4>
+<ul>
+<li><strong>双重效应（P8）</strong>：轻/中度发热可增强免疫防御（白细胞增多、吞噬增强、抗体生成增多、肝脏解毒加强），故临床曾用<strong>人工发热</strong>辅助消炎或肿瘤治疗；但<strong>持续过久或过高热</strong>会导致酶变性、细胞膜损伤及器官衰竭。</li>
+<li><strong>四种特殊病例典型发热曲线（PPT P9，读图考点！）</strong>：<ol>
+<li><strong>稽留热（缓发段—稽留热—渐退段）</strong>：典型见于<strong>伤寒</strong>（体温持续维持高位，波动小，升降缓慢）；</li>
+<li><strong>稽留热（骤发段—稽留热—骤退段）</strong>：典型见于<strong>大叶性肺炎</strong>（急骤高热并急骤退热）；</li>
+<li><strong>间歇热</strong>：体温骤升骤降至正常、呈周期性反复，典型见于<strong>疟疾</strong>；</li>
+<li><strong>消耗热（弛张/大幅波动型）</strong>：昼夜温差极大且伴消耗衰竭，典型见于<strong>严重肺结核</strong>。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="四-疾病热诊断原理与临床应用p10">四、 疾病热诊断原理与临床应用（P10）</h3>
+<ul>
+<li><strong>热诊断物理原理（PPT P10）</strong>：体表温度 $T_{\text{shell}}$ 受四大因素强约束：
+$$T_{\text{shell}} = f\big(\text{皮下血液循环},\;\text{局部组织代谢产热},\;\text{皮肤热传导性},\;\text{皮肤与环境的温湿度交换}\big)$$
+体内深层或皮下病变引起局部代谢率或血流灌注异常时，热量通过传导与对流映射到皮肤表面形成<strong>异常热图（红外热成像）</strong>。</li>
+<li><strong>五大临床诊断范围（PPT P10）</strong>：①<strong>癌症早期诊断</strong>（如乳腺癌高代谢与新生血管导致局部高温区）；②<strong>分辨烧伤深度</strong>（重度烧伤血流中断区温度明显偏低）；③<strong>血管性疾病判断</strong>（血栓/动脉栓塞导致远端灌注低温）；④<strong>深部病变定位</strong>；⑤<strong>局部炎症探测</strong>（炎性充血高温区）。</li>
+</ul>
+<hr>
+<h3 id="五-物理公理与底层简单证明补强短板">五、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="51-热力学第零定律为什么温度计能测出人体温度">5.1 热力学第零定律：为什么温度计能测出人体温度？</h4>
+<ul>
+<li><strong>公理内容</strong>：如果物体 $A$（人体组织）与物体 $B$（温度计感温头）达到热平衡，物体 $B$ 又与标准温度标尺 $C$ 处于热平衡，则 $A$ 与 $C$ 必然处于相同的热力学状态（具有相同的温度 $T$）。</li>
+<li><strong>工程推论</strong>：任何接触式温度传感器测量的其实都是**“传感器自身的温度”**，只有当传感器与人体组织达到热平衡后，两者温度才严格相等。</li>
+</ul>
+<h4 id="52-牛顿冷却定律与热时间常数-tau--r_textth-c_textth-证明解释新生儿散热快">5.2 牛顿冷却定律与热时间常数 $\tau = R_{\text{th}} C_{\text{th}}$ 证明（解释新生儿散热快）</h4>
+<p>设传感体（或新生儿躯体）热容为 $C_{\text{th}} = c m$，与环境之间的总传热热阻为 $R_{\text{th}} = \frac{1}{h A}$（$h$ 为表面对流换热系数，$A$ 为表面积），初始温度为 $T(0)$，环境温度为 $T_{\text{env}}$。由能量守恒与牛顿冷却定律：
+$$C_{\text{th}}\frac{dT}{dt} = -\frac{T(t) - T_{\text{env}}}{R_{\text{th}}} \implies R_{\text{th}} C_{\text{th}}\frac{dT}{dt} + T(t) = T_{\text{env}}$$
+记热时间常数 $\tau \equiv R_{\text{th}} C_{\text{th}} = \frac{c m}{h A}$，解该一阶线性常微分方程得：
+$$T(t) = T_{\text{env}} + \big[T(0) - T_{\text{env}}\big]e^{-t/\tau}$$</p>
+<ul>
+<li><strong>生物物理推论</strong>：由于体积 $m \propto L^3$、表面积 $A \propto L^2$，热时间常数 $\tau \propto \frac{m}{A} \propto L$（特征尺度）。新生儿体型小（比表面积 $A/m$ 极大），故 $\tau$ 显著小于成人——这意味着在寒冷环境中，新生儿体温跌落速度远快于成人，必须依赖保温箱减小温差 $(T - T_{\text{env}})$！</li>
+</ul>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-12-1">12-1 概论温标与热膨胀</h2>
+<h2 id="12-1-温度传感器概论温标与热膨胀式测温对应-ppt-p1214--p385387" class="doc-title">12-1 温度传感器概论、温标与热膨胀式测温（对应 PPT P12–14 / P385–387）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1sRf3KHThLs_YWAgXRN3gH70401HKqbKY/view?usp=drivesdk">12_物理3-温度传感器_P385-441.pdf</a>（PPT P12–14）｜<em>注：融合原笔记 <code>t5.7.1.1</code>、<code>t5.7.1.2</code>，完整覆盖温度传感器演进史、医学三层次体温、五大医用温度传感器分类、三大温标转换与水银温度计放大灵敏度推导。</em></p>
+</blockquote>
+<h3 id="目录-2">目录</h3>
+<ul>
+<li><a href="#一-温度传感技术演进与医学三层次体温p1213">一、 温度传感技术演进与医学三层次体温（P12–13）</a></li>
+<li><a href="#二-三大温标系统与线性转换推导p14">二、 三大温标系统与线性转换推导（P14）</a></li>
+<li><a href="#三-热膨胀式温度计灵敏度与热容权衡推导">三、 热膨胀式温度计灵敏度与热容权衡推导</a></li>
+<li><a href="#四-物理公理与底层简单证明补强短板">四、 物理公理与底层简单证明（补强短板）</a></li>
+</ul>
+<hr>
+<h3 id="一-温度传感技术演进与医学三层次体温p1213">一、 温度传感技术演进与医学三层次体温（P12–13）</h3>
+<h4 id="11-温度传感器的物理发展脉络ppt-p12">1.1 温度传感器的物理发展脉络（PPT P12）</h4>
+<p>温度是最早开发且应用最广的物理量，其传感技术经历了从宏观热电/热阻到半导体与波场交互的四次跃迁：</p>
+<ol>
+<li><strong>1821 年</strong>：德国物理学家**赛贝克（Seebeck）**发明热电偶，首次将温度直接转化为电信号；</li>
+<li><strong>约 1871 年（50 年后）</strong>：德国人<strong>西门子（Siemens）<strong>发明</strong>铂电阻温度计（RTD）</strong>；</li>
+<li><strong>20 世纪</strong>：基于固体能带与载流子统计物理，相继开发出<strong>半导体热敏电阻</strong>、<strong>PN 结温度传感器</strong>与<strong>集成温度传感器（IC）</strong>；</li>
+<li><strong>波与物质相互作用类</strong>：声学温度传感器、红外热辐射温度传感器、微波温度传感器等（可实现非接触与空间分布测温）。</li>
+</ol>
+<h4 id="12-医学体温三层次与五大常用医用温度传感器ppt-p1213">1.2 医学体温三层次与五大常用医用温度传感器（PPT P12–13）</h4>
+<ul>
+<li><strong>医学测温三层次（P12）</strong>：①<strong>体表温度</strong>（皮肤外周）；②<strong>深部温度</strong>（机体核心内部）；③<strong>器官温度</strong>（临床常用<strong>流经该器官的血液温度</strong>来代替）。</li>
+<li><strong>医用五大温度传感器分类（P13）</strong>：<ol>
+<li><strong>热膨胀式</strong>：水银温度计（体积热膨胀 $\to$ 毛细管液柱高度）；</li>
+<li><strong>热电式</strong>：热电偶温度传感器（Seebeck 效应，温差 $\to$ 毫伏/微伏电势）；</li>
+<li><strong>热阻式</strong>：金属热电阻（RTD）与半导体热敏电阻（NTC/PTC，温度 $\to$ 电阻率变化）；</li>
+<li><strong>晶体管式</strong>：PN 结温度传感器与集成温度传感器（如 AD590，温度 $\to$ $V_{BE}$ 或 PTAT 电流）；</li>
+<li><strong>热辐射式</strong>：红外热辐射温度传感器（耳温枪、额温枪、医用红外热像仪，基于黑体辐射定律）。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="二-三大温标系统与线性转换推导p14">二、 三大温标系统与线性转换推导（P14）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">温标体系</th>
+<th align="center">符号与单位</th>
+<th align="left">核心物理定标点（标准大气压下）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>华氏温标（Fahrenheit）</strong></td>
+<td align="center">$t_F\;([^\circ\text{F}])$</td>
+<td align="left">纯水凝固点 <strong>$32^\circ\text{F}$</strong>，沸点 <strong>$212^\circ\text{F}$</strong>（等分 $180$ 格）</td>
+</tr>
+<tr>
+<td align="left"><strong>摄氏温标（Celsius）</strong></td>
+<td align="center">$t_C\;([^\circ\text{C}])$</td>
+<td align="left">纯水冰点 <strong>$0^\circ\text{C}$</strong>，沸点 <strong>$100^\circ\text{C}$</strong>（等分 $100$ 格）</td>
+</tr>
+<tr>
+<td align="left"><strong>开氏温标 / 绝对温标（Kelvin）</strong></td>
+<td align="center">$T_K\;(\text{K})$</td>
+<td align="left">理论基准为<strong>绝对零度（$0\;\text{K}$）</strong>；<strong>水的三相点</strong>（固、液、气三相共存）严格定义为 <strong>$273.15\;\text{K}$</strong></td>
+</tr>
+</tbody></table></div>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：三大温标线性转换公式推导（PPT P14）】</strong></p>
+<ol>
+<li><strong>摄氏与华氏转换</strong>：摄氏 $100$ 格对应华氏 $212 - 32 = 180$ 格，比例因子为 $\frac{100}{180} = \frac{5}{9}$，且华氏零冰点偏置为 $32$：
+$$\boxed{t_C = (t_F - 32)\times\frac{5}{9}, \qquad t_F = t_C\times\frac{9}{5} + 32}$$</li>
+<li><strong>摄氏与开氏转换</strong>：两温标每 $1$ 刻度间隔完全相等（$\Delta T_K = \Delta t_C$），仅零点平移 $273.15$：
+$$\boxed{T_K = t_C + 273.15}$$</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="三-热膨胀式温度计灵敏度与热容权衡推导">三、 热膨胀式温度计灵敏度与热容权衡推导</h3>
+<p>水银温度计将微小的液体体积热膨胀 $\Delta V$ 通过细长毛细管转化为肉眼可读的液柱高度位移 $\Delta h$：</p>
+<ol>
+<li><strong>热力学体积膨胀方程</strong>：在恒压下由一阶泰勒展开（$\beta$ 为水银体膨胀系数，$V_0$ 为感温泡初始体积）：
+$$\Delta V = V_0 \beta \Delta T$$</li>
+<li><strong>毛细管几何放大与静态灵敏度</strong>：设毛细管内截面积为 $A$，忽略玻璃壳微弱热膨胀，液柱上升高度 $\Delta h = \frac{\Delta V}{A} = \left(\frac{V_0 \beta}{A}\right)\Delta T$，故静态灵敏度为：
+$$\boxed{S = \frac{dh}{dT} = \frac{V_0 \beta}{A}}$$</li>
+<li><strong>工程矛盾（灵敏度 vs. 动态响应）</strong>：提高灵敏度需要<strong>增大感温泡体积 $V_0$</strong>、<strong>减小毛细管截面积 $A$</strong>；但 $V_0$ 增大会使水银热容 $C_{\text{th}}$ 急剧变大，导致热时间常数 $\tau = R_{\text{th}} C_{\text{th}}$ 变长（水银体温计常需夹持 $3\sim 5$ 分钟才达到热平衡）。</li>
+</ol>
+<hr>
+<h3 id="四-物理公理与底层简单证明补强短板">四、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="41-为什么物理学必须引入绝对温标-t_k分子平均平动动能公理">4.1 为什么物理学必须引入绝对温标 $T_K$？（分子平均平动动能公理）</h4>
+<p>摄氏与华氏温标都依赖特定物质（水）的相变点，一旦离开水的液相温区或需要建立普适的热力学/统计物理公式（如理想气体方程 $PV = nRT$、玻尔兹曼因子 $e^{-E/(k_BT)}$、热电势 $e_{AB} \propto T$、黑体辐射 $\propto T^4$），必须使用以<strong>微观粒子平均热运动动能为零</strong>作起点的绝对温标 $T_K$：
+$$\bar{\varepsilon}_k = \frac{1}{2}m\overline{v^2} = \frac{3}{2}k_B T_K$$
+其中 $k_B = 1.38\times 10^{-23}\;\text{J/K}$ 为玻尔兹曼常数。当 $T_K \to 0\;\text{K}$ 时经典分子热运动完全停止，因此所有统计物理指数项中的 $T$ <strong>必须代入开尔文绝对温度 $T_K$，绝不能直接代入摄氏度 $t_C$</strong>！</p>
+<hr>
+<h3 id="五-医用五大温度传感器全维度对比表补漏">五、 医用五大温度传感器全维度对比表（补漏）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">传感器类型</th>
+<th align="left">物理机理与核心公式</th>
+<th align="center">换热方式</th>
+<th align="left">典型灵敏度 / 响应</th>
+<th align="left">核心优缺点</th>
+<th align="left">典型医用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>水银温度计</strong></td>
+<td align="left">热膨胀式：$V = V_0(1+\beta\Delta T)$</td>
+<td align="center">接触式热传导</td>
+<td align="left">读数稳定、无非线性校准</td>
+<td align="left"><strong>优</strong>：无需电源、性质稳定<br><strong>缺</strong>：热平衡时间长、汞污染风险</td>
+<td align="left">传统临床常规测温（逐步淘汰）</td>
+</tr>
+<tr>
+<td align="left"><strong>热电偶</strong></td>
+<td align="left">Seebeck 效应：$E_{AB} = \int_{T_0}^T (S_A - S_B)\,dT$</td>
+<td align="center">接触式热传导</td>
+<td align="left">$5\sim 40\;\mu\text{V}/^\circ\text{C}$，<strong>$\tau &lt; 1\;\text{ms}$</strong></td>
+<td align="left"><strong>优</strong>：响应极快、微米级尺寸、量程宽<br><strong>缺</strong>：微伏弱信号、须冷端补偿</td>
+<td align="left">微创穿刺针尖、激光消融、动态气流测温</td>
+</tr>
+<tr>
+<td align="left"><strong>热敏电阻（NTC）</strong></td>
+<td align="left">阿伦尼乌斯热激发：$R_T = R_0 e^{B(1/T - 1/T_0)}$</td>
+<td align="center">接触式热传导</td>
+<td align="left"><strong>$\alpha_T \approx -4.7\%/^\circ\text{C}$</strong>（极高）</td>
+<td align="left"><strong>优</strong>：生理温区分辨率极高、体积小<br><strong>缺</strong>：强指数非线性、互换性差</td>
+<td align="left">电子体温计、深部留置导尿管、呼吸机</td>
+</tr>
+<tr>
+<td align="left"><strong>PN 结 / 集成式（IC）</strong></td>
+<td align="left">PN 结压降负温漂：$\frac{dV_F}{dT} \approx -2\;\text{mV}/^\circ\text{C}$；或 PTAT 电流 $1\;\mu\text{A/K}$</td>
+<td align="center">接触式热传导</td>
+<td align="left">极佳线性度（$\pm 0.5^\circ\text{C}$）</td>
+<td align="left"><strong>优</strong>：外围电路极简、直接输出线性量/数字量<br><strong>缺</strong>：工作温区受硅基半导体限制</td>
+<td align="left">多路体表阵列监护、可穿戴连续监测</td>
+</tr>
+<tr>
+<td align="left"><strong>红外热辐射式</strong></td>
+<td align="left">斯特藩—玻尔兹曼定律：$M(T) = \varepsilon\sigma T^4$（皮肤 $\varepsilon \approx 0.98$）</td>
+<td align="center"><strong>非接触式热辐射</strong></td>
+<td align="left">毫秒级响应（$\text{ms}$）</td>
+<td align="left"><strong>优</strong>：零接触、零热负载干扰、速度极快<br><strong>缺</strong>：易受汗液、环境反射与测距干扰</td>
+<td align="left">红外耳温枪、额温枪、医用红外热像仪</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-12-2">12-2 热电偶原理与定律</h2>
+<h2 id="12-2-热电偶原理微观电动势推导与四大基本定律对应-ppt-p1535--p388408" class="doc-title">12-2 热电偶原理、微观电动势推导与四大基本定律（对应 PPT P15–35 / P388–408）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1sRf3KHThLs_YWAgXRN3gH70401HKqbKY/view?usp=drivesdk">12_物理3-温度传感器_P385-441.pdf</a>（PPT P15–35）｜<em>注：融合原笔记 <code>t5.7.1.3</code>～<code>t5.7.1.6</code>，完整保留 Seebeck 效应、扩散—漂移平衡接触电势积分推导、汤姆逊温差电势、五大性质、四大核心定律（含反循环论证细节）及标准分度表。</em></p>
+</blockquote>
+<h3 id="目录-3">目录</h3>
+<ul>
+<li><a href="#一-赛贝克效应与热电偶工作原理p1517">一、 赛贝克效应与热电偶工作原理（P15–17）</a></li>
+<li><a href="#二-接触电动势与温差电动势微观推导p1822">二、 接触电动势与温差电动势微观推导（P18–22）</a></li>
+<li><a href="#三-热电偶五大基本性质与四大核心定律严密证明p2331">三、 热电偶五大基本性质与四大核心定律严密证明（P23–31）</a></li>
+<li><a href="#四-热电极材料选型标准热电偶矩阵与分度表p3235">四、 热电极材料选型、标准热电偶矩阵与分度表（P32–35）</a></li>
+</ul>
+<hr>
+<h3 id="一-赛贝克效应与热电偶工作原理p1517">一、 赛贝克效应与热电偶工作原理（P15–17）</h3>
+<ul>
+<li><strong>热电效应（Seebeck 效应，P15）</strong>：将两种不同材质的导体 $A, B$ 连接成闭合回路，若两个连接点温度不同（热端/工作端温度为 $T$，冷端/自由端温度为 $T_0$），回路中就会产生电动势与电流，称为热电效应。</li>
+<li><strong>热电灵敏度（P16）</strong>：加热端温度每变化 $1^\circ\text{C}$ 时输出电位差的变化量 $S_{AB} = \frac{dE_{AB}}{dT}$。绝大多数金属热电偶的灵敏度仅在 <strong>$5\sim 40\;\mu\text{V}/^\circ\text{C}$</strong> 之间（极微弱信号）。</li>
+<li><strong>测温核心逻辑</strong>：总热电势是两端的函数，只有当固定或已知冷端温度 $T_0$ 时，输出电压才成为热端温度 $T$ 的单值函数。</li>
+</ul>
+<hr>
+<h3 id="二-接触电动势与温差电动势微观推导p1822">二、 接触电动势与温差电动势微观推导（P18–22）</h3>
+<p>热电偶闭合回路总热电动势由<strong>接触电动势</strong>与<strong>温差（汤姆逊）电动势</strong>两部分构成（PPT P17）。</p>
+<h4 id="21-接触电动势的扩散漂移零跳步推导ppt-p1819">2.1 接触电动势的扩散—漂移零跳步推导（PPT P18–19）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从菲克定律与爱因斯坦关系式导出 $e_{AB}(T) = \dfrac{kT}{e}\ln\left(\dfrac{N_A}{N_B}\right)$】</strong>
+设金属 $A, B$ 在温度 $T$ 下的自由电子密度分别为 $N_A, N_B$（不妨设 $N_A &gt; N_B$）。接触时电子从高浓度的 $A$ 向 $B$ 扩散，使 $A$ 带正电、$B$ 带负电，界面建立阻挡内电场 $E(x) = -\frac{dV}{dx}$ 驱动电子逆向漂移，直到净电流密度为零：</p>
+<ol>
+<li><strong>热平衡电流密度方程</strong>：
+$$J = J_{\text{diff}} + J_{\text{drift}} = 0$$<ul>
+<li>扩散电流密度（菲克第一定律）：$J_{\text{diff}} = (-e)\left(-D\frac{dn}{dx}\right) = e D\frac{dn}{dx}$；</li>
+<li>漂移电流密度（欧姆迁移）：$J_{\text{drift}} = (-e)\,n(x)\left(-\mu E(x)\right) = -e n(x)\mu\frac{dV}{dx}$。</li>
+</ul>
+</li>
+<li><strong>引入爱因斯坦关系式 $\dfrac{D}{\mu} = \dfrac{kT}{e}$</strong>（$k = 1.38\times 10^{-23}\;\text{J/K}$，$e = 1.6\times 10^{-19}\;\text{C}$）：
+$$e\left(\mu\frac{kT}{e}\right)\frac{dn}{dx} = e n\mu\frac{dV}{dx} \implies dV = \frac{kT}{e}\frac{dn}{n}$$</li>
+<li><strong>分离变量从 $A$ 内部（$V_A, N_A$）积分到 $B$ 内部（$V_B, N_B$）</strong>：
+$$V_B - V_A = \frac{kT}{e}\int_{N_A}^{N_B}\frac{dn}{n} = \frac{kT}{e}\ln\left(\frac{N_B}{N_A}\right)$$</li>
+<li><strong>定义 $e_{AB}(T) \equiv V_A - V_B$（$N_A &gt; N_B$ 时为正）</strong>：
+$$\boxed{e_{AB}(T) = \frac{kT}{e}\ln\left(\frac{N_A}{N_B}\right)}$$
+<em>关键结论</em>：$e_{AB}(T)$ 只取决于接点绝对温度 $T$ 和两种材料电子密度比 $N_A/N_B$，与导体长度、粗细、焊点形状完全无关！</li>
+</ol>
+</blockquote></details>
+<h4 id="22-温差电动势与回路总热电势简化ppt-p2022">2.2 温差电动势与回路总热电势简化（PPT P20–22）</h4>
+<ol>
+<li><strong>温差（汤姆逊）电动势（P20）</strong>：同一导体两端温度分别为 $T, T_0$ 时，高温端电子动能大向低温端扩散，形成单一导体内部的电势差（$\sigma_A$ 为汤姆逊系数）：
+$$e_A(T, T_0) = \int_{T_0}^T \sigma_A\,dT$$</li>
+<li><strong>闭合回路总电动势（P21）</strong>：沿回路顺时针累加两接触电势与两导体温差电势：
+$$E_{AB}(T, T_0) = e_{AB}(T) - e_{AB}(T_0) + \int_{T_0}^T (\sigma_B - \sigma_A)\,dT$$</li>
+<li><strong>金属近似简化（P22）</strong>：在金属中自由电子密度极高，温度对自由电子密度的影响微弱（$N_{AT} \approx N_{AT_0} = N_A$），故温差电动势远小于接触电动势可忽略不计：
+$$\boxed{E_{AB}(T, T_0) \approx e_{AB}(T) - e_{AB}(T_0) = \frac{k}{e}(T - T_0)\ln\left(\frac{N_A}{N_B}\right)}$$
+当冷端恒定 $T_0 = \text{const}$ 时，$e_{AB}(T_0) = C$，故 $E_{AB}(T, T_0) = e_{AB}(T) - C = \phi(T)$，成为热端温度 $T$ 的<strong>单值函数</strong>。</li>
+</ol>
+<hr>
+<h3 id="三-热电偶五大基本性质与四大核心定律严密证明p2331">三、 热电偶五大基本性质与四大核心定律严密证明（P23–31）</h3>
+<h4 id="31-五大基本性质ppt-p23常考简答">3.1 五大基本性质（PPT P23，常考简答！）</h4>
+<ol>
+<li>$E_{AB}(T,T_0)$ 只与电极材料及两端接点温度有关，<strong>与导线长度、粗细、形状无关</strong>；</li>
+<li>相同材料（$N_A = N_B \implies \ln 1 = 0$）不能组成热电偶；</li>
+<li>两端温度相同（$T = T_0$）时热电势为零（热电偶本质是<strong>温差传感器</strong>）；</li>
+<li>冷端恒定时总热电势是热端温度 $T$ 的单值函数（测温基石）；</li>
+<li>多种导体串联闭合回路总热电势等于各接点接触电动势的代数和：$E = e_{AB}(T_1) + e_{BC}(T_2) + \cdots + e_{NA}(T_N)$。</li>
+</ol>
+<h4 id="32-四大核心定律严密证明ppt-p2431必考证明与计算">3.2 四大核心定律严密证明（PPT P24–31，必考证明与计算！）</h4>
+<blockquote>
+<p><strong>⚠️ 推导方法论铁律：为什么证明必须用微观单点电势 $e$ 而不能直接用宏观 $E$？</strong>
+插入第三种导体 $C$ 时形成了 $B\text{–}C$ 等孤立单点界面，尚未形成双金属闭合回路，只能用单点接触电势 $e_{BC}$ 描述；若直接套用 $E$ 则相当于预先假定结论成立，犯了<strong>循环论证</strong>错误！</p>
+</blockquote>
+<ol>
+<li><p><strong>定律一：均质导体定律（P24）</strong></p>
+<ul>
+<li><strong>内容</strong>：由同一种均质材料组成的闭合回路，不论截面、长度及沿线温度分布如何，总热电势恒为零；反之若有热电势产生，材料必不相同或不均匀。</li>
+<li><strong>应用</strong>：<strong>同名极检验法</strong>（鉴别未知电极材料是否相同）与<strong>材料均匀性检验</strong>。</li>
+</ul>
+</li>
+<li><p><strong>定律二：中间导体定律（P25–26）</strong></p>
+<ul>
+<li><strong>内容</strong>：在回路中接入第三种导体 $C$，只要导体 $C$ <strong>两端接点温度相同</strong>，总热电势不变（因此可任意接入铜导线和毫伏表）。</li>
+<li><strong>情况 ① 冷端接入 $C$（接点均为 $T_0$，P25）</strong>：
+$$E_{ABC}(T,T_0) = e_{AB}(T) + e_{BC}(T_0) + e_{CA}(T_0)$$
+令全系统等温 $T = T_0$，由性质 3 得 $e_{AB}(T_0) + e_{BC}(T_0) + e_{CA}(T_0) = 0 \implies e_{BC}(T_0)+e_{CA}(T_0) = -e_{AB}(T_0)$，代回即得：
+$$\boxed{E_{ABC}(T,T_0) = e_{AB}(T) - e_{AB}(T_0) = E_{AB}(T,T_0)}$$</li>
+<li><strong>情况 ② 电极 $B$ 中间断开接入 $C$（两端同温 $T_1$，P26）</strong>：
+$$E_{ABC}(T,T_0) = e_{AB}(T) + e_{BA}(T_0) + e_{BC}(T_1) + e_{CB}(T_1)$$
+利用接触电势反对称性 $e_{BC}(T_1) = -e_{CB}(T_1)$，中间项抵消，同样严格等于 $E_{AB}(T,T_0)$！</li>
+</ul>
+</li>
+<li><p><strong>定律三：标准电极（组成）定律（P27–28, P31）</strong></p>
+<ul>
+<li><strong>内容</strong>：若 $A, B$ 分别与标准电极 $C$（通常取纯铂 $\text{Pt}$）组成热电偶的热电势已知，则 $A, B$ 直接配对的热电势为两者之差：
+$$\boxed{E_{AB}(T, T_0) = E_{AC}(T, T_0) - E_{BC}(T, T_0)}$$</li>
+<li><strong>证明（P28）</strong>：在同温 $T$ 下虚拟三金属闭合回路有 $e_{AC}(T)+e_{CB}(T)+e_{BA}(T)=0 \implies e_{AC}(T)-e_{BC}(T)=e_{AB}(T)$；同理在 $T_0$ 处有 $e_{AC}(T_0)-e_{BC}(T_0)=e_{AB}(T_0)$，两式相减即得证。</li>
+<li><strong>PPT P31 例题 10.1</strong>：热端 $100^\circ\text{C}$、冷端 $0^\circ\text{C}$ 时，镍铬—纯铂热电势为 $2.95\;\text{mV}$，考铜—纯铂为 $-4.0\;\text{mV}$，则镍铬—考铜热电势为：
+$$E_{\text{镍铬-考铜}} = 2.95\;\text{mV} - (-4.0\;\text{mV}) = \boxed{6.95\;\text{mV}}$$</li>
+</ul>
+</li>
+<li><p><strong>定律四：中间温度定律（P29–30）</strong></p>
+<ul>
+<li><strong>内容与证明</strong>：热电偶在 $(T, T_0)$ 下的热电势等于在 $(T, T_n)$ 与 $(T_n, T_0)$ 下热电势的代数和：
+$$E_{AB}(T, T_n) + E_{AB}(T_n, T_0) = [e_{AB}(T) - e_{AB}(T_n)] + [e_{AB}(T_n) - e_{AB}(T_0)] = \boxed{E_{AB}(T, T_0)}$$</li>
+<li><strong>工程价值</strong>：令 $T_n = 0^\circ\text{C}$ 的标准冷端，即得冷端温度非零时的修正公式：$E_{AB}(T, 0) = E_{AB}(T, T_0) + E_{AB}(T_0, 0)$，是所有冷端补偿算法与分度表查表的理论基石！</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="四-热电极材料选型标准热电偶矩阵与分度表p3235">四、 热电极材料选型、标准热电偶矩阵与分度表（P32–35）</h3>
+<ul>
+<li><strong>电极材料三要求（P32）</strong>：①测温范围广、灵敏度高、单值线性好；②热电性能稳定、均匀性与复现性好；③化学稳定性与抗氧化/抗还原性好。</li>
+<li><strong>IEC 统一标准型热电偶对比表（P33–34）</strong>：</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="center">ANSI 分度号</th>
+<th align="left">电极材料组合</th>
+<th align="center">典型使用温区（$^\circ\text{C}$）</th>
+<th align="center">标称灵敏度（$\mu\text{V}/^\circ\text{C}$）</th>
+<th align="left">特性与定位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>B</strong></td>
+<td align="left">铂(6%)铑 — 铂(30%)铑</td>
+<td align="center">$38\sim 1800$</td>
+<td align="center">$7.7$</td>
+<td align="left">贵金属高温精密测量，常温灵敏度极低</td>
+</tr>
+<tr>
+<td align="center"><strong>R</strong></td>
+<td align="left">铂(13%)铑 — 铂</td>
+<td align="center">$0\sim 1593$</td>
+<td align="center">$11.7$</td>
+<td align="left">贵金属高稳定标准偶</td>
+</tr>
+<tr>
+<td align="center"><strong>S</strong></td>
+<td align="left">铂(10%)铑 — 铂</td>
+<td align="center">$0\sim 1538$</td>
+<td align="center">$10.4$</td>
+<td align="left">国际温标精密标定用基准偶</td>
+</tr>
+<tr>
+<td align="center"><strong>C</strong></td>
+<td align="left">钨(5%)铼 — 钨(26%)铼</td>
+<td align="center">$0\sim 2300$</td>
+<td align="center">$16$</td>
+<td align="left">特种难熔超高温（真空/惰性气氛）</td>
+</tr>
+<tr>
+<td align="center"><strong>E</strong></td>
+<td align="left"><strong>镍铬合金 — 康铜</strong></td>
+<td align="center">$0\sim 982$</td>
+<td align="center"><strong>$76$</strong></td>
+<td align="left"><strong>廉金属中灵敏度最高</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>J</strong></td>
+<td align="left">铁 — 康铜</td>
+<td align="center">$0\sim 760$</td>
+<td align="center">$55$</td>
+<td align="left">还原性气氛适用、价格低</td>
+</tr>
+<tr>
+<td align="center"><strong>K</strong></td>
+<td align="left"><strong>镍铬合金 — 镍铝</strong></td>
+<td align="center">$-184\sim 1260$</td>
+<td align="center">$39$</td>
+<td align="left"><strong>工业与实验室通用性最广</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>T</strong></td>
+<td align="left"><strong>铜 — 康铜</strong></td>
+<td align="center">$-184\sim 400$</td>
+<td align="center">$45$</td>
+<td align="left"><strong>低温与生物医学生理温区精度极佳</strong></td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>分度表物理基准（P35）</strong>：所有标准分度表（如 K 型表，纵轴十位 $0\sim 90^\circ\text{C}$、横轴个位 $0\sim 9^\circ\text{C}$）均严格规定在<strong>冷端 $T_0 = 0^\circ\text{C}$</strong> 下标定（例如 K 型 $T=45^\circ\text{C}, T_0=0^\circ\text{C}$ 时读数为 $1.817\;\text{mV}$）。</li>
+</ul>
+<hr>
+<h3 id="五-物理公理补强为什么金属中温差电势可忽略">五、 物理公理补强：为什么金属中温差电势可忽略？</h3>
+<h4 id="51-费米简并电子气与-nt-近似恒定的物理依据">5.1 费米简并电子气与 $N(T)$ 近似恒定的物理依据</h4>
+<p>在经典气体中，温度升高会显著改变分子密度；但金属中的自由电子属于<strong>高密度简并费米气体</strong>（电子浓度 $N \sim 10^{28}\;\text{m}^{-3}$，费米温度 $T_F \sim 10^4\text{–}10^5\;\text{K}$）。</p>
+<ul>
+<li>在日常测温与工业温区（$T \sim 300\text{–}1500\;\text{K} \ll T_F$）内，热能 $k_B T$ 远小于费米能 $E_F$，只有费米面附近极窄带（约 $k_B T / E_F &lt; 1\%$）的电子能被热激发。</li>
+<li>因此同一金属内部高温端与低温端的有效电子浓度几乎相等（$N_T \approx N_{T_0}$），导致单导体内部的<strong>汤姆逊温差电动势远小于异质金属界面的接触电动势</strong>，工程计算中可安全略去。</li>
+</ul>
+<h4 id="52-多相串联闭合回路的基尔霍夫环路直观理解">5.2 多相串联闭合回路的基尔霍夫环路直观理解</h4>
+<p>对由 $N$ 种导体串联组成的闭合回路，沿回路任意一点出发绕行一周回到原点，电势的代数和（扣除各界面电化学接触电势跃变）必须满足能量守恒：
+$$E_{AB\dots N} = e_{AB}(T_1) + e_{BC}(T_2) + \cdots + e_{NA}(T_N)$$
+只要任意相邻两个接点温度相同且构成同一段中间材料（如 $e_{BC}(T_0) + e_{CB}(T_0) = 0$），该段材料就对总电动势“完全透明”——这正是<strong>中间导体定律</strong>的底层电路拓扑含义。</p>
+<hr>
+<h3 id="六-真题靶向加厚任意多边形热电偶回路证明万能模板25-计4--26-计6">六、 真题靶向加厚：任意多边形热电偶回路证明万能模板（25-计4 / 26-计6）</h3>
+<p>遇到“给出多边形热电偶连接图（含电压表接入引线 $C, D$ 与中间温度 $T_{m1}, T_{m2}$），证明对材质与温度有什么要求”的真题时，按以下三步稳拿满分：</p>
+<ol>
+<li><strong>沿闭合回路逐段写单导体电势差</strong>（设工作端 $T$、中间端 $T_{m1}, T_{m2}$、仪表端 $T_o$）：
+$$V_{\text{out}} = \big[e_C(T_{m1}) - e_C(T_o)\big] + \big[e_A(T) - e_A(T_{m1})\big] + \big[e_B(T_{m2}) - e_B(T)\big] + \big[e_D(T_o) - e_D(T_{m2})\big]$$</li>
+<li><strong>拆出目标项 $E_{AB}(T, T_m)$ 与寄生误差项</strong>：令 $T_{m1} = T_{m2} = T_m$ 后整理得：
+$$V_{\text{out}} = E_{AB}(T, T_m) + \big[e_C(T_m) - e_D(T_m)\big] - \big[e_C(T_o) - e_D(T_o)\big]$$</li>
+<li><strong>令误差项对任意温度恒为零，得出双约束</strong>：① <strong>$C$ 与 $D$ 必须是同一种均质材料</strong>（$e_C(T) \equiv e_D(T)$）；② <strong>两中间接点 $(A,C)$ 与 $(B,D)$ 必须同温</strong>（$T_{m1} = T_{m2} = T_m$）。</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-12-3">12-3 特性与冷端补偿</h2>
+<h2 id="12-3-热电偶特性五大冷端补偿技术与算例精解对应-ppt-p3642--p409415" class="doc-title">12-3 热电偶特性、五大冷端补偿技术与算例精解（对应 PPT P36–42 / P409–415）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1sRf3KHThLs_YWAgXRN3gH70401HKqbKY/view?usp=drivesdk">12_物理3-温度传感器_P385-441.pdf</a>（PPT P36–42）｜<em>注：融合原笔记 <code>t5.7.1.6</code>、<code>t5.7.1.7</code>，完整覆盖热电偶优缺点、五大冷端补偿（CJC）技术、双试管绝缘约束、PPT 两道必考算例闭环解算及爱因斯坦关系物理公理。</em></p>
+</blockquote>
+<h3 id="目录-4">目录</h3>
+<ul>
+<li><a href="#一-热电偶的核心优缺点与医学微创优势p36">一、 热电偶的核心优缺点与医学微创优势（P36）</a></li>
+<li><a href="#二-五大冷端补偿cjc方法完整推导与算例p3742">二、 五大冷端补偿（CJC）方法完整推导与算例（P37–42）</a></li>
+<li><a href="#三-物理公理与底层简单证明补强短板">三、 物理公理与底层简单证明（补强短板）</a></li>
+</ul>
+<hr>
+<h3 id="一-热电偶的核心优缺点与医学微创优势p36">一、 热电偶的核心优缺点与医学微创优势（P36）</h3>
+<ul>
+<li><strong>三大优势</strong>：<ol>
+<li><strong>动态响应极快</strong>：热端可点焊成微小球状，热容 $C_{\text{th}}$ 极小，时间常数 <strong>$\tau = R_{\text{th}} C_{\text{th}} &lt; 1\;\text{ms}$</strong>（适于激光消融、呼吸气流瞬态测温）；</li>
+<li><strong>物理尺寸极微小</strong>：根据<strong>均质导体定律</strong>，热电势与丝材粗细无关，可将直径拉细至 <strong>$12\;\mu\text{m}$ 以下</strong>，热负载极低，可直接嵌入注射针尖或血管导管微创测温；</li>
+<li><strong>长期稳定性好</strong>：纯金属/合金固态结构不易发生载流子老化。</li>
+</ol>
+</li>
+<li><strong>两大固有缺点</strong>：<ol>
+<li><strong>输出电压微弱、灵敏度低</strong>（$5\sim 40\;\mu\text{V}/^\circ\text{C}$），极易受电磁干扰与运放温漂淹没，须配高 CMRR 仪表放大器；</li>
+<li><strong>本质是温差传感器</strong>：必须依赖已知的冷端标准参考温度 $T_0$（即<strong>冷端补偿</strong>）。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="二-五大冷端补偿cjc方法完整推导与算例p3742">二、 五大冷端补偿（CJC）方法完整推导与算例（P37–42）</h3>
+<h4 id="21-方法-1冷端恒温法冰点槽法ppt-p37">2.1 方法 1：冷端恒温法——冰点槽法（PPT P37）</h4>
+<ul>
+<li><strong>机理</strong>：将冷端置于标准大气压下的冰水混合物（$0^\circ\text{C}$）中，使 $T_0 \equiv 0^\circ\text{C}$，仪表读数直接对齐标准分度表。</li>
+<li><strong>⚠️ 关键工程约束——双试管绝缘</strong>：<strong>绝不能</strong>将两根热电偶冷端引线直接裸露浸入冰水中！因实际冰水含微量离子会导电，造成冷端两接点<strong>电学短路</strong>。必须将两个接点分别插入两只<strong>相互独立的玻璃试管</strong>内再浸入冰点槽（既通过薄玻璃壁导热，又保证高电阻绝缘）。</li>
+</ul>
+<h4 id="22-方法-2计算修正法与避坑指南ppt-p3840必考计算">2.2 方法 2：计算修正法与避坑指南（PPT P38–40，必考计算！）</h4>
+<p>当冷端暴露在恒定室温 $T_1 \neq 0^\circ\text{C}$ 时，由<strong>中间温度定律</strong>，必须在<strong>毫伏电势空间</strong>叠加后再查表：
+$$\boxed{E_{AB}(T, 0^\circ\text{C}) = E_{AB}(T, T_1) + E_{AB}(T_1, 0^\circ\text{C})}$$</p>
+<blockquote>
+<p><strong>【PPT P39 例题 5.1 完整闭环解算】</strong></p>
+<ul>
+<li><strong>题意</strong>：用 K 型（镍铬—镍铝）热电偶测水池温度，实测热电势 $E(T, 30^\circ\text{C}) = 2.436\;\text{mV}$，环境温度恒为 $T_1 = 30^\circ\text{C}$，求池水真实温度 $T$。</li>
+<li><strong>规范三步解</strong>：<ol>
+<li><strong>查冷端基准电势</strong>：查 K 型分度表得 $E(30^\circ\text{C}, 0^\circ\text{C}) = 1.203\;\text{mV}$；</li>
+<li><strong>电势空间叠加</strong>：$E(T, 0^\circ\text{C}) = 2.436 + 1.203 = 3.639\;\text{mV}$；</li>
+<li><strong>查表反解真实温度</strong>：手持 $3.639\;\text{mV}$ 查 K 型分度表（纵轴 $80$，横轴 $9$），得 <strong>$\boxed{T = 89^\circ\text{C}}$</strong>。</li>
+</ol>
+</li>
+<li><strong>⚠️ 常见错解警示</strong>：绝不能直接把 $2.436\;\text{mV}$ 查表得 $60^\circ\text{C}$ 后直接加上 $30^\circ\text{C}$ 得出 $90^\circ\text{C}$！因为热电偶分度曲线是<strong>非线性的</strong>（$0\text{–}30^\circ\text{C}$ 斜率约 $40.1\;\mu\text{V}/^\circ\text{C}$，而 $60\text{–}90^\circ\text{C}$ 斜率约 $53.9\;\mu\text{V}/^\circ\text{C}$），<strong>只能加减电压，不能加减温度</strong>！</li>
+</ul>
+</blockquote>
+<h4 id="23-方法-3电桥补偿法--冷端补偿器ppt-p41必考计算">2.3 方法 3：电桥补偿法 / 冷端补偿器（PPT P41，必考计算！）</h4>
+<ul>
+<li><strong>电路架构</strong>：采用不平衡直流电桥串联在热电偶回路中。其中 $R_1, R_2, R_3$ 为温度系数极小的锰铜/康铜精密电阻，而<strong>补偿电阻 $R_T$ 采用高正温度系数铜丝（或镍丝）绕制并与热电偶冷端置于同一温度场 $T_0$ 中</strong>。设限流电阻 $R_S$ 很大，左臂电流 $I_1$ 近似恒定。</li>
+<li><strong>自动补偿数学条件</strong>：电桥在 $0^\circ\text{C}$ 时调零（$U_T - U_3 = 0$）。当冷端温度升高 $\Delta T$ 时，热电偶输出减小 $\Delta E$，同时 $R_T$ 增大 $\Delta R_T = R_t \alpha \Delta T$ 使电桥输出升高 $\Delta U_T = I_1 R_t \alpha \Delta T$。令两者严格抵消：
+$$I_1 R_t \alpha \Delta T = \Delta E \implies \boxed{R_t = \frac{\Delta E}{\alpha \Delta T\, I_1}}$$</li>
+<li><strong>PPT P41 算例</strong>：选用 S 型（铂铑 10-铂）热电偶，冷端变化范围 $0\sim +50^\circ\text{C}$（$\Delta T = 50^\circ\text{C}$），查表得 $\Delta E = 0.299\;\text{mV}$，桥臂电流 $I_1 = 0.5\;\text{mA}$，铜丝温度系数 $\alpha = 0.00391\;^\circ\text{C}^{-1}$，则 $0^\circ\text{C}$ 下补偿电阻设计值为：
+$$R_t = \frac{0.299\times 10^{-3}\;\text{V}}{0.00391\times 50\times 0.5\times 10^{-3}\;\text{A}} = \boxed{3.07\;\Omega}$$</li>
+</ul>
+<h4 id="24-方法-4-与方法-5零位调整法与软件处理法ppt-p42">2.4 方法 4 与方法 5：零位调整法与软件处理法（PPT P42）</h4>
+<ul>
+<li><strong>显示仪表零位调整法</strong>：当冷端温度虽非 $0^\circ\text{C}$ 但<strong>恒定不变</strong>（如恒温空调房）时，直接把指针式仪表机械零位调至已知室温 $T_1$ 上，表盘读数即为真实温度。</li>
+<li><strong>软件处理法</strong>：用热敏电阻/集成温度传感器实时测出冷端温度 $T_0$ 送入 MCU，由软件查表或多项式拟合自动完成 $E(T,0)=E(T,T_0)+E(T_0,0)$ 修正。</li>
+</ul>
+<hr>
+<h3 id="三-物理公理与底层简单证明补强短板">三、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="31-爱因斯坦关系式-fracdmu--frackte-为什么成立">3.1 爱因斯坦关系式 $\frac{D}{\mu} = \frac{kT}{e}$ 为什么成立？</h4>
+<p>第 12-2 讲推导接触电动势时用到了 $D/\mu = kT/e$，它其实是统计力学与电输运的普适桥梁：</p>
+<ul>
+<li>在热平衡外场 $U(x)$ 中，粒子浓度遵循<strong>玻尔兹曼分布</strong> $n(x) = n_0 e^{-q U(x)/(kT)}$，求导得 $\frac{dn}{dx} = -\frac{q}{kT}n(x)\frac{dU}{dx} = \frac{q}{kT}n(x)E(x)$；</li>
+<li>又因热平衡时扩散通量与漂移通量相消：$D\frac{dn}{dx} = \mu n(x) E(x)$。</li>
+<li>将第一式代入第二式消去 $n(x)E(x)$，立得 <strong>$D\frac{q}{kT} = \mu \implies \frac{D}{\mu} = \frac{kT}{q}$</strong>！它本质上表明“热扩散（分子无规则碰撞，正比于 $kT$）”与“电场迁移（阻力决定，正比于 $\mu$）”同源于晶格散射机制。</li>
+</ul>
+<h4 id="32-热电效应的可逆兄弟珀耳帖效应与汤姆逊效应">3.2 热电效应的可逆兄弟：珀耳帖效应与汤姆逊效应</h4>
+<ul>
+<li><strong>赛贝克效应（热 $\to$ 电）</strong>：温差产生电势（热电偶测温）；</li>
+<li><strong>珀耳帖效应（Peltier，电 $\to$ 热）</strong>：给异质结通直流电时，一端吸热制冷、另一端放热（医用便携式半导体制冷盒、PCR 热循环 TEC 温控模块的核心原理！）。</li>
+</ul>
+<hr>
+<h3 id="四-ppt-补漏补偿导线原理与-mcu-软件冷端补偿闭环">四、 PPT 补漏：补偿导线原理与 MCU 软件冷端补偿闭环</h3>
+<h4 id="41-补偿导线compensating-lead为什么能省钱又不引入误差ppt-p37">4.1 补偿导线（Compensating Lead）为什么能省钱又不引入误差？（PPT P37）</h4>
+<p>贵金属热电偶（如 S 型铂铑—铂）价格昂贵，无法将偶丝直接拉长几十米接到控制室仪表上。工程上采用<strong>补偿导线</strong>（一对由廉金属制成的合金导线，在 $0\sim 100^\circ\text{C}$ 低温区间的热电特性曲线与配对热电偶几乎完全一致）将热电偶冷端从现场延伸至恒温控制室：</p>
+<ul>
+<li><strong>原理</strong>：补偿导线与原热电偶连接处温度 $T_n \le 100^\circ\text{C}$，在此区间内补偿导线等效于原热电偶的延拓，从而等效将参考端 $T_0$ 移至远端恒温仪表处；再配合铜导线接入仪表（由<strong>中间导体定律</strong>，仪表接线柱两端子同温故不引入附加误差）。</li>
+</ul>
+<h4 id="42-现代微处理器mcu软件冷端补偿三步闭环ppt-p42-展开">4.2 现代微处理器（MCU）软件冷端补偿三步闭环（PPT P42 展开）</h4>
+<ol>
+<li><strong>电势采集</strong>：ADC 经仪表放大器采集热电偶实际输出电压 $E_{AB}(T, T_0)$；</li>
+<li><strong>冷端标定</strong>：由贴装在接线端子旁的绝对温度传感器（NTC 或 AD590）实时测得冷端温度 $T_0$，查内置分度表得到数字补偿电势 $E_{AB}(T_0, 0^\circ\text{C})$；</li>
+<li><strong>电势空间合成与反查表</strong>：计算 $E_{AB}(T, 0^\circ\text{C}) = E_{AB}(T, T_0) + E_{AB}(T_0, 0^\circ\text{C})$，再对分度表做分段线性插值或高阶多项式拟合，输出高精度温度 $T$。</li>
+</ol>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-12-4">12-4 热阻线性化与前沿</h2>
+<h2 id="12-4-热阻式ntcrtd线性化网络与医用温度芯片及前沿对应-ppt-p4367--p416441" class="doc-title">12-4 热阻式（NTC/RTD）、线性化网络与医用温度芯片及前沿（对应 PPT P43–67 / P416–441）</h2>
+<blockquote>
+<p><strong>参考资料</strong>：<a href="https://drive.google.com/file/d/1sRf3KHThLs_YWAgXRN3gH70401HKqbKY/view?usp=drivesdk">12_物理3-温度传感器_P385-441.pdf</a>（PPT P43–67）｜<em>注：融合原笔记 <code>t5.8.1.1</code>～<code>t5.8.1.3</code>，完整覆盖金属 RTD vs. NTC 灵敏度对比、NTC 物理方程零跳步推导、I-V 自热三段论、并联/串联导纳法二阶曲率线性化推导、AD590 与 PTAT 物理公理，以及辅助生殖/PCR 生物医学前沿应用。</em></p>
+</blockquote>
+<h3 id="目录-5">目录</h3>
+<ul>
+<li><a href="#一-热电阻效应rtd-与热敏电阻结构参数p4347">一、 热电阻效应、RTD 与热敏电阻结构参数（P43–47）</a></li>
+<li><a href="#二-ntc-阻温方程推导对比-pt100-与伏安特性p4852">二、 NTC 阻温方程推导、对比 Pt100 与伏安特性（P48–52）</a></li>
+<li><a href="#三-硬件线性化网络导纳法二阶导数归零推导p5355">三、 硬件线性化网络：导纳法二阶导数归零推导（P53–55）</a></li>
+<li><a href="#四-集成温度传感器-ad590-与生物医学前沿应用p5666">四、 集成温度传感器 AD590 与生物医学前沿应用（P56–66）</a></li>
+<li><a href="#五-物理公理与底层简单证明补强短板-2">五、 物理公理与底层简单证明（补强短板）</a></li>
+</ul>
+<hr>
+<h3 id="一-热电阻效应rtd-与热敏电阻结构参数p4347">一、 热电阻效应、RTD 与热敏电阻结构参数（P43–47）</h3>
+<h4 id="11-热电阻效应与两大分类ppt-p4344">1.1 热电阻效应与两大分类（PPT P43–44）</h4>
+<p>物质的电阻率 $\rho$ 随温度 $T$ 变化的现象称为热电阻效应：</p>
+<ul>
+<li><strong>金属热电阻（RTD，如铂 Pt100）</strong>：自由电子受晶格热振动散射增强，呈<strong>正温度系数</strong>，线性度极佳但灵敏度较低（$\alpha \approx 0.41\%/^\circ\text{C}$）。</li>
+<li><strong>半导体热敏电阻（Thermistors）</strong>：由钴（Co）、锰（Mn）、镍（Ni）等过渡金属氧化物高温烧结而成，<strong>灵敏度比金属 RTD 高 $1\sim 2$ 个数量级</strong>、体积小动态响应快、适于 $-100\sim 300^\circ\text{C}$；缺点是<strong>非线性强、同型号互换性差</strong>。</li>
+</ul>
+<h4 id="12-四大结构类型与六大基本参数ppt-p4547">1.2 四大结构类型与六大基本参数（PPT P45–47）</h4>
+<ul>
+<li><strong>四大拓扑结构（P45）</strong>：<strong>(a) 珠状</strong>（玻璃壳密封，体积最小响应最快，适于穿刺针尖/导管）；<strong>(b) 片状</strong>（表面积大，适于皮肤表层贴片测温）；<strong>(c) 杆状</strong>（机械强度高，适于血液透析管路流体）；<strong>(d) 垫圈状</strong>（带通孔螺栓紧固，适于仪器功率散热保护）。</li>
+<li><strong>六大核心参数（P46–47，必考名词解释！）</strong>：<ol>
+<li><strong>标称电阻 $R_H$</strong>：在 <strong>$25 \pm 0.2^\circ\text{C}$、零功率</strong>（不产生自热）条件下测得的冷电阻值；</li>
+<li><strong>材料常数 $B_N$</strong>：反映 NTC 材料微观激活能的固有常数，$B_N$ 越大绝对灵敏度越高；</li>
+<li><strong>电阻温度系数 $\alpha$</strong>：$\alpha = \frac{1}{R}\frac{dR}{dT} \approx \frac{\Delta R/R}{\Delta T}$（NTC 恒为负且随温度升高而衰减）；</li>
+<li><strong>耗散系数 $H$</strong>：热敏电阻自身温度升高 $1^\circ\text{C}$ 所耗散的功率变化量（单位 $\text{mW}/^\circ\text{C}$），满足热平衡 $P = H(T - T_a)$，用于限制测量电流防止<strong>自热误差</strong>；</li>
+<li><strong>时间常数 $\tau$</strong>：零功率下环境温度阶跃变化时，阻值/温度变化达到最终稳态变化量 <strong>$63.2\%$</strong>（即 $1 - e^{-1}$）所需时间，$\tau = R_{\text{th}} C_{\text{th}}$；</li>
+<li><strong>最高工作温度 $T_{\max}$</strong>：长期连续安全工作的上限温度。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="二-ntc-阻温方程推导对比-pt100-与伏安特性p4852">二、 NTC 阻温方程推导、对比 Pt100 与伏安特性（P48–52）</h3>
+<h4 id="21-三类热敏电阻特性对比ppt-p48">2.1 三类热敏电阻特性对比（PPT P48）</h4>
+<ul>
+<li><strong>NTC（负温度系数）</strong>：阻值随温度升高指数单调下降（生物医学测温主力）；</li>
+<li><strong>PTC（正温度系数）</strong>：超过居里点温度后阻值剧增（用于过流保护与自控温加热）；</li>
+<li><strong>CTR（临界温度系数）</strong>：达到临界温度时发生相变，阻值跨越数个数量级陡降（用于自动控温与极限报警开关）。</li>
+</ul>
+<h4 id="22-ntc-阻温本构方程与-alpha_t-零跳步推导ppt-p4951">2.2 NTC 阻温本构方程与 $\alpha_T$ 零跳步推导（PPT P49–51）</h4>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：从阿伦尼乌斯热激发导出 $R_T$ 与 $\alpha_T = -B_N/T^2$】</strong></p>
+<ol>
+<li><strong>载流子浓度热激发</strong>：NTC 半导体载流子浓度随绝对温度 $T$ 遵循玻尔兹曼—阿伦尼乌斯分布（$E_a$ 为激活能）：
+$$n(T) = n_\infty \exp\left(-\frac{E_a}{k_B T}\right)$$</li>
+<li><strong>宏观电阻率与阻值</strong>：电导率 $\sigma = n e \mu$，电阻 $R_T = \frac{1}{\sigma}\frac{L}{A} = A_\infty \exp\left(\frac{B_N}{T}\right)$（其中材料常数 $B_N \equiv \frac{E_a}{k_B}$）。</li>
+<li><strong>双点标定消去 $A_\infty$（PPT P49–50）</strong>：代入参考温度 $T_0$（常取 $25^\circ\text{C} = 298.15\;\text{K}$）下的标称电阻 $R_0$（$R_{25}$），消去 $A_\infty$ 得：
+$$\boxed{R_T = R_0 \exp\left[B_N\left(\frac{1}{T} - \frac{1}{T_0}\right)\right]} \iff \ln R_T = B_N\left(\frac{1}{T} - \frac{1}{T_0}\right) + \ln R_0$$
+<em>(注：$\ln R_T$ 对 $1/T$ 作图为一条直线，斜率即材料常数 $B_N$！)</em></li>
+<li><strong>求电阻温度系数 $\alpha_T$（链式法则，PPT P50）</strong>：
+$$\frac{dR_T}{dT} = R_T \cdot \left(-\frac{B_N}{T^2}\right) \implies \boxed{\alpha_T = \frac{1}{R_T}\frac{dR_T}{dT} = -\frac{B_N}{T^2}}$$</li>
+</ol>
+<ul>
+<li><strong>与铂电阻（Pt）灵敏度对比（PPT P51）</strong>：铂电阻 $\alpha_{\text{Pt}} = +0.41\%/^\circ\text{C}$，而 NTC 典型值可达 <strong>$\alpha_T = -4.7\%/^\circ\text{C}$</strong>——在生理体温区，<strong>NTC 灵敏度是铂电阻的 $11$ 倍以上</strong>！</li>
+</ul>
+</blockquote></details>
+<h4 id="23-稳态伏安itextv特性三段论ppt-p52">2.3 稳态伏安（$I\text{–}V$）特性三段论（PPT P52）</h4>
+<p>结合热平衡 $U\cdot I = H(T - T_a)$，NTC 稳态 $U\text{–}I$ 曲线分为三区：</p>
+<ol>
+<li><strong>线性欧姆区（功耗 $&lt; 1\;\text{mW}$）</strong>：电流极小不足以自热，$T \approx T_a$，$R_T$ 恒定，$U$ 与 $I$ 成正比（<strong>正常测温必须工作在此区！</strong>）；</li>
+<li><strong>非线性正阻区（功耗 $1\sim 10\;\text{mW}$）</strong>：自热使 $T &gt; T_a$、$R_T$ 下降，$U$ 随 $I$ 增长变缓直至达到电压峰值；</li>
+<li><strong>负阻区（功耗 $&gt; 10\;\text{mW}$）</strong>：电流继续增大引起剧烈自热，阻值下降速度超过电流增加速度，出现<strong>电压反随电流增大而减小</strong>的负阻特性（用于浪涌限流或稳压）。</li>
+</ol>
+<hr>
+<h3 id="三-硬件线性化网络导纳法二阶导数归零推导p5355">三、 硬件线性化网络：导纳法二阶导数归零推导（P53–55）</h3>
+<p>为改善 NTC 的指数非线性，常将其与零温度系数精密电阻 $R_x$ 并联或串联，迫使输出曲线在目标测温中点 $T_i$ 处产生<strong>拐点（二阶导数为零）</strong>，从而在该温区内实现近线性输出。</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：并联与串联补偿电阻 $R_x$ 解析式推导（PPT P54–55）】</strong>
+记简写本构式 $R_t(T) = R_c e^{B/T}$。</p>
+<ol>
+<li><p><strong>并联线性化（恒流源驱动，输出电压 $U_o \propto R = R_t // R_x$，P54）</strong>：
+为避开商式二阶求导，改用<strong>导纳（倒数）法</strong>：$Y = \frac{1}{R} = \frac{1}{R_x} + \frac{1}{R_t} = \frac{1}{R_x} + \frac{1}{R_c}e^{-B/T}$。
+由 $R = Y^{-1}$，求一阶、二阶导数：
+$$R' = -Y^{-2}Y', \qquad R'' = 2Y^{-3}(Y')^2 - Y^{-2}Y'' = 0 \implies \boxed{2(Y')^2 = Y Y''}$$
+计算 $Y$ 的各阶导数：
+$$Y' = \frac{B}{T^2 R_t}, \qquad Y'' = \frac{B}{R_c}\left[-2T^{-3}e^{-B/T} + T^{-2}e^{-B/T}\left(\frac{B}{T^2}\right)\right] = \frac{B(B - 2T)}{T^4 R_t}$$
+代回 $2(Y')^2 = Y Y''$ 并两边同乘 $\frac{T^4 R_t^2}{B}$：
+$$2\left(\frac{B}{T^2 R_t}\right)^2 = \left(\frac{1}{R_x} + \frac{1}{R_t}\right)\frac{B(B-2T)}{T^4 R_t} \implies 2B = \left(\frac{R_t}{R_x} + 1\right)(B - 2T)$$
+解得中心温度 $T_i$（对应阻值 $R_{t_i}$）处的最佳并联电阻：
+$$\frac{R_{t_i}}{R_x} = \frac{2B}{B - 2T_i} - 1 = \frac{B + 2T_i}{B - 2T_i} \implies \boxed{R_x = R_{t_i}\left(\frac{B - 2T_i}{B + 2T_i}\right)}$$</p>
+</li>
+<li><p><strong>串联线性化（恒压源驱动，输出电流 $I \propto Y_{\text{串}} = \frac{1}{R_t + R_x}$，P55）</strong>：
+令 $\frac{d^2 Y_{\text{串}}}{dT^2} = 0$。因 $Y_{\text{串}}$ 的一阶导数与并联电阻 $R$ 的一阶导数仅差常数因子 $-R_x^2$，方程与上式严格对偶（$R_x \leftrightarrow 1/R_x,\; R_{t_i} \leftrightarrow 1/R_{t_i}$），故串联补偿电阻满足：
+$$\boxed{\frac{1}{R_x} = \frac{1}{R_{t_i}}\left(\frac{B - 2T_i}{B + 2T_i}\right) \iff R_x = R_{t_i}\left(\frac{B + 2T_i}{B - 2T_i}\right)}$$</p>
+</li>
+</ol>
+</blockquote></details>
+<hr>
+<h3 id="四-集成温度传感器-ad590-与生物医学前沿应用p5666">四、 集成温度传感器 AD590 与生物医学前沿应用（P56–66）</h3>
+<h4 id="41-集成温度芯片-ad590-核心指标ppt-p58">4.1 集成温度芯片 AD590 核心指标（PPT P58）</h4>
+<p>AD590 是经典的电流型集成温度传感器（适合远距离抗干扰传输）：</p>
+<ol>
+<li><strong>线性电流输出</strong>：<strong>$1\;\mu\text{A/K}$</strong>，严格正比于开尔文绝对温度（如 $25^\circ\text{C} = 298.15\;\text{K}$ 时输出 $298.15\;\mu\text{A}$）；</li>
+<li><strong>宽测温范围</strong>：$-55\sim +150^\circ\text{C}$；</li>
+<li><strong>高精度</strong>：激光校准精度可达 <strong>$\pm 0.5^\circ\text{C}$</strong>（AD590M）；</li>
+<li><strong>宽电源范围</strong>：$+4\sim +30\;\text{V}$。</li>
+</ol>
+<h4 id="42-生物医学与前沿应用ppt-p57-p6066">4.2 生物医学与前沿应用（PPT P57, P60–66）</h4>
+<ul>
+<li><strong>微型测温探头（P57）</strong>：单晶 $\text{SiC}$ 薄片热敏电阻（涂高强绝缘漆测皮肤表面温度）；微型珠状热敏电阻封装于注射针尖（测肌肉与浅表血管温度）。</li>
+<li><strong>传统临床监护（P60–61）</strong>：<strong>新生儿保温箱</strong>闭环控温；<strong>肿瘤诊断与热疗</strong>（精确监测微波/射频/磁热疗局部温升）。</li>
+<li><strong>辅助生殖：精子趋温性筛选（P62–65）</strong>：利用输卵管壶腹部与峡部间的天然温度梯度（$31\sim 37^\circ\text{C}$）引导精子定向游动；全集成微流控芯片（如 ITO 透明加热器构建微温差场，刘冉课题组 <em>Lab Chip</em> 2021）实现高活力精子无损筛选。</li>
+<li><strong>PCR 聚合酶链式反应热循环仪（P66）</strong>：需要高速、精准的三温区循环控制——<strong>高温变性（$\sim 95^\circ\text{C}$）$\to$ 低温退火（$\sim 55^\circ\text{C}$）$\to$ 适温延伸（$\sim 72^\circ\text{C}$）</strong>，热阻/热电偶反馈控温精度直接决定 DNA 扩增特异性与效率。</li>
+</ul>
+<hr>
+<h3 id="五-物理公理与底层简单证明补强短板-2">五、 物理公理与底层简单证明（补强短板）</h3>
+<h4 id="51-为什么集成温度芯片ad590能实现-1mutextak-绝对线性ptat-公理证明">5.1 为什么集成温度芯片（AD590）能实现 $1\;\mu\text{A/K}$ 绝对线性？——PTAT 公理证明</h4>
+<p>半导体 PN 结电流遵循肖克莱（Shockley）二极管方程 $I_C \approx I_S e^{q V_{BE} / (k_B T)}$。反解基极—发射极电压 $V_{BE} = \frac{k_B T}{q}\ln\frac{I_C}{I_S}$。
+虽然单个 PN 结的 $I_S$ 随温度剧烈非线性变化，但如果在一块硅片上制造<strong>两个面积比为 $1:N$ 的完全匹配三极管</strong>（如 $N=8$），迫使它们流过相等电流 $I_C$，然后将它们的 $V_{BE}$ 作差：
+$$\Delta V_{BE} = V_{BE1} - V_{BE2} = \frac{k_B T}{q}\ln\left(\frac{I_C}{I_{S1}}\right) - \frac{k_B T}{q}\ln\left(\frac{I_C}{N I_{S1}}\right) = \boxed{\frac{k_B T}{q}\ln N}$$
+所有非线性的 $I_S$ 项在作差瞬间彻底消去！再将该与绝对温度成正比（<strong>PTAT</strong>, Proportional To Absolute Temperature）的压差加在精密薄膜电阻 $R$ 上，即输出严格线性的电流 $I_{\text{out}} \propto \frac{\Delta V_{BE}}{R} \propto T$。</p>
+<h4 id="52-红外非接触测温耳温枪额温枪底层公理斯特藩玻尔兹曼定律">5.2 红外非接触测温（耳温枪/额温枪）底层公理：斯特藩—玻尔兹曼定律</h4>
+<p>PPT P13 提到的“热辐射式红外温度传感器”依赖两大黑体辐射物理公理：</p>
+<ol>
+<li><strong>斯特藩—玻尔兹曼定律</strong>：任何绝对温度 $T &gt; 0$ 的物体都会向外辐射电磁波，单位面积总辐射功率 $M = \varepsilon \sigma T^4$（$\varepsilon$ 为发射率，人体皮肤 $\varepsilon \approx 0.98$；$\sigma = 5.67\times 10^{-8}\;\text{W}/(\text{m}^2\cdot\text{K}^4)$）；</li>
+<li><strong>维恩位移定律</strong>：峰值辐射波长 $\lambda_{\max} T = 2898\;\mu\text{m}\cdot\text{K}$。代入人体体温 $T \approx 310\;\text{K}$，算得峰值波长 <strong>$\lambda_{\max} \approx 9.35\;\mu\text{m}$</strong>（恰好位于中远红外波段，故医用红外耳温枪专门在 $8\sim 14\;\mu\text{m}$ 大气窗口采集鼓膜热辐射！）。</li>
+</ol>
+<hr>
+<h3 id="六-深度补充伏安曲线负阻临界温升自热电流上限与线性化对比表">六、 深度补充：伏安曲线负阻临界温升、自热电流上限与线性化对比表</h3>
+<h4 id="61-伏安曲线参数化方程与负阻临界温升-delta-t_textcrit-approx-fract_a2b-推导对应-ppt-p52">6.1 伏安曲线参数化方程与负阻临界温升 $\Delta T_{\text{crit}} \approx \frac{T_a^2}{B}$ 推导（对应 PPT P52）</h4>
+<p>联立热平衡方程 $U I = H(T - T_a)$、欧姆定律 $U = I R_T$ 与 $R_T = R_a \exp\left[B\left(\frac{1}{T}-\frac{1}{T_a}\right)\right]$，消去 $R_T$ 得隐式参数化轨迹：
+$$I(T) = \left[\frac{H(T - T_a)}{R_a}\right]^{1/2} \exp\left[-\frac{B}{2}\left(\frac{1}{T} - \frac{1}{T_a}\right)\right], \qquad U(T) = \left[H(T - T_a) R_a\right]^{1/2} \exp\left[\frac{B}{2}\left(\frac{1}{T} - \frac{1}{T_a}\right)\right]$$</p>
+<details class="note-fold note-fold-bridge" open=""><summary>最小闭环</summary><blockquote>
+<p><strong>【最小闭环：求伏安曲线电压峰值（正阻 $\to$ 负阻转折点）临界温升】</strong>
+微分电阻 $r_d = \frac{dU}{dI} = \frac{dU/dT}{dI/dT}$。由于 $\frac{dI}{dT} &gt; 0$ 恒成立，峰值转折点即 $\frac{d(\ln U)}{dT} = 0$：
+$$\frac{d(\ln U)}{dT} = \frac{1}{2(T - T_a)} - \frac{B}{2T^2} = 0 \implies T^2 - B T + B T_a = 0$$
+取物理合理根并利用常温近似 $\frac{4T_a}{B} \ll 1$（二阶泰勒展开 $\sqrt{1-x} \approx 1 - \frac{x}{2} - \frac{x^2}{8}$）：
+$$T_{\text{crit}} = \frac{B}{2}\left(1 - \sqrt{1 - \frac{4T_a}{B}}\right) \approx \frac{B}{2}\left[1 - \left(1 - \frac{2T_a}{B} - \frac{2T_a^2}{B^2}\right)\right] = T_a + \frac{T_a^2}{B}$$
+$$\implies \boxed{\Delta T_{\text{crit}} = T_{\text{crit}} - T_a \approx \frac{T_a^2}{B}}$$
+<em>(算例：若室温 $T_a = 300\;\text{K}$、$B = 3000\;\text{K}$，则温升达到 $\Delta T_{\text{crit}} \approx 30\;\text{K}$（即 $57^\circ\text{C}$）时发生负阻热失控翻转！)</em></p>
+</blockquote></details>
+<h4 id="62-医用测温最大允许激励电流-i_max-设计约束防自热误差">6.2 医用测温最大允许激励电流 $I_{\max}$ 设计约束（防自热误差）</h4>
+<p>若临床要求热敏电阻自热温升误差控制在 $\delta T_{\text{self}} \le 0.01^\circ\text{C}$ 以内，由热平衡 $I^2 R_T = H\,\delta T_{\text{self}}$：
+$$\boxed{I_{\max} = \sqrt{\frac{\delta T_{\text{self\_max}}\cdot H}{R_T}}}$$</p>
+<ul>
+<li><strong>工程算例</strong>：某医用珠状 NTC 在体内耗散系数 $H = 2\;\text{mW}/^\circ\text{C}$，当前阻值 $R_T = 10\;\text{k}\Omega$，则最大允许电流为：
+$$I_{\max} = \sqrt{\frac{0.01\times 2\times 10^{-3}}{10\times 10^3}} = \sqrt{2\times 10^{-9}} \approx \boxed{44.7\;\mu\text{A}}$$
+因此医用测量电桥必须将激励电流严格限制在几十微安量级以内！</li>
+</ul>
+<h4 id="63-并联线性化-vs-串联线性化全维度工程对比表ppt-p5455">6.3 并联线性化 vs. 串联线性化全维度工程对比表（PPT P54–55）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th align="left">对比维度</th>
+<th align="left">并联线性化网络（$R_t // R_x$）</th>
+<th align="left">串联线性化网络（$R_t + R_x$）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>激励源要求</strong></td>
+<td align="left"><strong>恒流源</strong>驱动（$I_s$）</td>
+<td align="left"><strong>恒压源</strong>驱动（$E$）</td>
+</tr>
+<tr>
+<td align="left"><strong>输出物理量</strong></td>
+<td align="left">端电压 $U_{\text{out}} = I_s (R_t // R_x)$</td>
+<td align="left">回路电流 $I_{\text{out}} = \frac{E}{R_t + R_x}$</td>
+</tr>
+<tr>
+<td align="left"><strong>补偿电阻公式</strong></td>
+<td align="left">$R_x = R_{t_i}\left(\frac{B - 2T_i}{B + 2T_i}\right)$</td>
+<td align="left">$\frac{1}{R_x} = \frac{1}{R_{t_i}}\left(\frac{B - 2T_i}{B + 2T_i}\right)$</td>
+</tr>
+<tr>
+<td align="left"><strong>高温区功耗与自热安全</strong></td>
+<td align="left">温度 $\uparrow \implies R_t\downarrow \implies R_{\text{并}}\downarrow$，恒流下功耗 $P = I_s^2 R_{\text{并}}$ <strong>单调减小</strong>（具备生物安全负反馈自保护）</td>
+<td align="left">温度 $\uparrow \implies R_t\downarrow \implies R_{\text{串}}\downarrow$，恒压下功耗 $P = E^2 / R_{\text{串}}$ <strong>单调递增</strong>（须严防高温区热失控）</td>
+</tr>
+<tr>
+<td align="left"><strong>典型医用场景</strong></td>
+<td align="left">可穿戴体温贴片、连续核心体温监护仪</td>
+<td align="left">大型医疗设备内部远距离电流信号抗噪传输</td>
+</tr>
+</tbody></table></div>
+<h4 id="64-ppt-p6265-辅助生殖精子趋温性微流控芯片生理细节">6.4 PPT P62–65 辅助生殖精子趋温性微流控芯片生理细节</h4>
+<ul>
+<li>哺乳动物输卵管**峡部（Isthmus，储存区）**温度约 <strong>$31^\circ\text{C}$</strong>，**壶腹部（Ampulla，受精区）**温度约 <strong>$37^\circ\text{C}$</strong>，两者之间存在约 $6^\circ\text{C}$ 的天然温度梯度（$31\sim 37^\circ\text{C}$）。获能精子通过感知微小温差定向游向高温受精部位（趋温性 Thermotaxis）；微流控芯片利用透明 ITO 加热膜与精密温度传感器反馈闭环复现该微小温差场，实现高质量精子的无损筛选。</li>
+</ul>
+</section>
+</article>
+{% endraw %}
+{% include shengyi-foot.html %}

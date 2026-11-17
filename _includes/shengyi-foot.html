@@ -1,0 +1,16 @@
+<script src="{{ '/assets/katex/katex.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/katex/auto-render.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/notes-folds.js' | prepend: site.baseurl }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var root = document.querySelector('.article');
+    if (!root || !window.renderMathInElement) return;
+    window.renderMathInElement(root, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ],
+        throwOnError: false
+    });
+});
+</script>

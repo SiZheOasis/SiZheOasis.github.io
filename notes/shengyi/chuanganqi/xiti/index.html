@@ -1,0 +1,597 @@
+---
+layout: front
+title: "传感器重构笔记 · 习题精编（真题+PPT）"
+lang: zh-CN
+body_class: notes shengyi
+section: notes
+nav_current: notes
+permalink: /notes/shengyi/chuanganqi/xiti/
+katex: true
+---
+
+<header class="topic-head">
+    <p class="page-kicker"><a href="{{ '/notes/' | prepend: site.baseurl }}">学习笔记</a> · <a href="{{ '/notes/shengyi/' | prepend: site.baseurl }}">生物医学电子学</a> · <a href="{{ '/notes/shengyi/chuanganqi/' | prepend: site.baseurl }}">传感器重构笔记</a> · 习题精编（真题+PPT）</p>
+    <h1>习题精编（真题+PPT）</h1>
+</header>
+<nav class="note-toc" aria-label="目录">
+<ol>
+<li class="toc-h2 toc-tab"><a href="#tab-ex1">习题-01 概论与误差(02–04)</a></li>
+<li class="toc-h2"><a href="#习题-01-概论静动态特性与误差统计对应-0204-章">习题-01 概论、静动态特性与误差统计（对应 02–04 章）</a></li>
+<li class="toc-h3"><a href="#一-历年真题汇编20242026">一、 历年真题汇编（2024–2026）</a></li>
+<li class="toc-h3"><a href="#二-课程-ppt-核心例题与习题">二、 课程 PPT 核心例题与习题</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-ex2">习题-02 物理一(05–08)</a></li>
+<li class="toc-h2"><a href="#习题-02-物理一阻容感电桥与血压测量对应-0508-章">习题-02 物理一：阻容感、电桥与血压测量（对应 05–08 章）</a></li>
+<li class="toc-h3"><a href="#一-历年真题汇编20242026-2">一、 历年真题汇编（2024–2026）</a></li>
+<li class="toc-h3"><a href="#二-课程-ppt-核心例题与习题-2">二、 课程 PPT 核心例题与习题</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-ex3">习题-03 物理二三(09–12)</a></li>
+<li class="toc-h2"><a href="#习题-03-物理二与物理三压电磁电与温度对应-0912-章">习题-03 物理二与物理三：压电、磁电与温度（对应 09–12 章）</a></li>
+<li class="toc-h3"><a href="#一-历年真题汇编20242026-3">一、 历年真题汇编（2024–2026）</a></li>
+<li class="toc-h3"><a href="#二-课程-ppt-核心例题与习题-3">二、 课程 PPT 核心例题与习题</a></li>
+<li class="toc-h2 toc-tab"><a href="#tab-ex4">习题-04 化学生物(13–21)</a></li>
+<li class="toc-h2"><a href="#习题-04-化学与生物传感器对应-1321-章">习题-04 化学与生物传感器（对应 13–21 章）</a></li>
+<li class="toc-h3"><a href="#一-历年真题汇编20252026">一、 历年真题汇编（2025–2026）</a></li>
+<li class="toc-h3"><a href="#二-课程-ppt-核心例题与习题-4">二、 课程 PPT 核心例题与习题</a></li>
+</ol>
+</nav>
+{% raw %}
+<article class="article">
+<section class="note-tab">
+<h2 class="tab-label" id="tab-ex1">习题-01 概论与误差(02–04)</h2>
+<h2 id="习题-01-概论静动态特性与误差统计对应-0204-章" class="doc-title">习题-01 概论、静动态特性与误差统计（对应 02–04 章）</h2>
+<blockquote>
+<p><strong>说明</strong>：本篇汇总 <strong>2024–2026 清华 801 考研真题</strong>及<strong>课程 PPT 原题/例题</strong>中属于第 02–04 章的全部习题。真题均经独立验算，并标注考查陷阱与得分要点。</p>
+</blockquote>
+<h3 id="目录">目录</h3>
+<ul>
+<li><a href="#一-历年真题汇编20242026">一、 历年真题汇编（2024–2026）</a></li>
+<li><a href="#二-课程-ppt-核心例题与习题">二、 课程 PPT 核心例题与习题</a></li>
+</ul>
+<hr>
+<h3 id="一-历年真题汇编20242026">一、 历年真题汇编（2024–2026）</h3>
+<h4 id="1-2024-真题--单选-3--3分静态特性指标辨析">1. 【2024 真题 · 单选 3 · 3分】静态特性指标辨析</h4>
+<p><strong>题干</strong>：传感器能感知的输入变化量越小，表示传感器（ ）
+A. 线性度好　　B. 迟滞小　　C. 重复性好　　D. 分辨力高</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>D</strong></p>
+<ul>
+<li><strong>考点定位</strong>：第 03-1 讲 静态特性指标。</li>
+<li><strong>解析</strong>：<strong>分辨力（Resolution）<strong>是指传感器在规定测量范围内所能检测出的被测输入量的</strong>最小变化量</strong>；能感知的输入变化量越小，说明分辨力越高。线性度、迟滞、重复性均无法由该描述推出。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="2-2024-真题--单选-5--3分一阶系统时间常数提取">2. 【2024 真题 · 单选 5 · 3分】一阶系统时间常数提取</h4>
+<p><strong>题干</strong>：某温度传感器，微分方程 $20\dfrac{dy(t)}{dt} + 2y(t) = 0.2x(t)$，$y$ 为输出电压（$\text{mV}$），$x$ 为输入温度（$^\circ\text{C}$），则时间常数为（ ）
+A. $2\;\text{s}$　　B. $20\;\text{s}$　　C. $15\;\text{s}$　　D. $10\;\text{s}$</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>D（$10\;\text{s}$）</strong></p>
+<ul>
+<li><strong>陷阱拆解</strong>：切忌直接把最高阶导数前系数 $20$ 当成时间常数 $\tau$！必须先将 $y(t)$ 的系数化为 $1$。</li>
+<li><strong>标准解答</strong>：方程两边同除以 $2$，化为一阶标准形式 $\tau\dot{y} + y = K x$：
+$$10\frac{dy(t)}{dt} + y(t) = 0.1x(t)$$
+对比标准式得时间常数 <strong>$\tau = 10\;\text{s}$</strong>，静态灵敏度 $K = 0.1\;\text{mV}/^\circ\text{C}$。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="3-2025-真题--单选-3--3分迟滞定义">3. 【2025 真题 · 单选 3 · 3分】迟滞定义</h4>
+<p><strong>题干</strong>：正反行程特性不一致程度用哪个静态指标表示（ ）？
+A. 线性度　　B. 迟滞　　C. 重复性　　D. 漂移</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>B（迟滞）</strong></p>
+<ul>
+<li><strong>解析</strong>：<strong>迟滞（Hysteresis）<strong>反映传感器在正行程（输入量增大）和反行程（输入量减小）期间输入—输出特性曲线不重合的程度，通常用正反行程输出最大偏差占满量程的百分比 $\gamma_H = \frac{\Delta H_{\max}}{Y_{FS}}\times 100\%$ 表示。注意区分</strong>重复性</strong>（同一方向多次测量不一致）。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="4-2026-真题--单选-6--3分静动态特性区分">4. 【2026 真题 · 单选 6 · 3分】静/动态特性区分</h4>
+<p><strong>题干</strong>：下列哪项指标描述的是传感器的静态特性（ ）
+A. 迟滞　　B. 时间常数　　C. 固有频率　　D. 传递函数</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>A（迟滞）</strong></p>
+<ul>
+<li><strong>解析</strong>：静态特性与时间无关（线性度、灵敏度、迟滞、重复性、分辨力、漂移）；时间常数 $\tau$、固有频率 $\omega_n$、传递函数 $H(s)$ 均描述输入随时间变化时的动态响应特性。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="5-2026-真题--单选-9--3分误差基本概念辨析">5. 【2026 真题 · 单选 9 · 3分】误差基本概念辨析</h4>
+<p><strong>题干</strong>：以下有关误差的基本概念的说法正确的是（ ）
+A. 系统误差均可通过增加测量次数完全消除
+B. 随机误差不可确定，且不符合统计规律
+C. 高的精密度是高的准确度的前提条件
+D. 仪器测试结果的显示位数有限所导致的结果截位属于粗大误差</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>C</strong></p>
+<ul>
+<li><strong>解析</strong>：<ul>
+<li>A 错：增加测量次数只能减小随机误差，无法消除恒定/规律变化的系统误差；</li>
+<li>B 错：随机误差单次不可预测，但大量测量服从统计规律（正态分布）；</li>
+<li>C 对：<strong>精密度</strong>反映随机误差小（离散度小），<strong>正确度</strong>反映系统误差小，<strong>准确度</strong>是二者综合——结果都发散（精密度低）就不可能稳定逼近真值；</li>
+<li>D 错：显示位数有限导致的截位属于量化误差/分辨力误差（仪器系统或随机误差），粗大误差指读错、记错、仪器故障等明显偏离真值的坏值。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="6-2026-真题--填空-6--3分一阶传感器传递函数">6. 【2026 真题 · 填空 6 · 3分】一阶传感器传递函数</h4>
+<p><strong>题干</strong>：某一阶传感器的静态灵敏度为 $1$，时间常数为 $2\;\text{s}$，则其传递函数 $H(s)$ 为 ______。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>$\dfrac{1}{2s + 1}$</strong></p>
+<ul>
+<li><strong>解析</strong>：一阶系统标准传递函数 $H(s) = \dfrac{K}{\tau s + 1}$，代入 $K = 1,\; \tau = 2\;\text{s}$ 即得 $H(s) = \dfrac{1}{2s + 1}$。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="7-2026-真题--计算-5--12分二阶机械力传感器建模与动态响应">7. 【2026 真题 · 计算 5 · 12分】二阶机械力传感器建模与动态响应</h4>
+<img class="note-fig" src="/notes/shengyi/chuanganqi/xiti/img/fig_26_5.png" alt="fig_26_5.png">
+**题干**：下图的 2 阶传感器系统将力 $F(t)$ 转化为位移 $y(t)$，其中质量 $m = 100\;\text{g}$，阻尼系数 $f = 120\;\text{kg/s}$，弹性系数 $k = 1\times 10^5\;\text{N/m}$。
+（1）写出系统的微分方程，并计算静态灵敏度、固有角频率和阻尼比；
+（2）判断系统是欠阻尼还是过阻尼；如果是欠阻尼，求震荡周期；如果是过阻尼，求上升到 $90\%$ 所用时间。
+
+<blockquote>
+<p><strong>标准解答（独立验算无误）</strong>：</p>
+<ul>
+<li><strong>单位换算陷阱</strong>：$m = 100\;\text{g} = 0.1\;\text{kg}$。</li>
+</ul>
+<p><strong>（1）微分方程与三大特征参数</strong>：
+由牛顿第二定律（输入力 $-$ 弹性恢复力 $-$ 阻尼力 $=$ 质量 $\times$ 加速度）：
+$$m\ddot{y}(t) + f\dot{y}(t) + k y(t) = F(t) \implies 0.1\ddot{y} + 120\dot{y} + 10^5 y = F(t)$$
+两边同除以 $k = 10^5$ 化为标准形式 $\frac{1}{\omega_n^2}\ddot{y} + \frac{2\zeta}{\omega_n}\dot{y} + y = K F(t)$：</p>
+<ul>
+<li><strong>静态灵敏度</strong>：$K = \dfrac{1}{k} = \dfrac{1}{1\times 10^5} = \boxed{1\times 10^{-5}\;\text{m/N}}$；</li>
+<li><strong>固有角频率</strong>：$\omega_n = \sqrt{\dfrac{k}{m}} = \sqrt{\dfrac{1\times 10^5}{0.1}} = \sqrt{10^6} = \boxed{1000\;\text{rad/s}}$；</li>
+<li><strong>阻尼比</strong>：$\zeta = \dfrac{f}{2\sqrt{mk}} = \dfrac{f}{2m\omega_n} = \dfrac{120}{2\times 0.1\times 1000} = \boxed{0.6}$。</li>
+</ul>
+<p><strong>（2）阻尼状态判定与振荡周期</strong>：
+因 $0 &lt; \zeta = 0.6 &lt; 1$，系统处于<strong>欠阻尼状态</strong>（<em>注意：题干中的“如果过阻尼求上升到 90% 时间”为干扰分支，若前一步算错 $\zeta &gt; 1$ 就会掉入该分支</em>）。</p>
+<ul>
+<li>阻尼固有角频率：$\omega_d = \omega_n\sqrt{1 - \zeta^2} = 1000\sqrt{1 - 0.6^2} = 800\;\text{rad/s}$；</li>
+<li>振荡周期：$T_d = \dfrac{2\pi}{\omega_d} = \dfrac{2\pi}{800} \approx \boxed{7.85\times 10^{-3}\;\text{s}\;(7.85\;\text{ms})}$。</li>
+</ul>
+<p><strong>【防错扩展：万一遇到过阻尼（$\zeta &gt; 1$）如何求上升至 $90\%$ 稳态值的时间？】</strong>
+若某题算得 $\zeta &gt; 1$，特征方程 $s^2 + 2\zeta\omega_n s + \omega_n^2 = 0$ 有两个不等负实根 $s_{1,2} = -\omega_n(\zeta \mp \sqrt{\zeta^2 - 1})$（令时间常数 $\tau_1 = -1/s_1,\; \tau_2 = -1/s_2$，且 $\tau_1 &gt; \tau_2$）。单位阶跃响应为 $y(t)/K = 1 - \frac{\tau_1 e^{-t/\tau_1} - \tau_2 e^{-t/\tau_2}}{\tau_1 - \tau_2}$；当 $\zeta \gg 1$ 时快极点 $\tau_2$ 迅速衰减，可按主导极点近似 $1 - e^{-t/\tau_1} \approx 0.9 \implies t_{90\%} \approx \tau_1\ln 10 \approx 2.303\tau_1$。</p>
+</blockquote>
+<hr>
+<h4 id="8-2026-真题--计算-7--7分小样本均值标准差与-dixon-q-检验">8. 【2026 真题 · 计算 7 · 7分】小样本均值、标准差与 Dixon $Q$ 检验</h4>
+<img class="note-fig" src="/notes/shengyi/chuanganqi/xiti/img/fig_26_7.png" alt="fig_26_7.png">
+**题干**：现有如下 6 组数据样本，数据依次对应编号 1 至 6：
+`1.23, 1.24, 1.28, 1.19, 1.30, 1.20`
+（附 $Q$ 检验临界值表：$n=6$ 时，$Q(90\%)=0.56,\; Q(95\%)=0.64,\; Q(99\%)=0.74$）
+（1）求样本均值及标准差；
+（2）用 $Q$ 检验，判断样本 $1.30$ 是否应该被舍弃（置信度 $95\%$）。
+
+<blockquote>
+<p><strong>标准解答（独立验算无误）</strong>：
+<strong>（1）样本均值与贝塞尔标准差</strong>：
+$$\bar{x} = \frac{1.23 + 1.24 + 1.28 + 1.19 + 1.30 + 1.20}{6} = \frac{7.44}{6} = \boxed{1.24}$$
+各偏差 $v_i = x_i - \bar{x}$ 分别为：$-0.01,\; 0,\; +0.04,\; -0.05,\; +0.06,\; -0.04$。
+偏差平方和 $\sum v_i^2 = 0.0001 + 0 + 0.0016 + 0.0025 + 0.0036 + 0.0016 = 0.0094$。
+由贝塞尔公式（小样本分母为 $n-1 = 5$）：
+$$s = \sqrt{\frac{\sum_{i=1}^6 (x_i - \bar{x})^2}{n - 1}} = \sqrt{\frac{0.0094}{5}} = \sqrt{0.00188} \approx \boxed{0.0434}$$</p>
+<p><strong>（2）$Q$ 检验判别</strong>：
+将数据从小到大排序：$1.19,\; 1.20,\; 1.23,\; 1.24,\; 1.28,\; 1.30$。
+可疑值 $x_? = 1.30$，其最近邻 $x_{\text{nearest}} = 1.28$，极差 $x_{\max} - x_{\min} = 1.30 - 1.19 = 0.11$：
+$$Q_{\text{计}} = \frac{|x_? - x_{\text{nearest}}|}{x_{\max} - x_{\min}} = \frac{1.30 - 1.28}{1.30 - 1.19} = \frac{0.02}{0.11} \approx \boxed{0.182}$$
+查表得 $Q_{0.95}(n=6) = 0.64$。因 $Q_{\text{计}} = 0.182 &lt; 0.64$，故 <strong>$1.30$ 不是异常值，无需舍弃（应予保留）</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="二-课程-ppt-核心例题与习题">二、 课程 PPT 核心例题与习题</h3>
+<h4 id="9-ppt-例题--03-3-p79一阶系统正弦稳态响应求解">9. 【PPT 例题 · 03-3 P79】一阶系统正弦稳态响应求解</h4>
+<p><strong>题干</strong>：已知某传感器的传递函数为 $H(s) = \dfrac{1}{2s + 1}$，求输入正弦信号 $x(t) = 10\sin(0.5t)$ 时的稳态输出 $y_{ss}(t)$。</p>
+<blockquote>
+<p><strong>解答</strong>：
+令 $s = j\omega = j(0.5)$，代入频率响应函数：
+$$H(j0.5) = \frac{1}{1 + j(2\times 0.5)} = \frac{1}{1 + j}$$
+幅值 $|H(j0.5)| = \dfrac{1}{\sqrt{1^2 + 1^2}} = \dfrac{1}{\sqrt{2}}$，相角 $\varphi(0.5) = -\arctan(1) = -45^\circ$。
+故稳态输出为：
+$$y_{ss}(t) = 10\cdot \frac{1}{\sqrt{2}}\sin(0.5t - 45^\circ) = 5\sqrt{2}\sin(0.5t - 45^\circ)$$</p>
+</blockquote>
+<h4 id="10-ppt-例题--04-1-p31--04-2-p4850血压重复测量置信区间与异常值剔除">10. 【PPT 例题 · 04-1 P31 &amp; 04-2 P48–50】血压重复测量置信区间与异常值剔除</h4>
+<p><strong>题干</strong>：对同一标准血压连续测量 11 次得（$\text{mmHg}$）：<code>115.2, 114.8, 116.5, 114.1, 115.0, 115.6, 114.5, 113.8, 115.9, 114.4, 115.2</code>。若后续混入第 12 个疑似异常读数 $110.2\;\text{mmHg}$，分别用 $Q$ 检验（$Q_{12,0.95}=0.41$）和 Grubbs 检验（$G_{12,0.05}=2.29$）判断其是否应舍弃。</p>
+<blockquote>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>含 $110.2$ 时算得 12 个样本的 $\bar{x} = 114.6\;\text{mmHg},\; s = 1.66\;\text{mmHg}$，其余数据最小值为 $113.8$，最大值为 $116.5$。</li>
+<li><strong>$Q$ 检验</strong>：$Q = \frac{|110.2 - 113.8|}{116.5 - 110.2} = \frac{3.6}{6.3} = 0.571 &gt; 0.41 \implies$ <strong>舍弃</strong>。</li>
+<li><strong>Grubbs 检验</strong>：$G = \frac{|110.2 - 114.6|}{1.66} = 2.65 &gt; 2.29 \implies$ <strong>舍弃</strong>。</li>
+<li><strong>铁律</strong>：剔除后用剩下 11 个数据<strong>必须重新计算</strong>，得 $\bar{x} = 115.0\;\text{mmHg},\; s(\bar{x}) = 0.26\;\text{mmHg}$。</li>
+</ul>
+</blockquote>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-ex2">习题-02 物理一(05–08)</h2>
+<h2 id="习题-02-物理一阻容感电桥与血压测量对应-0508-章" class="doc-title">习题-02 物理一：阻容感、电桥与血压测量（对应 05–08 章）</h2>
+<blockquote>
+<p><strong>说明</strong>：本篇汇总 <strong>2024–2026 清华 801 考研真题</strong>及<strong>课程 PPT 原题/例题</strong>中属于第 05–08 章（电阻/应变片、血压流体力学、电容、电感、电桥接口电路）的全部习题。所有计算题均经过独立手算验算，并明确标注机构解析中的电路拓扑误判与印刷笔误。</p>
+</blockquote>
+<h3 id="目录-2">目录</h3>
+<ul>
+<li><a href="#一-历年真题汇编20242026-2">一、 历年真题汇编（2024–2026）</a></li>
+<li><a href="#二-课程-ppt-核心例题与习题-2">二、 课程 PPT 核心例题与习题</a></li>
+</ul>
+<hr>
+<h3 id="一-历年真题汇编20242026-2">一、 历年真题汇编（2024–2026）</h3>
+<h4 id="1-2024-真题--计算-11--6分血压测量的伯努利动能误差与静水压修正">1. 【2024 真题 · 计算 11 · 6分】血压测量的伯努利动能误差与静水压修正</h4>
+<p><strong>题干</strong>：用压力传感器测量血压，假设血液密度为 $\rho = 1069\;\text{kg/m}^3$。
+（1）（2 分）测量时，主动脉最大流速约为 $1.5\;\text{m/s}$，则血流自身的动能对测量可能会产生多大误差？
+（2）（4 分）无创测量血压时，若测得心脏下 $70\;\text{cm}$ 处收缩压为 $176\;\text{mmHg}$，则人体正确的收缩压是多少？（$1\;\text{kPa} = 7.5\;\text{mmHg}$，$g$ 可取 $10\;\text{m/s}^2$）</p>
+<blockquote>
+<p><strong>标准解答（独立验算无误）</strong>：
+由流体力学伯努利方程 $p + \frac{1}{2}\rho v^2 + \rho g h = \text{const}$：</p>
+<ul>
+<li><strong>（1）动能误差</strong>：
+$$\Delta p_k = \frac{1}{2}\rho v^2 = \frac{1}{2}\times 1069 \times 1.5^2 = 1202.625\;\text{Pa} \approx \boxed{1.20\;\text{kPa}}$$
+<em>(换算为毫米汞柱：$1.2026\times 7.5 \approx 9.02\;\text{mmHg}$；注：若仅答 $1.2\;\text{kPa}$ 也得分，建议 kPa 与 mmHg 并列写出。)</em></li>
+<li><strong>（2）静水压修正</strong>：
+心脏下 $h = 70\;\text{cm} = 0.7\;\text{m}$ 处附加静水压为：
+$$\Delta p_h = \rho g h = 1069 \times 10 \times 0.7 = 7483\;\text{Pa} = 7.483\;\text{kPa} = 7.483\times 7.5 = 56.1225\;\text{mmHg}$$
+因测点低于心脏使读数偏高，故人体真实收缩压为：
+$$P_{\text{true}} = 176 - 56.1225 \approx \boxed{119.88\;\text{mmHg}}$$</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="2-2024-真题--计算-12--10分心音测量差动式电容交流电桥推导与计算">2. 【2024 真题 · 计算 12 · 10分】心音测量差动式电容交流电桥推导与计算</h4>
+<img class="note-fig" src="/notes/shengyi/chuanganqi/xiti/img/fig_24_12.png" alt="fig_24_12.png">
+**题干**：心音测量中，使用差动式电容传感器，$v_i$、$v_o$ 为输入、输出（如图所示：左侧上臂为 $C+\Delta C$、左侧下臂为 $C-\Delta C$，右侧上下两臂均为阻抗 $Z$）。
+（1）（5 分）如果 $Z$ 均为固定电容 $C$，推导 $v_o$ 与 $v_i$ 关系式，求灵敏度 $k = \left|\dfrac{v_o}{v_i}\right|$；
+（2）（5 分）差动式电容传感器的极板半径均为 $4\;\text{mm}$，初始间距 $\delta_0 = 0.2\;\text{mm}$，工作时动板上移距离 $\delta = 5\;\mu\text{m}$。求此时灵敏度 $k$。（忽略非线性误差，介电常数取 $\varepsilon = 8.85\times 10^{12}\;\text{F/m}$ *[注：原卷印刷笔误，真空介电常数应为 $8.85\times 10^{-12}\;\text{F/m}$]*）
+
+<blockquote>
+<p><strong>⚠️ 独立验算与机构解析纠错</strong>：</p>
+<ul>
+<li><strong>对原图拓扑的严格推导（正确电桥接法）</strong>：
+观察真题电桥图，激励 $v_i$ 接在上下顶点之间，输出 $v_o$ 取自左右两中点之间：<ul>
+<li><strong>左侧支路</strong>由 $C+\Delta C$ 与 $C-\Delta C$ 串联，中点电位为：
+$$V_{\text{左}} = V_i \frac{\frac{1}{j\omega(C-\Delta C)}}{\frac{1}{j\omega(C+\Delta C)} + \frac{1}{j\omega(C-\Delta C)}} = V_i \frac{C+\Delta C}{(C+\Delta C)+(C-\Delta C)} = V_i \frac{C+\Delta C}{2C}$$</li>
+<li><strong>右侧支路</strong>由两个固定电容 $Z = C$ 串联，中点电位恒为 $V_{\text{右}} = \frac{1}{2}V_i$。</li>
+<li><strong>两中点作差</strong>：
+$$\boxed{V_o = V_{\text{左}} - V_{\text{右}} = V_i\left(\frac{C+\Delta C}{2C} - \frac{1}{2}\right) = \frac{1}{2}\frac{\Delta C}{C}V_i}$$
+<em>(注：当两个电容精确对称差动变化 $C_1 = C+\Delta C,\; C_2 = C-\Delta C$ 时，容抗分压输出是<strong>严格线性</strong>的！)</em></li>
+</ul>
+</li>
+<li><strong>第（2）问定量计算</strong>：
+当忽略变极距非线性误差时（$\Delta\delta \ll \delta_0$），单边电容相对变化 $\frac{\Delta C}{C} \approx \frac{\Delta\delta}{\delta_0} = \frac{5\times 10^{-6}}{0.2\times 10^{-3}} = 0.025$。
+代入上式得电压灵敏度（传递比）：
+$$k = \left|\frac{V_o}{V_i}\right| = \frac{1}{2}\frac{\Delta C}{C} \approx \frac{1}{2}\times 0.025 = \boxed{0.0125}$$
+<em>(机构解析错误说明：机构解析第 (1) 问看错了桥臂串联关系，误算成 $V_o = V_i\left(\frac{C}{2C-\Delta C} - \frac{C}{2C+\Delta C}\right) = V_i\frac{2\Delta C/C}{4-(\Delta C/C)^2}$，多出了分母 $(\Delta C/C)^2$ 项；幸好在小位移 $0.025$ 下 $2\times 0.025 / (4 - 0.025^2) \approx 0.0125$，数值恰好碰巧一致。考试时务必按真题图实际串联分支列分压！)</em></li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="3-2025-真题--单选-4--3分金属应变灵敏度主导机制">3. 【2025 真题 · 单选 4 · 3分】金属应变灵敏度主导机制</h4>
+<p><strong>题干</strong>：金属导电材料（ ）的变化是影响其应变灵敏度的主要因素。
+A. 电阻率　　B. 几何尺寸　　C. 弹性模量　　D. 化学性质</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>B（几何尺寸）</strong></p>
+<ul>
+<li><strong>解析</strong>：由灵敏系数公式 $G = (1 + 2\mu) + \frac{\Delta\rho/\rho}{\varepsilon}$，金属材料（如康铜）以<strong>尺寸效应</strong> $(1+2\mu)$ 为主，半导体材料则以压阻效应 $\frac{\Delta\rho/\rho}{\varepsilon}$ 为主。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="4-2025-真题--填空-6--3分有创与无创血压误差">4. 【2025 真题 · 填空 6 · 3分】有创与无创血压误差</h4>
+<p><strong>题干</strong>：液体耦合法有创测量血压模型可用 ______ 阶传感器系统表示，用柯氏音法测量血压时，若开始放气时间不合理，就会导致结果收缩压比实际值 ______。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>二；低（偏低）</strong></p>
+<ul>
+<li><strong>解析</strong>：液体耦合导管等效为 $R_c, L_c, C_d$ 二阶系统；柯氏音放气过快或起始压力未明显高于真实收缩压（放气时机不合理），袖带在等下一个心动周期收缩峰时压力已下降 $rT$，导致第一声柯氏音对应的压力低于真实 $SP$。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="5-2026-真题--填空-7--3分导管气泡血凝块对固有频率的影响">5. 【2026 真题 · 填空 7 · 3分】导管气泡/血凝块对固有频率的影响</h4>
+<p><strong>题干</strong>：有创血压检测仪器的导管内出现血凝块或气泡时，其传感器模块的固有频率通常会 ______（增大，减小或不变）。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>减小</strong></p>
+<ul>
+<li><strong>解析</strong>：由 $f_n = \frac{1}{2\pi}\sqrt{\frac{1}{L_c C_d}} = \frac{r}{2}\sqrt{\frac{1}{\pi\rho L C_d}}$，气泡使等效顺应性电容 $C_d$ 剧增，血凝块使等效半径 $r$ 减小、阻尼剧增，两者均导致固有频率 $f_n$ 减小、高频失真。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="6-2026-真题--计算-4--20分非理想-14-电桥接电流表精确推导与大应变温漂耦合">6. 【2026 真题 · 计算 4 · 20分】非理想 1/4 电桥（接电流表）精确推导与大应变/温漂耦合</h4>
+<img class="note-fig" src="/notes/shengyi/chuanganqi/xiti/img/fig_26_4.png" alt="fig_26_4.png">
+**题干**：如图所示的 1/4 电桥电路，激励电压 $V_i$（内阻忽略不计）。$ab$ 间是初始电阻为 $R$、变化量为 $\Delta R$ 的电阻应变片，其余各桥臂均为阻值为 $R$ 且热效应可忽略的普通电阻，电桥输出 $V_o$ 端接电流表，其内阻也为 $R$（图中未画出）。（20 分）
+(1) 推导输出电流的表达式（用 $V_i, R, \Delta R$ 表示）；
+(2) 如 $V_i = 10\;\text{V}$，$R = 100\;\Omega$，电阻应变片的应变为 $5\%$，灵敏度系数 $k = 2$，求解此时的输出电流（忽略压阻效应，保留 3 位有效数字）；
+(3) 对第 (2) 问情形，如电阻应变片的温度同时上升 $10^\circ\text{C}$，其温度系数 $\alpha = 2\times 10^{-3}/^\circ\text{C}$，求解此时的输出电流（保留 3 位有效数字）。
+
+<blockquote>
+<p><strong>标准解答（独立验算完全核实）</strong>：</p>
+<ul>
+<li><strong>⚠️ 核心陷阱</strong>：①输出接了内阻 $R_A = R$ 的电流表（<strong>不能视为开路</strong>）；②应变高达 $\varepsilon = 5\%$（<strong>不可用 $\Delta R \ll R$ 小信号近似</strong>，必须保留分母中的 $\Delta R$！）。</li>
+</ul>
+<p><strong>（1）戴维南等效推导输出电流 $I_o$</strong>：</p>
+<ol>
+<li><strong>开路电压 $V_{th}$</strong>：左侧桥臂 $(R+\Delta R)$ 与 $R$ 分压，右侧桥臂 $R$ 与 $R$ 分压：
+$$V_{th} = V_i\left(\frac{1}{2} - \frac{R}{2R + \Delta R}\right) = V_i\frac{\Delta R}{2(2R + \Delta R)}$$</li>
+<li><strong>等效内阻 $R_{th}$</strong>：将 $V_i$ 短路，输出端 $b, d$ 间电阻为左右两半臂并联之和：
+$$R_{th} = \big[R // (R + \Delta R)\big] + (R // R) = \frac{R(R + \Delta R)}{2R + \Delta R} + \frac{R}{2} = \frac{R(4R + 3\Delta R)}{2(2R + \Delta R)}$$</li>
+<li><strong>接入电流表 $R_A = R$ 求输出电流 $I_o$</strong>：
+$$I_o = \frac{V_{th}}{R_{th} + R_A} = \frac{V_i\frac{\Delta R}{2(2R+\Delta R)}}{\frac{R(4R+3\Delta R)}{2(2R+\Delta R)} + R}$$<ul>
+<li><strong>【中间化简展开】</strong>：先把分母通分，$R_{th} + R = \frac{R(4R+3\Delta R) + 2R(2R+\Delta R)}{2(2R+\Delta R)} = \frac{R(8R + 5\Delta R)}{2(2R+\Delta R)}$；分子分母同消去 $2(2R+\Delta R)$ 即得精确封闭解：
+$$I_o = \boxed{\frac{V_i \Delta R}{R(8R + 5\Delta R)}}$$</li>
+</ul>
+</li>
+</ol>
+<p><strong>（2）大应变定量计算</strong>：
+$$\Delta R = R\cdot k\cdot \varepsilon = 100\times 2\times 0.05 = 10\;\Omega$$
+$$I_o = \frac{10\times 10}{100\times (8\times 100 + 5\times 10)} = \frac{100}{85000} \approx 1.1765\times 10^{-3}\;\text{A} \approx \boxed{1.18\;\text{mA}\;(0.00118\;\text{A})}$$</p>
+<p><strong>（3）叠加温漂计算</strong>：
+$$\Delta R_T = R\cdot \alpha\cdot \Delta T = 100\times 2\times 10^{-3}\times 10 = 2\;\Omega$$
+$$\Delta R_{\text{total}} = \Delta R + \Delta R_T = 10 + 2 = 12\;\Omega$$
+$$I_o' = \frac{10\times 12}{100\times (8\times 100 + 5\times 12)} = \frac{120}{86000} \approx 1.3953\times 10^{-3}\;\text{A} \approx \boxed{1.40\;\text{mA}\;(0.00140\;\text{A})}$$</p>
+</blockquote>
+<hr>
+<h3 id="二-课程-ppt-核心例题与习题-2">二、 课程 PPT 核心例题与习题</h3>
+<h4 id="7-ppt-例题--05-4-p65柯氏音放气速率系统误差计算">7. 【PPT 例题 · 05-4 P65】柯氏音放气速率系统误差计算</h4>
+<p><strong>题干</strong>：采用柯氏音听诊法测量动脉血压时，若受试者心率为 $60\;\text{bpm}$（心动周期 $T = 1\;\text{s}$），袖带匀速放气速率为 $r = 3\;\text{mmHg/s}$，则理论上测得的收缩压 $SP$ 最多可能比真实值偏低多少？</p>
+<blockquote>
+<p><strong>解答</strong>：当袖带压刚略高于某次心搏峰值而未产生柯氏音时，需等待下一个心动周期 $T$ 到来，此期间袖带压力下降 $\Delta P_{\max} = r T = 3 \times 1 = \boxed{3\;\text{mmHg}}$。</p>
+</blockquote>
+<h4 id="8-ppt-例题--08-p110直流-14-电桥非线性误差定量验算">8. 【PPT 例题 · 08 P110】直流 1/4 电桥非线性误差定量验算</h4>
+<p><strong>题干</strong>：在等臂直流电桥（四臂初始电阻均为 $R$，激励 $V_i$）中，仅一个应变片发生 $\Delta R/R = 1\%$ 的相对变化，分别计算线性近似输出、精确输出以及相对非线性误差。</p>
+<blockquote>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>线性近似输出：$V_{o,\text{lin}} = \frac{1}{4}\frac{\Delta R}{R}V_i = 2.5\times 10^{-3}V_i$；</li>
+<li>精确输出：$V_{o,\text{exact}} = \frac{\Delta R/R}{2(2+\Delta R/R)}V_i = \frac{0.01}{2\times 2.01}V_i \approx 2.4876\times 10^{-3}V_i$；</li>
+<li>相对非线性误差：$\gamma_L = \frac{|2.4876 - 2.5|}{2.5}\times 100\% \approx \boxed{0.5\%}$。</li>
+</ul>
+</blockquote>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-ex3">习题-03 物理二三(09–12)</h2>
+<h2 id="习题-03-物理二与物理三压电磁电与温度对应-0912-章" class="doc-title">习题-03 物理二与物理三：压电、磁电与温度（对应 09–12 章）</h2>
+<blockquote>
+<p><strong>说明</strong>：本篇汇总 <strong>2024–2026 清华 801 考研真题</strong>及<strong>课程 PPT 原题/例题</strong>中属于第 09–12 章（压电、超声多普勒、磁电与热电偶/热敏电阻）的全部习题。包含对 <strong>2025 计 5(3) 机构解析分母误多乘 2 的明确纠错</strong>。</p>
+</blockquote>
+<h3 id="目录-3">目录</h3>
+<ul>
+<li><a href="#一-历年真题汇编20242026-3">一、 历年真题汇编（2024–2026）</a></li>
+<li><a href="#二-课程-ppt-核心例题与习题-3">二、 课程 PPT 核心例题与习题</a></li>
+</ul>
+<hr>
+<h3 id="一-历年真题汇编20242026-3">一、 历年真题汇编（2024–2026）</h3>
+<h4 id="1-2024-真题--单选-1--3分超声血流成像原理">1. 【2024 真题 · 单选 1 · 3分】超声血流成像原理</h4>
+<p><strong>题干</strong>：超声血流成像原理为（ ）
+A. 法拉第电磁感应　　B. 多普勒频移　　C. 康普顿散射　　D. 拉莫尔定理</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>B（多普勒频移）</strong></p>
+<ul>
+<li><strong>解析</strong>：电磁流量计用 A（法拉第电磁感应），MRI 用 D（拉莫尔定理），X 射线穿透衰减含 C（康普顿散射）。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="2-2024-真题--单选-4--3分石英晶体光轴受力压电特性">2. 【2024 真题 · 单选 4 · 3分】石英晶体光轴受力压电特性</h4>
+<p><strong>题干</strong>：石英晶体，沿光轴方向施加作用力 $\begin{cases}\text{会}\\\text{不会}\end{cases}$ 产生压电效应，$\begin{cases}\text{有}\\\text{没有}\end{cases}$ 电荷产生。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>不会；没有</strong></p>
+<ul>
+<li><strong>解析</strong>：石英晶体 Z 轴为<strong>光轴</strong>，沿 Z 轴受力时 $xy$ 平面投影保持 $120^\circ$ 对称且正负电荷中心重合，故沿光轴方向<strong>无压电效应、无电荷产生</strong>。仅沿电轴（X 轴，纵向）或机械轴（Y 轴，横向）施力才会在垂直于 X 轴的表面产生电荷。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="3-2025-真题--填空-5--3分压电传感器前置放大器对比">3. 【2025 真题 · 填空 5 · 3分】压电传感器前置放大器对比</h4>
+<p><strong>题干</strong>：压电传感器等效电路中，前置放大器可选 ______ 和 ______，其中 ______ 的测量系统不受电缆影响，因此适合远距离测量场景。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>电压放大器；电荷放大器；电荷放大器</strong></p>
+<ul>
+<li><strong>解析</strong>：电压放大器输出 $U_o \approx \frac{q}{C_a+C_c+C_i}$ 受电缆电容 $C_c$ 稀释；电荷放大器输出 $U_o \approx -\frac{q}{C_f}$ 仅取决于反馈电容 $C_f$，对长电缆免疫。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="4-2025-真题--填空-7--3分超声测血流速原理">4. 【2025 真题 · 填空 7 · 3分】超声测血流速原理</h4>
+<p><strong>题干</strong>：超声测血流流速的主要原理为 ______。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>多普勒频移效应</strong>（$f_D \approx \pm\dfrac{2 v \cos\theta}{c}f_0$）。</p>
+</blockquote>
+<hr>
+<h4 id="5-2025-真题--计算-4热电偶标准电极定律证明与冷端补偿">5. 【2025 真题 · 计算 4】热电偶标准电极定律证明与冷端补偿</h4>
+<p><strong>题干</strong>：热电偶是常用的测温方法，回答下面问题：
+（1）写出热电偶标准电极定理并证明；
+（2）为什么要用冷端温度补偿的方法，请写出一个常用的温度补偿方法。</p>
+<blockquote>
+<p><strong>标准解答</strong>：
+<strong>（1）标准电极定律（组成定律）表述与证明</strong>：</p>
+<ul>
+<li><strong>定理内容</strong>：若两种导体 $A, B$ 分别与第三种标准导体 $C$ 组成的热电偶在两接点温度 $(T, T_0)$ 下的热电动势 $E_{AC}(T, T_0)$、$E_{BC}(T, T_0)$ 已知，则由 $A, B$ 直接组成的热电偶在相同温度下的热电动势为两者之差：
+$$\boxed{E_{AB}(T, T_0) = E_{AC}(T, T_0) - E_{BC}(T, T_0)}$$</li>
+<li><strong>证明（基于微观接触电势 $e$）</strong>：
+由定义 $E_{AC}(T, T_0) = e_{AC}(T) - e_{AC}(T_0)$，$E_{BC}(T, T_0) = e_{BC}(T) - e_{BC}(T_0)$。
+考察由 $A, B, C$ 组成的虚拟三金属闭合回路，当全回路处于同一温度 $T$ 时，总热电势为零：
+$$e_{AC}(T) + e_{CB}(T) + e_{BA}(T) = 0 \implies e_{AC}(T) - e_{BC}(T) = e_{AB}(T)$$
+同理在冷端温度 $T_0$ 下也有 $e_{AC}(T_0) - e_{BC}(T_0) = e_{AB}(T_0)$。两式相减即得：
+$$E_{AC}(T, T_0) - E_{BC}(T, T_0) = \big[e_{AC}(T) - e_{AC}(T_0)\big] - \big[e_{BC}(T) - e_{BC}(T_0)\big] = e_{AB}(T) - e_{AB}(T_0) = E_{AB}(T, T_0)$$</li>
+</ul>
+<p><strong>（2）冷端补偿原因与常用方法</strong>：</p>
+<ul>
+<li><strong>原因</strong>：热电偶是温差传感器（$E_{AB}(T, T_0) = f(T) - f(T_0)$），且所有国家标准分度表均以冷端 $T_0 = 0^\circ\text{C}$ 为基准；实际测温中冷端暴露在环境温度下常不为 $0^\circ\text{C}$ 且随环境波动，不补偿会导致测温严重误差。</li>
+<li><strong>常用补偿方法</strong>（答出任一种并简述即可）：①<strong>冰点槽法</strong>（冷端置于双玻璃试管绝缘后浸入 $0^\circ\text{C}$ 冰水混合物）；②<strong>电桥补偿法</strong>（用高 TCR 铜丝桥臂 $R_T$ 置于冷端同温区，产生不平衡电压自动抵消冷端损失电势）；③<strong>计算修正法 / 软件补偿法</strong>（测得冷端 $T_1$，在电压空间叠加 $E(T,0)=E(T,T_1)+E(T_1,0)$）。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="6-2025-真题--计算-5正压电效应静态测量限制与电荷放大器定量计算">6. 【2025 真题 · 计算 5】正压电效应、静态测量限制与电荷放大器定量计算</h4>
+<p><strong>题干</strong>：
+（1）叙述正压电效应，可以测量静态量吗？为什么？
+（2）超声发出和接收分别是什么压电效应？
+（3）在电荷放大电路中，已知传感器反馈电容 $C_f = 10\;\text{pF}$，如果用该传感器测量一正弦变化的力，压电系数 $d_{33} = 190\times 10^{-12}\;\text{C/N}$，电荷放大器为理想运放，实际测得放大器电压输出为 $U_o = 10\sin(\omega t)\;(\text{V})$。求此时的作用力 $F$。</p>
+<blockquote>
+<p><strong>标准解答（⚠️ 含机构解析纠错）</strong>：</p>
+<ul>
+<li><strong>（1）</strong>：某些电介质沿特定方向受外力变形时，内部发生极化并在相对两表面产生符号相反、与外力成正比的束缚电荷，撤力后恢复中性，称为正压电效应。<strong>不可以测量静态量</strong>，因为传感器绝缘电阻 $R_a$ 与放大器输入电阻 $R_i$ 不可能无穷大，静态电荷会按时间常数 $\tau = R(C_a+C_c+C_i)$ 通过电路漏放归零。</li>
+<li><strong>（2）</strong>：超声发射利用<strong>逆压电效应</strong>（电 $\to$ 机械振动）；超声接收利用<strong>正压电效应</strong>（声压机械振动 $\to$ 电荷/电信号）。</li>
+<li><strong>（3）定量计算（独立验算纠错）</strong>：
+理想电荷放大器满足：
+$$U_o = -\frac{q}{C_f} = -\frac{d_{33} F}{C_f}$$
+解出作用力 $F(t)$：
+$$F(t) = -\frac{U_o C_f}{d_{33}} = -\frac{10\sin(\omega t)\times 10\times 10^{-12}\;\text{F}}{190\times 10^{-12}\;\text{C/N}} = \boxed{-\frac{10}{19}\sin(\omega t)\;\text{N} \approx -0.526\sin(\omega t)\;\text{N}}$$
+<em>(⚠️ 机构解析勘误：原机构解析第 11 页写成了 $F = -\frac{U_0 C_f}{2 d_{33}}$，分母莫名其妙多乘了一个 $2$，好在最后约分时它又按 $1$ 算出了 $-\frac{10}{19}$。解题时注意单极片公式绝对没有因子 $2$！)</em></li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="7-2026-真题--单选-8--3分热敏电阻测体温原理">7. 【2026 真题 · 单选 8 · 3分】热敏电阻测体温原理</h4>
+<p><strong>题干</strong>：热敏电阻传感器检测体温的基本原理是（ ）
+A. 金属材料的电阻随温度升高而减小　　B. 金属材料的电阻随温度升高而增加
+C. 半导体材料的电阻随温度升高而减小　　D. 半导体材料的电阻随温度升高而增加</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>C</strong></p>
+<ul>
+<li><strong>解析</strong>：医用电子体温计广泛采用<strong>半导体 NTC（负温度系数）热敏电阻</strong>，温度升高时本征载流子浓度按阿伦尼乌斯指数激增，电阻随温度升高而显著减小。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="8-2026-真题--计算-6--6分六边形热电偶回路接入材料-c-d-与温度-t_m-数学证明">8. 【2026 真题 · 计算 6 · 6分】六边形热电偶回路接入材料 $C, D$ 与温度 $T_m$ 数学证明</h4>
+<img class="note-fig" src="/notes/shengyi/chuanganqi/xiti/img/fig_26_6.png" alt="fig_26_6.png">
+**题干**：使用图中热电偶测量温度 $T$。$(A, B)$ 连接处温度为 $T$；$(A, C)$、$(B, D)$ 连接处温度为 $T_m$；$(C, D)$ 连接处温度为 $T_o$；$(C, D)$ 间有一电压表。对于该热电偶温度计，试证明 $C, D$ 部分材质和 $T_m$ 有什么要求？（用数学证明）（6 分）
+
+<blockquote>
+<p><strong>标准解答（接触电势法与温差电势法等价严密证明）</strong>：
+沿闭合回路 $T_o \xrightarrow{C} T_m \xrightarrow{A} T \xrightarrow{B} T_m \xrightarrow{D} T_o$ 列写回路总电动势（设 $(A,C)$ 处温度为 $T_{m1}$，$(B,D)$ 处温度为 $T_{m2}$，待证）：</p>
+<ol>
+<li><strong>用绝对塞贝克系数/单导体温差函数 $e_X(T)$（或各接点接触电势）列写总输出电压 $V_{\text{out}}$</strong>：
+$$V_{\text{out}} = \big[e_C(T_{m1}) - e_C(T_o)\big] + \big[e_A(T) - e_A(T_{m1})\big] + \big[e_B(T_{m2}) - e_B(T)\big] + \big[e_D(T_o) - e_D(T_{m2})\big]$$</li>
+<li><strong>提取理想热电偶测量项 $E_{AB}(T, T_m)$</strong>：
+目标只与 $A, B$ 及两端温度有关，若设 $T_{m1} = T_{m2} = T_m$，则：
+$$V_{\text{out}} = \underbrace{\big[(e_A(T) - e_B(T)) - (e_A(T_m) - e_B(T_m))\big]}_{E_{AB}(T, T_m)} + \underbrace{\big[e_C(T_m) - e_D(T_m)\big] - \big[e_C(T_o) - e_D(T_o)\big]}_{\text{附加误差项}}$$</li>
+<li><strong>令附加误差项对任意测量温度与环境温度恒为零，得出两大刚性约束</strong>：<ul>
+<li><strong>对 $C, D$ 材质的要求</strong>：必须满足 $e_C(T) \equiv e_D(T)$，即 <strong>$C$ 和 $D$ 必须是同一种均质材料</strong>（此时 $e_C(T_o)-e_D(T_o)=0$ 且 $e_C(T_m)-e_D(T_m)=0$）；</li>
+<li><strong>对温度 $T_m$ 的要求</strong>：两个中间接点 $(A,C)$ 与 $(B,D)$ <strong>必须处于完全相同的温度 $T_m$</strong>（若 $T_{m1} \neq T_{m2}$，则即使 $C=D$，仍残留 $e_C(T_{m1}) - e_C(T_{m2}) \neq 0$，引入寄生热电势误差）。
+<em>(注：这本质上是热电偶<strong>中间导体定律</strong>的工程逆向证明。)</em></li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="二-课程-ppt-核心例题与习题-3">二、 课程 PPT 核心例题与习题</h3>
+<h4 id="9-ppt-例题--12-p31-例-101标准电极定律计算">9. 【PPT 例题 · 12-P31 (例 10.1)】标准电极定律计算</h4>
+<p><strong>题干</strong>：热端为 $100^\circ\text{C}$、冷端为 $0^\circ\text{C}$ 时，镍铬合金与纯铂组成的热电偶的热电动势为 $2.95\;\text{mV}$，而考铜与纯铂组成的热电偶的热电动势为 $-4.0\;\text{mV}$，求此时镍铬和考铜组合而成的热电偶所产生的热电动势。</p>
+<blockquote>
+<p><strong>解答</strong>：由标准电极定律：$E_{\text{镍铬-考铜}} = E_{\text{镍铬-铂}} - E_{\text{考铜-铂}} = 2.95 - (-4.0) = \boxed{6.95\;\text{mV}}$。</p>
+</blockquote>
+<h4 id="10-ppt-例题--12-p39-例-51k-型热电偶计算修正法">10. 【PPT 例题 · 12-P39 (例 5.1)】K 型热电偶计算修正法</h4>
+<p><strong>题干</strong>：用 K 型（镍铬—镍铝）热电偶测水池水温，测得热电动势 $2.436\;\text{mV}$，环境温度恒为 $30^\circ\text{C}$，查 K 型分度表知 $E(30^\circ\text{C}, 0^\circ\text{C}) = 1.203\;\text{mV}$，求池水真实温度（分度表查得 $3.639\;\text{mV}$ 对应 $89^\circ\text{C}$，$2.436\;\text{mV}$ 对应 $60^\circ\text{C}$）。</p>
+<blockquote>
+<p><strong>解答</strong>：必须在电势（$\text{mV}$）空间叠加：$E(T,0) = 2.436 + 1.203 = 3.639\;\text{mV}$，查表得 <strong>$\boxed{T = 89^\circ\text{C}}$</strong>（切忌直接 $60+30=90^\circ\text{C}$）。</p>
+</blockquote>
+<h4 id="11-ppt-例题--12-p41电桥冷端补偿电阻设计">11. 【PPT 例题 · 12-P41】电桥冷端补偿电阻设计</h4>
+<p><strong>题干</strong>：选用 S 型热电偶，冷端变化范围 $0\sim +50^\circ\text{C}$，查表得电势损失 $\Delta E = 0.299\;\text{mV}$，电桥左臂恒流 $I_1 = 0.5\;\text{mA}$，铜丝温度系数 $\alpha = 0.00391\;^\circ\text{C}^{-1}$，求 $0^\circ\text{C}$ 下补偿电阻 $R_t$ 阻值。</p>
+<blockquote>
+<p><strong>解答</strong>：由 $I_1 R_t \alpha \Delta T = \Delta E$ 得 $R_t = \dfrac{0.299\times 10^{-3}}{0.00391\times 50\times 0.5\times 10^{-3}} = \boxed{3.07\;\Omega}$。</p>
+</blockquote>
+</section>
+<section class="note-tab">
+<h2 class="tab-label" id="tab-ex4">习题-04 化学生物(13–21)</h2>
+<h2 id="习题-04-化学与生物传感器对应-1321-章" class="doc-title">习题-04 化学与生物传感器（对应 13–21 章）</h2>
+<blockquote>
+<p><strong>说明</strong>：本篇汇总 <strong>2025–2026 清华 801 考研真题</strong>及<strong>课程 PPT 核心定量例题</strong>中属于第 13–21 章（电化学/ISE、光化学血氧、酶/免疫/基因生物传感器）的全部习题。</p>
+</blockquote>
+<h3 id="目录-4">目录</h3>
+<ul>
+<li><a href="#一-历年真题汇编20252026">一、 历年真题汇编（2025–2026）</a></li>
+<li><a href="#二-课程-ppt-核心例题与习题-4">二、 课程 PPT 核心例题与习题</a></li>
+</ul>
+<hr>
+<h3 id="一-历年真题汇编20252026">一、 历年真题汇编（2025–2026）</h3>
+<h4 id="1-2025-真题--单选-5--3分离子选择性电极ise敏感膜选型">1. 【2025 真题 · 单选 5 · 3分】离子选择性电极（ISE）敏感膜选型</h4>
+<p><strong>题干</strong>：以下离子选择电极敏感膜选择不当的是（ ）
+A. 石英玻璃膜实现铜离子选择性电极
+B. 溴化银 溴离子
+C. 二(正辛基苯基)磷酸钙液膜 钙离子
+D. 玻璃膜 氢离子</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>A</strong></p>
+<ul>
+<li><strong>解析</strong>：纯石英（$\text{SiO}_2$）晶格结构完整，没有可供离子交换的固定负电荷点位，不能响应离子；加入碱金属氧化物形成玻璃膜后才可响应 $\text{H}^+$（或改性后响应 $\text{Na}^+, \text{K}^+$ 等一价阳离子），但也不能做 $\text{Cu}^{2+}$ 玻璃膜电极。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="2-2026-真题--单选-7--3分医用脉搏血氧仪传感器类型">2. 【2026 真题 · 单选 7 · 3分】医用脉搏血氧仪传感器类型</h4>
+<p><strong>题干</strong>：医用脉搏血氧仪通常使用下列哪类传感器（ ）
+A. 压电式　　B. 磁电式　　C. 光电式　　D. 电感式</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>C（光电式）</strong></p>
+<ul>
+<li><strong>解析</strong>：基于光电容积脉搏波描记法（PPG）与朗伯—比尔定律，采用 $660\;\text{nm}$（红光）和 $940\;\text{nm}$（近红外光）双波长透射/反射光电传感器测算 $\text{SaO}_2$（见第 17-2 讲）。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="3-2026-真题--单选-10--3分生物传感器识别元件与检测模式">3. 【2026 真题 · 单选 10 · 3分】生物传感器识别元件与检测模式</h4>
+<p><strong>题干</strong>：关于生物传感器下列说法错误的是（ ）
+A. 核酸和组织膜等均可以作为分子识别元件
+B. 在三明治免疫分析中信号强度正比于分析物浓度
+C. 构建基因传感器时，DNA 探针内部必须存在互补区以形成特定结构
+D. 在竞争性免疫分析中信号强度反比于分析物浓度</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>C</strong></p>
+<ul>
+<li><strong>解析</strong>：仅分子信标（Molecular Beacon）等特殊探针需要内部茎环互补结构；最常规的<strong>线性 DNA 探针</strong>只需与靶序列互补杂交即可，自身内部无需存在互补区。三明治夹心法信号正比于抗原浓度，竞争法信号反比于抗原浓度（见第 19、21 讲）。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="4-2026-真题--填空-8--3分三电极体系回路划分">4. 【2026 真题 · 填空 8 · 3分】三电极体系回路划分</h4>
+<p><strong>题干</strong>：在三电极体系中，工作电极和 ______ 构成电压回路。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>参比电极（RE）</strong></p>
+<ul>
+<li><strong>解析</strong>：WE–RE 构成高输入阻抗<strong>电压测量/控制回路</strong>（无电流流过 RE，保持电位恒定）；WE–CE（对电极/辅助电极）构成<strong>极化电流回路</strong>。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="5-2026-真题--填空-9--3分酶固定化技术">5. 【2026 真题 · 填空 9 · 3分】酶固定化技术</h4>
+<p><strong>题干</strong>：说出一种常用的酶的固定化技术 ______。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>包埋法</strong>（或物理吸附法、戊二醛交联法、共价键结合法，任答一种即可）。</p>
+</blockquote>
+<hr>
+<h4 id="6-2026-真题--填空-10--3分液接电位适用边界">6. 【2026 真题 · 填空 10 · 3分】液接电位适用边界</h4>
+<p><strong>题干</strong>：液接电位 ______（能够或不能）应用 Nernst 方程求解。</p>
+<blockquote>
+<p><strong>答案与解析</strong>：<strong>不能</strong></p>
+<ul>
+<li><strong>解析</strong>：Nernst 方程仅适用于热力学平衡的电极/膜界面电位；液接电位是不同电解质溶液接触界面因阴阳离子迁移率不同产生的<strong>非平衡扩散电位</strong>，需用<strong>亨德森（Henderson）方程</strong>求解，工程上用饱和 $\text{KCl}$ 盐桥消除。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="7-2026-真题--计算-8--8分钙离子-ise--溶度积-k_sp--选择性系数误差边界">7. 【2026 真题 · 计算 8 · 8分】钙离子 ISE + 溶度积 $K_{sp}$ + 选择性系数误差边界</h4>
+<p><strong>题干</strong>：利用钙离子选择性电极（ISE）和饱和甘汞电极组成测量电池：$\text{甘汞电极}\;\|\;\text{Ca}^{2+}\;(0.01\;\text{mol/L})\;|\;\text{Ca}^{2+}\text{-ISE}$。已知电位遵循 $E = K + S\lg[\text{Ca}^{2+}]$，其中 $S = \frac{2.303RT}{nF}$；$25^\circ\text{C}$ 下二价 $\text{Ca}^{2+}$ 的 $S = 0.0296\;\text{V}$。
+（1）将该电极放入 $0.01\;\text{mol/L}$ 的 $\text{Ca}^{2+}$ 标准溶液中，测得电动势 $E_1 = 0.25\;\text{V}$。现有一待测溶液，含有 $\text{CaC}_2\text{O}_4$（草酸钙）沉淀及 $2.63\times 10^{-4}\;\text{mol/L}$ 的 $\text{C}_2\text{O}_4^{2-}$ 离子，已知 $\text{CaC}_2\text{O}_4$ 溶度积 $K_{sp} = 2.63\times 10^{-9}$，假设活度系数 $\gamma = 1$。此时测得的电池电动势 $E_2$ 是多少？
+（2）实际溶液中还含有 $\text{Mg}^{2+}$ 杂质，电极响应的“表观浓度”为 $[\text{Ca}^{2+}]_{\text{测}} = [\text{Ca}^{2+}]_{\text{真}} + K_{\text{Ca,Mg}}^{\text{pot}}\times ([\text{Mg}^{2+}])^{n_{\text{Ca}}/n_{\text{Mg}}}$。已知 $K_{\text{Ca,Mg}}^{\text{pot}} = 0.01$，$\gamma = 1$。要求 $\text{Mg}^{2+}$ 的存在对 $\text{Ca}^{2+}$ 浓度测量的相对误差控制在 $5\%$ 以内。求：待测液中 $\text{Mg}^{2+}$ 的浓度应满足什么范围？</p>
+<blockquote>
+<p><strong>标准解答（独立验算无误）</strong>：
+<strong>（1）校准常数 $K$ 并结合溶度积 $K_{sp}$ 求 $E_2$</strong>：</p>
+<ol>
+<li>代入标准液 $[\text{Ca}^{2+}]_1 = 0.01 = 10^{-2}\;\text{mol/L},\; E_1 = 0.25\;\text{V}$：
+$$0.25 = K + 0.0296\lg(10^{-2}) = K - 0.0592 \implies K = \boxed{0.3092\;\text{V}}$$</li>
+<li>由沉淀溶解平衡 $\text{CaC}_2\text{O}_4(s) \rightleftharpoons \text{Ca}^{2+} + \text{C}_2\text{O}_4^{2-}$ 及 $K_{sp} = [\text{Ca}^{2+}][\text{C}_2\text{O}_4^{2-}]$：
+$$[\text{Ca}^{2+}]_{\text{真}} = \frac{K_{sp}}{[\text{C}_2\text{O}_4^{2-}]} = \frac{2.63\times 10^{-9}}{2.63\times 10^{-4}} = \boxed{1\times 10^{-5}\;\text{mol/L}}$$</li>
+<li>代入校准后的能斯特方程：
+$$E_2 = 0.3092 + 0.0296\lg(1\times 10^{-5}) = 0.3092 - 0.1480 = \boxed{0.1612\;\text{V}}$$</li>
+</ol>
+<p><strong>（2）Nikolsky-Eisenman 选择性系数误差边界</strong>：</p>
+<ul>
+<li><strong>【为什么电荷比 $n_{\text{Ca}}/n_{\text{Mg}} = 1$？】</strong> $\text{Ca}^{2+}$ 与 $\text{Mg}^{2+}$ 均为二价阳离子（$n_{\text{Ca}} = n_{\text{Mg}} = 2$），故表观浓度简化为 $[\text{Ca}^{2+}]_{\text{测}} = [\text{Ca}^{2+}]_{\text{真}} + K_{\text{Ca,Mg}}^{\text{pot}}[\text{Mg}^{2+}]$，测量绝对误差即干扰贡献项 $K_{\text{Ca,Mg}}^{\text{pot}}[\text{Mg}^{2+}]$，相对误差为：
+$$\text{相对误差} = \frac{[\text{Ca}^{2+}]_{\text{测}} - [\text{Ca}^{2+}]_{\text{真}}}{[\text{Ca}^{2+}]_{\text{真}}} = \frac{K_{\text{Ca,Mg}}^{\text{pot}}\cdot [\text{Mg}^{2+}]}{[\text{Ca}^{2+}]_{\text{真}}} \le 5\%$$
+代入数据解不等式：
+$$\frac{0.01\times [\text{Mg}^{2+}]}{1\times 10^{-5}} \le 0.05 \implies \boxed{[\text{Mg}^{2+}] \le 5\times 10^{-5}\;\text{mol/L}}$$</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="二-课程-ppt-核心例题与习题-4">二、 课程 PPT 核心例题与习题</h3>
+<h4 id="8-ppt-例题--14-p27能斯特电位测量的误差传递分析">8. 【PPT 例题 · 14-P27】能斯特电位测量的误差传递分析</h4>
+<p><strong>题干</strong>：$25^\circ\text{C}$ 下用能斯特方程测定一价离子（$n=1$）与二价离子（$n=2$）浓度，若电位计测量存在 $\Delta E = 1\;\text{mV}$ 的绝对误差，引起的离子活度相对误差各是多少？</p>
+<blockquote>
+<p><strong>解答</strong>：由 $E = K + \frac{0.0592}{n}\lg a \implies \Delta E = \frac{0.0592}{n\ln 10}\frac{\Delta a}{a} = \frac{0.0257}{n}\frac{\Delta a}{a}$：</p>
+<ul>
+<li>一价离子（$n=1$）：$\frac{\Delta a}{a} = \frac{0.001}{0.0257} \approx \boxed{3.9\%\;(4\%)}$；</li>
+<li>二价离子（$n=2$）：$\frac{\Delta a}{a} = \frac{2\times 0.001}{0.0257} \approx \boxed{7.8\%\;(8\%)}$。</li>
+</ul>
+</blockquote>
+<h4 id="9-ppt-例题--17-p25--21-p10qcm-sauerbrey-定量计算与-dna-t_m-估算">9. 【PPT 例题 · 17-P25 &amp; 21-P10】QCM Sauerbrey 定量计算与 DNA $T_m$ 估算</h4>
+<p><strong>题干</strong>：（1）某 $9\;\text{MHz}$ AT 切型石英晶体微天平（灵敏度系数 $S = 2.26\times 10^{-6}\;\text{cm}^2\cdot\text{Hz}\cdot\text{g}^{-1}\cdot f_0^2$，电极面积 $A = 0.2\;\text{cm}^2$）吸附分子量 $M = 150\;\text{kDa}$ 的免疫球蛋白后谐振频率下降 $\Delta f = -14\;\text{Hz}$，求吸附质量 $\Delta m$、物质的量及分子数；
+（2）某 15-mer DNA 探针含 6 个 A/T、9 个 G/C，用 Wallace 公式估算其解链温度 $T_m$。</p>
+<blockquote>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>（1）由 Sauerbrey 方程 $\Delta f = -2.26\times 10^{-6} f_0^2 \frac{\Delta m}{A}$（$f_0 = 9\times 10^6\;\text{Hz}$），反解得 $\Delta m = \boxed{177.84\;\text{ng}}$，合 $0.0012\;\text{nmol}$，对应分子数 $7.14\times 10^{11}$ 个；</li>
+<li>（2）Wallace 公式：$T_m = 2(n_A+n_T) + 4(n_G+n_C) = 2\times 6 + 4\times 9 = \boxed{48^\circ\text{C}}$。</li>
+</ul>
+</blockquote>
+</section>
+</article>
+{% endraw %}
+{% include shengyi-foot.html %}
